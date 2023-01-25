@@ -10,6 +10,17 @@ import './custom.sass'
 
 export default {
   ...DefaultTheme,
+  // enhanceApp(ctx) {
+  //   DefaultTheme.enhanceApp(ctx)
+  //   console.log(ctx)
+  //   ctx.app.mixin({
+  //     beforeMount () {
+  //       import('v-page').then(module => {
+  //         ctx.app.component('Page', module.Page)
+  //       })
+  //     }
+  //   })
+  // },
   setup() {
     const { lang } = useData()
     watchEffect(() => {

@@ -6,6 +6,7 @@ export default {
   description: 'Just playing around.',
   appearance: false,
   lastUpdated: true,
+  base: '.',
   locales: {
     root: {
       label: 'English',

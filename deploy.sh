@@ -18,7 +18,7 @@ rm -rf vue3
 mkdir vue3
 
 # copy builded file to vue folder
-cp -r ../dist/* vue3
+cp -r ../docs/.vitepress/dist/* vue3
 
 git config user.email "terry5@foxmail.com"
 git config user.name "TerryZ"

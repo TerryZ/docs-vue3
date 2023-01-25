@@ -7,11 +7,11 @@ export default {
   appearance: false,
   lastUpdated: true,
   base: '/vue3/',
+  lang: 'en',
   locales: {
     root: {
       label: 'English',
       lang: 'en',
-      link: '/en/',
       ...enConfig
     },
     cn: {

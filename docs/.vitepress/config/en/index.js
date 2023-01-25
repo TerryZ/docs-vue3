@@ -17,14 +17,14 @@ export default {
         text: 'Start',
         collapsible: false,
         items: [
-          { text: "Overview", link: '/en/home/' }
+          { text: "Overview", link: '/home/' }
         ]
       },
       {
         text: "Components",
         collapsible: false,
         items: [
-          { text: "v-page", link: "/en/page/" }
+          { text: "v-page", link: "/page/" }
         ]
       }
     ],

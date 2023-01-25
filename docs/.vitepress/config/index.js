@@ -6,7 +6,7 @@ export default {
   description: 'Just playing around.',
   appearance: false,
   lastUpdated: true,
-  base: '.',
+  base: '/vue3/',
   locales: {
     root: {
       label: 'English',

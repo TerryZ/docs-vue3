@@ -8,7 +8,7 @@ Github: [@TerryZ](https://github.com/TerryZ)
 
 [![GitHub followers](https://img.shields.io/github/followers/terryz?style=social&label=Follow%20@TerryZ)](https://github.com/TerryZ)
 
-Mail：`terry5@foxmail.com / terryzeng@gmail.com`
+Mail：`terry5@foxmail.com / terryzeng5@gmail.com`
 
 ## Components
 

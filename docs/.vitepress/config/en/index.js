@@ -3,6 +3,7 @@ export default {
   description: 'Vue3 components documentation and examples',
   themeConfig: {
     siteTitle: 'Vue3 components',
+    outline: [2, 3],
     // Social Icons
     socialLinks: [
       { icon: "github", link: "https://github.com/TerryZ" }

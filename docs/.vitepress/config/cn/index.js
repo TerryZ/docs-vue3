@@ -3,6 +3,7 @@ export default {
   description: 'Vue3 组件集文档与实例',
   themeConfig: {
     siteTitle: 'Vue3 components',
+    outline: [2, 3],
     // Social Icons
     socialLinks: [
       { icon: "github", link: "https://github.com/TerryZ" }
@@ -37,7 +38,7 @@ export default {
       next: '下一页',
     },
     returnToTopLabel: '返回顶部',
-    outlineTitle: '导航栏',
+    outlineTitle: '目录',
     darkModeSwitchLabel: '外观',
     sidebarMenuLabel: '菜单',
     lastUpdatedText: '更新于'

@@ -25,7 +25,8 @@ export default {
         text: "Components",
         collapsible: false,
         items: [
-          { text: "v-page", link: "/page/" }
+          { text: "v-page", link: "/page/" },
+          { text: "v-dropdown", link: "/dropdown/" }
         ]
       }
     ],

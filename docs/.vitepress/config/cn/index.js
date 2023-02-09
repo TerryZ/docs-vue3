@@ -25,7 +25,8 @@ export default {
         text: "组件集",
         collapsible: false,
         items: [
-          { text: "v-page", link: "/cn/page/" }
+          { text: "v-page", link: "/cn/page/" },
+          { text: "v-dropdown", link: "/cn/dropdown/" }
         ]
       }
     ],

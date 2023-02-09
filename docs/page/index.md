@@ -382,7 +382,7 @@ Setup pagination modules on or off
 
 ### Slot
 
-`v-page` provides scoped slots to output pagination state for mor easily customization
+`v-page` provides scoped slots to output pagination state for more easily customization
 
 ```vue
 <template>

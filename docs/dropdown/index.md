@@ -181,7 +181,14 @@ Set the click to trigger the object cycle to switch the dropdown container open 
 <Dropdown :disabled="true" >
   <!-- named scoped slots -->
   <template #trigger="{ visible, disabled }">
-    <button type="button">
+    <button
+      type="button"
+      :class="{
+        'border-primary': visible.value,
+        'bg-primary': visible.value,
+        'bg-opacity-10': visible.value,
+      }"
+    >
       Click me (visible: {{ visible }}, disabled: {{ disabled }})
     </button>
   </template>
@@ -209,7 +216,12 @@ Set the click to trigger the object cycle to switch the dropdown container open 
   <template #trigger="{ visible, disabled: stateDisabled }">
     <button
       type="button"
-      class="border rounded-3 px-3 py-1 shadow-sm"
+      class="border rounded-3 px-3 py-1 shadow-sm transition-all"
+      :class="{
+        'border-primary': visible.value,
+        'bg-primary': visible.value,
+        'bg-opacity-10': visible.value,
+      }"
     >
       Click me (visible: {{ visible }}, disabled: {{ stateDisabled }})
     </button>

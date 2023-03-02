@@ -16,4 +16,4 @@ Github: [@TerryZ](https://github.com/TerryZ)
 | - | - | - |
 | [v-page](https://github.com/TerryZ/v-page) | ![GitHub Repo stars](https://img.shields.io/github/stars/terryz/v-page?style=social) | [Changelog](https://github.com/TerryZ/v-page/blob/dev/CHANGELOG.md) |
 | [v-dropdown](https://github.com/TerryZ/v-dropdown) | ![GitHub Repo stars](https://img.shields.io/github/stars/terryz/v-dropdown?style=social) | [Changelog](https://github.com/TerryZ/v-dropdown/blob/dev/CHANGELOG-CN.md) |
-| [v-region](https://github.com/TerryZ/v-region) | 研发中…… | - |
+| [v-region](https://github.com/TerryZ/v-region) | ![GitHub Repo stars](https://img.shields.io/github/stars/terryz/v-region?style=social) | [Changelog](https://github.com/TerryZ/v-region/blob/dev/CHANGELOG-CN.md) |

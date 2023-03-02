@@ -14,11 +14,12 @@
   "dependencies": {
     "bootstrap": "^5.2.3",
     "v-dropdown": "3.0.0-beta.1",
-    "v-page": "3.0.0-beta.2"
+    "v-page": "3.0.0-beta.2",
+    "v-region": "3.0.0-beta.1"
   },
   "devDependencies": {
-    "sass": "^1.58.0",
-    "vitepress": "1.0.0-alpha.45",
+    "sass": "^1.58.3",
+    "vitepress": "1.0.0-alpha.49",
     "vue": "^3.2.47"
   }
 }

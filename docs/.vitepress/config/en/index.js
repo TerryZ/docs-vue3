@@ -26,7 +26,8 @@ export default {
         collapsible: false,
         items: [
           { text: "v-page", link: "/page/" },
-          { text: "v-dropdown", link: "/dropdown/" }
+          { text: "v-dropdown", link: "/dropdown/" },
+          { text: "v-region", link: "/region/" }
         ]
       }
     ],

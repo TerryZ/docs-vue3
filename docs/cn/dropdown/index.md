@@ -543,7 +543,7 @@ function inputChange (e) {
 
 ## 事件
 
-组件操作各类响应事件
+组件各类操作响应事件
 
 ### visible-change
 

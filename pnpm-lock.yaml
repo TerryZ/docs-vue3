@@ -5,7 +5,7 @@ specifiers:
   sass: ^1.58.3
   v-dropdown: 3.0.0-beta.1
   v-page: 3.0.0-beta.2
-  v-region: 3.0.0-beta.1
+  v-region: 3.0.0-beta.3
   vitepress: 1.0.0-alpha.49
   vue: ^3.2.47
 
@@ -13,7 +13,7 @@ dependencies:
   bootstrap: 5.2.3
   v-dropdown: 3.0.0-beta.1_vue@3.2.47
   v-page: 3.0.0-beta.2_vue@3.2.47
-  v-region: 3.0.0-beta.1_vue@3.2.47
+  v-region: 3.0.0-beta.3_vue@3.2.47
 
 devDependencies:
   sass: 1.58.3
@@ -809,8 +809,8 @@ packages:
       vue: 3.2.47
     dev: false
 
-  /v-region/3.0.0-beta.1_vue@3.2.47:
-    resolution: {integrity: sha512-nsIAiAgZCM3exoBCEfDVtT0y0yuDVMayDKmBK9bGtgXoqNmtbdVfKOhTF6aaOxM/PJ9CFZZjeVhYWtV59cZxyA==}
+  /v-region/3.0.0-beta.3_vue@3.2.47:
+    resolution: {integrity: sha512-fWkOI11kiRBhaey08D4y/o/QPJcRchypGqeJiGtQywnabZx1aRipms5VhZSP2OoKmrYj5VtMJb8ArO/cUP5p+g==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:

@@ -15,7 +15,7 @@
     "bootstrap": "^5.2.3",
     "v-dropdown": "3.0.0-beta.1",
     "v-page": "3.0.0-beta.2",
-    "v-region": "3.0.0-beta.1"
+    "v-region": "3.0.0-beta.3"
   },
   "devDependencies": {
     "sass": "^1.58.3",

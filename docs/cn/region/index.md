@@ -238,11 +238,11 @@ const region = ref({
 - `region` 当前区域选择情况数据模型
 - `visible` 下拉层打开状态
 
-### 列竖排模式
+### 泳道模式
 
-使用分组切换显示行政区域的选择模式
+使用多数据列并排展示行政区域的选择模式
 
-#### 列竖排选择器模式
+#### 泳道选择器模式
 
 ```html
 <RegionColumns v-model="region" />
@@ -252,7 +252,7 @@ const region = ref({
 
 使用内置按钮作为触发对象的选择器模式
 
-#### 列竖排核心模块
+#### 泳道核心模块
 
 ```html
 <RegionColumnsCore v-model="region" />
@@ -262,7 +262,7 @@ const region = ref({
 
 核心模块可自由搭配其他交互形式
 
-#### 列竖排自定义选择器触发对象
+#### 泳道自定义选择器触发对象
 
 使用作用域插槽 `Scoped slots` 自定义选择器触发对象
 

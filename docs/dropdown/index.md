@@ -555,7 +555,7 @@ visible-change(visible: boolean): void
 
 ## API
 
-Before using Pagination component's API, need to declare a ref attribute for the component, declare a ref variable by ref() to hold the element reference(the name must match template ref value) and use it to call API methods
+Before using component's API, need to declare a ref attribute for the component, declare a ref variable by ref() to hold the element reference(the name must match template ref value) and use it to call API methods
 
 ```vue
 <template>

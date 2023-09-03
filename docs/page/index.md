@@ -2,7 +2,7 @@
 
 Pagination component
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/terryz/v-page?style=social) ![GitHub forks](https://img.shields.io/github/forks/terryz/v-page?style=social)](https://github.com/TerryZ/v-page)
+[![GitHub Repo stars](https://img.shields.io/github/stars/terryz/v-page?style=social)](https://github.com/TerryZ/v-page) [![GitHub forks](https://img.shields.io/github/forks/terryz/v-page?style=social)](https://github.com/TerryZ/v-page)
 
 Repository status
 
@@ -334,9 +334,8 @@ Setup pagination modules on or off
   <div>
     <input
       type="checkbox"
-      :value="true"
+      v-model="switchPageSizeMenu"
       id="checkbox-page-size-menu"
-      @change="pageSizeMenuChange"
     />
     <label for="checkbox-page-size-menu">Page size list</label>
   </div>
@@ -374,7 +373,7 @@ Setup pagination modules on or off
   :language="lang"
   align="left"
   :info="switchInfo"
-  :page-size-menu="switchPageSizeMenu"
+  :page-size-menu="pageSizeMenu"
   :page-number="switchPageNumber"
   :first="switchFirst"
   :last="switchLast"
@@ -448,7 +447,7 @@ Add `All` item to page size list to display all data without paging. When this i
 />
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useData } from 'vitepress'
 import Page from 'v-page'
 
@@ -463,10 +462,12 @@ const inputPageNumber = ref('2')
 const switchInfo = ref(true)
 const switchFirst = ref(true)
 const switchLast = ref(true)
-const switchPageSizeMenu = ref([10, 20])
+const switchPageSizeMenu = ref(true)
 const switchPageNumber = ref(true)
 
 const { lang } = useData()
+
+const pageSizeMenu = computed(() => switchPageSizeMenu.value ? [10, 20] : false)
 
 // import PageIndex from '@demo/PageIndex.vue'
 function changeBasic (data) {
@@ -492,13 +493,6 @@ function goToInputPage () {
     return
   }
   pageNumberOperate.value = newPageNumber
-}
-function pageSizeMenuChange (e) {
-  if (e.target.checked) {
-    switchPageSizeMenu.value = [10, 20]
-  } else {
-    switchPageSizeMenu.value = false
-  }
 }
 </script>
 

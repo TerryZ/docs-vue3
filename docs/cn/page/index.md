@@ -2,7 +2,7 @@
 
 分页栏组件
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/terryz/v-page?style=social) ![GitHub forks](https://img.shields.io/github/forks/terryz/v-page?style=social)](https://github.com/TerryZ/v-page)
+[![GitHub Repo stars](https://img.shields.io/github/stars/terryz/v-page?style=social)](https://github.com/TerryZ/v-page) [![GitHub forks](https://img.shields.io/github/forks/terryz/v-page?style=social)](https://github.com/TerryZ/v-page)
 
 项目状态
 
@@ -327,9 +327,8 @@ function goToInputPage () {
   <div>
     <input
       type="checkbox"
-      :value="true"
+      v-model="switchPageSizeMenu"
       id="checkbox-page-size-menu"
-      @change="pageSizeMenuChange"
     />
     <label for="checkbox-page-size-menu">每页数据量栏</label>
   </div>
@@ -366,7 +365,7 @@ function goToInputPage () {
   :total-row="28"
   align="left"
   :info="switchInfo"
-  :page-size-menu="switchPageSizeMenu"
+  :page-size-menu="pageSizeMenu"
   :page-number="switchPageNumber"
   :first="switchFirst"
   :last="switchLast"
@@ -438,7 +437,7 @@ function goToInputPage () {
 />
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import Page from 'v-page'
 
 const srcList = Array(88).fill(0).map((val, index) => index + 1)
@@ -452,8 +451,10 @@ const inputPageNumber = ref('2')
 const switchInfo = ref(true)
 const switchFirst = ref(true)
 const switchLast = ref(true)
-const switchPageSizeMenu = ref([10, 20])
+const switchPageSizeMenu = ref(true)
 const switchPageNumber = ref(true)
+
+const pageSizeMenu = computed(() => switchPageSizeMenu.value ? [10, 20] : false)
 
 // import PageIndex from '@demo/PageIndex.vue'
 function changeBasic (data) {
@@ -479,13 +480,6 @@ function goToInputPage () {
     return
   }
   pageNumberOperate.value = newPageNumber
-}
-function pageSizeMenuChange (e) {
-  if (e.target.checked) {
-    switchPageSizeMenu.value = [10, 20]
-  } else {
-    switchPageSizeMenu.value = false
-  }
 }
 </script>
 

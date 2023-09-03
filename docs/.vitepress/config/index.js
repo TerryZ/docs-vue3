@@ -8,6 +8,11 @@ export default {
   lastUpdated: true,
   base: '/vue3/',
   lang: 'en',
+  themeConfig: {
+    search: {
+      provider: 'local'
+    }
+  },
   locales: {
     root: {
       label: 'English',

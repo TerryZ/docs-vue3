@@ -12,14 +12,15 @@
   "author": "Terry",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^5.2.3",
+    "bootstrap": "^5.3.1",
     "v-dropdown": "3.0.0-beta.1",
     "v-page": "3.0.0-beta.2",
-    "v-region": "3.0.0-beta.3"
+    "v-region": "3.0.0-beta.3",
+    "v-selectpage": "3.0.0-beta.1"
   },
   "devDependencies": {
-    "sass": "^1.58.3",
-    "vitepress": "1.0.0-alpha.49",
-    "vue": "^3.2.47"
+    "sass": "^1.66.1",
+    "vitepress": "1.0.0-rc.10",
+    "vue": "^3.3.4"
   }
 }

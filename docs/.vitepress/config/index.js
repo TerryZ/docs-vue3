@@ -6,7 +6,7 @@ export default {
   description: 'Just playing around.',
   appearance: false,
   lastUpdated: true,
-  base: '/vue3/',
+  base: '/',
   lang: 'en',
   themeConfig: {
     search: {

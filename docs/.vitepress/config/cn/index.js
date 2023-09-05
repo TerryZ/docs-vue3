@@ -27,7 +27,8 @@ export default {
         items: [
           { text: "v-page", link: "/cn/page/" },
           { text: "v-dropdown", link: "/cn/dropdown/" },
-          { text: "v-region", link: "/cn/region/" }
+          { text: "v-region", link: "/cn/region/" },
+          { text: "v-selectpage", link: "/cn/selectpage/" }
         ]
       }
     ],

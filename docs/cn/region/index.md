@@ -2,7 +2,7 @@
 
 行政区划选择器组件
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/terryz/v-region?style=social) ![GitHub forks](https://img.shields.io/github/forks/terryz/v-region?style=social)](https://github.com/TerryZ/v-region)
+[![GitHub Repo stars](https://img.shields.io/github/stars/terryz/v-region?style=social)](https://github.com/TerryZ/v-region) [![GitHub forks](https://img.shields.io/github/forks/terryz/v-region?style=social)](https://github.com/TerryZ/v-region)
 
 项目状态
 

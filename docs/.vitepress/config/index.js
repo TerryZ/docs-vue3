@@ -1,7 +1,8 @@
+import { defineConfig } from 'vitepress'
 import cnConfig from './cn'
 import enConfig from './en'
 
-export default {
+export default defineConfig({
   title: 'Vue3 components',
   description: 'Just playing around.',
   appearance: false,
@@ -32,4 +33,4 @@ export default {
     },
     lineNumbers: false
   }
-}
+})

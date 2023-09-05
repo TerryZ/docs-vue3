@@ -10,7 +10,7 @@ export default {
     ],
     // Navbar Link
     nav: [
-      { text: 'Vue 2 components', link: 'https://terryz.github.io/vue/' }
+      { text: 'Vue 2 components', link: 'https://terryz.github.io/docs-vue/' }
     ],
     // Sidebar
     sidebar: [

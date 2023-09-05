@@ -2,7 +2,7 @@
 
 Chinese administrative divisions selector component
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/terryz/v-region?style=social) ![GitHub forks](https://img.shields.io/github/forks/terryz/v-region?style=social)](https://github.com/TerryZ/v-region)
+[![GitHub Repo stars](https://img.shields.io/github/stars/terryz/v-region?style=social)](https://github.com/TerryZ/v-region) [![GitHub forks](https://img.shields.io/github/forks/terryz/v-region?style=social)](https://github.com/TerryZ/v-region)
 
 Repository status
 

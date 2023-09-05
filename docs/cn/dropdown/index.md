@@ -2,7 +2,7 @@
 
 下拉菜单组件
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/terryz/v-dropdown?style=social) ![GitHub forks](https://img.shields.io/github/forks/terryz/v-dropdown?style=social)](https://github.com/TerryZ/v-dropdown)
+[![GitHub Repo stars](https://img.shields.io/github/stars/terryz/v-dropdown?style=social)](https://github.com/TerryZ/v-dropdown) [![GitHub forks](https://img.shields.io/github/forks/terryz/v-dropdown?style=social)](https://github.com/TerryZ/v-dropdown)
 
 项目状态
 

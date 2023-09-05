@@ -575,7 +575,7 @@ function goToInputPage () {
 
 ## 事件
 
-组件操作各类响应事件
+组件各类操作的响应事件
 
 ### change
 

@@ -133,11 +133,30 @@ debounce delay when typing, in milliseconds
 - 类型 `boolean`
 - 默认 `false`
 
-
+组件禁用状态，仅使用于 `SelectPageList` 与 `SelectPageTable` 选择器模式
 
 ## 事件
 
+组件各类操作的响应事件
+
 ### update:modelValue
+
+项目选中状态变更后，响应该事件输出项目 key 集合
+
+```ts
+update:modelValue: (keys: (string | number)[]) => void
+```
+
+将 `v-model` 进行手动绑定的处理
+
+```vue
+<template>
+  <SelectPageListCore
+    :modelValue="selected"
+    @update:modelValue="keys => selected = keys"
+  />
+</template>
+```
 
 ### fetch-data
 
@@ -147,12 +166,9 @@ debounce delay when typing, in milliseconds
 `fetch-data`: (data: PageParameters, callback: FetchDataCallback) => void
 
 interface PageParameters {
-  // 搜索关键字
-  search: string
-  // 当前页码
-  pageNumber: number
-  // 每页记录数
-  pageSize: number
+  search: string // 搜索关键字
+  pageNumber: number // 当前页码
+  pageSize: number // 每页记录数
 }
 type FetchDataCallback = (
   // 列表数据，注意必须是一个对象列表
@@ -165,7 +181,7 @@ type FetchDataCallback = (
 响应函数根据 `data` 提供的分页与搜索信息，将数据查询结果通过 `callback` 函数提交给组件
 
 ```js
-function (data, callback) {
+function fetchData (data, callback) {
   const params = { ... }
   search(params).then(resp => callback(resp.list, resp.count))
 }
@@ -183,18 +199,74 @@ function (data, callback) {
 
 :::
 
-
 ### fetch-selected-data
+
+通过 `v-model/modelValue` 变更选中项目时，响应该事件获取选中项目数据模型
+
+```ts
+`fetch-selected-data`: (
+  keys: (string | number)[],
+  callback: FetchSelectedDataCallback
+) => void
+
+type FetchSelectedDataCallback = (
+  dataList: Record<string, unknown>[]
+) => void
+```
+
+事件响应函数根据 key 集合，获得对应的数据模型，并通过 `callback` 函数提交给组件
+
+```js
+function fetchSelectedData (keys, callback) {
+  search({ keys }).then(resp => callback(resp.list))
+}
+```
 
 ### selection-change
 
+项目选中状态变更时响应的事件
+
+```ts
+`selection-change`: (items: Record<string, unknown>[]) => void
+```
+
 ### remove
+
+响应选中的项目被移除
+
+```ts
+remove: (items: Record<string, unknown>[]) => void
+```
 
 ### close-dropdown
 
+触发事件用于关闭下拉容器
+
+```ts
+`close-dropdown`: () => void
+```
+
+该事件仅适用于 `SelectPageListCore` 与 `SelectPageTableCore` 核心模块
+
 ### adjust-dropdown
 
+触发事件用于自动调整下拉容器位置
+
+```ts
+`adjust-dropdown`: () => void
+```
+
+该事件仅适用于 `SelectPageListCore` 与 `SelectPageTableCore` 核心模块
+
 ### visible-change
+
+响应下拉容器状态变更
+
+```ts
+`visible-change`: (visible: boolean) => void
+```
+
+该事件仅适用于 `SelectPageList` 与 `SelectPageTable` 选择器模式
 
 ## API
 

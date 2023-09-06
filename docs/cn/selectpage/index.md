@@ -25,6 +25,26 @@ yarn add v-selectpage
 pnpm add v-selectpage
 ```
 
+## 模式
+
+`v-selectpage` 提供了选择器模式的项目选择组件
+
+### 选择器模式
+
+常规下拉选择模式
+
+```js
+import { SelectPageList, SelectPageTable } from 'v-selectpage'
+```
+
+### 核心模块组件
+
+核心模块是具备搜索与分页功能的列表、表格模块，不论是直接使用、置于其他容器或组合其他组件，均可大大拓展功能的使用形式与场景
+
+```js
+import { SelectPageListCore, SelectPageTableCore } from 'v-selectpage'
+```
+
 ## 实例
 
 ## Props
@@ -34,19 +54,25 @@ pnpm add v-selectpage
 - 类型 `(string | number)[]`
 - 默认 `undefined`
 
-binding selected item keys, it must be match 'keyProp' option value
+绑定选中项目的键值，项目的键值须与 [keyProp](#keyprop) 指定的字段内容匹配
 
 ### placeholder
 
 - 类型 `string`
 - 默认 `''`
 
+未选择项目时显示的占位符文本内容，若不设置该参数，插件则默认使用多语言中设置的占位符
+
+该选项仅适用于 [选择器模式](#选择器模式)
+
 ### multiple
 
 - 类型 `boolean`
 - 默认 `false`
 
-multiple selection
+多选模式
+
+单选模式下，选中项目内容直接被显示出来。多选模式下，选中的项目将以标签的形式展现
 
 ### language
 
@@ -75,65 +101,109 @@ multiple selection
 ### keyProp
 
 - 类型 `string`
-- 默认 `id`
+- 默认 `'id'`
 
-specify property to be key field, the value will return by v-model
+指定一个属性作为键值列，它将作为 `v-model/modelValue` 及数据匹配的依据字段
 
 ### labelProp
 
-- 类型 `string`
-- 默认 `name`
+- 类型 `string | function`
+- 默认 `'name'`
 
-specify property to display in data row
+指定一个数据列或一个函数来处理行以显示文本内容，具体作用范围如下
+
+- 列表模式的行项目显示文本内容
+- [选择器模式](#选择器模式) 的触发对象中展示选中项目的文本内容
+- [选择器模式](#选择器模式) 多选方式时展示在触发对象的标签中的文本内容
+
+### columns
+
+- 类型 `TableColumn[]`
+- 默认 `undefined`
+
+表格形式的数据列设置模型
+
+```ts
+interface TableColumn {
+  title: string           // 标题栏文本
+  data: string | function // 数据列或数据处理函数
+  width?: number | string // 列宽度
+}
+```
+
+该属性仅适用于表格形式 `SelectPageTable` 与 `SelectPageTableCore`
 
 ### pageSize
 
 - 类型 `number`
 - 默认 `10`
 
+每页显示记录数，当关闭分页栏时，则固定应用 `0`
+
 ### max
 
 - 类型 `number`
 - 默认 `0`
 
-maximum number of selection, set 0 to unlimited
+可选中项目的最大数量，设置为 `0` 则不限制
 
-depend on `multiple` prop set to true
+该选项依赖于 [multiple](#multiple) prop 设置为 `true`
 
 ### pagination
 
 - 类型 `boolean`
 - 默认 `true`
 
-pagination bar
+数据列表使用分页栏
+
+当关闭分页栏时，[fetch-data 事件](#fetch-data) 的数据请求参数中的 `pageNumber` 与 `pageSize` 数据项固定输出为以下内容
+
+```js
+{
+  pageNumber: 1,
+  pageSize: 0
+}
+```
 
 ### rtl
 
 - 类型 `boolean`
 - 默认 `false`
 
-text written from right to left
+文字渲染方向从右向左
 
 ### width
 
 - 类型 `string | number`
 - 默认 `undefined`
 
-the width of drop down menu
+指定内容容器宽度，指定 `number` 格式内容，则自动使用像素 `px` 为单位；`string` 格式内容将直接应用
+
+```vue
+<!-- number type -->
+<SelectPageListCore :width="500" />
+  ⇩
+<div style="width: 500px;" />
+
+<!-- string type -->
+<SelectPageListCore width="50%" />
+  ⇩
+<div style="width: 50%;" />
+```
 
 ### debounce
 
 - 类型 `number`
 - 默认 `300`
 
-debounce delay when typing, in milliseconds
+输入搜索内容的去抖延迟时间，单位为毫秒
 
 ### disabled
 
 - 类型 `boolean`
 - 默认 `false`
 
-组件禁用状态，仅使用于 `SelectPageList` 与 `SelectPageTable` 选择器模式
+组件禁用状态，仅使用于 [选择器模式](#选择器模式)
 
 ## 事件
 
@@ -187,16 +257,8 @@ function fetchData (data, callback) {
 }
 ```
 
-::: tip 关闭分页
-在 `pagination` props 设置为 `false` 时（关闭分页栏），`pageNumber` 与 `pageSize` 数据项固定输出为以下内容
-
-```js
-{
-  pageNumber: 1,
-  pageSize: 0
-}
-```
-
+::: tip 关闭分页栏
+当关闭分页栏时，事件响应时输出的参数将变成固定值，具体请查看 [pagination](#pagination) props 设置
 :::
 
 ### fetch-selected-data
@@ -246,7 +308,7 @@ remove: (items: Record<string, unknown>[]) => void
 `close-dropdown`: () => void
 ```
 
-该事件仅适用于 `SelectPageListCore` 与 `SelectPageTableCore` 核心模块
+该事件仅适用于 [核心模块组件](#核心模块组件)
 
 ### adjust-dropdown
 
@@ -256,7 +318,7 @@ remove: (items: Record<string, unknown>[]) => void
 `adjust-dropdown`: () => void
 ```
 
-该事件仅适用于 `SelectPageListCore` 与 `SelectPageTableCore` 核心模块
+该事件仅适用于 [核心模块组件](#核心模块组件)
 
 ### visible-change
 
@@ -266,10 +328,43 @@ remove: (items: Record<string, unknown>[]) => void
 `visible-change`: (visible: boolean) => void
 ```
 
-该事件仅适用于 `SelectPageList` 与 `SelectPageTable` 选择器模式
+该事件仅适用于 [选择器模式](#选择器模式)
 
 ## API
 
+使用插件的 API 前，需为组件声明 `ref` 属性，并使用 `ref()` 声明对应名称的响应式变量以调用 API 方法
+
+```vue
+<template>
+  <SelectPageListCore ref="selectPage" />
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { SelectPageListCore } from 'v-selectpage'
+
+const selectPage = ref()
+// call api
+selectPage.value.removeAll()
+</script>
+```
+
 ### removeItem
 
+移除指定数据的选中状态
+
+```ts
+removeItem: (item: Record<string, unknown>) => void
+```
+
+该 API 仅适用于 [核心模块组件](#核心模块组件)
+
 ### removeAll
+
+移除所有选中的项目
+
+```ts
+removeAll: () => void
+```
+
+该 API 仅适用于 [核心模块组件](#核心模块组件)

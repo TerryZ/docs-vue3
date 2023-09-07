@@ -47,6 +47,116 @@ import { SelectPageListCore, SelectPageTableCore } from 'v-selectpage'
 
 ## 实例
 
+### 实用案例
+
+一些实际业务应用可能会使用到的案例，以供参考
+
+#### 世界国家列表
+
+使用表格视图呈现世界国家列表
+
+<SelectPageList
+  key-prop="key"
+  :label-prop="countryLabel"
+  placeholder="Countries of the world"
+  @fetch-data="fetchCountries"
+/>
+
+数据源: [country-list](https://github.com/umpirsky/country-list/blob/master/data/en_US/country.json)
+
+::: details 示例代码
+
+```vue
+<template>
+  <SelectPageList
+    key-prop="key"
+    :label-prop="countryLabel"
+    placeholder="Countries of the world"
+    @fetch-data="fetchCountries"
+  />
+</template>
+
+<script setup>
+import { SelectPageList } from 'v-selectpage'
+
+function countryLabel (data) {
+  return `(${data.key}) ${data.name}`
+}
+function fetchCountries (data, callback) {
+  ...
+}
+</script>
+```
+
+:::
+
+#### 世界时区表
+
+使用表格视图呈现世界时区表
+
+<SelectPageTable
+  key-prop="key"
+  label-prop="name"
+  :columns="timezonesColumn"
+  placeholder="World time zone"
+  @fetch-data="fetchTimezones"
+/>
+
+数据源: [timezones](https://gist.github.com/TerryZ/4ddab237f80ef7e27e5eb206d9e66e24)
+
+::: details 示例代码
+
+```vue
+<template>
+  <SelectPageTable
+    key-prop="key"
+    label-prop="name"
+    :columns="timezonesColumn"
+    placeholder="World time zone"
+    @fetch-data="fetchTimezones"
+  />
+</template>
+
+<script setup>
+import { SelectPageTable } from 'v-selectpage'
+const timezonesColumn = [
+  {title: 'area',data: 'key'},
+  {title: 'time zone',data: 'name'}
+]
+function fetchTimezones (data, callback) {
+  ...
+}
+</script>
+```
+
+:::
+
+<script setup>
+import {
+  SelectPageList,
+  SelectPageListCore,
+  SelectPageTable,
+  SelectPageTableCore
+} from 'v-selectpage'
+import { countries, timezones } from './data'
+import { useSelectPageHandle } from './handle'
+
+const { fetchData: fetchCountries } = useSelectPageHandle(countries)
+const { fetchData: fetchTimezones } = useSelectPageHandle(timezones)
+
+const countriesColumn = [
+  { title: 'abbr', data: 'key' },
+  { title: 'country', data: 'name' }
+]
+const timezonesColumn = [
+  {title: 'area',data: 'key'},
+  {title: 'time zone',data: 'name'}
+]
+function countryLabel (data) {
+  return `(${data.key}) ${data.name}`
+}
+</script>
+
 ## Props
 
 ### v-model/modelValue
@@ -72,7 +182,9 @@ import { SelectPageListCore, SelectPageTableCore } from 'v-selectpage'
 
 多选模式
 
-单选模式下，选中项目内容直接被显示出来。多选模式下，选中的项目将以标签的形式展现
+::: info 展现形式
+单选模式下，选中项目内容在触发对象中直接被显示出来。多选模式下，选中的项目将以标签的形式展现在触发对象中
+:::
 
 ### language
 
@@ -110,11 +222,14 @@ import { SelectPageListCore, SelectPageTableCore } from 'v-selectpage'
 - 类型 `string | function`
 - 默认 `'name'`
 
-指定一个数据列或一个函数来处理行以显示文本内容，具体作用范围如下
+指定一个数据列或一个函数来处理列表项目显示的文本内容
+
+::: info 作用范围
 
 - 列表模式的行项目显示文本内容
 - [选择器模式](#选择器模式) 的触发对象中展示选中项目的文本内容
 - [选择器模式](#选择器模式) 多选方式时展示在触发对象的标签中的文本内容
+:::
 
 ### columns
 
@@ -147,7 +262,7 @@ interface TableColumn {
 
 可选中项目的最大数量，设置为 `0` 则不限制
 
-该选项依赖于 [multiple](#multiple) prop 设置为 `true`
+> 该选项依赖于 [multiple](#multiple) prop 设置为 `true`
 
 ### pagination
 

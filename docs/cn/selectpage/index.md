@@ -47,22 +47,76 @@ import { SelectPageListCore, SelectPageTableCore } from 'v-selectpage'
 
 ## 实例
 
+### 列表视图
+
+```vue
+<template>
+  <SelectPageList
+    language="zh-chs"
+    @fetch-data="fetchData"
+  />
+</template>
+
+<script setup>
+import { SelectPageList } from 'v-selectpage'
+
+// local data list for example
+const list = [
+  { id: 1, name: 'Chicago Bulls', desc: '芝加哥公牛' },
+  { id: 2, name: 'Cleveland Cavaliers', desc: '克里夫兰骑士' },
+  { id: 3, name: 'Detroit Pistons', desc: '底特律活塞' },
+  { id: 4, name: 'Indiana Pacers', desc: '印第安纳步行者' },
+  ...
+]
+
+function fetchData (data, callback) {
+  const { search, pageNumber, pageSize } = data
+
+  const start = (pageNumber - 1) * pageSize
+  const end = start + pageSize - 1
+  // filter by search keyword
+  const filtered = search
+    ? list.filter(val => val.name.includes(search))
+    : list
+
+  callback(
+    // get current page items
+    filtered.filter((val, index) => index >= start && index <= end),
+    filtered.length
+  )
+}
+</script>
+```
+
+<SelectPageList
+  :language="language"
+  label-prop="desc"
+  @fetch-data="fetchList"
+/>
+
+### 表格视图
+
+### 核心模块
+
+### 多选模式
+
+### 其他设置选项
+
 ### 实用案例
 
 一些实际业务应用可能会使用到的案例，以供参考
 
 #### 世界国家列表
 
-使用表格视图呈现世界国家列表
+数据源: [country-list](https://github.com/umpirsky/country-list/blob/master/data/en_US/country.json)
 
 <SelectPageList
   key-prop="key"
   :label-prop="countryLabel"
+  :language="language"
   placeholder="Countries of the world"
   @fetch-data="fetchCountries"
 />
-
-数据源: [country-list](https://github.com/umpirsky/country-list/blob/master/data/en_US/country.json)
 
 ::: details 示例代码
 
@@ -92,17 +146,16 @@ function fetchCountries (data, callback) {
 
 #### 世界时区表
 
-使用表格视图呈现世界时区表
+数据源: [timezones](https://gist.github.com/TerryZ/4ddab237f80ef7e27e5eb206d9e66e24)
 
 <SelectPageTable
   key-prop="key"
   label-prop="name"
+  :language="language"
   :columns="timezonesColumn"
   placeholder="World time zone"
   @fetch-data="fetchTimezones"
 />
-
-数据源: [timezones](https://gist.github.com/TerryZ/4ddab237f80ef7e27e5eb206d9e66e24)
 
 ::: details 示例代码
 
@@ -132,6 +185,8 @@ function fetchTimezones (data, callback) {
 :::
 
 <script setup>
+import { useData } from 'vitepress'
+import { computed } from 'vue'
 import {
   SelectPageList,
   SelectPageListCore,
@@ -141,6 +196,11 @@ import {
 import { countries, timezones } from './data'
 import { useSelectPageHandle } from './handle'
 
+const { lang } = useData()
+
+const language = computed(() => lang.value === 'cn' ? 'zh-chs' : 'en')
+
+const { fetchData: fetchList } = useSelectPageHandle()
 const { fetchData: fetchCountries } = useSelectPageHandle(countries)
 const { fetchData: fetchTimezones } = useSelectPageHandle(timezones)
 
@@ -226,7 +286,7 @@ function countryLabel (data) {
 
 ::: info 作用范围
 
-- 列表模式的行项目显示文本内容
+- 列表视图的行项目显示文本内容
 - [选择器模式](#选择器模式) 的触发对象中展示选中项目的文本内容
 - [选择器模式](#选择器模式) 多选方式时展示在触发对象的标签中的文本内容
 :::

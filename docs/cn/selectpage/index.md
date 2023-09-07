@@ -65,7 +65,6 @@ const list = [
   { id: 1, name: 'Chicago Bulls', desc: '芝加哥公牛' },
   { id: 2, name: 'Cleveland Cavaliers', desc: '克里夫兰骑士' },
   { id: 3, name: 'Detroit Pistons', desc: '底特律活塞' },
-  { id: 4, name: 'Indiana Pacers', desc: '印第安纳步行者' },
   ...
 ]
 
@@ -89,14 +88,108 @@ function fetchData (data, callback) {
 ```
 
 <SelectPageList
-  :language="language"
+  language="zh-chs"
   label-prop="desc"
   @fetch-data="fetchList"
 />
 
+上例中使用了本地静态数据作为示例，而更的时候我们需要应用远端数据进行加载与查询
+
+```js
+function fetchData (data, callback) {
+  const params = { ... }
+
+  axios.post('some-api-address', params).then(resp => {
+    callback(resp.list, resp.count)
+  })
+}
+```
+
 ### 表格视图
 
+```vue
+<template>
+  <SelectPageTable
+    language="zh-chs"
+    label-prop="desc"
+    :columns="teamColumns"
+    @fetch-data="fetchData"
+  />
+</template>
+
+<script setup>
+import { SelectPageTable } from 'v-selectpage'
+
+// local data list for example
+const list = [
+  { id: 1, name: 'Chicago Bulls', desc: '芝加哥公牛' },
+  { id: 2, name: 'Cleveland Cavaliers', desc: '克里夫兰骑士' },
+  { id: 3, name: 'Detroit Pistons', desc: '底特律活塞' },
+  ...
+]
+const teamColumns = [
+  { title: 'Id', data: 'id' },
+  { title: '球队名称', data: row => `${row.abbr} - ${row.name}`, width: 250 },
+  { title: '中文名', data: 'desc' }
+]
+
+function fetchData (data, callback) {
+  ...
+}
+</script>
+```
+
+<SelectPageTable
+  label-prop="desc"
+  language="zh-chs"
+  :columns="teamColumns"
+  @fetch-data="fetchList"
+/>
+
 ### 核心模块
+
+列表视图核心模块
+
+```vue
+<template>
+  <SelectPageListCore
+    language="zh-chs"
+    @fetch-data="fetchData"
+  />
+</template>
+
+<script setup>
+import { SelectPageListCore } from 'v-selectpage'
+</script>
+```
+
+<SelectPageListCore
+  language="zh-chs"
+  class="border rounded-3 shadow-sm"
+  @fetch-data="fetchList"
+/>
+
+表格视图核心模块
+
+```vue
+<template>
+  <SelectPageTableCore
+    language="zh-chs"
+    @fetch-data="fetchData"
+  />
+</template>
+
+<script setup>
+import { SelectPageTableCore } from 'v-selectpage'
+</script>
+```
+
+<SelectPageTableCore
+  language="zh-chs"
+  class="border rounded-3 shadow-sm"
+  :columns="teamColumns"
+  @fetch-data="fetchList"
+/>
 
 ### 多选模式
 
@@ -112,8 +205,8 @@ function fetchData (data, callback) {
 
 <SelectPageList
   key-prop="key"
+  language="zh-chs"
   :label-prop="countryLabel"
-  :language="language"
   placeholder="Countries of the world"
   @fetch-data="fetchCountries"
 />
@@ -151,7 +244,7 @@ function fetchCountries (data, callback) {
 <SelectPageTable
   key-prop="key"
   label-prop="name"
-  :language="language"
+  language="zh-chs"
   :columns="timezonesColumn"
   placeholder="World time zone"
   @fetch-data="fetchTimezones"
@@ -185,7 +278,6 @@ function fetchTimezones (data, callback) {
 :::
 
 <script setup>
-import { useData } from 'vitepress'
 import { computed } from 'vue'
 import {
   SelectPageList,
@@ -196,14 +288,15 @@ import {
 import { countries, timezones } from './data'
 import { useSelectPageHandle } from './handle'
 
-const { lang } = useData()
-
-const language = computed(() => lang.value === 'cn' ? 'zh-chs' : 'en')
-
 const { fetchData: fetchList } = useSelectPageHandle()
 const { fetchData: fetchCountries } = useSelectPageHandle(countries)
 const { fetchData: fetchTimezones } = useSelectPageHandle(timezones)
 
+const teamColumns = [
+  { title: 'Id', data: 'id' },
+  { title: '球队名称', data: row => `${row.abbr} - ${row.name}`, width: 250 },
+  { title: '中文名', data: 'desc' }
+]
 const countriesColumn = [
   { title: 'abbr', data: 'key' },
   { title: 'country', data: 'name' }

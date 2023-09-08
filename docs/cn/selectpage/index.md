@@ -34,7 +34,7 @@ pnpm add v-selectpage
 
 ## 模式
 
-`v-selectpage` 提供了选择器模式的项目选择组件
+`v-selectpage` 组件的工作模式介绍
 
 ### 选择器模式
 
@@ -100,7 +100,7 @@ function fetchData (data, callback) {
   @fetch-data="fetchList"
 />
 
-上例中使用了本地静态数据作为示例，而更的时候我们需要应用远端数据进行加载与查询
+上例中使用了本地静态数据作为示例，而更多的情况下我们需要应用远端数据进行加载与查询
 
 ```js
 function fetchData (data, callback) {
@@ -111,6 +111,15 @@ function fetchData (data, callback) {
   })
 }
 ```
+
+#### 键盘快捷操作
+
+在打开下拉界面且输入焦点在搜索框中时，可使用以下动作进行快捷操作
+
+- `up` 与 `down` 键切换当前高亮项目
+- `left` 与 `right` 键切换上一下或下一页
+- `enter` 存在高亮行时，将该行数据选中
+- `esc` 关闭下拉界面
 
 ### 表格视图
 
@@ -152,7 +161,7 @@ function fetchData (data, callback) {
   @fetch-data="fetchList"
 />
 
-`teamColumns` 定义了表格了数据列，列模型中的 `data` 属性与 [labelProp](#labelprop) 功能一致，即可以指定某一个数据列作为内容字段，也可以提供一函数，自定义单元格渲染内容
+`teamColumns` 定义了表格了数据列，列模型中的 `data` 属性与 [labelProp](#labelprop) 功能一致，即可以指定某一个数据列作为内容字段，也可以提供一函数对单元格渲染内容进行自定义
 
 在表格视图里，[labelProp](#labelprop) 仅用于指定选中项目在触发对象中呈现的内容
 
@@ -301,27 +310,6 @@ function fetchSelectedData (keys, callback) {
   </div>
 </div>
 
-<!-- <div class="mb-3">
-  <SelectPageList
-    label-prop="desc"
-    disabled
-    v-model="oneSelected"
-    @fetch-data="fetchList"
-    @fetch-selected-data="fetchSelectedData"
-  />
-</div>
-
-<div class="mb-3">
-  <SelectPageList
-    label-prop="desc"
-    disabled
-    multiple
-    v-model="selected"
-    @fetch-data="fetchList"
-    @fetch-selected-data="fetchSelectedData"
-  />
-</div> -->
-
 #### 关闭分页栏
 
 ```html
@@ -331,6 +319,7 @@ function fetchSelectedData (keys, callback) {
 <div class="mb-3">
   <SelectPageList
     label-prop="desc"
+    language="zh-chs"
     :pagination="false"
     @fetch-data="fetchList"
   />
@@ -347,6 +336,7 @@ function fetchSelectedData (keys, callback) {
 <div class="mb-3">
   <SelectPageList
     label-prop="desc"
+    language="zh-chs"
     :rtl="true"
     @fetch-data="fetchList"
   />
@@ -361,6 +351,7 @@ function fetchSelectedData (keys, callback) {
 
 <SelectPageList
   label-prop="desc"
+  language="zh-chs"
   :width="500"
   @fetch-data="fetchList"
 />
@@ -597,7 +588,7 @@ interface TableColumn {
 
 数据列表使用分页栏
 
-当关闭分页栏时，[fetch-data 事件](#fetch-data) 的数据请求参数中的 `pageNumber` 与 `pageSize` 数据项固定输出为以下内容
+当关闭分页栏时，[fetch-data](#fetch-data) 事件的数据请求参数中的 `pageNumber` 与 `pageSize` 数据项固定输出为以下内容
 
 ```js
 {
@@ -677,9 +668,9 @@ update:modelValue: (keys: (string | number)[]) => void
 `fetch-data`: (data: PageParameters, callback: FetchDataCallback) => void
 
 interface PageParameters {
-  search: string // 搜索关键字
+  search: string     // 搜索关键字
   pageNumber: number // 当前页码
-  pageSize: number // 每页记录数
+  pageSize: number   // 每页记录数
 }
 type FetchDataCallback = (
   // 列表数据，注意必须是一个对象列表

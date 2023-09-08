@@ -14,4 +14,15 @@ hero:
     - theme: alt
       text: 在 GitHub 上查看
       link: https://github.com/TerryZ
+
+features:
+  - icon: 🛠️
+    title: 独立使用
+    details: Lorem ipsum...
+  - icon: 👻
+    title: 风格简洁
+    details: Lorem ipsum...
+  - icon: 
+    title: 国际化支持
+    details: Lorem ipsum...
 ---

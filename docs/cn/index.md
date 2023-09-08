@@ -16,13 +16,13 @@ hero:
       link: https://github.com/TerryZ
 
 features:
-  - icon: 🛠️
+  - icon: 🔩
     title: 独立使用
-    details: Lorem ipsum...
-  - icon: 👻
+    details: 所有组件均独立开发，可独立应用于项目中
+  - icon: 🍀
     title: 风格简洁
-    details: Lorem ipsum...
-  - icon: 
+    details: 极其简洁的界面与交互风格，能与绝大多数的界面风格进行搭配
+  - icon: 🌏
     title: 国际化支持
-    details: Lorem ipsum...
+    details: 所有组件均支持国际化，组件默认至少提供了中文与英文两种语言
 ---

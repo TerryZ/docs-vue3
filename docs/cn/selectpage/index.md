@@ -16,14 +16,21 @@
 
 将 `v-selectpage` 组件安装到项目中
 
-```sh
-# use npm
+::: code-group
+
+```sh [npm]
 npm i v-selectpage
-# use yarn
+```
+
+```sh [yarn]
 yarn add v-selectpage
-# use pnpm
+```
+
+```sh [pnpm]
 pnpm add v-selectpage
 ```
+
+:::
 
 ## 模式
 
@@ -98,7 +105,7 @@ function fetchData (data, callback) {
 ```js
 function fetchData (data, callback) {
   const params = { ... }
-
+  // get current page items from remote api
   axios.post('some-api-address', params).then(resp => {
     callback(resp.list, resp.count)
   })
@@ -110,7 +117,6 @@ function fetchData (data, callback) {
 ```vue
 <template>
   <SelectPageTable
-    language="zh-chs"
     label-prop="desc"
     :columns="teamColumns"
     @fetch-data="fetchData"
@@ -122,9 +128,9 @@ import { SelectPageTable } from 'v-selectpage'
 
 // local data list for example
 const list = [
-  { id: 1, name: 'Chicago Bulls', desc: '芝加哥公牛' },
-  { id: 2, name: 'Cleveland Cavaliers', desc: '克里夫兰骑士' },
-  { id: 3, name: 'Detroit Pistons', desc: '底特律活塞' },
+  { id: 1, name: 'Chicago Bulls', desc: '芝加哥公牛', abbr: 'CHI' },
+  { id: 2, name: 'Cleveland Cavaliers', desc: '克里夫兰骑士', abbr: 'CLE' },
+  { id: 3, name: 'Detroit Pistons', desc: '底特律活塞', abbr: 'DET' },
   ...
 ]
 const teamColumns = [
@@ -146,16 +152,17 @@ function fetchData (data, callback) {
   @fetch-data="fetchList"
 />
 
+`teamColumns` 定义了表格了数据列，列模型中的 `data` 属性与 [labelProp](#labelprop) 功能一致，即可以指定某一个数据列作为内容字段，也可以提供一函数，自定义单元格渲染内容
+
+在表格视图里，[labelProp](#labelprop) 仅用于指定选中项目在触发对象中呈现的内容
+
 ### 核心模块
 
 列表视图核心模块
 
 ```vue
 <template>
-  <SelectPageListCore
-    language="zh-chs"
-    @fetch-data="fetchData"
-  />
+  <SelectPageListCore @fetch-data="fetchData" />
 </template>
 
 <script setup>
@@ -173,10 +180,7 @@ import { SelectPageListCore } from 'v-selectpage'
 
 ```vue
 <template>
-  <SelectPageTableCore
-    language="zh-chs"
-    @fetch-data="fetchData"
-  />
+  <SelectPageTableCore @fetch-data="fetchData" />
 </template>
 
 <script setup>
@@ -193,7 +197,173 @@ import { SelectPageTableCore } from 'v-selectpage'
 
 ### 多选模式
 
+设置 `multiple` prop 以启用多项目选择功能
+
+```vue
+<template>
+  <SelectPageList
+    multiple
+    v-model="selected"
+    @fetch-data="fetchData"
+    @fetch-selected-data="fetchSelectedData"
+  />
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { SelectPageList } from 'v-selectpage'
+// local data list for example
+const list = [
+  { id: 1, name: 'Chicago Bulls', desc: '芝加哥公牛' },
+  { id: 2, name: 'Cleveland Cavaliers', desc: '克里夫兰骑士' },
+  { id: 3, name: 'Detroit Pistons', desc: '底特律活塞' },
+  ...
+]
+const selected = ref([1, 2, 4])
+
+function fetchData (data, callback) { ... }
+function fetchSelectedData (keys, callback) {
+  // get items model by keys when v-model is set to a non-empty value
+  callback(list.filter(val => keys.includes(val.id)))
+}
+</script>
+```
+
+<div class="mb-3">
+  <SelectPageList
+    language="zh-chs"
+    label-prop="desc"
+    multiple
+    v-model="selected"
+    @fetch-data="fetchList"
+    @fetch-selected-data="fetchSelectedData"
+  />
+</div>
+
+#### v-model 与 fetch-selected-data
+
+上面举例了设置默认选中项目的场景，`v-model` 与 `fetch-selected-data` 事件是配套使用的，当使用 `v-model` 设置一个或多个 key 时（key 值内容应与 `keyProp` 指定的数据列对应 ），组件会响应 `fetch-selected-data` 事件用于获取 key 对应的数据，而通过组件交互操作完成的项目选择不会触发该事件
+
+#### 限制最大选择数量
+
+设置 `max` 值以限制最大可选择数量
+
+```html
+<SelectPageList
+  multiple
+  v-model="selected"
+  :max="3"
+  @fetch-data="fetchData"
+  @fetch-selected-data="fetchSelectedData"
+/>
+```
+
+<SelectPageList
+  language="zh-chs"
+  label-prop="desc"
+  multiple
+  v-model="selected"
+  :max="3"
+  @fetch-data="fetchList"
+  @fetch-selected-data="fetchSelectedData"
+/>
+
 ### 其他设置选项
+
+组件的其它设置选项
+
+#### 禁用
+
+```html
+<SelectPageList disabled />
+<SelectPageList :disabled="true" />
+```
+
+<div class="row">
+  <div class="col-md-6">
+  <SelectPageList
+    label-prop="desc"
+    disabled
+    v-model="oneSelected"
+    @fetch-data="fetchList"
+    @fetch-selected-data="fetchSelectedData"
+  />
+  </div>
+  <div class="col-md-6">
+  <SelectPageList
+    label-prop="desc"
+    disabled
+    multiple
+    v-model="selected"
+    @fetch-data="fetchList"
+    @fetch-selected-data="fetchSelectedData"
+  />
+  </div>
+</div>
+
+<!-- <div class="mb-3">
+  <SelectPageList
+    label-prop="desc"
+    disabled
+    v-model="oneSelected"
+    @fetch-data="fetchList"
+    @fetch-selected-data="fetchSelectedData"
+  />
+</div>
+
+<div class="mb-3">
+  <SelectPageList
+    label-prop="desc"
+    disabled
+    multiple
+    v-model="selected"
+    @fetch-data="fetchList"
+    @fetch-selected-data="fetchSelectedData"
+  />
+</div> -->
+
+#### 关闭分页栏
+
+```html
+<SelectPageList :pagination="false" />
+```
+
+<div class="mb-3">
+  <SelectPageList
+    label-prop="desc"
+    :pagination="false"
+    @fetch-data="fetchList"
+  />
+</div>
+
+#### 文字从右至左的书写与对齐
+
+部分语言有文字从右向左的书写习惯，例如希伯来语 `he` 与阿拉伯语 `ar` 等语言
+
+```html
+<SelectPageList :rtl="true" />
+```
+
+<div class="mb-3">
+  <SelectPageList
+    label-prop="desc"
+    :rtl="true"
+    @fetch-data="fetchList"
+  />
+</div>
+
+#### 内容区域宽度
+
+```html
+<SelectPageList :width="500" />
+<SelectPageList width="20rem" />
+```
+
+<SelectPageList
+  label-prop="desc"
+  :width="500"
+  @fetch-data="fetchList"
+/>
 
 ### 实用案例
 
@@ -278,7 +448,7 @@ function fetchTimezones (data, callback) {
 :::
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import {
   SelectPageList,
   SelectPageListCore,
@@ -288,9 +458,12 @@ import {
 import { countries, timezones } from './data'
 import { useSelectPageHandle } from './handle'
 
-const { fetchData: fetchList } = useSelectPageHandle()
+const { fetchData: fetchList, fetchSelectedData } = useSelectPageHandle()
 const { fetchData: fetchCountries } = useSelectPageHandle(countries)
 const { fetchData: fetchTimezones } = useSelectPageHandle(timezones)
+
+const oneSelected = ref([1])
+const selected = ref([1, 2, 4])
 
 const teamColumns = [
   { title: 'Id', data: 'id' },

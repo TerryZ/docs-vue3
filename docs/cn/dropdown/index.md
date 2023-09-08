@@ -16,14 +16,21 @@
 
 将 `v-dropdown` 组件安装到项目中
 
-```sh
-# use npm
+::: code-group
+
+```sh [npm]
 npm i v-dropdown
-# use yarn
+```
+
+```sh [yarn]
 yarn add v-dropdown
-# use pnpm
+```
+
+```sh [pnpm]
 pnpm add v-dropdown
 ```
+
+:::
 
 ### 常规用例
 

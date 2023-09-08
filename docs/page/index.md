@@ -16,14 +16,21 @@ If you are using [vue 2.x](https://v2.vuejs.org/v2/guide/) version, please use [
 
 Install `v-page` component in to your project
 
-```sh
-# use npm
+::: code-group
+
+```sh [npm]
 npm i v-page
-# use yarn
+```
+
+```sh [yarn]
 yarn add v-page
-# use pnpm
+```
+
+```sh [pnpm]
 pnpm add v-page
 ```
+
+:::
 
 Globally install component
 

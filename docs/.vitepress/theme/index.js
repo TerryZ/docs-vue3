@@ -5,6 +5,7 @@ import DefaultTheme from "vitepress/theme"
 // import 'bootstrap/dist/css/bootstrap.min.css'
 // 引用 bootstrap 工具类样式
 import 'bootstrap/dist/css/bootstrap-utilities.min.css'
+import 'bootstrap/dist/css/bootstrap-grid.min.css'
 import './component-fix.sass'
 import './custom.sass'
 

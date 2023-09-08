@@ -16,14 +16,21 @@ If you are using [vue 2.x](https://v2.vuejs.org/v2/guide/) version, please use [
 
 Install `v-region` component in to your project
 
-```sh
-# use npm
+::: code-group
+
+```sh [npm]
 npm i v-region
-# use yarn
+```
+
+```sh [yarn]
 yarn add v-region
-# use pnpm
+```
+
+```sh [pnpm]
 pnpm add v-region
 ```
+
+:::
 
 Globally install component
 

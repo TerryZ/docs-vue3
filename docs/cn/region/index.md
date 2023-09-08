@@ -16,14 +16,21 @@
 
 将 `v-region` 组件安装到项目中
 
-```sh
-# use npm
+::: code-group
+
+```sh [npm]
 npm i v-region
-# use yarn
+```
+
+```sh [yarn]
 yarn add v-region
-# use pnpm
+```
+
+```sh [pnpm]
 pnpm add v-region
 ```
+
+:::
 
 全局安装组件
 

@@ -16,14 +16,21 @@
 
 将 `v-page` 组件安装到项目中
 
-```sh
-# use npm
+::: code-group
+
+```sh [npm]
 npm i v-page
-# use yarn
+```
+
+```sh [yarn]
 yarn add v-page
-# use pnpm
+```
+
+```sh [pnpm]
 pnpm add v-page
 ```
+
+:::
 
 全局安装插件
 

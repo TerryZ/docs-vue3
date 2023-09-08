@@ -7,7 +7,7 @@ export default defineConfig({
   description: 'Just playing around.',
   appearance: false,
   lastUpdated: true,
-  base: '/',
+  base: '/docs-vue3/',
   lang: 'en',
   themeConfig: {
     search: {

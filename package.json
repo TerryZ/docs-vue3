@@ -15,7 +15,7 @@
   "dependencies": {
     "bootstrap": "^5.3.1",
     "v-dropdown": "3.0.0-beta.1",
-    "v-page": "3.0.0-beta.2",
+    "v-page": "3.0.0",
     "v-region": "3.0.0-beta.3",
     "v-selectpage": "3.0.0-beta.1"
   },

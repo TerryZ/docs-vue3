@@ -38,10 +38,10 @@ pnpm add v-page
 // add component in global scope as plugin
 import { createApp } from 'vue'
 import App from './app.vue'
-import Page from 'v-page'
+import { PaginationBar } from 'v-page'
 
 const app = createApp(App)
-app.use(Page, {
+app.use(PaginationBar, {
   // globally config options
 })
 app.mount('#app')
@@ -62,11 +62,11 @@ app.mount('#app')
 
 ```vue
 <template>
-  <Page />
+  <PaginationBar />
 </template>
 
 <script setup>
-import { Page } from 'v-page'
+import { PaginationBar } from 'v-page'
 </script>
 ```
 
@@ -80,7 +80,7 @@ import { Page } from 'v-page'
     v-text="item.name"
   />
 
-  <Page
+  <PaginationBar
     v-model="pageNumber"
     :total-row="totalRow"
     @change="change"
@@ -89,7 +89,7 @@ import { Page } from 'v-page'
 
 <script setup>
 import { ref } from 'vue'
-import { Page } from 'v-page'
+import { PaginationBar } from 'v-page'
 
 const pageNumber = ref(3)
 const totalRow = ref(100)
@@ -97,13 +97,15 @@ const list = ref([])
 // respond for pagination change
 function change (data) {
   console.log(data) // { pageNumber: 1, pageSize: 10 }
-  // a case for example
-  // do some http request
-  // fetch new data and update `totalRow` variable
-  axios({
+
+  const params = {
     pageNumber: data.pageNumber,
-    pageSize: data.pageSize
-  }).then(resp => {
+    pageSize: data.pageSize,
+    ...
+  }
+  // do some http request for example
+  axios.post('some-api-address', params).then(resp => {
+    // fetch new data and update data list and `totalRow` variable
     list.value = resp.list || []
     totalRow.value = resp.totalRow
   })
@@ -117,17 +119,19 @@ function change (data) {
 
 ```vue
 <template>
-  <Page
+  <PaginationBar
     :total-row="21"
+    language="cn"
     @change="changeBasic"
   />
 </template>
 ```
 
 <div class="border rounded-3 shadow-sm p-2">
-  <Page
-    :total-row="21"
+  <PaginationBar
     align="center"
+    language="cn"
+    :total-row="21"
     @change="changeBasic"
   />
 </div>
@@ -154,15 +158,17 @@ function change (data) {
       v-text=item
     />
   </div>
-  <Page
-    :total-row="88"
+  <PaginationBar
     align="left"
+    language="cn"
+    :total-row="88"
     @change="changeGallery"
   />
 </template>
+
 <script setup>
 import { ref } from 'vue'
-import Page from 'v-page'
+import { PaginationBar } from 'v-page'
 
 const srcList = Array(88).fill(0).map((val, index) => index + 1)
 const listGallery = ref([])
@@ -172,7 +178,6 @@ function changeGallery ({ pageNumber, pageSize }) {
   const end = (start + pageSize) > srcList.length
     ? srcList.length
     : start + pageSize
-
   listGallery.value = srcList.filter((val, index) => {
     return index >= start && index < end
   })
@@ -192,9 +197,10 @@ function changeGallery ({ pageNumber, pageSize }) {
     v-text=item
   />
 </div>
-<Page
-  :total-row="88"
+<PaginationBar
   align="left"
+  language="cn"
+  :total-row="88"
   @change="changeGallery"
 />
 
@@ -210,7 +216,7 @@ function changeGallery ({ pageNumber, pageSize }) {
     <button type="button" @click="pageNumberOperate++" >pageNumber + 1</button>
   </div>
 
-  <Page v-model="pageNumberOperate" />
+  <PaginationBar v-model="pageNumberOperate" />
 </template>
 
 <script setup>
@@ -255,8 +261,9 @@ function goToInputPage () {
   </button>
 </div>
 
-<Page
+<PaginationBar
   align="left"
+  language="cn"
   v-model="pageNumberOperate"
   :total-row="58"
 />
@@ -264,7 +271,7 @@ function goToInputPage () {
 ### 对齐方向
 
 ```vue
-<Page align="left" />
+<PaginationBar align="left" />
 ```
 
 <div class="mb-3">
@@ -280,28 +287,30 @@ function goToInputPage () {
   </select>
 </div>
 
-<Page
+<PaginationBar
   :total-row="28"
   :align="align"
+  language="cn"
   border
 />
 
 ### 显示边框模式
 
 ```vue
-<Page :border="true" />
+<PaginationBar :border="true" />
 ```
 
-<Page
+<PaginationBar
   :total-row="28"
   align="left"
+  language="cn"
   border
 />
 
 ### 启用与禁用
 
 ```vue
-<Page :disabled="true" />
+<PaginationBar :disabled="true" />
 ```
 
 <div class="border shadow-sm p-2 d-inline-flex rounded-3 mb-3">
@@ -311,10 +320,21 @@ function goToInputPage () {
   <label for="radio-disabled">禁用</label>
 </div>
 
-<Page
+<div class="my-3">
+  <PaginationBar
+    :total-row="28"
+    :disabled="disabled"
+    language="cn"
+    align="left"
+  />
+</div>
+
+<PaginationBar
   :total-row="28"
   :disabled="disabled"
+  border
   align="left"
+  language="cn"
 />
 
 ### 功能模块的启用与关闭
@@ -368,9 +388,10 @@ function goToInputPage () {
   </div>
 </div>
 
-<Page
-  :total-row="28"
+<PaginationBar
   align="left"
+  language="cn"
+  :total-row="28"
   :info="switchInfo"
   :page-size-menu="pageSizeMenu"
   :page-number="switchPageNumber"
@@ -384,7 +405,7 @@ function goToInputPage () {
 
 ```vue
 <template>
-  <Page
+  <PaginationBar
     border
     align="left"
     :total-row="28"
@@ -402,13 +423,14 @@ function goToInputPage () {
       <div>isFirst: <span v-text="isFirst" /></div>
       <div>isLast: <span v-text="isLast" /></div>
     </div>
-  </Page>
+  </PaginationBar>
 </template>
 ```
 
-<Page
+<PaginationBar
   border
   align="left"
+  language="cn"
   :total-row="28"
   :page-size-menu="false"
   :info="false"
@@ -424,7 +446,7 @@ function goToInputPage () {
     <div class="me-1">isFirst: <span v-text="isFirst" /></div>
     <div>isLast: <span v-text="isLast" /></div>
   </div>
-</Page>
+</PaginationBar>
 
 ### 显示全部数据选项
 
@@ -437,15 +459,16 @@ function goToInputPage () {
 }
 ```
 
-<Page
+<PaginationBar
   :total-row="28"
   :display-all="true"
   align="left"
+  language="cn"
 />
 
 <script setup>
 import { ref, computed } from 'vue'
-import Page from 'v-page'
+import { PaginationBar } from 'v-page'
 
 const srcList = Array(88).fill(0).map((val, index) => index + 1)
 
@@ -507,7 +530,7 @@ function goToInputPage () {
 ### language
 
 - 类型 `string`
-- 默认 `'cn'`
+- 默认 `'en'`
 
 指定分页栏语言，完整语言清单
 
@@ -589,16 +612,18 @@ function goToInputPage () {
 分页栏操作发生数据变更时，触发的响应事件
 
 ```ts
-change(data: PageState): void
+change: (data: PageInfo) => void
 ```
 
 ```ts
-interface PageState {
+interface PageInfo {
   // 当前分页号
   pageNumber: number
   // 每页显示记录数
   pageSize: number
 }
+// 也可以通过以下的方式直接使用类型
+import type { PageInfo } from 'v-page/types'
 ```
 
 ## API
@@ -607,11 +632,12 @@ interface PageState {
 
 ```vue
 <template>
-  <v-page ref="page" />
+  <PaginationBar ref="page" />
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { PaginationBar } from 'v-page'
 
 const page = ref(null)
 // call api
@@ -624,7 +650,7 @@ page.value.goPage(3)
 切换当前页
 
 ```ts
-goPage(page: number): void
+goPage: (page: number) => void
 ```
 
 ### reload
@@ -632,5 +658,5 @@ goPage(page: number): void
 更新分页信息及事件
 
 ```ts
-reload(): void
+reload: () => void
 ```

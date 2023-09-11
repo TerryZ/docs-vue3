@@ -38,10 +38,10 @@ Globally install component
 // add component in global scope as plugin
 import { createApp } from 'vue'
 import App from './app.vue'
-import Page from 'v-page'
+import { PaginationBar } from 'v-page'
 
 const app = createApp(App)
-app.use(Page, {
+app.use(PaginationBar, {
   // globally config options
 })
 app.mount('#app')
@@ -62,11 +62,11 @@ You can also use components only where you need them, which is the more recommen
 
 ```vue
 <template>
-  <Page />
+  <PaginationBar />
 </template>
 
 <script setup>
-import { Page } from 'v-page'
+import { PaginationBar } from 'v-page'
 </script>
 ```
 
@@ -80,7 +80,7 @@ import { Page } from 'v-page'
     v-text="item.name"
   />
 
-  <Page
+  <PaginationBar
     v-model="pageNumber"
     :total-row="totalRow"
     @change="change"
@@ -89,7 +89,7 @@ import { Page } from 'v-page'
 
 <script setup>
 import { ref } from 'vue'
-import { Page } from 'v-page'
+import { PaginationBar } from 'v-page'
 
 const pageNumber = ref(3)
 const totalRow = ref(100)
@@ -97,13 +97,15 @@ const list = ref([])
 // respond for pagination change
 function change (data) {
   console.log(data) // { pageNumber: 1, pageSize: 10 }
-  // a case for example
-  // do some http request
-  // fetch new data and update `totalRow` variable
-  axios({
+
+  const params = {
     pageNumber: data.pageNumber,
-    pageSize: data.pageSize
-  }).then(resp => {
+    pageSize: data.pageSize,
+    ...
+  }
+  // do some http request for example
+  axios.post('some-api-address', params).then(resp => {
+    // fetch new data and update data list and `totalRow` variable
     list.value = resp.list || []
     totalRow.value = resp.totalRow
   })
@@ -117,7 +119,7 @@ function change (data) {
 
 ```vue
 <template>
-  <Page
+  <PaginationBar
     :total-row="21"
     @change="changeBasic"
   />
@@ -125,7 +127,7 @@ function change (data) {
 ```
 
 <div class="border rounded-3 shadow-sm p-2">
-  <Page
+  <PaginationBar
     :total-row="21"
     :language="lang"
     align="center"
@@ -155,7 +157,7 @@ Pagination [change](#change) event response data
       v-text=item
     />
   </div>
-  <Page
+  <PaginationBar
     :total-row="88"
     :language="lang"
     align="left"
@@ -164,7 +166,7 @@ Pagination [change](#change) event response data
 </template>
 <script setup>
 import { ref } from 'vue'
-import Page from 'v-page'
+import { PaginationBar } from 'v-page'
 
 const srcList = Array(88).fill(0).map((val, index) => index + 1)
 const listGallery = ref([])
@@ -194,7 +196,7 @@ function changeGallery ({ pageNumber, pageSize }) {
     v-text=item
   />
 </div>
-<Page
+<PaginationBar
   :total-row="88"
   :language="lang"
   align="left"
@@ -213,7 +215,7 @@ Some cases showing how pagination operation works
     <button type="button" @click="pageNumberOperate++" >pageNumber + 1</button>
   </div>
 
-  <Page v-model="pageNumberOperate" />
+  <PaginationBar v-model="pageNumberOperate" />
 </template>
 
 <script setup>
@@ -258,7 +260,7 @@ function goToInputPage () {
   </button>
 </div>
 
-<Page
+<PaginationBar
   align="left"
   v-model="pageNumberOperate"
   :total-row="58"
@@ -268,7 +270,7 @@ function goToInputPage () {
 ### Alignment direction
 
 ```vue
-<Page align="left" />
+<PaginationBar align="left" />
 ```
 
 <div class="mb-3">
@@ -284,7 +286,7 @@ function goToInputPage () {
   </select>
 </div>
 
-<Page
+<PaginationBar
   :total-row="28"
   :align="align"
   :language="lang"
@@ -294,10 +296,10 @@ function goToInputPage () {
 ### Display border mode
 
 ```vue
-<Page :border="true" />
+<PaginationBar :border="true" />
 ```
 
-<Page
+<PaginationBar
   :total-row="28"
   :language="lang"
   align="left"
@@ -307,7 +309,7 @@ function goToInputPage () {
 ### Enabled and disabled
 
 ```vue
-<Page :disabled="true" />
+<PaginationBar :disabled="true" />
 ```
 
 <div class="border shadow-sm p-2 d-inline-flex rounded-3 mb-3">
@@ -317,10 +319,18 @@ function goToInputPage () {
   <label for="radio-disabled">Disabled</label>
 </div>
 
-<Page
+<div class="my-3">
+  <PaginationBar
+    :total-row="28"
+    :disabled="disabled"
+    align="left"
+  />
+</div>
+
+<PaginationBar
   :total-row="28"
   :disabled="disabled"
-  :language="lang"
+  border
   align="left"
 />
 
@@ -375,10 +385,10 @@ Setup pagination modules on or off
   </div>
 </div>
 
-<Page
+<PaginationBar
+  align="left"
   :total-row="28"
   :language="lang"
-  align="left"
   :info="switchInfo"
   :page-size-menu="pageSizeMenu"
   :page-number="switchPageNumber"
@@ -392,7 +402,7 @@ Setup pagination modules on or off
 
 ```vue
 <template>
-  <Page
+  <PaginationBar
     border
     align="left"
     :total-row="28"
@@ -410,11 +420,11 @@ Setup pagination modules on or off
       <div>isFirst: <span v-text="isFirst" /></div>
       <div>isLast: <span v-text="isLast" /></div>
     </div>
-  </Page>
+  </PaginationBar>
 </template>
 ```
 
-<Page
+<PaginationBar
   border
   align="left"
   :total-row="28"
@@ -433,7 +443,7 @@ Setup pagination modules on or off
     <div class="me-1">isFirst: <span v-text="isFirst" /></div>
     <div>isLast: <span v-text="isLast" /></div>
   </div>
-</Page>
+</PaginationBar>
 
 ### Display all data option
 
@@ -446,7 +456,7 @@ Add `All` item to page size list to display all data without paging. When this i
 }
 ```
 
-<Page
+<PaginationBar
   :total-row="28"
   :display-all="true"
   :language="lang"
@@ -456,7 +466,7 @@ Add `All` item to page size list to display all data without paging. When this i
 <script setup>
 import { ref, computed } from 'vue'
 import { useData } from 'vitepress'
-import Page from 'v-page'
+import { PaginationBar } from 'v-page'
 
 const srcList = Array(88).fill(0).map((val, index) => index + 1)
 
@@ -520,7 +530,7 @@ The total number of records in each data request
 ### language
 
 - type `string`
-- default `'cn'`
+- default `'en'`
 
 Specify the pagination language, check below for a complete language list
 
@@ -602,16 +612,18 @@ Component operation response events
 Response event triggered when data changes in the operation of pagination
 
 ```ts
-change(data: PageState): void
+change: (data: PageInfo) => void
 ```
 
 ```ts
-interface PageState {
+interface PageInfo {
   // Current page number
   pageNumber: number
   // Page size
   pageSize: number
 }
+// You can also use the type directly in the following way
+import type { PageInfo } from 'v-page/types'
 ```
 
 ## API
@@ -620,11 +632,12 @@ Before using Pagination component's API, need to declare a ref attribute for the
 
 ```vue
 <template>
-  <v-page ref="page" />
+  <PaginationBar ref="page" />
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { PaginationBar } from 'v-page'
 
 const page = ref(null)
 // call api
@@ -637,7 +650,7 @@ page.value.goPage(3)
 Go to specified page
 
 ```ts
-goPage(page: number): void
+goPage: (page: number) => void
 ```
 
 ### reload
@@ -645,5 +658,5 @@ goPage(page: number): void
 Update pagination state and re-trigger component events
 
 ```ts
-reload(): void
+reload: () => void
 ```

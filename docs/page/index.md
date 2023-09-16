@@ -188,7 +188,7 @@ function changeGallery ({ pageNumber, pageSize }) {
   <div
     style="height: 100px;width: 126px;"
     class="
-      rounded-2 bg-light me-2 mb-2 fs-1 text-muted
+      rounded-2 bg-light me-2 mb-2 fs-1 text-body-secondary
       d-flex align-items-center justify-content-center
     "
     v-for="item in listGallery"

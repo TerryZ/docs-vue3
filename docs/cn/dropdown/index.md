@@ -141,7 +141,7 @@ function change (val) {
     <div
       class="
         d-flex align-items-center justify-content-center
-        bg-light rounded-3 px-3 py-1 fs-1 text-muted
+        bg-light rounded-3 px-3 py-1 fs-1 text-body-secondary w-100
       "
       style="height: 10rem;"
     >
@@ -426,17 +426,21 @@ function inputChange (e) {
 
 在 `Dropdown` 组件中，触发对象与内容均使用插槽的方式进行分发
 
-### trigger(named scoped slots)
+### trigger <Badge type="info" text="named scoped slots" />
 
 用于放置触发对象的具名作用域插槽，它输出了以下组件状态
 
-- `visible` 显示状态
-- `disabled` 禁用状态
+```ts
+interface TriggerSlotData {
+  visible: boolean  // 显示状态
+  disabled: boolean // 禁用状态
+}
+```
 
 ```vue
 <template>
   <Dropdown>
-    <template #trigger>
+    <template #trigger> // [!code focus]
       <button type="button">Click me</button>
     </template>
   </Dropdown>
@@ -470,9 +474,9 @@ function inputChange (e) {
     </template>
 
     <!-- contents display in dropdown default slot -->
-    <div>
-      some contents
-    </div>
+    <div>                     // [!code focus]
+      some contents           // [!code focus]
+    </div>                    // [!code focus]
   </Dropdown>
 </template>
 ```
@@ -548,6 +552,20 @@ function inputChange (e) {
 
 下拉栏打开的触发方式
 
+### customTriggerClass
+
+- 类型 `string`
+- 默认 `''`
+
+添加自定义样式类名至触发对象容器
+
+### customContainerClass
+
+- 类型 `string`
+- 默认 `''`
+
+添加自定义样式类名至下拉容器中
+
 ## 事件
 
 组件各类操作响应事件
@@ -557,7 +575,7 @@ function inputChange (e) {
 响应下拉栏打开 / 关闭的状态变化
 
 ```ts
-visible-change(visible: boolean): void
+`visible-change`: (visible: boolean) => void
 ```
 
 ## API
@@ -566,11 +584,12 @@ visible-change(visible: boolean): void
 
 ```vue
 <template>
-  <v-dropdown ref="dropdown" />
+  <Dropdown ref="dropdown" />
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { Dropdown } from 'v-dropdown'
 
 const dropdown = ref(null)
 // call api
@@ -583,7 +602,7 @@ dropdown.value.display()
 打开下拉栏
 
 ```ts
-display(): void
+display: () => void
 ```
 
 ### close
@@ -591,7 +610,7 @@ display(): void
 关闭下拉栏
 
 ```ts
-close(): void
+close: () => void
 ```
 
 ### toggleVisible
@@ -599,7 +618,7 @@ close(): void
 循环切换下拉栏状态
 
 ```ts
-toggleVisible(): void
+toggleVisible: () => void
 ```
 
 ### adjust
@@ -607,5 +626,5 @@ toggleVisible(): void
 检测并调整下拉栏位置，使下拉栏与触发对象位置对齐
 
 ```ts
-adjust(): void
+adjust: () => void
 ```

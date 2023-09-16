@@ -141,7 +141,7 @@ Mouse right click trigger container area to open dropdown container
     <div
       class="
         d-flex align-items-center justify-content-center
-        bg-light rounded-3 px-3 py-1 fs-1 text-muted
+        bg-light rounded-3 px-3 py-1 fs-1 text-body-secondary
       "
       style="height: 10rem;"
     >
@@ -426,17 +426,21 @@ function inputChange (e) {
 
 In the `Dropdown` component, the trigger object and content are distributed using slots
 
-### trigger(named scoped slots)
+### trigger <Badge type="info" text="named scoped slots" />
 
 Named scoped slots for placing trigger objects, which outputs the following component state
 
-- `visible` the dropdown container visible status
-- `disabled` disabled status
+```ts
+interface TriggerSlotData {
+  visible: boolean  // the dropdown container visible status
+  disabled: boolean // disabled status
+}
+```
 
 ```vue
 <template>
   <Dropdown>
-    <template #trigger>
+    <template #trigger> // [!code focus]
       <button type="button">Click me</button>
     </template>
   </Dropdown>
@@ -470,9 +474,9 @@ The default slot is used to place the content area in the dropdown container
     </template>
 
     <!-- contents display in dropdown default slot -->
-    <div>
-      some contents
-    </div>
+    <div>                     // [!code focus]
+      some contents           // [!code focus]
+    </div>                    // [!code focus]
   </Dropdown>
 </template>
 ```
@@ -548,29 +552,44 @@ Trigger container display mode
 
 Open the dropdown container trigger method
 
+### customTriggerClass
+
+- type `string`
+- default `''`
+
+Add custom class to trigger container
+
+### customContainerClass
+
+- type `string`
+- default `''`
+
+Add custom class to dropdown container
+
 ## Events
 
 Component operation response events
 
 ### visible-change
 
-Respond to the state change of the dropdown container opening/closing
+Respond to the state change of the dropdown container opening / closing
 
 ```ts
-visible-change(visible: boolean): void
+`visible-change`: (visible: boolean) => void
 ```
 
 ## API
 
-Before using component's API, need to declare a ref attribute for the component, declare a ref variable by ref() to hold the element reference(the name must match template ref value) and use it to call API methods
+Before using component's API, need to declare a `ref` attribute for the component, declare a `ref` variable by `ref()` to hold the element reference(the name must match template ref value) and use it to call API methods
 
 ```vue
 <template>
-  <v-dropdown ref="dropdown" />
+  <Dropdown ref="dropdown" />
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { Dropdown } from 'v-dropdown'
 
 const dropdown = ref(null)
 // call api
@@ -583,7 +602,7 @@ dropdown.value.display()
 Display dropdown container
 
 ```ts
-display(): void
+display: () => void
 ```
 
 ### close
@@ -591,7 +610,7 @@ display(): void
 Close dropdown container
 
 ```ts
-close(): void
+close: () => void
 ```
 
 ### toggleVisible
@@ -599,7 +618,7 @@ close(): void
 Toggle dropdown visible state
 
 ```ts
-toggleVisible(): void
+toggleVisible: () => void
 ```
 
 ### adjust
@@ -607,5 +626,5 @@ toggleVisible(): void
 Detect and adjust dropdown container position, make the dropdown container align to the trigger container
 
 ```ts
-adjust(): void
+adjust: () => void
 ```

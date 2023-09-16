@@ -6,11 +6,11 @@ settings:
 
 dependencies:
   bootstrap:
-    specifier: ^5.3.1
-    version: 5.3.1(@popperjs/core@2.11.8)
+    specifier: ^5.3.2
+    version: 5.3.2(@popperjs/core@2.11.8)
   v-dropdown:
-    specifier: 3.0.0-beta.1
-    version: 3.0.0-beta.1(vue@3.3.4)
+    specifier: 3.0.0
+    version: 3.0.0(vue@3.3.4)
   v-page:
     specifier: 3.0.0
     version: 3.0.0(vue@3.3.4)
@@ -23,11 +23,11 @@ dependencies:
 
 devDependencies:
   sass:
-    specifier: ^1.66.1
-    version: 1.66.1
+    specifier: ^1.67.0
+    version: 1.67.0
   vitepress:
-    specifier: 1.0.0-rc.10
-    version: 1.0.0-rc.10(@algolia/client-search@4.19.1)(sass@1.66.1)(search-insights@2.8.1)
+    specifier: 1.0.0-rc.13
+    version: 1.0.0-rc.13(@algolia/client-search@4.19.1)(sass@1.67.0)(search-insights@2.8.1)
   vue:
     specifier: ^3.3.4
     version: 3.3.4
@@ -631,8 +631,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /bootstrap@5.3.1(@popperjs/core@2.11.8):
-    resolution: {integrity: sha512-jzwza3Yagduci2x0rr9MeFSORjcHpt0lRZukZPZQJT1Dth5qzV7XcgGqYzi39KGAVYR8QEDVoO0ubFKOxzMG+g==}
+  /bootstrap@5.3.2(@popperjs/core@2.11.8):
+    resolution: {integrity: sha512-D32nmNWiQHo94BKHLmOrdjlL05q1c8oxbtBphQFb9Z5to6eGRDCm0QgeaZ4zFBHzfg2++rqa2JkqCcxDy0sH0g==}
     peerDependencies:
       '@popperjs/core': ^2.11.8
     dependencies:
@@ -831,8 +831,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /sass@1.66.1:
-    resolution: {integrity: sha512-50c+zTsZOJVgFfTgwwEzkjA3/QACgdNsKueWPyAR0mRINIvLAStVQBbPg14iuqEQ74NPDbXzJARJ/O4SI1zftA==}
+  /sass@1.67.0:
+    resolution: {integrity: sha512-SVrO9ZeX/QQyEGtuZYCVxoeAL5vGlYjJ9p4i4HFuekWl8y/LtJ7tJc10Z+ck1c8xOuoBm2MYzcLfTAffD0pl/A==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
@@ -873,6 +873,14 @@ packages:
       is-number: 7.0.0
     dev: true
 
+  /v-dropdown@3.0.0(vue@3.3.4):
+    resolution: {integrity: sha512-sDBiHhTjm0/eLmC83vUbOIHXNTlQD30w+usrh779OG+aNc/5vqyFQbSBPGekvD7pQPbWSPc5esVT8jcqfLRnrg==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      vue: 3.3.4
+    dev: false
+
   /v-dropdown@3.0.0-beta.1(vue@3.3.4):
     resolution: {integrity: sha512-UzIompU3CHtRu3QvlNaMxhXMYmPexVbkY9nsftZIx+3VuskWoCpH/drOsPRQwBHST0Ox3nWpEgzS9OhcUisNQQ==}
     peerDependencies:
@@ -894,7 +902,7 @@ packages:
     peerDependencies:
       vue: ^3.2.0
     dependencies:
-      v-dropdown: 3.0.0-beta.1(vue@3.3.4)
+      v-dropdown: 3.0.0(vue@3.3.4)
       vue: 3.3.4
     dev: false
 
@@ -907,7 +915,7 @@ packages:
       vue: 3.3.4
     dev: false
 
-  /vite@4.4.9(sass@1.66.1):
+  /vite@4.4.9(sass@1.67.0):
     resolution: {integrity: sha512-2mbUn2LlUmNASWwSCNSJ/EG2HuSRTnVNaydp6vMCm5VIqJsjMfbIWtbH2kDuwUVW5mMUKKZvGPX/rqeqVvv1XA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -938,13 +946,13 @@ packages:
       esbuild: 0.18.20
       postcss: 8.4.29
       rollup: 3.28.1
-      sass: 1.66.1
+      sass: 1.67.0
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
 
-  /vitepress@1.0.0-rc.10(@algolia/client-search@4.19.1)(sass@1.66.1)(search-insights@2.8.1):
-    resolution: {integrity: sha512-+MsahIWqq5WUEmj6MR4obcKYbT7im07jZPCQPdNJExkeOSbOAJ4xypSLx88x7rvtzWHhHc5aXbOhCRvGEGjFrw==}
+  /vitepress@1.0.0-rc.13(@algolia/client-search@4.19.1)(sass@1.67.0)(search-insights@2.8.1):
+    resolution: {integrity: sha512-TnVydQOZE38rtXu9gHCb7EGdN03jTcmYkDdhCqox6+pfKYgiyfm1qk2Uy8BZatnM9wXpa64f+T5p30R8P/9Z+A==}
     hasBin: true
     dependencies:
       '@docsearch/css': 3.5.2
@@ -956,7 +964,7 @@ packages:
       mark.js: 8.11.1
       minisearch: 6.1.0
       shiki: 0.14.4
-      vite: 4.4.9(sass@1.66.1)
+      vite: 4.4.9(sass@1.67.0)
       vue: 3.3.4
     transitivePeerDependencies:
       - '@algolia/client-search'

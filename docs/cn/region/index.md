@@ -35,7 +35,6 @@ pnpm add v-region
 全局安装组件
 
 ```js
-// add component in global scope as plugin
 import { createApp } from 'vue'
 import App from './app.vue'
 import Region from 'v-region'
@@ -311,12 +310,13 @@ const region = ref({
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { RegionCityPicker } from 'v-region'
+import type { RegionItem } from 'v-region'
 
-const selected = ref(['110000', '130200', '140100'])
-function change (data) {
+const selected = ref<string[]>(['110000', '130200', '140100'])
+function change (data: RegionItem[]): void {
   console.log(data)
 }
 </script>
@@ -399,7 +399,7 @@ function resultText (region) {
 - 类型 `RegionKeys | string[]`
 
 ```ts
-interface RegionKeys {
+interface RegionInputModel {
   province: string
   city: string
   area: string
@@ -475,6 +475,20 @@ interface RegionKeys {
 - `true` 显示所有选中城市名称
 - `false` 选中的城市多于两个时，仅显示前两个城市名称，其他城市会被收起
 
+### customTriggerClass
+
+- 类型 `string`
+- 默认 `''`
+
+添加自定义样式类名至触发对象容器，作用于下拉选择的模块
+
+### customContainerClass
+
+- 类型 `string`
+- 默认 `''`
+
+添加自定义样式类名至下拉容器中，作用于下拉选择的模块
+
 ## 事件
 
 组件各类操作响应事件
@@ -485,18 +499,48 @@ interface RegionKeys {
 
 ```ts
 change: (data: RegionModel) => void
+```
 
-interface RegionLevel {
+```ts
+interface RegionItem {
   key: string
   value: string
 }
 
 interface RegionModel {
-  province: RegionLevel
-  city: RegionLevel
-  area: RegionLevel
-  town: RegionLevel
+  province: RegionItem
+  city: RegionItem
+  area: RegionItem
+  town: RegionItem
 }
+```
+
+你也可直接使用组件提供的类型定义
+
+```vue
+<template>
+  <RegionSelects
+    v-model="region"
+    @change="change"
+  />
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { RegionSelects } from 'v-region'
+import type { RegionInputModel, RegionModel } from 'v-region'
+
+const region = ref<RegionInputModel>({
+  province: '350000',
+  city: '350100',
+  area: '350104',
+  town: '350104008'
+})
+
+function change (data: RegionModel): void {
+  console.log(data)
+}
+</script>
 ```
 
 ### complete

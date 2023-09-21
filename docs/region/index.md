@@ -35,7 +35,6 @@ pnpm add v-region
 Globally install component
 
 ```js
-// add component in global scope as plugin
 import { createApp } from 'vue'
 import App from './app.vue'
 import Region from 'v-region'
@@ -320,12 +319,13 @@ Two data fields are output in the scoped slots
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { RegionCityPicker } from 'v-region'
+import type { RegionItem } from 'v-region'
 
-const selected = ref(['110000', '130200', '140100'])
-function change (data) {
+const selected = ref<string[]>(['110000', '130200', '140100'])
+function change (data: RegionItem[]): void {
   console.log(data)
 }
 </script>
@@ -411,7 +411,7 @@ function resultText (region) {
 - type `RegionKeys | string[]`
 
 ```ts
-interface RegionKeys {
+interface RegionInputModel {
   province: string
   city: string
   area: string
@@ -484,9 +484,22 @@ Separator between administrative region names, available on `RegionText` mode
 
 When more cities are selected, more than 2 cities are only displayed by quantity, only available on `RegionCityPicker` mode
 
-
 - `true` Display all selected city names
 - `false` When more than two cities are selected, only the names of the first two cities will be displayed, and other cities will be collapsed
+
+### customTriggerClass
+
+- type `string`
+- default `''`
+
+Add custom class to trigger container, work on dropdown selection mode
+
+### customContainerClass
+
+- type `string`
+- default `''`
+
+Add custom class to dropdown container, work on dropdown selection mode
 
 ## Events
 
@@ -498,18 +511,48 @@ Respond for level selection change
 
 ```ts
 change: (data: RegionModel) => void
+```
 
-interface RegionLevel {
+```ts
+interface RegionItem {
   key: string
   value: string
 }
 
 interface RegionModel {
-  province: RegionLevel
-  city: RegionLevel
-  area: RegionLevel
-  town: RegionLevel
+  province: RegionItem
+  city: RegionItem
+  area: RegionItem
+  town: RegionItem
 }
+```
+
+You can also directly use the type definition provided by the component
+
+```vue
+<template>
+  <RegionSelects
+    v-model="region"
+    @change="change"
+  />
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { RegionSelects } from 'v-region'
+import type { RegionInputModel, RegionModel } from 'v-region'
+
+const region = ref<RegionInputModel>({
+  province: '350000',
+  city: '350100',
+  area: '350104',
+  town: '350104008'
+})
+
+function change (data: RegionModel): void {
+  console.log(data)
+}
+</script>
 ```
 
 ### complete

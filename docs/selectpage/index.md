@@ -61,8 +61,9 @@ import { SelectPageListCore, SelectPageTableCore } from 'v-selectpage'
   <SelectPageList @fetch-data="fetchData" />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { SelectPageList } from 'v-selectpage'
+import type { PageParameters, FetchDataCallback } from 'v-selectpage'
 
 // local data list for example
 const list = [
@@ -72,7 +73,7 @@ const list = [
   ...
 ]
 
-function fetchData (data, callback) {
+function fetchData (data: PageParameters, callback: FetchDataCallback) {
   const { search, pageNumber, pageSize } = data
 
   const start = (pageNumber - 1) * pageSize
@@ -126,8 +127,11 @@ When the dropdown container is open and the input focus is in the search box, th
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { SelectPageTable } from 'v-selectpage'
+import type {
+  PageParameters, FetchDataCallback, SelectPageTableColumn
+} from 'v-selectpage'
 
 // local data list for example
 const list = [
@@ -136,13 +140,13 @@ const list = [
   { id: 3, name: 'Detroit Pistons', desc: '底特律活塞', abbr: 'DET' },
   ...
 ]
-const teamColumns = [
+const teamColumns: SelectPageTableColumn[] = [
   { title: 'Id', data: 'id' },
   { title: 'Team name', data: row => `${row.abbr} - ${row.name}`, width: 250 },
   { title: 'Description', data: 'desc' }
 ]
 
-function fetchData (data, callback) {
+function fetchData (data: PageParameters, callback: FetchDataCallback) {
   ...
 }
 </script>
@@ -208,9 +212,13 @@ Set the `multiple` prop to enabled multiple item selection
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { SelectPageList } from 'v-selectpage'
+import type {
+  SelectPageKey, FetchSelectedDataCallback,
+  PageParameters, FetchDataCallback
+} from 'v-selectpage'
 // local data list for example
 const list = [
   { id: 1, name: 'Chicago Bulls', desc: '芝加哥公牛' },
@@ -218,10 +226,13 @@ const list = [
   { id: 3, name: 'Detroit Pistons', desc: '底特律活塞' },
   ...
 ]
-const selected = ref([1, 2, 4])
+const selected = ref<SelectPageKey[]>([1, 2, 4])
 
-function fetchData (data, callback) { ... }
-function fetchSelectedData (keys, callback) {
+function fetchData (data: PageParameters, callback: FetchDataCallback) { ... }
+function fetchSelectedData (
+  keys: SelectPageKey[],
+  callback: FetchSelectedDataCallback
+) {
   // get items model by keys when v-model is set to a non-empty value
   callback(list.filter(val => keys.includes(val.id)))
 }
@@ -613,6 +624,20 @@ debounce delay when typing, in milliseconds
 
 Component disabled states, only work on [Selector mode](#selector-mode)
 
+### customTriggerClass
+
+- type `string`
+- default `''`
+
+Add custom class to trigger container, work on dropdown selection mode
+
+### customContainerClass
+
+- type `string`
+- default `''`
+
+Add custom class to dropdown container, work on dropdown selection mode
+
 ## Event
 
 Response events for various operations of components
@@ -622,7 +647,9 @@ Response events for various operations of components
 When an item's selection status changes, the item key collection is output in response to this event
 
 ```ts
-update:modelValue: (keys: (string | number)[]) => void
+`update:modelValue`: (keys: SelectPageKey[]) => void
+
+type SelectPageKey = string | number
 ```
 
 Handling of `v-model` for manual binding
@@ -650,7 +677,7 @@ interface PageParameters {
 }
 type FetchDataCallback = (
   // data list
-  dataList: Record<string, unknown>[]
+  dataList: Record<string, unknown>[],
   // total number of records
   resultCount: number
 ) => void
@@ -675,13 +702,11 @@ When the selected item is changed through `v-model/modelValue`, respond to this 
 
 ```ts
 `fetch-selected-data`: (
-  keys: (string | number)[],
+  keys: SelectPageKey[],
   callback: FetchSelectedDataCallback
 ) => void
 
-type FetchSelectedDataCallback = (
-  dataList: Record<string, unknown>[]
-) => void
+type FetchSelectedDataCallback = (dataList: Record<string, unknown>[]) => void
 ```
 
 The event response function gets the corresponding data model based on the key collection and submits it to the component via the `callback` function

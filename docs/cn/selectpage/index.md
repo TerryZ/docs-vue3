@@ -64,8 +64,9 @@ import { SelectPageListCore, SelectPageTableCore } from 'v-selectpage'
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { SelectPageList } from 'v-selectpage'
+import type { PageParameters, FetchDataCallback } from 'v-selectpage'
 
 // local data list for example
 const list = [
@@ -75,7 +76,7 @@ const list = [
   ...
 ]
 
-function fetchData (data, callback) {
+function fetchData (data: PageParameters, callback: FetchDataCallback) {
   const { search, pageNumber, pageSize } = data
 
   const start = (pageNumber - 1) * pageSize
@@ -132,8 +133,11 @@ function fetchData (data, callback) {
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { SelectPageTable } from 'v-selectpage'
+import type {
+  PageParameters, FetchDataCallback, SelectPageTableColumn
+} from 'v-selectpage'
 
 // local data list for example
 const list = [
@@ -142,13 +146,13 @@ const list = [
   { id: 3, name: 'Detroit Pistons', desc: '底特律活塞', abbr: 'DET' },
   ...
 ]
-const teamColumns = [
+const teamColumns: SelectPageTableColumn[] = [
   { title: 'Id', data: 'id' },
   { title: '球队名称', data: row => `${row.abbr} - ${row.name}`, width: 250 },
   { title: '中文名', data: 'desc' }
 ]
 
-function fetchData (data, callback) {
+function fetchData (data: PageParameters, callback: FetchDataCallback) {
   ...
 }
 </script>
@@ -218,9 +222,13 @@ import { SelectPageTableCore } from 'v-selectpage'
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { SelectPageList } from 'v-selectpage'
+import type {
+  SelectPageKey, FetchSelectedDataCallback,
+  PageParameters, FetchDataCallback
+} from 'v-selectpage'
 // local data list for example
 const list = [
   { id: 1, name: 'Chicago Bulls', desc: '芝加哥公牛' },
@@ -228,10 +236,13 @@ const list = [
   { id: 3, name: 'Detroit Pistons', desc: '底特律活塞' },
   ...
 ]
-const selected = ref([1, 2, 4])
+const selected = ref<SelectPageKey[]>([1, 2, 4])
 
-function fetchData (data, callback) { ... }
-function fetchSelectedData (keys, callback) {
+function fetchData (data: PageParameters, callback: FetchDataCallback) { ... }
+function fetchSelectedData (
+  keys: SelectPageKey[],
+  callback: FetchSelectedDataCallback
+) {
   // get items model by keys when v-model is set to a non-empty value
   callback(list.filter(val => keys.includes(val.id)))
 }
@@ -637,6 +648,20 @@ interface TableColumn {
 
 组件禁用状态，仅使用于 [选择器模式](#选择器模式)
 
+### customTriggerClass
+
+- 类型 `string`
+- 默认 `''`
+
+添加自定义样式类名至触发对象容器，作用于下拉选择的模块
+
+### customContainerClass
+
+- 类型 `string`
+- 默认 `''`
+
+添加自定义样式类名至下拉容器中，作用于下拉选择的模块
+
 ## 事件
 
 组件各类操作的响应事件
@@ -646,7 +671,9 @@ interface TableColumn {
 项目选中状态变更后，响应该事件输出项目 key 集合
 
 ```ts
-update:modelValue: (keys: (string | number)[]) => void
+`update:modelValue`: (keys: SelectPageKey[]) => void
+
+type SelectPageKey = string | number
 ```
 
 将 `v-model` 进行手动绑定的处理
@@ -674,7 +701,7 @@ interface PageParameters {
 }
 type FetchDataCallback = (
   // 列表数据，注意必须是一个对象列表
-  dataList: Record<string, unknown>[]
+  dataList: Record<string, unknown>[],
   // 总记录条数
   resultCount: number
 ) => void
@@ -699,13 +726,11 @@ function fetchData (data, callback) {
 
 ```ts
 `fetch-selected-data`: (
-  keys: (string | number)[],
+  keys: SelectPageKey[],
   callback: FetchSelectedDataCallback
 ) => void
 
-type FetchSelectedDataCallback = (
-  dataList: Record<string, unknown>[]
-) => void
+type FetchSelectedDataCallback = (dataList: Record<string, unknown>[]) => void
 ```
 
 事件响应函数根据 key 集合，获得对应的数据模型，并通过 `callback` 函数提交给组件

@@ -35,12 +35,12 @@ pnpm add v-page
 全局安装插件
 
 ```js
-// add component in global scope as plugin
 import { createApp } from 'vue'
 import App from './app.vue'
 import { PaginationBar } from 'v-page'
 
 const app = createApp(App)
+// globally install component
 app.use(PaginationBar, {
   // globally config options
 })
@@ -72,6 +72,8 @@ import { PaginationBar } from 'v-page'
 
 ## 在页面中应用组件
 
+一个分页栏的典型用法
+
 ```vue
 <template>
   <div
@@ -87,16 +89,17 @@ import { PaginationBar } from 'v-page'
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { PaginationBar } from 'v-page'
+import type { PageInfo } from 'v-page/types'
 
-const pageNumber = ref(3)
-const totalRow = ref(100)
-const list = ref([])
+const pageNumber = ref<number>(3)
+const totalRow = ref<number>(100)
+const list = ref<unknown[]>([])
 // respond for pagination change
-function change (data) {
-  console.log(data) // { pageNumber: 1, pageSize: 10 }
+function change (data: PageInfo): void {
+  console.log(data) // { pageNumber: 1, pageSize: 10, totalPage: 10 }
 
   const params = {
     pageNumber: data.pageNumber,
@@ -354,7 +357,7 @@ function goToInputPage () {
   <div>
     <input
       type="checkbox"
-      v-model="switchPageSizeMenu"
+      v-model="switchPageSizeOptions"
       id="checkbox-page-size-menu"
     />
     <label for="checkbox-page-size-menu">每页数据量栏</label>
@@ -393,7 +396,7 @@ function goToInputPage () {
   language="cn"
   :total-row="28"
   :info="switchInfo"
-  :page-size-menu="pageSizeMenu"
+  :page-size-options="switchPageSizeOptions"
   :page-number="switchPageNumber"
   :first="switchFirst"
   :last="switchLast"
@@ -432,7 +435,8 @@ function goToInputPage () {
   align="left"
   language="cn"
   :total-row="28"
-  :page-size-menu="false"
+  :page-size-options="false"
+  :page-number="false"
   :info="false"
   :first="false"
   :last="false"
@@ -481,10 +485,8 @@ const inputPageNumber = ref('2')
 const switchInfo = ref(true)
 const switchFirst = ref(true)
 const switchLast = ref(true)
-const switchPageSizeMenu = ref(true)
+const switchPageSizeOptions = ref(true)
 const switchPageNumber = ref(true)
-
-const pageSizeMenu = computed(() => switchPageSizeMenu.value ? [10, 20] : false)
 
 // import PageIndex from '@demo/PageIndex.vue'
 function changeBasic (data) {
@@ -515,7 +517,7 @@ function goToInputPage () {
 
 ## Props
 
-### v-model/value
+### value/v-model
 
 - 类型 `number`
 
@@ -526,6 +528,13 @@ function goToInputPage () {
 - 类型 `number`
 
 每次数据查询中的总记录数，在父组件进行数据查询后，必须更新插件的总记录数参数
+
+### page-size/v-model:page-size
+
+- 类型 `number`
+- 默认 `10`
+
+每页数据条数
 
 ### language
 
@@ -542,10 +551,10 @@ function goToInputPage () {
 
 ### page-size-menu
 
-- 类型 `number[] | boolean`
+- 类型 `number[]`
 - 默认 `[10, 20, 50, 100]`
 
-分页尺寸列表, 可设置 `false` 来关闭该栏
+每页数据量列表
 
 ### align
 
@@ -560,6 +569,13 @@ function goToInputPage () {
 - 默认 `false`
 
 启用/禁用 分页栏
+
+### page-size-options
+
+- 类型 `boolean`
+- 默认 `true`
+
+显示每页数据量列表栏
 
 ### info
 
@@ -603,6 +619,13 @@ function goToInputPage () {
 
 在每页记录数列表中增加显示所有数据记录项目
 
+### hide-on-single-page
+
+- 类型 `boolean`
+- 默认 `false`
+
+在只有一页数据时，隐藏分页栏
+
 ## 事件
 
 组件各类操作的响应事件
@@ -621,6 +644,8 @@ interface PageInfo {
   pageNumber: number
   // 每页显示记录数
   pageSize: number
+  // 总页数
+  totalPage: number
 }
 // 也可以通过以下的方式直接使用类型
 import type { PageInfo } from 'v-page/types'
@@ -639,7 +664,7 @@ import type { PageInfo } from 'v-page/types'
 import { ref } from 'vue'
 import { PaginationBar } from 'v-page'
 
-const page = ref(null)
+const page = ref()
 // call api
 page.value.goPage(3)
 </script>

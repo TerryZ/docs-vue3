@@ -35,12 +35,12 @@ pnpm add v-page
 Globally install component
 
 ```js
-// add component in global scope as plugin
 import { createApp } from 'vue'
 import App from './app.vue'
 import { PaginationBar } from 'v-page'
 
 const app = createApp(App)
+// globally install component
 app.use(PaginationBar, {
   // globally config options
 })
@@ -72,6 +72,8 @@ import { PaginationBar } from 'v-page'
 
 ## Use component on page
 
+Typical usage of a pagination component
+
 ```vue
 <template>
   <div
@@ -87,16 +89,17 @@ import { PaginationBar } from 'v-page'
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { PaginationBar } from 'v-page'
+import type { PageInfo } from 'v-page/types'
 
-const pageNumber = ref(3)
-const totalRow = ref(100)
-const list = ref([])
+const pageNumber = ref<number>(3)
+const totalRow = ref<number>(100)
+const list = ref<unknown[]>([])
 // respond for pagination change
-function change (data) {
-  console.log(data) // { pageNumber: 1, pageSize: 10 }
+function change (data: PageInfo): void {
+  console.log(data) // { pageNumber: 1, pageSize: 10, totalPage: 10 }
 
   const params = {
     pageNumber: data.pageNumber,
@@ -351,7 +354,7 @@ Setup pagination modules on or off
   <div>
     <input
       type="checkbox"
-      v-model="switchPageSizeMenu"
+      v-model="switchPageSizeOptions"
       id="checkbox-page-size-menu"
     />
     <label for="checkbox-page-size-menu">Page size list</label>
@@ -390,7 +393,7 @@ Setup pagination modules on or off
   :total-row="28"
   :language="lang"
   :info="switchInfo"
-  :page-size-menu="pageSizeMenu"
+  :page-size-options="switchPageSizeOptions"
   :page-number="switchPageNumber"
   :first="switchFirst"
   :last="switchLast"
@@ -428,7 +431,8 @@ Setup pagination modules on or off
   border
   align="left"
   :total-row="28"
-  :page-size-menu="false"
+  :page-size-options="false"
+  :page-number="false"
   :info="false"
   :first="false"
   :last="false"
@@ -479,12 +483,10 @@ const inputPageNumber = ref('2')
 const switchInfo = ref(true)
 const switchFirst = ref(true)
 const switchLast = ref(true)
-const switchPageSizeMenu = ref(true)
+const switchPageSizeOptions = ref(true)
 const switchPageNumber = ref(true)
 
 const { lang } = useData()
-
-const pageSizeMenu = computed(() => switchPageSizeMenu.value ? [10, 20] : false)
 
 // import PageIndex from '@demo/PageIndex.vue'
 function changeBasic (data) {
@@ -515,7 +517,7 @@ function goToInputPage () {
 
 ## Props
 
-### v-model/value
+### value/v-model
 
 - type `number`
 
@@ -526,6 +528,13 @@ Set current page / default page
 - type `number`
 
 The total number of records in each data request
+
+### page-size/v-model:page-size
+
+- type `number`
+- default `10`
+
+The number of per page data
 
 ### language
 
@@ -542,10 +551,10 @@ Specify the pagination language, check below for a complete language list
 
 ### page-size-menu
 
-- type `number[] | boolean`
+- type `number[]`
 - default `[10, 20, 50, 100]`
 
-Set page size item in to list, set `false` to close page size selection module
+The list of page size option
 
 ### align
 
@@ -560,6 +569,13 @@ Pagination alignment direction
 - default `false`
 
 Enabled / Disabled Pagination component
+
+### page-size-options
+
+- type `boolean`
+- default `true`
+
+Display page size list module
 
 ### info
 
@@ -603,6 +619,13 @@ Display last page button
 
 Add `All` option to display all data in to page size list
 
+### hide-on-single-page
+
+- type `boolean`
+- default `false`
+
+Hide pagination bar when there is only one page of data
+
 ## Events
 
 Component operation response events
@@ -621,6 +644,8 @@ interface PageInfo {
   pageNumber: number
   // Page size
   pageSize: number
+  // Total page
+  totalPage: number
 }
 // You can also use the type directly in the following way
 import type { PageInfo } from 'v-page/types'
@@ -639,7 +664,7 @@ Before using Pagination component's API, need to declare a ref attribute for the
 import { ref } from 'vue'
 import { PaginationBar } from 'v-page'
 
-const page = ref(null)
+const page = ref()
 // call api
 page.value.goPage(3)
 </script>

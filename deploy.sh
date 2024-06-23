@@ -9,7 +9,7 @@ pnpm build
 # clone gitee and github project
 
 # add proxy in git global config
-git config --global http.proxy http://192.168.1.100:10808
+git config --global http.proxy http://10.0.0.10:10808
 # git clone https://terryz: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@github.com/TerryZ/TerryZ.github.io.git
 git clone https://terryz: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@github.com/TerryZ/docs-vue3.git
 git checkout master

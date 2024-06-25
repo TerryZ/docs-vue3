@@ -348,19 +348,19 @@ function goToInputPage () {
   <div>
     <input
       type="checkbox"
+      v-model="switchPageSizeOptions"
+      id="checkbox-page-size-menu"
+    />
+    <label for="checkbox-page-size-menu">每页数据量栏</label>
+  </div>
+  <div>
+    <input
+      type="checkbox"
       :value="true"
       v-model="switchInfo"
       id="checkbox-info"
     />
     <label for="checkbox-info">分页信息栏</label>
-  </div>
-  <div>
-    <input
-      type="checkbox"
-      v-model="switchPageSizeOptions"
-      id="checkbox-page-size-menu"
-    />
-    <label for="checkbox-page-size-menu">每页数据量栏</label>
   </div>
   <div>
     <input
@@ -412,7 +412,7 @@ function goToInputPage () {
     border
     align="left"
     :total-row="28"
-    :page-size-menu="false"
+    :page-size-options="false"
     :info="false"
     :first="false"
     :last="false"
@@ -459,7 +459,8 @@ function goToInputPage () {
 ```js
 {
   pageNumber: 1,
-  pageSize: 0
+  pageSize: 0,
+  totalPage: 1
 }
 ```
 

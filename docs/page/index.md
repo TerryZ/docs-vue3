@@ -345,19 +345,19 @@ Setup pagination modules on or off
   <div>
     <input
       type="checkbox"
+      v-model="switchPageSizeOptions"
+      id="checkbox-page-size-menu"
+    />
+    <label for="checkbox-page-size-menu">Page size list</label>
+  </div>
+  <div>
+    <input
+      type="checkbox"
       :value="true"
       v-model="switchInfo"
       id="checkbox-info"
     />
     <label for="checkbox-info">Pagination status information</label>
-  </div>
-  <div>
-    <input
-      type="checkbox"
-      v-model="switchPageSizeOptions"
-      id="checkbox-page-size-menu"
-    />
-    <label for="checkbox-page-size-menu">Page size list</label>
   </div>
   <div>
     <input
@@ -409,7 +409,7 @@ Setup pagination modules on or off
     border
     align="left"
     :total-row="28"
-    :page-size-menu="false"
+    :page-size-options="false"
     :info="false"
     :first="false"
     :last="false"
@@ -456,7 +456,8 @@ Add `All` item to page size list to display all data without paging. When this i
 ```js
 {
   pageNumber: 1,
-  pageSize: 0
+  pageSize: 0,
+  totalPage: 1
 }
 ```
 

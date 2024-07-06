@@ -2,10 +2,11 @@ import { watchEffect } from 'vue'
 import { inBrowser, useData } from 'vitepress'
 import DefaultTheme from "vitepress/theme"
 
-// import 'bootstrap/dist/css/bootstrap.min.css'
 // 引用 bootstrap 工具类样式
-import 'bootstrap/dist/css/bootstrap-utilities.min.css'
-import 'bootstrap/dist/css/bootstrap-grid.min.css'
+// import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap/dist/css/bootstrap-utilities.min.css'
+// import 'bootstrap/dist/css/bootstrap-grid.min.css'
+import '../../../bootstrap.sass'
 import './component-fix.sass'
 import './custom.sass'
 

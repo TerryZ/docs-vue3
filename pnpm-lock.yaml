@@ -11,6 +11,9 @@ importers:
       bootstrap:
         specifier: ^5.3.3
         version: 5.3.3(@popperjs/core@2.11.8)
+      v-dialogs:
+        specifier: 3.0.2
+        version: 3.0.2(vue@3.4.30)
       v-dropdown:
         specifier: 3.0.0
         version: 3.0.0(vue@3.4.30)
@@ -667,6 +670,11 @@ packages:
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
+
+  v-dialogs@3.0.2:
+    resolution: {integrity: sha512-JJT8yx6tqgM3uJIIEF5vujPVFN0v/a+zxsWb682IJ4gq+1TNTaQrGNsphq5ddE5AlKXjKjxlMIGPKnGHsBmqEg==}
+    peerDependencies:
+      vue: ^3.2.0
 
   v-dropdown@3.0.0:
     resolution: {integrity: sha512-sDBiHhTjm0/eLmC83vUbOIHXNTlQD30w+usrh779OG+aNc/5vqyFQbSBPGekvD7pQPbWSPc5esVT8jcqfLRnrg==}
@@ -1327,6 +1335,10 @@ snapshots:
   to-regex-range@5.0.1:
     dependencies:
       is-number: 7.0.0
+
+  v-dialogs@3.0.2(vue@3.4.30):
+    dependencies:
+      vue: 3.4.30
 
   v-dropdown@3.0.0(vue@3.4.30):
     dependencies:

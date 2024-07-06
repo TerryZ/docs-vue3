@@ -28,7 +28,20 @@ export default {
           { text: "v-page", link: "/cn/page/" },
           { text: "v-dropdown", link: "/cn/dropdown/" },
           { text: "v-region", link: "/cn/region/" },
-          { text: "v-selectpage", link: "/cn/selectpage/" }
+          { text: "v-selectpage", link: "/cn/selectpage/" },
+          {
+            text: "v-dialogs",
+            link: "/cn/dialog/",
+            collapsed: true,
+            items: [
+              { text: "Alert", link: "/cn/dialog/alert" },
+              { text: "Modal", link: "/cn/dialog/modal" },
+              { text: "Drawer", link: "/cn/dialog/drawer" },
+              { text: "Message", link: "/cn/dialog/message" },
+              { text: "Toast", link: "/cn/dialog/toast" },
+              { text: "Mask", link: "/cn/dialog/mask" },
+            ]
+          }
         ]
       }
     ],

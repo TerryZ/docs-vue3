@@ -1,3 +1,4 @@
+import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vitepress'
 import cnConfig from './cn'
 import enConfig from './en'
@@ -32,5 +33,13 @@ export default defineConfig({
       light: 'github-light',
     },
     lineNumbers: false
+  },
+  vite: {
+    resolve: {
+      alias: {
+        '@': fileURLToPath(new URL('../../../docs', import.meta.url)),
+        '@demo': fileURLToPath(new URL('../demos', import.meta.url))
+      }
+    }
   }
 })

@@ -134,7 +134,7 @@ const visible = ref(false)
 ```
 
 <script setup>
-import { useDrawerExamples } from '../script/dialog/drawer'
+import { useDrawerExamples } from '@/script/dialog/drawer'
 
 const {
   placement,

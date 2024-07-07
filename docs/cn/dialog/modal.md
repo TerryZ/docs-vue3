@@ -104,7 +104,7 @@ const visible = ref(false)
 ```
 
 <script setup>
-import { useModalExamples } from '../../script/dialog/modal'
+import { useModalExamples } from '@/script/dialog/modal'
 
 const {
   openModal
@@ -128,47 +128,49 @@ function DialogModal(
 ```ts
 interface ModalOptions {
   /**
-   * Custom class name
+   * 自定义样式类名
    */
   customClass?: string
   /**
-   * Display the header
+   * 显示标题栏
    * @default true
    */
   header?: boolean
   /**
-   * The title text displayed in header
+   * 标题栏文本内容
    */
   title?: string
   /**
-   * Dialog width
+   * 对话框宽度
    * @default 700
    */
   width?: number
   /**
-   * Dialog height
+   * 对话框高度
    * @default 400
    */
   height?: number
-  /** The parameters pass to component as props */
+  /**
+   * 传递给组件作为 props 的参数集
+   */
   params?: Record<string, unknown>
   /**
-   * The close dialog button in header
+   * 关闭按钮
    * @default true
    */
   closeButton?: boolean
   /**
-   * Maximize dialog button in header
+   * 最大化窗口按钮
    * @default true
    */
   maxButton?: boolean
   /**
-   * Open and maximize the modal dialog
+   * 打开窗口时最大化
    * @default false
    */
   fullscreen?: boolean
   /**
-   * Shake the dialog when operating outside the dialog
+   * 对话框外操作，抖动窗口提醒
    * @default true
    */
   shaking?: boolean

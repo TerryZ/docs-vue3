@@ -132,7 +132,7 @@ DialogMessage('Hello', { offset: 100 })
 </div>
 
 <script setup>
-import { useMessageExamples } from '../script/dialog/message'
+import { useMessageExamples } from '@/script/dialog/message'
 
 const {
   placement,

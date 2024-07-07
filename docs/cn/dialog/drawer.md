@@ -134,7 +134,7 @@ const visible = ref(false)
 ```
 
 <script setup>
-import { useDrawerExamples } from '../../script/dialog/drawer'
+import { useDrawerExamples } from '@/script/dialog/drawer'
 
 const {
   placement,
@@ -159,45 +159,47 @@ function DialogDrawer(
 ```ts
 interface DrawerOptions {
   /**
-   * Custom class name
+   * 自定义样式类名
    */
   customClass?: string
   /**
-   * Display the header
+   * 显示标题栏
    * @default true
    */
   header?: boolean
   /**
-   * The title text displayed in header
+   * 标题栏文本内容
    */
   title?: string
   /**
-   * Dialog width
+   * 对话框宽度，仅适用于 `left` 与 `right` 两个位置
    */
   width?: number
   /**
-   * Dialog height
+   * 对话框高度，仅适用于 `top` 与 `bottom` 两个位置
    */
   height?: number
-  /** The parameters pass to component as props */
+  /** 
+   * 传递给组件作为 props 的参数集
+   */
   params?: Record<string, unknown>
   /**
-   * The close dialog button in header
+   * 关闭按钮
    * @default true
    */
   closeButton?: boolean
   /**
-   * The drawer dialog placement
+   * 显示位置
    * @default 'right'
    */
   placement?: 'left' | 'right' | 'top' | 'bottom'
   /**
-   * Display the dialog background overlay
+   * 背景遮罩
    * @default true
    */
   backdrop?: boolean
   /**
-   * Click backdrop to close dialog
+   * 点击遮罩关闭对话框
    * @default true
    */
   backdropClose?: boolean

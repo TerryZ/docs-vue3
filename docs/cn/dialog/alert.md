@@ -150,7 +150,7 @@ DialogAlert('Hello', { shake: true })
 </div>
 
 <script setup>
-import { useAlertExamples } from '../../script/dialog/alert'
+import { useAlertExamples } from '@/script/dialog/alert'
 
 const {
   colorfulShadow,
@@ -177,49 +177,49 @@ function DialogAlert(
 ```ts
 interface AlertOptions {
   /**
-   * Plugin language
+   * 语言
    * @default `en`
    */
   language?: string
   /**
-   * Custom class name
+   * 自定义样式类名
    */
   customClass?: string
   /**
-   * Display the header
+   * 显示标题栏
    * @default true
    */
   header?: boolean
   /**
-   * The title text displayed in header
+   * 标题栏文本内容
    */
   title?: string
   /**
-   * Message types
+   * 消息类型
    * @default `info`
    */
   messageType?: 'info' | 'warning' | 'error' | 'success' | 'confirm'
   /**
-   * Message type icon
+   * 消息类型图标
    * @default true
    */
   icon?: boolean
   /**
-   * Shake the dialog when operating outside the dialog
+   * 对话框外操作，抖动窗口提醒
    * @default false
    */
   shaking?: boolean
   /**
-   * Use colorful shadow
+   * 应用对应消息类型的颜色阴影，增强显示效果
    * @default false
    */
   colorfulShadow?: boolean
   /**
-   * Respond the cancel button click in `confirm` type alert
+   * 响应 `confirm` 模式下取消按钮的事件
    */
   cancelCallback?: Function
   /**
-   * Click outside the dialog to close dialog
+   * 点击对话框以外的区域，关闭对话框
    * @default false
    */
   backdropClose?: boolean

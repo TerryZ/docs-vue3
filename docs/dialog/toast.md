@@ -151,7 +151,7 @@ Silent message notification, Unlike [Message](./message), Toast is only displaye
 </div>
 
 <script setup>
-import { useToastExamples } from '../script/dialog/toast'
+import { useToastExamples } from '@/script/dialog/toast'
 
 const {
   placement,

@@ -104,7 +104,7 @@ const visible = ref(false)
 ```
 
 <script setup>
-import { useModalExamples } from '../script/dialog/modal'
+import { useModalExamples } from '@/script/dialog/modal'
 
 const {
   openModal

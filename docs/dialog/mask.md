@@ -122,7 +122,7 @@ DialogMask('Loading', { panel: false, customClass:'my-custom-class' })
 </div>
 
 <script setup>
-import { useMaskExamples } from '../script/dialog/mask'
+import { useMaskExamples } from '@/script/dialog/mask'
 
 const {
   loadDataList,

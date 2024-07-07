@@ -150,7 +150,7 @@ DialogAlert('Hello', { shake: true })
 </div>
 
 <script setup>
-import { useAlertExamples } from '../script/dialog/alert'
+import { useAlertExamples } from '@/script/dialog/alert'
 
 const {
   colorfulShadow,

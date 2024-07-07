@@ -132,7 +132,7 @@ DialogMessage('Hello', { offset: 100 })
 </div>
 
 <script setup>
-import { useMessageExamples } from '../../script/dialog/message'
+import { useMessageExamples } from '@/script/dialog/message'
 
 const {
   placement,
@@ -158,44 +158,44 @@ function DialogMessage(
 ```ts
 interface MessageOptions {
   /**
-   * Custom class name
+   * 自定义样式类名
    */
   customClass?: string
   /**
-   * Message types
+   * 消息类型
    * @default `info`
    */
   messageType?: 'info' | 'warning' | 'error' |'success'
   /**
-   * Message type icon
+   * 消息类型图标
    * @default true
    */
   icon?: boolean
   /**
-   * Display close button
+   * 关闭按钮
    * @default false
    */
   closeButton?: boolean
   /**
-   * The number of milliseconds to automatically close the dialog
+   * 自动关闭对话框的时间（单位：毫秒）
    *
-   * set to 0 to disable auto close
+   * 设置为 0 则取消自动关闭
    *
    * @default 3000
    */
   duration?: number
   /**
-   * The distance to the top of viewport
+   * 距离屏幕边缘的值
    * @default 32
    */
   offset?: string | number
   /**
-   * The placement of the message dialog
+   * 显示位置
    * @default `top`
    */
   placement?: 'top' | 'bottom'
   /**
-   * Display pill rounded style
+   * 胶囊圆角样式
    * @default true
    */
   pill?: boolean

@@ -1,6 +1,6 @@
 # Toast
 
-静默式消息通知对话框，与 [Message](./message) 不同的是 Toast 仅显示于屏幕的边角区域
+Silent message notification, Unlike [Message](./message), Toast is only displayed in the corner area of ​​the screen
 
 ## Examples
 
@@ -187,11 +187,6 @@ interface ToastOptions {
   customClass?: string
   /**
    * Message types
-   * - `info`
-   * - `warning`
-   * - `error`
-   * - `success`
-   * 
    * @default `info`
    */
   messageType?: 'info' | 'warning' | 'error' |'success'

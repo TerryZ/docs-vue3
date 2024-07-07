@@ -163,12 +163,9 @@ interface MessageOptions {
   customClass?: string
   /**
    * Message types
-   * - `info` default
-   * - `warning`
-   * - `error`
-   * - `success`
+   * @default `info`
    */
-  messageType?: DialogMessageType
+  messageType?: 'info' | 'warning' | 'error' |'success'
   /**
    * Message type icon
    * @default true

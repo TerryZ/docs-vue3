@@ -127,6 +127,13 @@
 
 ### 界面定制化
 
+```ts
+DialogToast('Hello', { icon: false })
+DialogToast('Hello', { closeButton: false })
+DialogToast('Hello', { duration: 0 })
+DialogToast('Hello', { offset: 100 })
+```
+
 <div class="my-3">
   <button
     type="button"
@@ -187,11 +194,6 @@ interface ToastOptions {
   customClass?: string
   /**
    * Message types
-   * - `info`
-   * - `warning`
-   * - `error`
-   * - `success`
-   * 
    * @default `info`
    */
   messageType?: 'info' | 'warning' | 'error' |'success'

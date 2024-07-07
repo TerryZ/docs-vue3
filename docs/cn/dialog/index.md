@@ -1,6 +1,6 @@
 # Dialogs
 
-带有分页的项目列表的项目选择组件
+一款适用于 Vue3 的简洁实用的对话框组件集合，
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/terryz/v-dialogs?style=social)](https://github.com/TerryZ/v-dialogs) [![GitHub forks](https://img.shields.io/github/forks/terryz/v-dialogs?style=social)](https://github.com/TerryZ/v-dialogs)
 
@@ -32,11 +32,57 @@ pnpm add v-dialogs
 
 :::
 
+## 应用场景
+
+- **Alert** 交互式对话框，用于需要用户明确反馈的通知
+- **Modal** 模态容器对话框，显示在屏幕中央
+- **Drawer** 另一种模态容器对话框，它显示在屏幕边缘，是快速查看详细信息的更好选择
+- **Message** 静默消息通知，显示在屏幕垂直中心区域
+- **Toast** 静默消息通知，显示在屏幕角落
+- **Mask** 阻止用户操作的屏幕遮罩
+
+## 全局对象
+
+`v-dialogs` 也提供了注册全局对象的方式来打开对话框，可以在任何组件中使用它
+
+默认的实例名为 `$dlg`
+
+```js-vue
+import { createApp } from 'vue'
+import dialogs from 'v-dialogs'
+import App from 'App.vue'
+
+createApp(App).use(dialogs).mount('#app')
+```
+
+> 全局对象仅作为功能提供支持，并不建议使用
+
+### Option API
+
+```js-vue
+export default {
+  mounted () {
+    this.$dlg.message('Saved successfully!')
+  }
+}
+```
+
+### Composition API
+
+```js-vue
+import { getCurrentInstance } from 'vue'
+
+// const $dlg = getCurrentInstance().appContext.config.globalProperties.$dlg
+const $dlg = getCurrentInstance().proxy.$dlg
+
+$dlg.message('Saved successfully!')
+```
+
 ## 功能模块
 
-- Alert
-- Modal
-- Drawer
-- Message
+- [Alert](./alert)
+- [Modal](./modal)
+- [Drawer](./drawer)
+- [Message](./message)
 - [Toast](./toast)
 - [Mask](./mask)

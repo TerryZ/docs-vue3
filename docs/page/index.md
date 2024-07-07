@@ -241,22 +241,23 @@ function goToInputPage () {
 </script>
 ```
 
-<div class="mb-3">
+<div class="mb-3 d-flex">
   <input
     type="text"
-    class="border border-secondary me-2 rounded-1 px-2"
+    class="form-control me-3"
     v-model="inputPageNumber"
+    style="width: 100px"
   />
   <button
     type="button"
-    class="border me-2 px-3 rounded-1 shadow-sm"
+    class="btn btn-dark me-3"
     @click="goToInputPage"
   >
     Go
   </button>
   <button
     type="button"
-    class="border px-3 rounded-1 shadow-sm"
+    class="btn btn-dark"
     @click="pageNumberOperate++"
   >
     pageNumber + 1
@@ -276,12 +277,12 @@ function goToInputPage () {
 <PaginationBar align="left" />
 ```
 
-<div class="mb-3">
-  Specify alignment direction
+<div class="mb-3 d-flex align-items-center">
+  指定对齐方向
   <select
     v-model="align"
-    style="-webkit-appearance: auto;"
-    class="border border-secondary"
+    style="-webkit-appearance: auto;width: 100px"
+    class="form-control ms-3"
   >
     <option>left</option>
     <option>center</option>

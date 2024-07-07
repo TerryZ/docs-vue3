@@ -1,6 +1,6 @@
 # Message
 
-静默式消息通知对话框，显示于屏幕的中间位置
+Silent message notification, displayed in the vertical center area of ​​the screen
 
 ## Examples
 
@@ -163,12 +163,9 @@ interface MessageOptions {
   customClass?: string
   /**
    * Message types
-   * - `info` default
-   * - `warning`
-   * - `error`
-   * - `success`
+   * @default `info`
    */
-  messageType?: DialogMessageType
+  messageType?: 'info' | 'warning' | 'error' |'success'
   /**
    * Message type icon
    * @default true

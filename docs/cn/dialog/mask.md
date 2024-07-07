@@ -140,16 +140,10 @@ const {
 ## API
 
 ```ts
-type MessageContent = string|VNode
+type MessageContent = string | VNode
 
 function DialogMask(
-  /**
-   * 对话框文本内容
-   */
   message?: MessageContent,
-  /**
-   * 关闭后的回调
-   */
   callback?: Function,
   options?: MaskOptions
 ): Function
@@ -160,7 +154,7 @@ function DialogMask(
 ```ts
 interface MaskOptions {
   /**
-   * Plugin language
+   * 语言
    * @default `en`
    */
   language?: string

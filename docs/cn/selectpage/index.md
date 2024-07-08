@@ -457,8 +457,8 @@ import {
   SelectPageTable,
   SelectPageTableCore
 } from 'v-selectpage'
-import { countries, timezones } from './data'
-import { useSelectPageHandle } from './handle'
+import { countries, timezones } from '@/script/selectpage/data'
+import { useSelectPageHandle } from '@/script/selectpage/handle'
 
 const { fetchData: fetchList, fetchSelectedData } = useSelectPageHandle()
 const { fetchData: fetchCountries } = useSelectPageHandle(countries)

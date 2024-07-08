@@ -490,7 +490,6 @@ const switchLast = ref(true)
 const switchPageSizeOptions = ref(true)
 const switchPageNumber = ref(true)
 
-// import PageIndex from '@demo/PageIndex.vue'
 function changeBasic (data) {
   logs.value.push(data)
 }

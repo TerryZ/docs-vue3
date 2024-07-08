@@ -6,6 +6,7 @@ import enConfig from './en'
 export default defineConfig({
   title: 'Vue3 components',
   description: 'Just playing around.',
+  
   appearance: false,
   lastUpdated: true,
   base: '/docs-vue3/',
@@ -15,6 +16,11 @@ export default defineConfig({
       provider: 'local'
     }
   },
+
+  rewrites: {
+    'en/:rest*': ':rest*'
+  },
+
   locales: {
     root: {
       label: 'English',

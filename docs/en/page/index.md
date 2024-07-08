@@ -490,7 +490,6 @@ const switchPageNumber = ref(true)
 
 const { lang } = useData()
 
-// import PageIndex from '@demo/PageIndex.vue'
 function changeBasic (data) {
   logs.value.push(data)
 }

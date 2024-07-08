@@ -1,1 +1,0 @@
-import{m as e}from"./v-dialogs.lIx8ktvn.js";import{s as n}from"./framework.BhJCiThr.js";function p(){const t=n("top-right"),s=n("info");function a(o){e("Hello World",o)}function r(o){e("Hello World",{...o,language:"cn"})}return{placement:t,messageType:s,openToast:a,openToastCN:r}}export{p as u};

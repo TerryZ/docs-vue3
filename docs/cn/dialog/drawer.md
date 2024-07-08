@@ -4,6 +4,52 @@
 
 ## 实例
 
+### 抽屉对话框
+
+```ts
+import { DialogDrawer, DialogAlert } from 'v-dialogs'
+import UserProfile from './UserProfile.vue'
+
+DialogDrawer(UserProfile, {
+  width: 700,
+  title: 'User Profile',
+  placement: 'left',
+  params: {
+    userId: 1,
+    userName: 'Terry Zeng'
+  },
+  callback: data => {
+    DialogAlert(`Received message: ${data}`)
+  }
+})
+```
+
+`UserProfile.vue` 文件内容
+
+```vue
+<template>
+  <div>
+    <div>User name: {{ profile.name }}</div>
+    <div>User age: {{ profile.age }}</div>
+
+    <button
+      type="button"
+      @click="close"
+    >Close</button>
+  </div>
+</template>
+
+<script setup>
+import { getUserProfile } from './data'
+// declare `close` event
+const emit = defineEmits(['close'])
+
+const profile = getUserProfile()
+// emit `close` event to close Drawer dialog
+const close = () => emit('close', profile.name)
+</script>
+```
+
 ### 显示位置
 
 <div class="my-3">
@@ -111,14 +157,14 @@ DialogDrawer(component, { backdropClose: false })
       v-model:visible="visible"
       :header="false"
     >
-      <MyComponent />
+      <MyComponent @close="close" />
     </DialogDrawerBox>
 
     <button
       type="button"
       @click="visible = true"
     >
-      Open my component in drawer
+      Open component in drawer
     </button>
   </div>
 </template>
@@ -130,6 +176,10 @@ import { DialogDrawerBox } from 'v-dialogs'
 import MyComponent from './MyComponent.vue'
 
 const visible = ref(false)
+
+function close () {
+  visible.value = false
+}
 </script>
 ```
 

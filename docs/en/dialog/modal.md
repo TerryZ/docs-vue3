@@ -24,6 +24,32 @@ DialogModal(UserProfile, {
 })
 ```
 
+`UserProfile.vue` file content
+
+```vue
+<template>
+  <div>
+    <div>User name: {{ profile.name }}</div>
+    <div>User age: {{ profile.age }}</div>
+
+    <button
+      type="button"
+      @click="close"
+    >Close</button>
+  </div>
+</template>
+
+<script setup>
+import { getUserProfile } from './data'
+// declare `close` event
+const emit = defineEmits(['close'])
+
+const profile = getUserProfile()
+// emit `close` event to close Modal dialog
+const close = () => emit('close', profile.name)
+</script>
+```
+
 ### UI customization
 
 ```ts
@@ -81,14 +107,14 @@ In addition to the functional opening method, `v-dialogs` also supports the comp
       v-model:visible="visible"
       :header="false"
     >
-      <UserProfile />
+      <UserProfile @close="close" />
     </DialogModalBox>
 
     <button
       type="button"
       @click="visible = true"
     >
-      Open my component in modal
+      Open component in modal
     </button>
   </div>
 </template>
@@ -100,6 +126,10 @@ import { DialogModalBox } from 'v-dialogs'
 import UserProfile from './UserProfile.vue'
 
 const visible = ref(false)
+
+function close () {
+  visible.value = false
+}
 </script>
 ```
 

@@ -4,9 +4,15 @@ import {
 } from 'v-dialogs'
 
 
-export function useMaskExamples () {
+export function useMaskExamples (lang) {
+  function mergeOptions (options) {
+    return {
+      ...options,
+      language: lang
+    }
+  }
   function loadDataList () {
-    const destroy = DialogMask()
+    const destroy = DialogMask(mergeOptions())
   
     setTimeout(() => {
       destroy()
@@ -14,27 +20,23 @@ export function useMaskExamples () {
     },3000)
   }
   function coverTargetArea (appendTo) {
-    const destroy = DialogMask('Data loading...', { appendTo })
+    const destroy = DialogMask('Data loading...', mergeOptions({ appendTo }))
 
     setTimeout(() => {
       destroy()
     }, 3000)
   }
   function openMask (options) {
-    const destroy = DialogMask(options)
+    const destroy = DialogMask(mergeOptions(options))
 
     setTimeout(() => {
       destroy()
     }, 3000)
   }
-  function openMaskCN (options) {
-    openMask({ ...options, language: 'cn' })
-  }
 
   return {
     loadDataList,
     coverTargetArea,
-    openMask,
-    openMaskCN
+    openMask
   }
 }

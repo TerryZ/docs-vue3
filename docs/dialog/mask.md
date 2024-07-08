@@ -123,12 +123,14 @@ DialogMask('Loading', { panel: false, customClass:'my-custom-class' })
 
 <script setup>
 import { useMaskExamples } from '@/script/dialog/mask'
+import { useData } from 'vitepress'
 
+const { lang } = useData()
 const {
   loadDataList,
   coverTargetArea,
   openMask
-} = useMaskExamples()
+} = useMaskExamples(lang.value)
 </script>
 
 <style lang="sass">

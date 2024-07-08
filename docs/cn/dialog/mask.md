@@ -102,33 +102,35 @@ DialogMask('Loading', { panel: false, customClass:'my-custom-class' })
   <button
     type="button"
     class="btn btn-dark me-3"
-    @click="openMaskCN({ icon: false })"
+    @click="openMask({ icon: false })"
   >No spinner icon</button>
   <button
     type="button"
     class="btn btn-dark me-3"
-    @click="openMaskCN({ pill: false })"
+    @click="openMask({ pill: false })"
   >No pill style border</button>
   <button
     type="button"
     class="btn btn-dark me-3"
-    @click="openMaskCN({ panel: false })"
+    @click="openMask({ panel: false })"
   >No content panel</button>
   <button
     type="button"
     class="btn btn-dark me-3"
-    @click="openMaskCN({ panel: false, customClass: 'my-custom-class' })"
+    @click="openMask({ panel: false, customClass: 'my-custom-class' })"
   >Custom class</button>
 </div>
 
 <script setup>
 import { useMaskExamples } from '@/script/dialog/mask'
+import { useData } from 'vitepress'
 
+const { lang } = useData()
 const {
   loadDataList,
   coverTargetArea,
-  openMaskCN
-} = useMaskExamples()
+  openMask
+} = useMaskExamples(lang.value)
 </script>
 
 <style lang="sass">

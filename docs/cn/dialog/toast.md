@@ -121,7 +121,7 @@
   <button
     type="button"
     class="btn btn-dark"
-    @click="openToastCN({ placement, messageType })"
+    @click="openToast({ placement, messageType })"
   >Open toast</button>
 </div>
 
@@ -138,33 +138,35 @@ DialogToast('Hello', { offset: 100 })
   <button
     type="button"
     class="btn btn-dark me-2"
-    @click="openToastCN({ icon: false })"
+    @click="openToast({ icon: false })"
   >No message type icon</button>
   <button
     type="button"
     class="btn btn-dark me-2"
-    @click="openToastCN({ closeButton: false })"
+    @click="openToast({ closeButton: false })"
   >No close icon</button>
   <button
     type="button"
     class="btn btn-dark me-2"
-    @click="openToastCN({ duration: 0 })"
+    @click="openToast({ duration: 0 })"
   >No auto close</button>
   <button
     type="button"
     class="btn btn-dark"
-    @click="openToastCN({ offset: 100 })"
+    @click="openToast({ offset: 100 })"
   >Distance from the edge</button>
 </div>
 
 <script setup>
 import { useToastExamples } from '@/script/dialog/toast'
+import { useData } from 'vitepress'
 
+const { lang } = useData()
 const {
   placement,
   messageType,
-  openToastCN
-} = useToastExamples()
+  openToast
+} = useToastExamples(lang.value)
 </script>
 
 ## API

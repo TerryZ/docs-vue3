@@ -83,7 +83,7 @@
   <button
     type="button"
     class="btn btn-dark"
-    @click="openAlertCN({ colorfulShadow, messageType })"
+    @click="openAlert({ colorfulShadow, messageType })"
   >Open message</button>
 </div>
 
@@ -113,7 +113,7 @@ function deleteUser (userId) {
   <button
     type="button"
     class="btn btn-dark"
-    @click="openConfirmCN"
+    @click="openConfirm"
   >Confirm</button>
 </div>
 
@@ -130,34 +130,36 @@ DialogAlert('Hello', { shake: true })
   <button
     type="button"
     class="btn btn-dark me-2"
-    @click="openAlertCN({ icon: false })"
+    @click="openAlert({ icon: false })"
   >No message type icon</button>
   <button
     type="button"
     class="btn btn-dark me-2"
-    @click="openAlertCN({ header: false })"
+    @click="openAlert({ header: false })"
   >No header</button>
   <button
     type="button"
     class="btn btn-dark me-2"
-    @click="openAlertCN({ title: 'Custom title' })"
+    @click="openAlert({ title: 'Custom title' })"
   >Custom title</button>
   <button
     type="button"
     class="btn btn-dark"
-    @click="openAlertCN({ shake: true })"
+    @click="openAlert({ shake: true })"
   >Outside click shaking</button>
 </div>
 
 <script setup>
 import { useAlertExamples } from '@/script/dialog/alert'
+import { useData } from 'vitepress'
 
+const { lang } = useData()
 const {
   colorfulShadow,
   messageType,
-  openAlertCN,
-  openConfirmCN
-} = useAlertExamples()
+  openAlert,
+  openConfirm
+} = useAlertExamples(lang.value)
 </script>
 
 ## API

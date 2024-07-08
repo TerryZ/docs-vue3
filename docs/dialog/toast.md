@@ -152,12 +152,14 @@ Silent message notification, Unlike [Message](./message), Toast is only displaye
 
 <script setup>
 import { useToastExamples } from '@/script/dialog/toast'
+import { useData } from 'vitepress'
 
+const { lang } = useData()
 const {
   placement,
   messageType,
   openToast
-} = useToastExamples()
+} = useToastExamples(lang.value)
 </script>
 
 ## API

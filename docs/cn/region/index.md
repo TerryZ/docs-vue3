@@ -68,25 +68,25 @@ import { RegionSelects } from 'v-region'
 
 ### 下拉列表模式
 
-```html
+```vue-html
 <RegionSelects :city="false" />
 ```
 
 <RegionSelects :city="false" />
 
-```html
+```vue-html
 <RegionSelects :area="false" />
 ```
 
 <RegionSelects :area="false" />
 
-```html
+```vue-html
 <RegionSelects />
 ```
 
 <RegionSelects />
 
-```html
+```vue-html
 <RegionSelects :town="true" />
 ```
 
@@ -131,7 +131,7 @@ const region = ref({
 
 #### 禁用状态
 
-```html
+```vue-html
 <RegionSelects
   :town="true"
   :disabled="true"
@@ -174,7 +174,7 @@ const region = ref({
 
 在各级别行政区域名称间应用指定的分隔符，增加信息可读性
 
-```html
+```vue-html
 <RegionText
   v-model="region"
   separator="-"
@@ -194,7 +194,7 @@ const region = ref({
 
 #### 分组选择器模式
 
-```html
+```vue-html
 <RegionGroup v-model="region" />
 ```
 
@@ -204,7 +204,7 @@ const region = ref({
 
 #### 分组核心模块
 
-```html
+```vue-html
 <RegionGroupCore v-model="region" />
 ```
 
@@ -216,7 +216,7 @@ const region = ref({
 
 使用作用域插槽 `Scoped slots` 自定义选择器触发对象
 
-```html
+```vue-html
 <RegionGroup :town="true">
   <template #default="{ region, visible }">
     <button
@@ -250,7 +250,7 @@ const region = ref({
 
 #### 泳道选择器模式
 
-```html
+```vue-html
 <RegionColumns v-model="region" />
 ```
 
@@ -260,7 +260,7 @@ const region = ref({
 
 #### 泳道核心模块
 
-```html
+```vue-html
 <RegionColumnsCore v-model="region" />
 ```
 
@@ -272,7 +272,7 @@ const region = ref({
 
 使用作用域插槽 `Scoped slots` 自定义选择器触发对象
 
-```html
+```vue-html
 <RegionColumns :town="true">
   <template #default="{ region, visible }">
     <button
@@ -339,7 +339,7 @@ function change (data: RegionItem[]): void {
 
 设置 `overflow` 为 `true` 后，选择项目将被完整显示在触发对象中，不再进行折叠
 
-```html
+```vue-html
 <RegionCityPicker
   v-model="selected"
   :overflow="true"

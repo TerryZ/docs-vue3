@@ -68,25 +68,25 @@ import { RegionSelects } from 'v-region'
 
 ### Select menus mode
 
-```html
+```vue-html
 <RegionSelects :city="false" language="en" />
 ```
 
 <RegionSelects :city="false" language="en" />
 
-```html
+```vue-html
 <RegionSelects :area="false" language="en" />
 ```
 
 <RegionSelects :area="false" language="en" />
 
-```html
+```vue-html
 <RegionSelects language="en" />
 ```
 
 <RegionSelects language="en" />
 
-```html
+```vue-html
 <RegionSelects :town="true" language="en" />
 ```
 
@@ -134,7 +134,7 @@ const region = ref({
 
 #### Disabled state
 
-```html
+```vue-html
 <RegionSelects
   :town="true"
   :disabled="true"
@@ -182,7 +182,7 @@ const region = ref({
 
 Apply specified separators between administrative level names at each level to increase the readability of information
 
-```html
+```vue-html
 <RegionText
   v-model="region"
   separator="-"
@@ -202,7 +202,7 @@ Use grouping to toggle the selection mode for displaying administrative regions
 
 #### Group selector mode
 
-```html
+```vue-html
 <RegionGroup v-model="region" language="en" />
 ```
 
@@ -212,7 +212,7 @@ Group selector mode using built-in buttons as trigger objects
 
 #### Group core module
 
-```html
+```vue-html
 <RegionGroupCore language="en" v-model="region" />
 ```
 
@@ -224,7 +224,7 @@ The core module can be freely matched with other interactive forms
 
 Use scoped slots to custom trigger objects
 
-```html
+```vue-html
 <RegionGroup language="en" :town="true">
   <template #default="{ region, visible }">
     <button
@@ -258,7 +258,7 @@ Selection mode to display administrative regions side by side using multiple dat
 
 #### Columns selector mode
 
-```html
+```vue-html
 <RegionColumns language="en" v-model="region" />
 ```
 
@@ -268,7 +268,7 @@ Group selector mode using built-in buttons as trigger objects
 
 #### Columns core module
 
-```html
+```vue-html
 <RegionColumnsCore language="en" v-model="region" />
 ```
 
@@ -280,7 +280,7 @@ The core module can be freely matched with other interactive forms
 
 Use scoped slots to custom trigger objects
 
-```html
+```vue-html
 <RegionColumns language="en" :town="true">
   <template #default="{ region, visible }">
     <button
@@ -349,7 +349,7 @@ By default, if you select more than 2 city items, they will be stored and displa
 
 After setting `overflow` to `true`, the selected item will be fully displayed in the trigger object without collapsing
 
-```html
+```vue-html
 <RegionCityPicker
   language="en"
   v-model="selected"

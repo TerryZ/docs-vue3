@@ -5,7 +5,7 @@ hero:
   name: Vue 3 components
   text: 基于 Vue 3 的组件集文档与实例
   image:
-    src: /vue-logo.svg
+    src: /logo.svg
     alt: Vue3Components
   actions:
     - theme: brand
@@ -26,3 +26,21 @@ features:
     title: 国际化支持
     details: 所有组件均支持国际化，组件默认至少提供了中文与英文两种语言
 ---
+<style>
+:root {
+  --vp-home-hero-image-background-image: linear-gradient(-45deg, #00D26A 50%, #3451B2 50%);
+  --vp-home-hero-image-filter: blur(44px);
+}
+
+@media (min-width: 640px) {
+  :root {
+    --vp-home-hero-image-filter: blur(56px);
+  }
+}
+
+@media (min-width: 960px) {
+  :root {
+    --vp-home-hero-image-filter: blur(68px);
+  }
+}
+</style>

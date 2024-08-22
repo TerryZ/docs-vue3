@@ -41,6 +41,16 @@ export default {
               { text: "Toast", link: "/dialog/toast" },
               { text: "Mask", link: "/dialog/mask" },
             ]
+          },
+          {
+            text: "v-layouts",
+            link: "/layout/",
+            collapsed: true,
+            items: [
+              { text: "Admin", link: "/layout/admin" },
+              { text: "Content", link: "/layout/content" },
+              { text: "PanelGroup", link: "/layout/panel-group" }
+            ]
           }
         ]
       }

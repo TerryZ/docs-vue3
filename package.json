@@ -14,11 +14,12 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^5.3.3",
+    "v-dialogs": "3.0.3",
     "v-dropdown": "3.0.0",
+    "v-layouts": "^1.0.0",
     "v-page": "3.1.0",
     "v-region": "3.1.0",
-    "v-selectpage": "3.0.1",
-    "v-dialogs": "3.0.2"
+    "v-selectpage": "3.0.1"
   },
   "devDependencies": {
     "sass": "^1.69.2",

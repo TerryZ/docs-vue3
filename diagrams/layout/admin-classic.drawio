@@ -1,0 +1,28 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36" version="24.7.7">
+  <diagram id="2GOauJT7Yn-luxj3bmyB" name="第 1 页">
+    <mxGraphModel dx="794" dy="493" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="aq9JJDKxaiViuSofXtG_-2" value="" style="rounded=1;whiteSpace=wrap;html=1;glass=0;sketch=0;shadow=1;arcSize=3;fontFamily=Verdana;fontSize=20;fontStyle=1;fontColor=#FFFFFF;strokeColor=#CCCCCC;" parent="1" vertex="1">
+          <mxGeometry x="40" y="40" width="400" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="aq9JJDKxaiViuSofXtG_-3" value="Header" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;glass=0;sketch=0;arcSize=8;fillColor=#99CCFF;strokeColor=none;fontFamily=Verdana;fontSize=20;fontStyle=1;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="50" y="50" width="380" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="aq9JJDKxaiViuSofXtG_-4" value="Aside" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;glass=0;sketch=0;arcSize=6;fillColor=#CCFF99;strokeColor=none;fontFamily=Verdana;fontSize=20;fontStyle=1;fontColor=#999999;" parent="1" vertex="1">
+          <mxGeometry x="50" y="110" width="100" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="aq9JJDKxaiViuSofXtG_-5" value="Breadcrumb" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;glass=0;sketch=0;arcSize=8;fillColor=#FFCC99;strokeColor=none;fontFamily=Verdana;fontSize=20;fontStyle=1;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="160" y="110" width="270" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="aq9JJDKxaiViuSofXtG_-6" value="Main" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;glass=0;sketch=0;arcSize=4;fillColor=#B3B3B3;strokeColor=none;fontFamily=Verdana;fontSize=20;fontStyle=1;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="160" y="170" width="270" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="aq9JJDKxaiViuSofXtG_-7" value="Footer" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;glass=0;sketch=0;arcSize=8;fillColor=#FF9999;strokeColor=none;fontFamily=Verdana;fontSize=20;fontStyle=1;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="160" y="290" width="270" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

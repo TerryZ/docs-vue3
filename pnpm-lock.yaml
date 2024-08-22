@@ -12,11 +12,14 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3(@popperjs/core@2.11.8)
       v-dialogs:
-        specifier: 3.0.2
-        version: 3.0.2(vue@3.4.31)
+        specifier: 3.0.3
+        version: 3.0.3(vue@3.4.31)
       v-dropdown:
         specifier: 3.0.0
         version: 3.0.0(vue@3.4.31)
+      v-layouts:
+        specifier: ^1.0.0
+        version: 1.0.0(vue@3.4.31)
       v-page:
         specifier: 3.1.0
         version: 3.1.0(vue@3.4.31)
@@ -671,13 +674,18 @@ packages:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
 
-  v-dialogs@3.0.2:
-    resolution: {integrity: sha512-JJT8yx6tqgM3uJIIEF5vujPVFN0v/a+zxsWb682IJ4gq+1TNTaQrGNsphq5ddE5AlKXjKjxlMIGPKnGHsBmqEg==}
+  v-dialogs@3.0.3:
+    resolution: {integrity: sha512-o/8xk6bbaV08Hv7aBLnn8x3siUjP9ryXaTL/WQ7eesiweXakV0/FFzhjgcFBK4MlGOqRtPeYAeSNrBVkq+KVlQ==}
     peerDependencies:
       vue: ^3.2.0
 
   v-dropdown@3.0.0:
     resolution: {integrity: sha512-sDBiHhTjm0/eLmC83vUbOIHXNTlQD30w+usrh779OG+aNc/5vqyFQbSBPGekvD7pQPbWSPc5esVT8jcqfLRnrg==}
+    peerDependencies:
+      vue: ^3.2.0
+
+  v-layouts@1.0.0:
+    resolution: {integrity: sha512-YK28CL5BnDYxRpoS7URbid8ceLe2/Un5MGkPjjKxJ2d+8tAqPTY7ELhnG6/y2quIH+H7fGP2vA3lVj1EWSKaDw==}
     peerDependencies:
       vue: ^3.2.0
 
@@ -1355,11 +1363,15 @@ snapshots:
     dependencies:
       is-number: 7.0.0
 
-  v-dialogs@3.0.2(vue@3.4.31):
+  v-dialogs@3.0.3(vue@3.4.31):
     dependencies:
       vue: 3.4.31
 
   v-dropdown@3.0.0(vue@3.4.31):
+    dependencies:
+      vue: 3.4.31
+
+  v-layouts@1.0.0(vue@3.4.31):
     dependencies:
       vue: 3.4.31
 

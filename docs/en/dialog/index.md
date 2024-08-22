@@ -41,6 +41,18 @@ pnpm add v-dialogs
 - **Toast** Silent message notification, displayed in the corner of the screen
 - **Mask** A screen mask that blocks user actions
 
+## Built-in language
+
+Language built into the component
+
+| Language | Language code |
+| --- | --- |
+| Chinese | cn |
+| English | en |
+| Portuguese | pt |
+| Japanese | jp |
+| Turkish | tr |
+
 ## Globally instance
 
 `v-dialogs` also provides a globally instance to open dialogs, you can use it in any component

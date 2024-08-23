@@ -6,10 +6,18 @@ export function useAdmin () {
   const asideWidthWidthCollapse = computed(() => (
     collapse.value ? '200px' : collapsedWidth.value
   ))
+  const visibleHeader = ref(true)
+  const visibleBreadcrumb = ref(true)
+  const visibleAside = ref(true)
+  const visibleFooter = ref(true)
 
   return {
     collapse,
     collapsedWidth,
-    asideWidthWidthCollapse
+    asideWidthWidthCollapse,
+    visibleHeader,
+    visibleBreadcrumb,
+    visibleAside,
+    visibleFooter
   }
 }

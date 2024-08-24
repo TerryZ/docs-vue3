@@ -4,7 +4,7 @@ export function useAdmin () {
   const collapse = ref(false)
   const collapsedWidth = ref('70px')
   const asideWidthWidthCollapse = computed(() => (
-    collapse.value ? '200px' : collapsedWidth.value
+    collapse.value ? collapsedWidth.value : '200px'
   ))
   const visibleHeader = ref(true)
   const visibleBreadcrumb = ref(true)

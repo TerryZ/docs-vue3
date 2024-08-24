@@ -19,3 +19,4 @@ Github: [@TerryZ](https://github.com/TerryZ)
 | [v-region](https://github.com/TerryZ/v-region) | ![GitHub Repo stars](https://img.shields.io/github/stars/terryz/v-region?style=social) | [Changelog](https://github.com/TerryZ/v-region/blob/dev/CHANGELOG-CN.md) |
 | [v-selectpage](https://github.com/TerryZ/v-selectpage) | ![GitHub Repo stars](https://img.shields.io/github/stars/terryz/v-selectpage?style=social) | [Changelog](https://github.com/TerryZ/v-selectpage/blob/dev/CHANGELOG-CN.md) |
 | [v-dialogs](https://github.com/TerryZ/v-dialogs) | ![GitHub Repo stars](https://img.shields.io/github/stars/terryz/v-dialogs?style=social) | [Changelog](https://github.com/TerryZ/v-dialogs/blob/dev/CHANGELOG-CN.md) |
+| [v-layouts](https://github.com/TerryZ/v-layouts) | ![GitHub Repo stars](https://img.shields.io/github/stars/terryz/v-layouts?style=social) | [Changelog](https://github.com/TerryZ/v-layouts/blob/dev/CHANGELOG.md) |

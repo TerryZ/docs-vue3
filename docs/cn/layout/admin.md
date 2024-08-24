@@ -97,7 +97,7 @@ import { ref, computed } from 'vue'
 import { LayoutAdminClassic } from 'v-layouts'
 
 const collapse = ref(false)
-const asideWidth = computed(() => collapse.value ? '200px' : '70px')
+const asideWidth = computed(() => collapse.value ? '70px' : '200px')
 </script>
 ```
 
@@ -215,15 +215,13 @@ const visible = ref(true)
 在默认布局中，标题栏 `header` 独占一行，可通过设置 `aside-full-height` 属性让侧边栏 `aside` 独占一列
 
 ```vue-html
-<template>
-  <LayoutAdminClassic aside-full-height>
-    <template #aside>
-      <div>Aside</div>
-    </template>
+<LayoutAdminClassic aside-full-height>
+  <template #aside>
+    <div>Aside</div>
+  </template>
 
-    <div>Main content</div>
-  </LayoutAdminClassic>
-</template>
+  <div>Main content</div>
+</LayoutAdminClassic>
 ```
 
 <LayoutAdminClassic

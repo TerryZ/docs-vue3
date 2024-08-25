@@ -1,0 +1,1 @@
+import{r as t}from"./v-dialogs.DJZHNv9u.js";import{s as e}from"./framework.DatLbd_V.js";function m(){const o=e("top"),s=e("info");function r(n){t("Hello World",n)}return{placement:o,messageType:s,openMessage:r}}export{m as u};

@@ -1,0 +1,1 @@
+import{s as e,h as c}from"./framework.DatLbd_V.js";function n(){const s=e(!1),t=e("70px"),o=c(()=>s.value?t.value:"200px"),i=e(!0),r=e(!0),l=e(!0),a=e(!0);return{collapse:s,collapsedWidth:t,asideWidthWidthCollapse:o,visibleHeader:i,visibleBreadcrumb:r,visibleAside:l,visibleFooter:a}}export{n as u};

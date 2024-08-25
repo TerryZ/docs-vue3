@@ -12,7 +12,7 @@
 
 <script setup>
 import { LayoutContentPress } from 'v-layouts'
-import { useContent } from './content'
+import { useContent } from '@/script/layout/content'
 
 const {
   collapsePrimary,
@@ -62,16 +62,16 @@ import { LayoutContentPress } from 'v-layouts'
   class="border rounded-3 shadow-sm"
 >
   <template #header>
-    <div class="text-bg-primary h-100 p-3">Header</div>
+    <div class="border-bottom h-100 p-3">Header</div>
   </template>
   <template #primaryAside>
-    <div class="text-bg-warning h-100 p-3">Primary aside</div>
+    <div class="border-end h-100 p-3">Primary aside</div>
   </template>
   <template #secondaryAside>
-    <div class="text-bg-secondary h-100 p-3">Secondary aside</div>
+    <div class="border-start h-100 p-3">Secondary aside</div>
   </template>
   <template #footer>
-    <div class="text-bg-success h-100 p-3">Footer</div>
+    <div class="border-top h-100 p-3">Footer</div>
   </template>
 
   <div class="text-bg-light h-100 p-3">Main content</div>
@@ -133,10 +133,10 @@ const secondaryAsideWidth = computed(() => collapse.value ? '70px' : '200px')
   class="border rounded-3 shadow-sm"
 >
   <template #primaryAside>
-    <div class="text-bg-warning h-100 p-3">Primary aside</div>
+    <div class="border-end h-100 p-3">Primary aside</div>
   </template>
   <template #secondaryAside>
-    <div class="text-bg-secondary h-100 p-3">Secondary aside</div>
+    <div class="border-start h-100 p-3">Secondary aside</div>
   </template>
 
   <div class="text-bg-light h-100 p-3">Main content</div>
@@ -174,28 +174,31 @@ const visible = ref(true)
 </script>
 ```
 
-<div class="d-flex align-items-center my-3">
-  <span class="me-3">区域条件渲染</span>
-  <button
-    type="button"
-    class="btn btn-dark me-3"
-    @click="visibleHeader = !visibleHeader"
-  >Header</button>
-  <button
-    type="button"
-    class="btn btn-dark me-3"
-    @click="visiblePrimaryAside = !visiblePrimaryAside"
-  >Primary aside</button>
-  <button
-    type="button"
-    class="btn btn-dark me-3"
-    @click="visibleSecondaryAside = !visibleSecondaryAside"
-  >Secondary aside</button>
-  <button
-    type="button"
-    class="btn btn-dark"
-    @click="visibleFooter = !visibleFooter"
-  >Footer</button>
+<div class="">
+  <div class="">区域条件渲染</div>
+  <div class="d-flex align-items-center my-3">
+    <button
+      type="button"
+      class="btn btn-dark me-3"
+      @click="visibleHeader = !visibleHeader"
+    >Header</button>
+    <button
+      type="button"
+      class="btn btn-dark me-3"
+      @click="visiblePrimaryAside = !visiblePrimaryAside"
+    >Primary aside</button>
+    <button
+      type="button"
+      class="btn btn-dark me-3"
+      @click="visibleSecondaryAside = !visibleSecondaryAside"
+    >Secondary aside</button>
+    <button
+      type="button"
+      class="btn btn-dark"
+      @click="visibleFooter = !visibleFooter"
+    >Footer</button>
+  </div>
+
 </div>
 
 <LayoutContentPress
@@ -207,16 +210,16 @@ const visible = ref(true)
   class="border rounded-3 shadow-sm"
 >
   <template #header v-if="visibleHeader">
-    <div class="text-bg-primary h-100 p-3">Header</div>
+    <div class="border-bottom h-100 p-3">Header</div>
   </template>
   <template #primaryAside v-if="visiblePrimaryAside">
-    <div class="text-bg-warning h-100 p-3">Aside</div>
+    <div class="border-end h-100 p-3">Aside</div>
   </template>
   <template #secondaryAside v-if="visibleSecondaryAside">
-    <div class="text-bg-secondary h-100 p-3">Secondary aside</div>
+    <div class="border-start h-100 p-3">Secondary aside</div>
   </template>
   <template #footer v-if="visibleFooter">
-    <div class="text-bg-success h-100 p-3">Footer</div>
+    <div class="border-top h-100 p-3">Footer</div>
   </template>
 
   <div class="text-bg-light h-100 p-3">Main content</div>
@@ -257,16 +260,16 @@ const visible = ref(true)
   class="border rounded-3 shadow-sm"
 >
   <template #header>
-    <div class="text-bg-primary h-100 p-3">Header</div>
+    <div class="border-bottom h-100 p-3">Header</div>
   </template>
   <template #primaryAside>
-    <div class="text-bg-warning h-100 p-3">Primary aside</div>
+    <div class="border-end h-100 p-3">Primary aside</div>
   </template>
   <template #secondaryAside>
-    <div class="text-bg-secondary h-100 p-3">Secondary aside</div>
+    <div class="h-100 p-3">Secondary aside</div>
   </template>
   <template #footer>
-    <div class="text-bg-success h-100 p-3">Footer</div>
+    <div class="border-top h-100 p-3">Footer</div>
   </template>
 
   <div class="text-bg-light h-100 p-3">Main content</div>

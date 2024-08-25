@@ -18,8 +18,8 @@ importers:
         specifier: 3.0.0
         version: 3.0.0(vue@3.4.31)
       v-layouts:
-        specifier: ^1.0.0
-        version: 1.0.0(vue@3.4.31)
+        specifier: ^1.0.2
+        version: 1.0.2(vue@3.4.31)
       v-page:
         specifier: 3.1.0
         version: 3.1.0(vue@3.4.31)
@@ -684,8 +684,8 @@ packages:
     peerDependencies:
       vue: ^3.2.0
 
-  v-layouts@1.0.0:
-    resolution: {integrity: sha512-YK28CL5BnDYxRpoS7URbid8ceLe2/Un5MGkPjjKxJ2d+8tAqPTY7ELhnG6/y2quIH+H7fGP2vA3lVj1EWSKaDw==}
+  v-layouts@1.0.2:
+    resolution: {integrity: sha512-hsarreu0tKLpaDdqI1IfoiYZ+YxQcvg9kTjg1wd0Y5Jdv0e9rwdsAyYns33VE07NvngJEFT8YLhDinxDpPMbuw==}
     peerDependencies:
       vue: ^3.2.0
 
@@ -1371,7 +1371,7 @@ snapshots:
     dependencies:
       vue: 3.4.31
 
-  v-layouts@1.0.0(vue@3.4.31):
+  v-layouts@1.0.2(vue@3.4.31):
     dependencies:
       vue: 3.4.31
 

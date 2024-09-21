@@ -27,7 +27,18 @@ export default {
         items: [
           { text: "v-page", link: "/cn/page/" },
           { text: "v-dropdown", link: "/cn/dropdown/" },
-          { text: "v-region", link: "/cn/region/" },
+          {
+            text: "v-region",
+            link: "/cn/region/",
+            collapsed: true,
+            items: [
+              { text: "Select", link: "/cn/region/select" },
+              { text: "Group", link: "/cn/region/group" },
+              { text: "Column", link: "/cn/region/column" },
+              { text: "CityPicker", link: "/cn/region/city-picker" },
+              { text: "Text", link: "/cn/region/text" }
+            ]
+          },
           { text: "v-selectpage", link: "/cn/selectpage/" },
           {
             text: "v-dialogs",

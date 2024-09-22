@@ -1,38 +1,46 @@
 # Select
 
-下拉列表模式
+下拉列表模式，最传统，经典的应用形式
 
+## 组件引用
 
-
-## 实例
-
-<script setup>
-import {
-  RegionSelects,
-  RegionFullSelects
-} from 'v-region'
-
-import { useDataChange, valuesFuzhou } from '@/script/region/data'
-
-const {
-  changedValues,
-  changedModel,
-  change,
-  jsonFormat
-} = useDataChange()
-</script>
+在项目中引入组件
 
 ```js
 import { RegionSelects, RegionFullSelects } from 'v-region'
 ```
 
-### 3 级行政区划
+## 实例
+
+<script setup>
+import { ref } from 'vue'
+import {
+  RegionSelects,
+  RegionFullSelects
+} from 'v-region'
+
+import {
+  useUIDataChange, useRegionChange, valuesFuzhou
+} from '@/script/region/data'
+import RegionDataResult from './RegionDataResult.vue'
+
+const {
+  changedValues,
+  changedModel,
+  change
+} = useUIDataChange()
+const { values, reset } = useRegionChange()
+</script>
+
+关闭城市级别，仅选择省份
 
 ```vue-html
 <RegionSelects :city="false" />
 ```
 
 <RegionSelects :city="false" />
+
+关闭区县级别
 
 ```vue-html
 <RegionSelects :area="false" />
@@ -46,10 +54,10 @@ import { RegionSelects, RegionFullSelects } from 'v-region'
 
 <RegionSelects />
 
-### 4 级行政区划
+使用完整的 4 级行政区划
 
 ```vue-html
-<RegionFullSelects/>
+<RegionFullSelects />
 ```
 
 <RegionFullSelects
@@ -59,16 +67,10 @@ import { RegionSelects, RegionFullSelects } from 'v-region'
 
 响应数据
 
-<div class="rounded-3 my-3 border overflow-hidden d-flex">
-  <div class="col-md-6 p-3">
-    <h5>v-model values</h5>
-    <pre class="m-0">{{ jsonFormat(changedValues) }}</pre>
-  </div>
-  <div class="col-md-6 p-3 bg-light">
-    <h5>change 事件响应结果</h5>
-    <pre class="m-0">{{ jsonFormat(changedModel) }}</pre>
-  </div>
-</div>
+<RegionDataResult
+  :values="changedValues"
+  :model="changedModel"
+/>
 
 ### 初始值绑定
 
@@ -76,7 +78,6 @@ import { RegionSelects, RegionFullSelects } from 'v-region'
 <template>
   <RegionFullSelects v-model="region" />
 </template>
-
 <script setup>
 import { ref } from 'vue'
 import { RegionFullSelects } from 'v-region'
@@ -91,5 +92,43 @@ const region = ref({
 
 <RegionFullSelects
   class="mb-3"
-  v-model="valuesFuzhou"
+  v-model="values"
+/>
+
+### 清空/重置
+
+```js
+region.value = {
+  province: undefined,
+  city: undefined,
+  area: undefined,
+  town: undefined
+}
+```
+
+<div class="mt-3">
+  <button
+    type="button"
+    class="btn btn-dark"
+    @click="reset"
+  >清除/重置</button>
+</div>
+
+::: warning 注意
+传递 `undefined` 值或是一个空对象 `{}`，无法清空
+:::
+
+### 禁用状态
+
+```vue-html
+<RegionFullSelects
+  v-model="values"
+  :disabled="true"
+/>
+```
+
+<RegionFullSelects
+  class="mb-3"
+  disabled
+  v-model="values"
 />

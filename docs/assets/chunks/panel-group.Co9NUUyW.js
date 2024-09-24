@@ -1,1 +1,0 @@
-import{s as e}from"./framework.DatLbd_V.js";function s(){const n=e(["panel2","panel3"]),a=e(["panel2"]),t=e(["panel1","panel3"]),o=e(!0),c=e(!0);return{active:n,activeLayout:t,activeAccordion:a,visiblePanel2:o,visiblePanel1Header:c}}export{s as u};

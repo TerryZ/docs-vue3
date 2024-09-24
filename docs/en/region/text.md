@@ -1,16 +1,16 @@
 # Text
 
-纯文本模式，行政区域信息以纯文本方式展示
+Plain text mode, administrative area information is displayed in plain text
 
-## 组件引用
+## Component reference
 
-在项目中引入组件
+Referencing components in your project
 
 ```js
 import { RegionText, RegionFullText } from 'v-region'
 ```
 
-## 实例
+## Examples
 
 <script setup>
 import { RegionText, RegionFullText } from 'v-region'
@@ -19,7 +19,7 @@ import { useRegionChange } from '@/script/region/data'
 const { values, change } = useRegionChange()
 </script>
 
-快速应用
+Quick use
 
 ```vue
 <template>
@@ -48,9 +48,9 @@ const region = ref<RegionValues>({
   </div>
 </div>
 
-### 分隔符
+### Separator
 
-在各级别行政区域名称间应用指定的分隔符，增加信息可读性
+Apply specified separators between administrative region names at all levels to increase information readability
 
 ```vue-html
 <RegionText
@@ -73,5 +73,5 @@ const region = ref<RegionValues>({
     type="button"
     class="btn btn-dark"
     @click="change"
-  >换一个地区</button>
+  >Change a region</button>
 </div>

@@ -52,6 +52,15 @@ app.use(Region)
 app.mount('#app')
 ```
 
+Manually install components globally
+
+```js
+import { RegionSelects } from 'v-region'
+
+const app = createApp(App)
+app.component('v-region-selects', RegionSelects)
+```
+
 Partial use of components is the more recommended way to use them, and it is also more conducive to code splitting during project packaging, to achieve better resource reference on demand
 
 ```vue
@@ -64,450 +73,155 @@ import { RegionSelects } from 'v-region'
 </script>
 ```
 
-## Examples
+## Level separation
 
-### Select menus mode
+Due to the large amount of town level data, in order to avoid the situation where the project does not need to use the town level but packs the massive data at this level, resulting in a waste of resources and a large project package size, the `v-region` series components only provide 3-level administrative division selection from the `v3.2.0` version, and the newly added `Full` series components provide a complete 4-level administrative division selection. Projects can choose to use it according to their needs
 
-```vue-html
-<RegionSelects :city="false" language="en" />
-```
+New components list
 
-<RegionSelects :city="false" language="en" />
+- `RegionFullSelects`
+- `RegionFullText`
+- `RegionFullGroupCore`
+- `RegionFullGroup`
+- `RegionFullColumnsCore`
+- `RegionFullColumns`
 
-```vue-html
-<RegionSelects :area="false" language="en" />
-```
+The following is an example of the Select mode
 
-<RegionSelects :area="false" language="en" />
-
-```vue-html
-<RegionSelects language="en" />
-```
-
-<RegionSelects language="en" />
-
-```vue-html
-<RegionSelects :town="true" language="en" />
-```
-
-<RegionSelects
-  :town="true"
-  language="en"
-  @change="selectChange"
-/>
-
-The response data for [change](#change) event
-
-<div class="bg-light rounded-3 p-3 my-3">
-{{ selectSelectedData }}
-</div>
-
-#### Selected items value binding
+### 3 levels region selector
 
 ```vue
 <template>
-  <RegionSelects
-    :town="true"
-    language="en"
-    v-model="region"
-  />
+  <RegionSelects />
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import { RegionSelects } from 'v-region'
-const region = ref({
-  province: '350000',
-  city: '350100',
-  area: '350104',
-  town: '350104008'
-})
 </script>
 ```
 
-<RegionSelects
-  class="mb-3"
-  language="en"
-  :town="true"
-  v-model="region"
-/>
+In the 3-level administrative region selection component, regardless of setting `town` prop to `true` or `false`, the component only provides 3-level administrative division selection. If you need to use 4-level administrative division selection, please use the `RegionFullSelects` component
 
-#### Disabled state
-
-```vue-html
-<RegionSelects
-  :town="true"
-  :disabled="true"
-  language="en"
-  v-model="region"
-/>
-```
-
-<RegionSelects
-  :town="true"
-  :disabled="true"
-  language="en"
-  v-model="region"
-/>
-
-### Plain text mode
-
-Administrative area information displayed by plain text
+### 4 levels region selector
 
 ```vue
 <template>
-  <RegionText
-    v-model="region"
-    language="en"
-  />
+  <RegionFullSelects />
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { RegionText } from 'v-region'
-const region = ref({
-  province: '350000',
-  city: '350100',
-  area: '350104',
-  town: '350104008'
-})
+import { RegionFullSelects } from 'v-region'
 </script>
 ```
 
-<div class="border rounded-3 shadow-sm p-3 my-3">
-  <RegionText language="en" v-model="region" />
-</div>
+## Modules
 
-#### Separator
-
-Apply specified separators between administrative level names at each level to increase the readability of information
-
-```vue-html
-<RegionText
-  v-model="region"
-  separator="-"
-/>
-```
-
-<div class="border rounded-3 shadow-sm p-3 mt-3">
-  <RegionText
-    v-model="region"
-    separator="-"
-  />
-</div>
-
-### Group mode
-
-Use grouping to toggle the selection mode for displaying administrative regions
-
-#### Group selector mode
-
-```vue-html
-<RegionGroup v-model="region" language="en" />
-```
-
-<RegionGroup language="en" />
-
-Group selector mode using built-in buttons as trigger objects
-
-#### Group core module
-
-```vue-html
-<RegionGroupCore language="en" v-model="region" />
-```
-
-<RegionGroupCore language="en" class="border rounded-3 shadow-sm" />
-
-The core module can be freely matched with other interactive forms
-
-#### Group mode custom trigger objects
-
-Use scoped slots to custom trigger objects
-
-```vue-html
-<RegionGroup language="en" :town="true">
-  <template #default="{ region, visible }">
-    <button
-      type="button"
-      class="btn btn-success"
-    >
-      region: <span v-text="resultText(region)" />,
-      visible: <span v-text="visible" />
-    </button>
-  </template>
-</RegionGroup>
-```
-
-<RegionGroup language="en" :town="true">
-  <template #default="{ region, visible }">
-    <div class="bg-success px-3 py-2 rounded-3 text-white" >
-      region: <span v-text="resultText(region)" />,
-      visible: <span v-text="visible" />
-    </div>
-  </template>
-</RegionGroup>
-
-Two data fields are output in the scoped slots
-
-- `region` current Region Selection Data Model
-- `visible` the dropdown container open state
-
-### Columns mode
-
-Selection mode to display administrative regions side by side using multiple data columns
-
-#### Columns selector mode
-
-```vue-html
-<RegionColumns language="en" v-model="region" />
-```
-
-<RegionColumns language="en" />
-
-Group selector mode using built-in buttons as trigger objects
-
-#### Columns core module
-
-```vue-html
-<RegionColumnsCore language="en" v-model="region" />
-```
-
-<RegionColumnsCore language="en" class="border rounded-3 shadow-sm" />
-
-The core module can be freely matched with other interactive forms
-
-#### Columns mode custom trigger objects
-
-Use scoped slots to custom trigger objects
-
-```vue-html
-<RegionColumns language="en" :town="true">
-  <template #default="{ region, visible }">
-    <button
-      type="button"
-      class="btn btn-success"
-    >
-      region: <span v-text="resultText(region)" />,
-      visible: <span v-text="visible" />
-    </button>
-  </template>
-</RegionColumns>
-```
-
-<RegionColumns language="en" :town="true">
-  <template #default="{ region, visible }">
-    <div class="bg-success px-3 py-2 rounded-3 text-white" >
-      region: <span v-text="resultText(region)" />,
-      visible: <span v-text="visible" />
-    </div>
-  </template>
-</RegionColumns>
-
-Two data fields are output in the scoped slots
-
-- `region` current Region Selection Data Model
-- `visible` the dropdown container open state
-
-### City Picker mode
-
-```vue
-<template>
-  <RegionCityPicker
-    language="en"
-    v-model="selected"
-    @change="change"
-  />
-</template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import { RegionCityPicker } from 'v-region'
-import type { RegionItem } from 'v-region'
-
-const selected = ref<string[]>(['110000', '130200', '140100'])
-function change (data: RegionItem[]): void {
-  console.log(data)
-}
-</script>
-```
-
-<RegionCityPicker
-  language="en"
-  v-model="citySelected"
-  @change="cityChange"
-/>
-
-The response data for [change](#change) event
-
-<div class="bg-light rounded-3 p-3 my-3">
-  {{ citySelectedData }}
-</div>
-
-#### collapsing items
-
-By default, if you select more than 2 city items, they will be stored and displayed in a unified manner, and the number of folded storage will be displayed
-
-After setting `overflow` to `true`, the selected item will be fully displayed in the trigger object without collapsing
-
-```vue-html
-<RegionCityPicker
-  language="en"
-  v-model="selected"
-  :overflow="true"
-/>
-```
-
-<RegionCityPicker
-  language="en"
-  v-model="citySelected"
-  :overflow="true"
-/>
-
-<script setup>
-import { ref } from 'vue'
-import {
-  RegionSelects,
-  RegionText,
-  RegionGroup,
-  RegionGroupCore,
-  RegionColumns,
-  RegionColumnsCore,
-  RegionCityPicker
-} from 'v-region'
-
-const selectSelectedData = ref({})
-const region = ref({
-  province: '350000',
-  city: '350100',
-  area: '350104',
-  town: '350104008'
-})
-const citySelected = ref(['110000', '130200', '140100'])
-const citySelectedData = ref([])
-
-function cityChange (data) {
-  citySelectedData.value = data
-}
-function selectChange (data) {
-  selectSelectedData.value = data
-}
-function resultText (region) {
-  if (!region) return 'No data'
-  if (!Object.values(region).some(val => val) || !region) {
-    return 'No data'
-  }
-  return Object
-    .values(region)
-    .filter(val => val)
-    .map(val => val.value)
-    .join(',')
-}
-</script>
+- [Select](./select.md)
+- [Group](./group.md)
+- [Column](./column.md)
+- [CityPicker](./city-picker.md)
+- [Text](./text.md)
 
 ## Props
 
-### v-model/modelValue
-
-- type `RegionKeys | string[]`
+Core module component props arguments
 
 ```ts
-interface RegionInputModel {
-  province: string
-  city: string
-  area: string
-  town: string
+interface RegionBaseProps {
+  /**
+   * v-model input value, each level of administrative division
+   * selection item binding value
+   */
+  modelValue?: RegionValues
+  /**
+   * City level
+   * @default true
+   */
+  city?: boolean
+  /**
+   * Area level
+   * @default true
+   */
+  area?: boolean
+  /**
+   * Town level
+   * @default true
+   */
+  town?: boolean
+  /**
+   * Component language
+   * @default `cn`
+   */
+  language?: 'cn' | 'en'
+  /**
+   * When no selection is made, the prompt text `Please select` is displayed.
+   * This is only applicable to
+   * 
+   * - `RegionSelects`
+   * - `RegionFullSelects`
+   * 
+   * modes
+   * 
+   * @default true
+   */
+  blank?: boolean
+  /**
+   * Region level separator, only applicable to
+   * 
+   * - `RegionText`
+   * - `RegionFullText`
+   * 
+   * modes
+   * @default ''
+   */
+  separator?: string
 }
 ```
 
-Binding value of selection items for administrative divisions at each level
+Selector module component props arguments
 
-::: tip Data format
-The selection item binding of the city picker `RegionCityPicker` is bound through the `string[]` array format
-:::
-
-### city
-
-- type `boolean`
-- default `true`
-
-Use city level, if this level is turned off, all subordinate administrative levels are unavailable
-
-### area
-
-- type `boolean`
-- default `true`
-
-Use area level, if this level is turned off, all subordinate administrative levels are unavailable
-
-### town
-
-- type `boolean`
-- default `false`
-
-Use town level
-
-### blank
-
-- type `boolean`
-- default `false`
-
-Add `Please select` option in select menus, available on `RegionSelects` module
-
-### disabled
-
-- type `boolean`
-- default `false`
-
-Enabled / Disabled component, available on `RegionSelects`、`RegionGroup` and `RegionColumns` modules
-
-### language
-
-- type `string`
-- default `'cn'`
-
-The language used by the component
-
-- `cn` 中文
-- `en` English
-
-### separator
-
-- type `string`
-- default `''`
-
-Separator between administrative region names, available on `RegionText` mode
-
-### overflow
-
-- type `boolean`
-- default `false`
-
-When more cities are selected, more than 2 cities are only displayed by quantity, only available on `RegionCityPicker` mode
-
-- `true` Display all selected city names
-- `false` When more than two cities are selected, only the names of the first two cities will be displayed, and other cities will be collapsed
-
-### customTriggerClass
-
-- type `string`
-- default `''`
-
-Add custom class to trigger container, work on dropdown selection mode
-
-### customContainerClass
-
-- type `string`
-- default `''`
-
-Add custom class to dropdown container, work on dropdown selection mode
+```ts
+interface RegionSelectorProps extends RegionBaseProps {
+  /**
+   * Disabled component
+   * @default false
+   */
+  disabled?: boolean
+  /**
+   * Add custom class to trigger container, work on dropdown selection mode
+   */
+  customTriggerClass?: string
+  /**
+   * Add custom class to dropdown container, work on dropdown selection mode
+   */
+  customContainerClass?: string
+}
+```
 
 ## Events
 
 Component response events for various types of operations
 
+### update:modelValue
+
+The response of `v-model` to the administrative area selection changes, and the response content is the coded value of the selected administrative area
+
+```ts
+update:modelValue: (data: RegionValues) => void
+```
+
+```ts
+interface RegionValues {
+  province?: string
+  city?: string
+  area?: string
+  town?: string
+}
+```
+
 ### change
 
-Respond for level selection change
+Responding to administrative division changes
 
 ```ts
 change: (data: RegionModel) => void
@@ -518,7 +232,6 @@ interface RegionItem {
   key: string
   value: string
 }
-
 interface RegionModel {
   province: RegionItem
   city: RegionItem
@@ -540,9 +253,9 @@ You can also directly use the type definition provided by the component
 <script setup lang="ts">
 import { ref } from 'vue'
 import { RegionSelects } from 'v-region'
-import type { RegionInputModel, RegionModel } from 'v-region'
+import type { RegionValues, RegionModel } from 'v-region'
 
-const region = ref<RegionInputModel>({
+const region = ref<RegionValues>({
   province: '350000',
   city: '350100',
   area: '350104',
@@ -557,43 +270,23 @@ function change (data: RegionModel): void {
 
 ### complete
 
-In response to the completion of all valid region selections, only available on `RegionGroupCore` and `RegionColumnsCore` modules
+In response to the completion of all valid region selections, only available on
+
+- `RegionGroupCore`
+- `RegionFullGroupCore`
+- `RegionColumnsCore`
+- `RegionFullColumnsCore`
+
+Core modules
 
 ```ts
 complete: () => void
 ```
 
-### visible-change
+### visibleChange
 
 Respond for dropdown layer state change(display / close)
 
 ```ts
-'visible-change': (visible: boolean) => void
-```
-
-## API
-
-Before using component's API, need to declare a ref attribute for the component, declare a ref variable by ref() to hold the element reference(the name must match template ref value) and use it to call API methods
-
-```vue
-<template>
-  <RegionSelects ref="region" />
-</template>
-
-<script setup>
-import { ref } from 'vue'
-import { RegionSelects } from 'v-region'
-
-const region = ref()
-// call api
-region.value.reset()
-</script>
-```
-
-### reset
-
-Reset all level data
-
-```ts
-reset: () => void
+visibleChange: (visible: boolean) => void
 ```

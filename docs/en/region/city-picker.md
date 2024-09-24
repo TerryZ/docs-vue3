@@ -1,16 +1,16 @@
 # CityPicker
 
-城市选择器模式
+City picker mode
 
-## 组件引用
+## Component reference
 
-在项目中引入组件
+Referencing components in your project
 
 ```js
 import { RegionCityPicker } from 'v-region'
 ```
 
-## 实例
+## Examples
 
 <script setup>
 import { RegionCityPicker } from 'v-region'
@@ -33,11 +33,12 @@ const reset = () => {
 }
 </script>
 
-快速应用
+Quick use
 
 ```vue
 <template>
   <RegionCityPicker
+    language="en"
     v-model="selected"
     @change="change"
   />
@@ -55,20 +56,21 @@ function change (data: RegionItem[]): void {
 ```
 
 <RegionCityPicker
+  language="en"
   v-model="changedValues"
   @change="change"
 />
 
-响应数据
+Response Data
 
 <RegionDataResult
   :values="changedValues"
   :model="changedModel"
 />
 
-### 清空/重置
+### Clear/Reset
 
-传递一个空数组即可清空选择
+Pass an empty array to clear the selection
 
 ```js
 selected.value = []
@@ -79,23 +81,25 @@ selected.value = []
     type="button"
     class="btn btn-dark"
     @click="reset"
-  >清除/重置</button>
+  >Clear/Reset</button>
 </div>
 
-### 折叠项目
+### Collapse items
 
-在默认情况下，选择超过 2 个城市项目，将会被统一收纳显示，并显示折叠收纳数量
+By default, if you select more than 2 city items, they will be stored and displayed in a unified manner, and the number of folded storage will be displayed
 
-设置 `overflow` props 为 `true` 后，选择项目将被完整显示在触发对象中，不再进行折叠
+After setting overflow to true, the selected item will be fully displayed in the trigger object without collapsing
 
 ```vue-html
 <RegionCityPicker
+  language="en"
   v-model="selected"
   :overflow="true"
 />
 ```
 
 <RegionCityPicker
+  language="en"
   v-model="changedValues"
   overflow
 />
@@ -105,25 +109,33 @@ selected.value = []
 ```ts
 interface CityPickerProps {
   /**
-   * 语言
+   * Component language
    * @default `cn`
    */
   language?: string
   /**
-   * 禁用组件
+   * Whether to disable the component
    * @default false
    */
   disabled?: boolean
-  /** 为触发对象添加自定义样式类 */
+  /**
+   * Add custom class to trigger container, work on dropdown selection mode
+   */
   customTriggerClass?: string
-  /** 为下拉容器添加自定义样式类 */
+  /**
+   * Add custom class to dropdown container, work on dropdown selection mode
+   */
   customContainerClass?: string
-  /** 输入区域编码列表 */
+  /**
+   * Input values as a list of area codes
+   */
   modelValue?: string[]
   /**
-   * 按钮中显示选中城市模式
-   * true: 显示所有选中城市名称
-   * false: 选中的城市多于两个时，仅显示前两个城市名称，其他城市会被收起
+   * Display mode for the selected city in the button
+   * true: Display all selected city names
+   * false: When more than two cities are selected, only the
+   *        names of the first two cities will be displayed,
+   *        and other cities will be collapsed
    *
    * @default false
    */
@@ -131,13 +143,13 @@ interface CityPickerProps {
 }
 ```
 
-## 事件
+## Events
 
-城市选择器组件各类操作响应事件
+Various operation response events of the city selector component
 
 ### update:modelValue
 
-响应城市选择变化，响应内容为选择城市的编码值
+In response to the change of city selection, the response content is the coded value of the selected city
 
 ```ts
 update:modelValue: (data: string[]) => void
@@ -145,7 +157,7 @@ update:modelValue: (data: string[]) => void
 
 ### change
 
-响应城市选择变化，响应内容为选择城市的模型
+In response to changes in city selection, the response content is the model of the selected city
 
 ```ts
 change: (data: RegionItem[]) => void
@@ -153,7 +165,7 @@ change: (data: RegionItem[]) => void
 
 ### visible-change
 
-响应下拉栏打开 / 关闭的状态变化
+Respond for dropdown layer state change(display / close)
 
 ```ts
 visibleChange: (visible: boolean) => void

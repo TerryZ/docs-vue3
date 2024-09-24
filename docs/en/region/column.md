@@ -1,10 +1,10 @@
 # Column
 
-泳道模式，使用多数据列并排展示行政区域的选择模式
+Lane mode, a selection mode that uses multiple data columns to display administrative regions side by side
 
-## 组件引用
+## Component reference
 
-在项目中引入组件
+Referencing components in your project
 
 ```js
 import {
@@ -15,7 +15,7 @@ import {
 } from 'v-region'
 ```
 
-## 实例
+## Examples
 
 <script setup>
 import { ref } from 'vue'
@@ -30,9 +30,9 @@ import { useRegionChange, resultText } from '@/script/region/data'
 const { values, change } = useRegionChange()
 </script>
 
-### 核心模块
+### Core Modules
 
-核心模块可自由搭配其他交互形式
+The core module can be freely matched with other interactive forms
 
 ```vue-html
 <RegionColumnsCore v-model="region" />
@@ -44,16 +44,17 @@ const { values, change } = useRegionChange()
   class="border rounded-3 shadow-sm d-inline-flex"
 />
 
-### 选择器模式
+### Selector mode
 
-使用内置按钮作为触发对象的选择器模式
+Selector mode using built-in buttons as trigger elements
 
 ```vue-html
-<RegionColumns v-model="region" />
-<RegionFullColumns v-model="region" />
+<RegionColumns language="en" v-model="region" />
+<RegionFullColumns language="en" v-model="region" />
 ```
 
 <RegionFullColumns
+  language="en"
   v-model="values"
 />
 
@@ -62,12 +63,12 @@ const { values, change } = useRegionChange()
     type="button"
     class="btn btn-dark"
     @click="change"
-  >换一个地区</button>
+  >Change a region</button>
 </div>
 
-### 自定义选择器触发对象
+### Custom selector trigger element
 
-若组件内置的触发器按钮不满足应用场景需求，可使用作用域插槽 `Scoped slots` 自定义选择器触发对象，另外同时可以配合 `custom-trigger-class` 和 `custom-container-class` props 对选择器触发对象以及下拉容器的样式进行自定义
+If the built-in trigger button of the component does not meet the needs of the application scenario, you can use the scoped slot `Scoped slots` to customize the selector trigger element. In addition, you can also customize the style of the selector trigger element and the drop-down container with `custom-trigger-class` and `custom-container-class` props
 
 ```vue-html
 <RegionColumns
@@ -101,16 +102,16 @@ const { values, change } = useRegionChange()
   </template>
 </RegionColumns>
 
-选择器作用域插槽数据格式
+Selector scoped slot data format
 
 ```ts
 interface RegionTriggerSlotData {
   /**
-   * 当前选择的行政区域数据模型
+   * The currently selected administrative area data model
    */
   data?: RegionModel
   /**
-   * 当前选择器是否可见
+   * Current selector visibility
    */
   visible?: boolean
 }

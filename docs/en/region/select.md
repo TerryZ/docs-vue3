@@ -1,16 +1,16 @@
 # Select
 
-下拉列表模式，最传统，经典的应用形式
+Select mode, the most traditional and classic application form
 
-## 组件引用
+## Component reference
 
-在项目中引入组件
+Referencing components in your project
 
 ```js
 import { RegionSelects, RegionFullSelects } from 'v-region'
 ```
 
-## 实例
+## Examples
 
 <script setup>
 import { ref } from 'vue'
@@ -32,53 +32,55 @@ const {
 const { values, reset } = useRegionChange()
 </script>
 
-关闭城市级别，仅选择省份
+Close city level, only select province
 
 ```vue-html
-<RegionSelects :city="false" />
+<RegionSelects language="en" :city="false" />
 ```
 
-<RegionSelects :city="false" />
+<RegionSelects language="en" :city="false" />
 
-关闭区县级别
+Close area level
 
 ```vue-html
-<RegionSelects :area="false" />
+<RegionSelects language="en" :area="false" />
 ```
 
-<RegionSelects :area="false" />
+<RegionSelects language="en" :area="false" />
 
 ```vue-html
-<RegionSelects />
+<RegionSelects language="en" />
 ```
 
-<RegionSelects />
+<RegionSelects language="en" />
 
-使用完整的 4 级行政区划
+Use full 4-level administrative divisions
 
 ```vue-html
-<RegionFullSelects />
+<RegionFullSelects language="en" />
 ```
 
 <RegionFullSelects
+  language="en"
   v-model="changedValues"
   @change="change"
 />
 
-响应数据
+Response Data
 
 <RegionDataResult
+  language="en"
   :values="changedValues"
   :model="changedModel"
 />
 
-### 初始值绑定
+### Initial value binding
 
-指定一套地区编码值，使组件默认显示这些地区
+Specify a set of region code values ​​so that the component displays those regions by default
 
 ```vue
 <template>
-  <RegionFullSelects v-model="region" />
+  <RegionFullSelects language="en" v-model="region" />
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
@@ -94,13 +96,14 @@ const region = ref<RegionModel>({
 ```
 
 <RegionFullSelects
+  language="en"
   class="mb-3"
   v-model="values"
 />
 
-### 清空/重置
+### Clear/Reset
 
-指定一个各级别的值为 `undefined` 的对象，即可清空
+Specify an object with the value of `undefined` at each level to clear it
 
 ```js
 region.value = {
@@ -116,14 +119,14 @@ region.value = {
     type="button"
     class="btn btn-dark"
     @click="reset"
-  >清除/重置</button>
+  >Clear/Reset</button>
 </div>
 
-::: warning 注意
-传递 `undefined` 值或是一个空对象 `{}`，无法清空
+::: warning
+Passing an `undefined` value or an empty object `{}` does not clear
 :::
 
-### 禁用状态
+### Disabled state
 
 ```vue-html
 <RegionFullSelects
@@ -133,6 +136,7 @@ region.value = {
 ```
 
 <RegionFullSelects
+  language="en"
   class="mb-3"
   disabled
   v-model="values"

@@ -4,20 +4,16 @@
       <div class="border-bottom p-3">
         <h5>v-model values</h5>
       </div>
-      <div class="p-3 text-black-50">
-        <small>
-          <pre class="m-0">{{ jsonFormat(values) }}</pre>
-        </small>
+      <div class="p-3 code-result">
+        <pre class="m-0">{{ jsonFormat(values) }}</pre>
       </div>
     </div>
     <div class="col-md-6">
       <div class="border-bottom p-3">
-        <h5>change 事件响应结果</h5>
+        <h5>change event response results</h5>
       </div>
-      <div class="p-3 text-black-50">
-        <small>
-          <pre class="m-0">{{ jsonFormat(model) }}</pre>
-        </small>
+      <div class="p-3 code-result">
+        <pre class="m-0">{{ jsonFormat(model) }}</pre>
       </div>
     </div>
   </div>
@@ -31,3 +27,13 @@ defineProps({
 
 const jsonFormat = data => JSON.stringify(data, null, 2)
 </script>
+
+<style lang="sass">
+.code-result
+  font-size: 14px
+  color: #666
+  transition: all .3s
+  height: 100%
+  &:hover
+    background-color: #fafafa
+</style>

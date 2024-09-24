@@ -6,8 +6,7 @@ export default defineConfig({
   plugins: [],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./', import.meta.url)),
-      '@demo': fileURLToPath(new URL('../demos', import.meta.url))
+      '@': fileURLToPath(new URL('./', import.meta.url))
     }
   }
 })

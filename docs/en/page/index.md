@@ -278,7 +278,7 @@ function goToInputPage () {
 ```
 
 <div class="mb-3 d-flex align-items-center">
-  指定对齐方向
+  Specify alignment direction
   <select
     v-model="align"
     style="-webkit-appearance: auto;width: 100px"

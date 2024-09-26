@@ -24,8 +24,8 @@ importers:
         specifier: 3.1.0
         version: 3.1.0(vue@3.5.8)
       v-region:
-        specifier: 3.2.1
-        version: 3.2.1(vue@3.5.8)
+        specifier: 3.3.0
+        version: 3.3.0(vue@3.5.8)
       v-selectpage:
         specifier: 3.0.1
         version: 3.0.1(vue@3.5.8)
@@ -798,8 +798,8 @@ packages:
     peerDependencies:
       vue: ^3.4.0
 
-  v-region@3.2.1:
-    resolution: {integrity: sha512-sk4YrfcP+ILV4IH+q8hRJUGfAEy8WL/K0LbozLohFJ2+I+tcOEVzVPYu3Bg/0PVDiuF3N5x2vZzywDTyidqFzQ==}
+  v-region@3.3.0:
+    resolution: {integrity: sha512-DS8+Gf7Lund21Ubyv3ffkwcCpaBhXogR1wllldydR2yfEiuRW+rIUtUM0RyLSeUMaofFY5YOJpJJSR6BS8XrbQ==}
     peerDependencies:
       vue: ^3.2.0
 
@@ -1635,7 +1635,7 @@ snapshots:
     dependencies:
       vue: 3.5.8
 
-  v-region@3.2.1(vue@3.5.8):
+  v-region@3.3.0(vue@3.5.8):
     dependencies:
       v-dropdown: 3.0.0(vue@3.5.8)
       vue: 3.5.8

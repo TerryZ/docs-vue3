@@ -1,1 +1,0 @@
-import{p as e}from"./framework.wJYvC2Xn.js";const r="/docs-vue3/layout/panel-group.svg";function l(){const n=e(["panel2","panel3"]),a=e(["panel2"]),o=e(["panel1","panel3"]),t=e(!0),s=e(!0);return{active:n,activeLayout:o,activeAccordion:a,visiblePanel2:t,visiblePanel1Header:s}}export{r as _,l as u};

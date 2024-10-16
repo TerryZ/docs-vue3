@@ -85,8 +85,8 @@ Specify a set of region code values ​​so that the component displays those r
 <script setup lang="ts">
 import { ref } from 'vue'
 import { RegionFullSelects } from 'v-region'
-import type { RegionModel } from 'v-region'
-const region = ref<RegionModel>({
+import type { RegionValues } from 'v-region'
+const region = ref<RegionValues>({
   province: '350000',
   city: '350100',
   area: '350104',

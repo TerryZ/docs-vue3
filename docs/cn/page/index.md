@@ -162,7 +162,7 @@ function change (data: PageInfo): void {
     />
   </div>
   <PaginationBar
-    align="left"
+    align="center"
     language="cn"
     :total-row="88"
     @change="changeGallery"
@@ -201,7 +201,7 @@ function changeGallery ({ pageNumber, pageSize }) {
   />
 </div>
 <PaginationBar
-  align="left"
+  align="center"
   language="cn"
   :total-row="88"
   @change="changeGallery"
@@ -216,16 +216,19 @@ function changeGallery ({ pageNumber, pageSize }) {
   <div>
     <input type="text" v-model="inputPageNumber" />
     <button type="button" @click="goToInputPage" >go</button>
-    <button type="button" @click="pageNumberOperate++" >pageNumber + 1</button>
+    <button
+      type="button"
+      @click="pageNumber++"
+    >pageNumber + 1</button>
   </div>
 
-  <PaginationBar v-model="pageNumberOperate" />
+  <PaginationBar v-model="pageNumber" />
 </template>
 
 <script setup>
 import { ref } from 'vue'
 
-const pageNumberOperate = ref(3)
+const pageNumber = ref(3)
 const inputPageNumber = ref('2')
 
 function goToInputPage () {
@@ -237,7 +240,7 @@ function goToInputPage () {
     inputPageNumber.value = ''
     return
   }
-  pageNumberOperate.value = newPageNumber
+  pageNumber.value = newPageNumber
 }
 </script>
 ```
@@ -272,6 +275,32 @@ function goToInputPage () {
   :total-row="58"
 />
 
+### 每页记录数
+
+`pageSize` 指定了每页记录数，`pageSizeMenu` 指定了可供用户快速选择的每页记录数列表
+
+```vue
+<template>
+  <PaginationBar
+    v-model:page-size="pageSize"
+    :total-row="100"
+  />
+</template>
+<script setup>
+import { ref } from 'vue'
+
+const pageSize = ref(25)
+</script>
+```
+
+<PaginationBar
+  align="left"
+  language="cn"
+  v-model="pageNumberOperate"
+  v-model:page-size="pageSize"
+  :total-row="100"
+/>
+
 ### 对齐方向
 
 ```vue
@@ -301,7 +330,7 @@ function goToInputPage () {
 ### 显示边框模式
 
 ```vue
-<PaginationBar :border="true" />
+<PaginationBar border />
 ```
 
 <PaginationBar
@@ -309,6 +338,19 @@ function goToInputPage () {
   align="left"
   language="cn"
   border
+/>
+
+### 圆形按钮风格
+
+```vue
+<PaginationBar circle />
+```
+
+<PaginationBar
+  :total-row="28"
+  align="left"
+  language="cn"
+  circle
 />
 
 ### 启用与禁用
@@ -473,50 +515,117 @@ function goToInputPage () {
 />
 
 <script setup>
-import { ref, computed } from 'vue'
 import { PaginationBar } from 'v-page'
 
-const srcList = Array(88).fill(0).map((val, index) => index + 1)
+import { usePagination } from '@/script/page'
 
-const logs = ref([])
-const listGallery = ref([])
-const disabled = ref(false)
-const align = ref('left')
-const pageNumberOperate = ref(3)
-const inputPageNumber = ref('2')
-const switchInfo = ref(true)
-const switchFirst = ref(true)
-const switchLast = ref(true)
-const switchPageSizeOptions = ref(true)
-const switchPageNumber = ref(true)
+const {
+  srcList,
+  logs,
+  listGallery,
+  disabled,
+  align,
+  pageSize,
+  pageNumberOperate,
+  inputPageNumber,
+  switchInfo,
+  switchFirst,
+  switchLast,
+  switchPageSizeOptions,
+  switchPageNumber,
 
-function changeBasic (data) {
-  logs.value.push(data)
-}
-function changeGallery ({ pageNumber, pageSize }) {
-  const start = pageSize * (pageNumber - 1)
-  const end = (start + pageSize) > srcList.length
-    ? srcList.length
-    : start + pageSize
-
-  listGallery.value = srcList.filter((val, index) => {
-    return index >= start && index < end
-  })
-}
-function goToInputPage () {
-  if (!inputPageNumber.value) return
-
-  const newPageNumber = Number(inputPageNumber.value)
-
-  if (window.isNaN(newPageNumber)) {
-    inputPageNumber.value = ''
-    return
-  }
-  pageNumberOperate.value = newPageNumber
-}
+  changeBasic,
+  changeGallery,
+  goToInputPage
+} = usePagination()
 </script>
 
 ## Props
+
+`v-page` 的设置参数
+
+```ts
+interface PaginationProps {
+  /**
+   * The number of current page
+   */
+  modelValue?: number
+  /**
+   * The number of page size
+   * @default 10
+   */
+  pageSize?: number
+  /**
+   * The number of total record
+   */
+  totalRow: number
+  /**
+   * v-page language
+   * @default `en`
+   */
+  language?: 'cn' | 'en' | 'de' | 'jp' | 'pt'
+  /**
+   * Page size list
+   * @default [10, 20, 50, 100]
+   */
+  pageSizeMenu?: number[]
+  /**
+   * Whether to display page size list panel
+   * @default true
+   */
+  pageSizeOptions?: boolean
+  /**
+   * Alignment direction
+   * @default `right`
+   */
+  align?: 'left' | 'right' | 'center'
+  /**
+   * Disabled the pagination
+   * @default false
+   */
+  disabled?: boolean
+  /**
+   * Whether to display the border
+   * @default true
+   */
+  border?: boolean
+  /**
+   * Round style page number button
+   * @default false
+   */
+  circle?: boolean
+  /**
+   * Whether to display page information panel
+   * @default true
+   */
+  info?: boolean
+  /**
+   * Whether to display page number buttons
+   * @default true
+   */
+  pageNumber?: boolean
+  /**
+   * Whether to display first page button
+   * @default true
+   */
+  first?: boolean
+  /**
+   * Whether to display last page button
+   * @default true
+   */
+  last?: boolean
+  /**
+   * Whether add `All` item in page length list
+   * @default false
+   */
+  displayAll?: boolean
+  /**
+   * Hide pagination when only have one page
+   * @default false
+   */
+  hideOnSinglePage?: boolean
+}
+```
 
 ### value/v-model
 
@@ -652,37 +761,18 @@ interface PageInfo {
 import type { PageInfo } from 'v-page/types'
 ```
 
-## API
+### update:modelValue
 
-使用插件的 API 前，需为组件声明 `ref` 属性，并使用 `ref()` 声明对应名称的响应式变量以调用 API 方法
-
-```vue
-<template>
-  <PaginationBar ref="page" />
-</template>
-
-<script setup>
-import { ref } from 'vue'
-import { PaginationBar } from 'v-page'
-
-const page = ref()
-// call api
-page.value.goPage(3)
-</script>
-```
-
-### goPage
-
-切换当前页
+当前页变更时，触发的响应事件
 
 ```ts
-goPage: (page: number) => void
+`update:modelValue`: (value: number) => void
 ```
 
-### reload
+### update:pageSize
 
-更新分页信息及事件
+每页记录数变更时，触发的响应事件
 
 ```ts
-reload: () => void
+`update:pageSize`: (value: number) => void
 ```

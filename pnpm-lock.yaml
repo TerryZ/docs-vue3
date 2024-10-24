@@ -21,8 +21,8 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2(vue@3.5.8)
       v-page:
-        specifier: 3.1.0
-        version: 3.1.0(vue@3.5.8)
+        specifier: 3.2.0
+        version: 3.2.0(vue@3.5.8)
       v-region:
         specifier: 3.3.0
         version: 3.3.0(vue@3.5.8)
@@ -819,8 +819,8 @@ packages:
     peerDependencies:
       vue: ^3.2.0
 
-  v-page@3.1.0:
-    resolution: {integrity: sha512-HQvbNJjCoMbLHDX5BuvUYQwgeB2bbF0tYywUeFhmJdXnKA+m9rW/gfaJCbQU0IsfTDftfPpIho1fdaBb/PO+pQ==}
+  v-page@3.2.0:
+    resolution: {integrity: sha512-A2LVtKdUCbcl64pQfPSPGPTI0SCvcijSSrHZGExhrabjPqOOMuYMcFC8J64Xq7M1aR34c9uhEZp56ULHdr30kQ==}
     peerDependencies:
       vue: ^3.4.0
 
@@ -1717,7 +1717,7 @@ snapshots:
     dependencies:
       vue: 3.5.8
 
-  v-page@3.1.0(vue@3.5.8):
+  v-page@3.2.0(vue@3.5.8):
     dependencies:
       vue: 3.5.8
 

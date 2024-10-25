@@ -81,7 +81,6 @@ import { PaginationBar } from 'v-page'
     :key="item.key"
     v-text="item.name"
   />
-
   <PaginationBar
     v-model="pageNumber"
     :total-row="totalRow"
@@ -92,7 +91,7 @@ import { PaginationBar } from 'v-page'
 <script setup lang="ts">
 import { ref } from 'vue'
 import { PaginationBar } from 'v-page'
-import type { PageInfo } from 'v-page/types'
+import type { PageInfo } from 'v-page'
 
 const pageNumber = ref<number>(3)
 const totalRow = ref<number>(100)
@@ -124,7 +123,6 @@ function change (data: PageInfo): void {
 <template>
   <PaginationBar
     :total-row="21"
-    language="cn"
     @change="changeBasic"
   />
 </template>
@@ -163,7 +161,6 @@ function change (data: PageInfo): void {
   </div>
   <PaginationBar
     align="center"
-    language="cn"
     :total-row="88"
     @change="changeGallery"
   />
@@ -277,7 +274,7 @@ function goToInputPage () {
 
 ### 每页记录数
 
-`pageSize` 指定了每页记录数，`pageSizeMenu` 指定了可供用户快速选择的每页记录数列表
+`pageSize` 指定了每页记录数，`pageSizeMenu` 提供了可供用户快速选择的每页记录数列表
 
 ```vue
 <template>
@@ -300,6 +297,18 @@ const pageSize = ref(25)
   v-model:page-size="pageSize"
   :total-row="100"
 />
+
+<div>
+  <button
+    type="button"
+    class="btn btn-dark mt-3"
+    @click="setPageSize(15)"
+  >
+    set pageSize to 15
+  </button>
+</div>
+
+当 `pageSizeMenu` 所提供值列表没有与 `pageSize` 值匹配的项目时，则该值将自动添加进 `pageSizeMenu` 列表中，并选中该值
 
 ### 对齐方向
 
@@ -359,11 +368,16 @@ const pageSize = ref(25)
 <PaginationBar :disabled="true" />
 ```
 
-<div class="border shadow-sm p-2 d-inline-flex rounded-3 mb-3">
-  <input type="radio" v-model="disabled" :value="false" id="radio-enabled" />
-  <label for="radio-enabled">启用</label>
-  <input type="radio" v-model="disabled" :value="true" id="radio-disabled" />
-  <label for="radio-disabled">禁用</label>
+<div class="form-check form-switch d-inline-flex align-items-center border px-3 py-2 shadow-sm rounded-3">
+  <label class="form-check-label" for="switchDisabled">启用</label>
+  <input
+    class="form-check-input mx-3"
+    type="checkbox"
+    role="switch"
+    id="switchDisabled"
+    v-model="disabled"
+  >
+  <label class="form-check-label" for="switchDisabled">禁用</label>
 </div>
 
 <div class="my-3">
@@ -449,18 +463,20 @@ const pageSize = ref(25)
 
 `v-page` 提供了作用域插槽，输出分页栏核心状态数据，方便进行功能定制
 
-```vue
-<template>
-  <PaginationBar
-    border
-    align="left"
-    :total-row="28"
-    :page-size-options="false"
-    :info="false"
-    :first="false"
-    :last="false"
-    v-slot="{ pageNumber, pageSize, totalPage, totalRow, isFirst, isLast }"
-  >
+```vue-html
+<PaginationBar
+  border
+  align="left"
+  :total-row="28"
+  :page-size-options="false"
+  :info="false"
+  :first="false"
+  :last="false"
+>
+  <template #default="{
+    pageNumber, pageSize, totalPage,
+    totalRow, isFirst, isLast
+  }">
     <div>
       <div>page: <span v-text="pageNumber" /></div>
       <div>pageSize: <span v-text="pageSize" /></div>
@@ -469,8 +485,8 @@ const pageSize = ref(25)
       <div>isFirst: <span v-text="isFirst" /></div>
       <div>isLast: <span v-text="isLast" /></div>
     </div>
-  </PaginationBar>
-</template>
+  </template>
+</PaginationBar>
 ```
 
 <PaginationBar
@@ -483,16 +499,17 @@ const pageSize = ref(25)
   :info="false"
   :first="false"
   :last="false"
-  v-slot="{ pageNumber, pageSize, totalPage, totalRow, isFirst, isLast }"
 >
-  <div class="d-flex">
-    <div class="me-1">page: <span v-text="pageNumber" /></div>
-    <div class="me-1">pageSize: <span v-text="pageSize" /></div>
-    <div class="me-1">totalPage: <span v-text="totalPage" /></div>
-    <div class="me-1">totalRow: <span v-text="totalRow" /></div>
-    <div class="me-1">isFirst: <span v-text="isFirst" /></div>
-    <div>isLast: <span v-text="isLast" /></div>
-  </div>
+  <template #default="{ pageNumber, pageSize, totalPage, totalRow, isFirst, isLast }">
+    <div class="d-flex">
+      <div class="me-1">page: <span v-text="pageNumber" /></div>
+      <div class="me-1">pageSize: <span v-text="pageSize" /></div>
+      <div class="me-1">totalPage: <span v-text="totalPage" /></div>
+      <div class="me-1">totalRow: <span v-text="totalRow" /></div>
+      <div class="me-1">isFirst: <span v-text="isFirst" /></div>
+      <div>isLast: <span v-text="isLast" /></div>
+    </div>
+  </template>
 </PaginationBar>
 
 ### 显示全部数据选项
@@ -536,7 +553,8 @@ const {
 
   changeBasic,
   changeGallery,
-  goToInputPage
+  goToInputPage,
+  setPageSize
 } = usePagination()
 </script>
 
@@ -547,194 +565,93 @@ const {
 ```ts
 interface PaginationProps {
   /**
-   * The number of current page
+   * 默认页/当前页
+   * @default 1
    */
   modelValue?: number
   /**
-   * The number of page size
+   * 每页数据记录数
    * @default 10
    */
   pageSize?: number
   /**
-   * The number of total record
+   * 总记录数
    */
   totalRow: number
   /**
-   * v-page language
+   * 组件语言
    * @default `en`
+   * 
+   * 完整语言清单
+   * `cn` 简体中文
+   * `en` English
+   * `de` German
+   * `pt` Portuguese
+   * `jp` Japanese
    */
   language?: 'cn' | 'en' | 'de' | 'jp' | 'pt'
   /**
-   * Page size list
+   * 每页数据记录数列表，仅在 `pageSizeOptions` 为 `true` 时生效
    * @default [10, 20, 50, 100]
    */
   pageSizeMenu?: number[]
   /**
-   * Whether to display page size list panel
-   * @default true
-   */
-  pageSizeOptions?: boolean
-  /**
-   * Alignment direction
+   * 分页栏对齐方向
    * @default `right`
    */
   align?: 'left' | 'right' | 'center'
   /**
-   * Disabled the pagination
+   * 禁用分页栏组件
    * @default false
    */
   disabled?: boolean
   /**
-   * Whether to display the border
+   * 显示边框样式
    * @default true
    */
   border?: boolean
   /**
-   * Round style page number button
+   * 圆形按钮风格
    * @default false
    */
   circle?: boolean
   /**
-   * Whether to display page information panel
+   * 显示记录数列表面板
+   * @default true
+   */
+  pageSizeOptions?: boolean
+  /**
+   * 显示分页信息面板
    * @default true
    */
   info?: boolean
   /**
-   * Whether to display page number buttons
+   * 显示分页码模块
    * @default true
    */
   pageNumber?: boolean
   /**
-   * Whether to display first page button
+   * 显示首页按钮
    * @default true
    */
   first?: boolean
   /**
-   * Whether to display last page button
+   * 显示尾页按钮
    * @default true
    */
   last?: boolean
   /**
-   * Whether add `All` item in page length list
+   * 在每页记录数列表中增加显示所有数据记录项目
    * @default false
    */
   displayAll?: boolean
   /**
-   * Hide pagination when only have one page
+   * 在只有一页数据时，隐藏分页栏
    * @default false
    */
   hideOnSinglePage?: boolean
 }
 ```
-
-### value/v-model
-
-- 类型 `number`
-
-设置默认页/当前页
-
-### total-row
-
-- 类型 `number`
-
-每次数据查询中的总记录数，在父组件进行数据查询后，必须更新插件的总记录数参数
-
-### page-size/v-model:page-size
-
-- 类型 `number`
-- 默认 `10`
-
-每页数据条数
-
-### language
-
-- 类型 `string`
-- 默认 `'en'`
-
-指定分页栏语言，完整语言清单
-
-- `'cn'` 简体中文
-- `'en'` English
-- `'de'` German
-- `'pt'` Portuguese
-- `'jp'` Japanese
-
-### page-size-menu
-
-- 类型 `number[]`
-- 默认 `[10, 20, 50, 100]`
-
-每页数据量列表
-
-### align
-
-- 类型 `'left' | 'center' | 'right'`
-- 默认 `'right'`
-
-分页栏对齐方向
-
-### disabled
-
-- 类型 `boolean`
-- 默认 `false`
-
-启用/禁用 分页栏
-
-### page-size-options
-
-- 类型 `boolean`
-- 默认 `true`
-
-显示每页数据量列表栏
-
-### info
-
-- 类型 `boolean`
-- 默认 `true`
-
-显示分页信息栏
-
-### border
-
-- 类型 `boolean`
-- 默认 `false`
-
-显示边框模式
-
-### page-number
-
-- 类型 `boolean`
-- 默认 `true`
-
-显示分页码模块
-
-### first
-
-- 类型 `boolean`
-- 默认 `true`
-
-显示首页按钮
-
-### last
-
-- 类型 `boolean`
-- 默认 `true`
-
-显示尾页按钮
-
-### display-all
-
-- 类型 `boolean`
-- 默认 `false`
-
-在每页记录数列表中增加显示所有数据记录项目
-
-### hide-on-single-page
-
-- 类型 `boolean`
-- 默认 `false`
-
-在只有一页数据时，隐藏分页栏
 
 ## 事件
 
@@ -757,8 +674,8 @@ interface PageInfo {
   // 总页数
   totalPage: number
 }
-// 也可以通过以下的方式直接使用类型
-import type { PageInfo } from 'v-page/types'
+// 可直接使用组件提供类型描述
+import type { PageInfo } from 'v-page'
 ```
 
 ### update:modelValue

@@ -40,6 +40,9 @@ export function usePagination () {
     }
     pageNumberOperate.value = newPageNumber
   }
+  function setPageSize (val) {
+    pageSize.value = Number(val)
+  }
 
   return {
     srcList,
@@ -58,6 +61,7 @@ export function usePagination () {
 
     changeBasic,
     changeGallery,
-    goToInputPage
+    goToInputPage,
+    setPageSize
   }
 }

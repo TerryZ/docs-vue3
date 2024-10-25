@@ -81,7 +81,6 @@ Typical usage of a pagination component
     :key="item.key"
     v-text="item.name"
   />
-
   <PaginationBar
     v-model="pageNumber"
     :total-row="totalRow"
@@ -92,7 +91,7 @@ Typical usage of a pagination component
 <script setup lang="ts">
 import { ref } from 'vue'
 import { PaginationBar } from 'v-page'
-import type { PageInfo } from 'v-page/types'
+import type { PageInfo } from 'v-page'
 
 const pageNumber = ref<number>(3)
 const totalRow = ref<number>(100)
@@ -132,7 +131,6 @@ function change (data: PageInfo): void {
 <div class="border rounded-3 shadow-sm p-2">
   <PaginationBar
     :total-row="21"
-    :language="lang"
     align="center"
     @change="changeBasic"
   />
@@ -162,8 +160,7 @@ Pagination [change](#change) event response data
   </div>
   <PaginationBar
     :total-row="88"
-    :language="lang"
-    align="left"
+    align="center"
     @change="changeGallery"
   />
 </template>
@@ -201,8 +198,7 @@ function changeGallery ({ pageNumber, pageSize }) {
 </div>
 <PaginationBar
   :total-row="88"
-  :language="lang"
-  align="left"
+  align="center"
   @change="changeGallery"
 />
 
@@ -215,16 +211,19 @@ Some cases showing how pagination operation works
   <div>
     <input type="text" v-model="inputPageNumber" />
     <button type="button" @click="goToInputPage" >go</button>
-    <button type="button" @click="pageNumberOperate++" >pageNumber + 1</button>
+    <button
+      type="button"
+      @click="pageNumber++"
+    >pageNumber + 1</button>
   </div>
 
-  <PaginationBar v-model="pageNumberOperate" />
+  <PaginationBar v-model="pageNumber" />
 </template>
 
 <script setup>
 import { ref } from 'vue'
 
-const pageNumberOperate = ref(3)
+const pageNumber = ref(3)
 const inputPageNumber = ref('2')
 
 function goToInputPage () {
@@ -236,7 +235,7 @@ function goToInputPage () {
     inputPageNumber.value = ''
     return
   }
-  pageNumberOperate.value = newPageNumber
+  pageNumber.value = newPageNumber
 }
 </script>
 ```
@@ -268,8 +267,44 @@ function goToInputPage () {
   align="left"
   v-model="pageNumberOperate"
   :total-row="58"
-  :language="lang"
 />
+
+### Number of records per page
+
+`pageSize` specifies the number of records per page, and `pageSizeMenu` provides a list of the number of records per page for users to quickly select
+
+```vue
+<template>
+  <PaginationBar
+    v-model:page-size="pageSize"
+    :total-row="100"
+  />
+</template>
+<script setup>
+import { ref } from 'vue'
+
+const pageSize = ref(25)
+</script>
+```
+
+<PaginationBar
+  align="left"
+  v-model="pageNumberOperate"
+  v-model:page-size="pageSize"
+  :total-row="100"
+/>
+
+<div>
+  <button
+    type="button"
+    class="btn btn-dark mt-3"
+    @click="setPageSize(15)"
+  >
+    set pageSize to 15
+  </button>
+</div>
+
+When the value list provided by `pageSizeMenu` does not have an item matching the `pageSize` value, the value will be automatically added to the `pageSizeMenu` list and selected
 
 ### Alignment direction
 
@@ -293,21 +328,31 @@ function goToInputPage () {
 <PaginationBar
   :total-row="28"
   :align="align"
-  :language="lang"
   border
 />
 
 ### Display border mode
 
 ```vue
-<PaginationBar :border="true" />
+<PaginationBar border />
 ```
 
 <PaginationBar
   :total-row="28"
-  :language="lang"
   align="left"
   border
+/>
+
+### Round style page number button
+
+```vue
+<PaginationBar circle />
+```
+
+<PaginationBar
+  :total-row="28"
+  align="left"
+  circle
 />
 
 ### Enabled and disabled
@@ -316,11 +361,16 @@ function goToInputPage () {
 <PaginationBar :disabled="true" />
 ```
 
-<div class="border shadow-sm p-2 d-inline-flex rounded-3 mb-3">
-  <input type="radio" v-model="disabled" :value="false" id="radio-enabled" />
-  <label for="radio-enabled">Enabled</label>
-  <input type="radio" v-model="disabled" :value="true" id="radio-disabled" />
-  <label for="radio-disabled">Disabled</label>
+<div class="form-check form-switch d-inline-flex align-items-center border px-3 py-2 shadow-sm rounded-3">
+  <label class="form-check-label" for="switchDisabled">Enabled</label>
+  <input
+    class="form-check-input mx-3"
+    type="checkbox"
+    role="switch"
+    id="switchDisabled"
+    v-model="disabled"
+  >
+  <label class="form-check-label" for="switchDisabled">Disabled</label>
 </div>
 
 <div class="my-3">
@@ -392,7 +442,6 @@ Setup pagination modules on or off
 <PaginationBar
   align="left"
   :total-row="28"
-  :language="lang"
   :info="switchInfo"
   :page-size-options="switchPageSizeOptions"
   :page-number="switchPageNumber"
@@ -404,18 +453,20 @@ Setup pagination modules on or off
 
 `v-page` provides scoped slots to output pagination state for more easily customization
 
-```vue
-<template>
-  <PaginationBar
-    border
-    align="left"
-    :total-row="28"
-    :page-size-options="false"
-    :info="false"
-    :first="false"
-    :last="false"
-    v-slot="{ pageNumber, pageSize, totalPage, totalRow, isFirst, isLast }"
-  >
+```vue-html
+<PaginationBar
+  border
+  align="left"
+  :total-row="28"
+  :page-size-options="false"
+  :info="false"
+  :first="false"
+  :last="false"
+>
+  <template #default="{
+    pageNumber, pageSize, totalPage,
+    totalRow, isFirst, isLast
+  }">
     <div>
       <div>page: <span v-text="pageNumber" /></div>
       <div>pageSize: <span v-text="pageSize" /></div>
@@ -424,8 +475,8 @@ Setup pagination modules on or off
       <div>isFirst: <span v-text="isFirst" /></div>
       <div>isLast: <span v-text="isLast" /></div>
     </div>
-  </PaginationBar>
-</template>
+  </template>
+</PaginationBar>
 ```
 
 <PaginationBar
@@ -437,17 +488,17 @@ Setup pagination modules on or off
   :info="false"
   :first="false"
   :last="false"
-  :language="lang"
-  v-slot="{ pageNumber, pageSize, totalPage, totalRow, isFirst, isLast }"
 >
-  <div class="d-flex">
-    <div class="me-1">page: <span v-text="pageNumber" /></div>
-    <div class="me-1">pageSize: <span v-text="pageSize" /></div>
-    <div class="me-1">totalPage: <span v-text="totalPage" /></div>
-    <div class="me-1">totalRow: <span v-text="totalRow" /></div>
-    <div class="me-1">isFirst: <span v-text="isFirst" /></div>
-    <div>isLast: <span v-text="isLast" /></div>
-  </div>
+  <template #default="{ pageNumber, pageSize, totalPage, totalRow, isFirst, isLast }">
+    <div class="d-flex">
+      <div class="me-1">page: <span v-text="pageNumber" /></div>
+      <div class="me-1">pageSize: <span v-text="pageSize" /></div>
+      <div class="me-1">totalPage: <span v-text="totalPage" /></div>
+      <div class="me-1">totalRow: <span v-text="totalRow" /></div>
+      <div class="me-1">isFirst: <span v-text="isFirst" /></div>
+      <div>isLast: <span v-text="isLast" /></div>
+    </div>
+  </template>
 </PaginationBar>
 
 ### Display all data option
@@ -465,167 +516,130 @@ Add `All` item to page size list to display all data without paging. When this i
 <PaginationBar
   :total-row="28"
   :display-all="true"
-  :language="lang"
   align="left"
 />
 
 <script setup>
-import { ref, computed } from 'vue'
-import { useData } from 'vitepress'
 import { PaginationBar } from 'v-page'
 
-const srcList = Array(88).fill(0).map((val, index) => index + 1)
+import { usePagination } from '@/script/page'
 
-const logs = ref([])
-const listGallery = ref([])
-const disabled = ref(false)
-const align = ref('left')
-const pageNumberOperate = ref(3)
-const inputPageNumber = ref('2')
-const switchInfo = ref(true)
-const switchFirst = ref(true)
-const switchLast = ref(true)
-const switchPageSizeOptions = ref(true)
-const switchPageNumber = ref(true)
+const {
+  srcList,
+  logs,
+  listGallery,
+  disabled,
+  align,
+  pageSize,
+  pageNumberOperate,
+  inputPageNumber,
+  switchInfo,
+  switchFirst,
+  switchLast,
+  switchPageSizeOptions,
+  switchPageNumber,
 
-const { lang } = useData()
-
-function changeBasic (data) {
-  logs.value.push(data)
-}
-function changeGallery ({ pageNumber, pageSize }) {
-  const start = pageSize * (pageNumber - 1)
-  const end = (start + pageSize) > srcList.length
-    ? srcList.length
-    : start + pageSize
-
-  listGallery.value = srcList.filter((val, index) => {
-    return index >= start && index < end
-  })
-}
-function goToInputPage () {
-  if (!inputPageNumber.value) return
-
-  const newPageNumber = Number(inputPageNumber.value)
-
-  if (window.isNaN(newPageNumber)) {
-    inputPageNumber.value = ''
-    return
-  }
-  pageNumberOperate.value = newPageNumber
-}
+  changeBasic,
+  changeGallery,
+  goToInputPage,
+  setPageSize
+} = usePagination()
 </script>
 
 ## Props
 
-### value/v-model
+`v-page` component props arguments
 
-- type `number`
-
-Set current page / default page
-
-### total-row
-
-- type `number`
-
-The total number of records in each data request
-
-### page-size/v-model:page-size
-
-- type `number`
-- default `10`
-
-The number of per page data
-
-### language
-
-- type `string`
-- default `'en'`
-
-Specify the pagination language, check below for a complete language list
-
-- `'cn'` 简体中文
-- `'en'` English
-- `'de'` German
-- `'pt'` Portuguese
-- `'jp'` Japanese
-
-### page-size-menu
-
-- type `number[]`
-- default `[10, 20, 50, 100]`
-
-The list of page size option
-
-### align
-
-- type `'left' | 'center' | 'right'`
-- default `'right'`
-
-Pagination alignment direction
-
-### disabled
-
-- type `boolean`
-- default `false`
-
-Enabled / Disabled Pagination component
-
-### page-size-options
-
-- type `boolean`
-- default `true`
-
-Display page size list module
-
-### info
-
-- type `boolean`
-- default `true`
-
-Display pagination status information module
-
-### border
-
-- type `boolean`
-- default `false`
-
-Display outline borders in each modules
-
-### page-number
-
-- type `boolean`
-- default `true`
-
-Display page numbers
-
-### first
-
-- type `boolean`
-- default `true`
-
-Display first page button
-
-### last
-
-- type `boolean`
-- default `true`
-
-Display last page button
-
-### display-all
-
-- type `boolean`
-- default `false`
-
-Add `All` option to display all data in to page size list
-
-### hide-on-single-page
-
-- type `boolean`
-- default `false`
-
-Hide pagination bar when there is only one page of data
+```ts
+interface PaginationProps {
+  /**
+   * The number of current page
+   */
+  modelValue?: number
+  /**
+   * The number of page size
+   * @default 10
+   */
+  pageSize?: number
+  /**
+   * The number of total record
+   */
+  totalRow: number
+  /**
+   * Component language
+   * @default `en`
+   *
+   * The complete language list
+   * `cn` Simplified Chinese
+   * `en` English
+   * `de` German
+   * `pt` Portuguese
+   * `jp` Japanese
+   */
+  language?: 'cn' | 'en' | 'de' | 'jp' | 'pt'
+  /**
+   * List of the number of records per page, only
+   * valid when `pageSizeOptions` is `true`
+   * @default [10, 20, 50, 100]
+   */
+  pageSizeMenu?: number[]
+  /**
+   * Alignment direction
+   * @default `right`
+   */
+  align?: 'left' | 'right' | 'center'
+  /**
+   * Disabled the pagination
+   * @default false
+   */
+  disabled?: boolean
+  /**
+   * Display the border
+   * @default true
+   */
+  border?: boolean
+  /**
+   * Round style page number button
+   * @default false
+   */
+  circle?: boolean
+  /**
+   * Display page size list panel
+   * @default true
+   */
+  pageSizeOptions?: boolean
+  /**
+   * Display page information panel
+   * @default true
+   */
+  info?: boolean
+  /**
+   * Display page number buttons
+   * @default true
+   */
+  pageNumber?: boolean
+  /**
+   * Display first page button
+   * @default true
+   */
+  first?: boolean
+  /**
+   * Display last page button
+   * @default true
+   */
+  last?: boolean
+  /**
+   * Whether add `All` item in page length list
+   * @default false
+   */
+  displayAll?: boolean
+  /**
+   * Hide pagination when only have one page
+   * @default false
+   */
+  hideOnSinglePage?: boolean
+}
+```
 
 ## Events
 
@@ -648,41 +662,22 @@ interface PageInfo {
   // Total page
   totalPage: number
 }
-// You can also use the type directly in the following way
-import type { PageInfo } from 'v-page/types'
+// You can directly use the type description provided by the component
+import type { PageInfo } from 'v-page'
 ```
 
-## API
+### update:modelValue
 
-Before using Pagination component's API, need to declare a ref attribute for the component, declare a ref variable by `ref()` to hold the element reference(the name must match template ref value) and use it to call API methods
-
-```vue
-<template>
-  <PaginationBar ref="page" />
-</template>
-
-<script setup>
-import { ref } from 'vue'
-import { PaginationBar } from 'v-page'
-
-const page = ref()
-// call api
-page.value.goPage(3)
-</script>
-```
-
-### goPage
-
-Go to specified page
+The response event triggered when the current page changes
 
 ```ts
-goPage: (page: number) => void
+`update:modelValue`: (value: number) => void
 ```
 
-### reload
+### update:pageSize
 
-Update pagination state and re-trigger component events
+The response event triggered when the number of records per page changes
 
 ```ts
-reload: () => void
+`update:pageSize`: (value: number) => void
 ```

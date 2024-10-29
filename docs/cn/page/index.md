@@ -139,14 +139,7 @@ function change (data: PageInfo): void {
 
 分页事件 [change](#change) 响应数据
 
-<div class="bg-light rounded-3 p-3 font-monospace">
-  <div
-    v-for="(item, index) in logs"
-    :key="index"
-  >
-    <small>{{ JSON.stringify(item, null, 2) }}</small>
-  </div>
-</div>
+<LogDataPrinter :logs="logs" />
 
 ### 画廊数据展示模式实例
 
@@ -293,7 +286,6 @@ const pageSize = ref(25)
 <PaginationBar
   align="left"
   language="cn"
-  v-model="pageNumberOperate"
   v-model:page-size="pageSize"
   :total-row="100"
 />
@@ -533,6 +525,7 @@ const pageSize = ref(25)
 
 <script setup>
 import { PaginationBar } from 'v-page'
+import LogDataPrinter from '@/views/components/LogDataPrinter.vue'
 
 import { usePagination } from '@/script/page'
 

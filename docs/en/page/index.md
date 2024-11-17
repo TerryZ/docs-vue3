@@ -119,13 +119,11 @@ function change (data: PageInfo): void {
 
 ### Quick demo
 
-```vue
-<template>
-  <PaginationBar
-    :total-row="21"
-    @change="changeBasic"
-  />
-</template>
+```vue-html
+<PaginationBar
+  :total-row="21"
+  @change="change"
+/>
 ```
 
 <div class="border rounded-3 shadow-sm p-2">
@@ -142,22 +140,24 @@ Pagination [change](#change) event response data
 
 ### Gallery data
 
-```vue
-<template>
-  <div>
-    <div
-      v-for="item in listGallery"
-      :key="item"
-      v-text=item
-    />
-  </div>
-  <PaginationBar
-    :total-row="88"
-    align="center"
-    @change="changeGallery"
+::: code-group
+
+```vue-html
+<div>
+  <div
+    v-for="item in listGallery"
+    :key="item"
+    v-text=item
   />
-</template>
-<script setup>
+</div>
+<PaginationBar
+  :total-row="88"
+  align="center"
+  @change="changeGallery"
+/>
+```
+
+```js
 import { ref } from 'vue'
 import { PaginationBar } from 'v-page'
 
@@ -174,8 +174,9 @@ function changeGallery ({ pageNumber, pageSize }) {
     return index >= start && index < end
   })
 }
-</script>
 ```
+
+:::
 
 <div class="border rounded-3 shadow-sm pt-2 ps-2 mb-2 d-flex flex-wrap">
   <div
@@ -199,21 +200,22 @@ function changeGallery ({ pageNumber, pageSize }) {
 
 Some cases showing how pagination operation works
 
-```vue
-<template>
-  <div>
-    <input type="text" v-model="inputPageNumber" />
-    <button type="button" @click="goToInputPage" >go</button>
-    <button
-      type="button"
-      @click="pageNumber++"
-    >pageNumber + 1</button>
-  </div>
+::: code-group
 
-  <PaginationBar v-model="pageNumber" />
-</template>
+```vue-html
+<div>
+  <input type="text" v-model="inputPageNumber" />
+  <button type="button" @click="goToInputPage" >go</button>
+  <button
+    type="button"
+    @click="pageNumber++"
+  >pageNumber + 1</button>
+</div>
 
-<script setup>
+<PaginationBar v-model="pageNumber" />
+```
+
+```js
 import { ref } from 'vue'
 
 const pageNumber = ref(3)
@@ -230,8 +232,9 @@ function goToInputPage () {
   }
   pageNumber.value = newPageNumber
 }
-</script>
 ```
+
+:::
 
 <div class="mb-3 d-flex">
   <input
@@ -266,19 +269,22 @@ function goToInputPage () {
 
 `pageSize` specifies the number of records per page, and `pageSizeMenu` provides a list of the number of records per page for users to quickly select
 
-```vue
-<template>
-  <PaginationBar
-    v-model:page-size="pageSize"
-    :total-row="100"
-  />
-</template>
-<script setup>
+::: code-group
+
+```vue-html
+<PaginationBar
+  v-model:page-size="pageSize"
+  :total-row="100"
+/>
+```
+
+```js
 import { ref } from 'vue'
 
 const pageSize = ref(25)
-</script>
 ```
+
+:::
 
 <PaginationBar
   align="left"
@@ -300,7 +306,7 @@ When the value list provided by `pageSizeMenu` does not have an item matching th
 
 ### Alignment direction
 
-```vue
+```vue-html
 <PaginationBar align="left" />
 ```
 
@@ -325,7 +331,7 @@ When the value list provided by `pageSizeMenu` does not have an item matching th
 
 ### Display border mode
 
-```vue
+```vue-html
 <PaginationBar border />
 ```
 
@@ -337,7 +343,7 @@ When the value list provided by `pageSizeMenu` does not have an item matching th
 
 ### Round style page number button
 
-```vue
+```vue-html
 <PaginationBar circle />
 ```
 
@@ -349,7 +355,7 @@ When the value list provided by `pageSizeMenu` does not have an item matching th
 
 ### Enabled and disabled
 
-```vue
+```vue-html
 <PaginationBar :disabled="true" />
 ```
 

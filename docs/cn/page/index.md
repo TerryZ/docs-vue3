@@ -82,6 +82,7 @@ import { PaginationBar } from 'v-page'
     v-text="item.name"
   />
   <PaginationBar
+    language="cn"
     v-model="pageNumber"
     :total-row="totalRow"
     @change="change"
@@ -119,13 +120,12 @@ function change (data: PageInfo): void {
 
 ### 快速应用
 
-```vue
-<template>
-  <PaginationBar
-    :total-row="21"
-    @change="changeBasic"
-  />
-</template>
+```vue-html
+<PaginationBar
+  language="cn"
+  :total-row="21"
+  @change="change"
+/>
 ```
 
 <div class="border rounded-3 shadow-sm p-2">
@@ -143,23 +143,24 @@ function change (data: PageInfo): void {
 
 ### 画廊数据展示模式实例
 
-```vue
-<template>
-  <div>
-    <div
-      v-for="item in listGallery"
-      :key="item"
-      v-text=item
-    />
-  </div>
-  <PaginationBar
-    align="center"
-    :total-row="88"
-    @change="changeGallery"
-  />
-</template>
+::: code-group
 
-<script setup>
+```vue-html
+<div>
+  <div
+    v-for="item in listGallery"
+    :key="item"
+    v-text=item
+  />
+</div>
+<PaginationBar
+  align="center"
+  :total-row="88"
+  @change="changeGallery"
+/>
+```
+
+```js
 import { ref } from 'vue'
 import { PaginationBar } from 'v-page'
 
@@ -175,8 +176,9 @@ function changeGallery ({ pageNumber, pageSize }) {
     return index >= start && index < end
   })
 }
-</script>
 ```
+
+:::
 
 <div class="border rounded-3 shadow-sm pt-2 ps-2 mb-2 d-flex flex-wrap">
   <div
@@ -201,21 +203,22 @@ function changeGallery ({ pageNumber, pageSize }) {
 
 几个实例展示分页码的操作方式
 
-```vue
-<template>
-  <div>
-    <input type="text" v-model="inputPageNumber" />
-    <button type="button" @click="goToInputPage" >go</button>
-    <button
-      type="button"
-      @click="pageNumber++"
-    >pageNumber + 1</button>
-  </div>
+::: code-group
 
-  <PaginationBar v-model="pageNumber" />
-</template>
+```vue-html
+<div>
+  <input type="text" v-model="inputPageNumber" />
+  <button type="button" @click="goToInputPage" >go</button>
+  <button
+    type="button"
+    @click="pageNumber++"
+  >pageNumber + 1</button>
+</div>
 
-<script setup>
+<PaginationBar v-model="pageNumber" />
+```
+
+```js
 import { ref } from 'vue'
 
 const pageNumber = ref(3)
@@ -232,8 +235,9 @@ function goToInputPage () {
   }
   pageNumber.value = newPageNumber
 }
-</script>
 ```
+
+:::
 
 <div class="mb-3 d-flex">
   <input
@@ -269,19 +273,22 @@ function goToInputPage () {
 
 `pageSize` 指定了每页记录数，`pageSizeMenu` 提供了可供用户快速选择的每页记录数列表
 
-```vue
-<template>
-  <PaginationBar
-    v-model:page-size="pageSize"
-    :total-row="100"
-  />
-</template>
-<script setup>
+::: code-group
+
+```vue-html
+<PaginationBar
+  v-model:page-size="pageSize"
+  :total-row="100"
+/>
+```
+
+```js
 import { ref } from 'vue'
 
 const pageSize = ref(25)
-</script>
 ```
+
+:::
 
 <PaginationBar
   align="left"
@@ -304,7 +311,7 @@ const pageSize = ref(25)
 
 ### 对齐方向
 
-```vue
+```vue-html
 <PaginationBar align="left" />
 ```
 
@@ -330,7 +337,7 @@ const pageSize = ref(25)
 
 ### 显示边框模式
 
-```vue
+```vue-html
 <PaginationBar border />
 ```
 
@@ -343,7 +350,7 @@ const pageSize = ref(25)
 
 ### 圆形按钮风格
 
-```vue
+```vue-html
 <PaginationBar circle />
 ```
 
@@ -356,7 +363,7 @@ const pageSize = ref(25)
 
 ### 启用与禁用
 
-```vue
+```vue-html
 <PaginationBar :disabled="true" />
 ```
 

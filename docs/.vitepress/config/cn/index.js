@@ -62,6 +62,19 @@ export default {
               { text: "Content", link: "/cn/layout/content" },
               { text: "PanelGroup", link: "/cn/layout/panel-group" }
             ]
+          },
+          {
+            text: "v-selectmenu",
+            link: "/cn/selectmenu/",
+            collapsed: true,
+            items: [
+              { text: "Group", link: "/cn/selectmenu/group" },
+              { text: "Selection", link: "/cn/selectmenu/selection" },
+              { text: "Layout", link: "/cn/selectmenu/layout" },
+              { text: "Multiple level", link: "/cn/selectmenu/multiple-level" },
+              { text: "Search", link: "/cn/selectmenu/search" },
+              { text: "组合", link: "/cn/selectmenu/combination" }
+            ]
           }
         ]
       }

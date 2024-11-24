@@ -62,6 +62,19 @@ export default {
               { text: "Content", link: "/layout/content" },
               { text: "PanelGroup", link: "/layout/panel-group" }
             ]
+          },
+          {
+            text: "v-selectmenu",
+            link: "/selectmenu/",
+            collapsed: true,
+            items: [
+              { text: "Group", link: "/selectmenu/group" },
+              { text: "Selection", link: "/selectmenu/selection" },
+              { text: "Layout", link: "/selectmenu/layout" },
+              { text: "Multiple level", link: "/selectmenu/multiple-level" },
+              { text: "Search", link: "/selectmenu/search" },
+              { text: "Combination", link: "/selectmenu/combination" }
+            ]
           }
         ]
       }

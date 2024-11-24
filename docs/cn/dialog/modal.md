@@ -50,6 +50,14 @@ const close = () => emit('close', profile.name)
 </script>
 ```
 
+<div>
+  <button
+    type="button"
+    class="btn btn-dark me-2"
+    @click="openModal()"
+  >Open Modal</button>
+</div>
+
 ### 界面定制化
 
 ```ts

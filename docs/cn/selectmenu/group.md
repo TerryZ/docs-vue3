@@ -51,6 +51,15 @@ const { logs, NormalMenuGroup } = menuGroupWithLogs()
 ```
 
 ```ts
+import {
+  SelectMenuDropdown,
+  SelectMenuTrigger,
+  SelectMenuBody,
+  SelectMenuHeader,
+  SelectMenuGroup,
+  SelectMenuGroupItem,
+  SelectMenuItem
+} from 'v-selectmenu'
 import type { GroupItemData } from 'v-selectmenu'
 
 function handleGroupChange(data: GroupItemData) {
@@ -93,7 +102,9 @@ const active = ref('group2')
 
 ## Props
 
-### SelectMenuGroup props
+### Group props
+
+`SelectMenuGroup` 的 props
 
 ```ts
 interface GroupProps {
@@ -101,7 +112,9 @@ interface GroupProps {
 }
 ```
 
-### SelectMenuGroupItem props
+### Item props
+
+`SelectMenuGroupItem` 的 props
 
 ```ts
 interface GroupItemProps {
@@ -139,10 +152,14 @@ import type { GroupItemData } from 'v-selectmenu'
 
 ## 插槽
 
-### SelectMenuGroup slots
+### Group slots
+
+`SelectMenuGroup` 的插槽
 
 - `default` 默认插槽
 
-### SelectMenuGroupItem slots
+### Item slots
+
+`SelectMenuGroupItem` 的插槽
 
 - `default` 默认插槽

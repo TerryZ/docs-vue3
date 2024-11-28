@@ -1,8 +1,6 @@
 import { ref } from 'vue'
 
 import {
-  SelectMenuDropdown,
-  SelectMenuTrigger,
   SelectMenuBody,
   SelectMenuHeader,
   SelectMenuCheckboxGroup,
@@ -11,52 +9,44 @@ import {
   SelectMenuRadioItem
 } from 'v-selectmenu'
 
+import { createDropdownWithTrigger } from './base'
+
 export function MenuRadioSelection (props) {
-  return (
-    <SelectMenuDropdown>{{
-      trigger: () => <SelectMenuTrigger />,
-      default: () => (
-        <SelectMenuBody>
-          <SelectMenuHeader>Radio group</SelectMenuHeader>
-          <SelectMenuRadioGroup
-            hideOnSelection={props.hideOnSelection}
-            modelValue={props.modelValue}
-            onChange={props.onChange}
-          >
-            <SelectMenuRadioItem
-              value="radio1"
-              disabled
-            >radio1</SelectMenuRadioItem>
-            <SelectMenuRadioItem value="radio2">radio2</SelectMenuRadioItem>
-            <SelectMenuRadioItem value="radio3">radio3</SelectMenuRadioItem>
-          </SelectMenuRadioGroup>
-        </SelectMenuBody>
-      )
-    }}</SelectMenuDropdown>
+  return createDropdownWithTrigger(
+    <SelectMenuBody>
+      <SelectMenuHeader>Radio group</SelectMenuHeader>
+      <SelectMenuRadioGroup
+        hideOnSelection={props.hideOnSelection}
+        modelValue={props.modelValue}
+        onChange={props.onChange}
+      >
+        <SelectMenuRadioItem
+          value="radio1"
+          disabled
+        >radio1</SelectMenuRadioItem>
+        <SelectMenuRadioItem value="radio2">radio2</SelectMenuRadioItem>
+        <SelectMenuRadioItem value="radio3">radio3</SelectMenuRadioItem>
+      </SelectMenuRadioGroup>
+    </SelectMenuBody>
   )
 }
 export function MenuCheckboxSelection (props) {
-  return (
-    <SelectMenuDropdown>{{
-      trigger: () => <SelectMenuTrigger />,
-      default: () => (
-        <SelectMenuBody>
-          <SelectMenuHeader>Checkbox group</SelectMenuHeader>
-          <SelectMenuCheckboxGroup
-            hideOnSelection={props.hideOnSelection}
-            modelValue={props.modelValue}
-            onChange={props.onChange}
-          >
-            <SelectMenuCheckboxItem value="checkbox1">checkbox1</SelectMenuCheckboxItem>
-            <SelectMenuCheckboxItem
-              value="checkbox2"
-              disabled
-            >checkbox2</SelectMenuCheckboxItem>
-            <SelectMenuCheckboxItem value="checkbox3">checkbox3</SelectMenuCheckboxItem>
-          </SelectMenuCheckboxGroup>
-        </SelectMenuBody>
-      )
-    }}</SelectMenuDropdown>
+  return createDropdownWithTrigger(
+    <SelectMenuBody>
+      <SelectMenuHeader>Checkbox group</SelectMenuHeader>
+      <SelectMenuCheckboxGroup
+        hideOnSelection={props.hideOnSelection}
+        modelValue={props.modelValue}
+        onChange={props.onChange}
+      >
+        <SelectMenuCheckboxItem value="checkbox1">checkbox1</SelectMenuCheckboxItem>
+        <SelectMenuCheckboxItem
+          value="checkbox2"
+          disabled
+        >checkbox2</SelectMenuCheckboxItem>
+        <SelectMenuCheckboxItem value="checkbox3">checkbox3</SelectMenuCheckboxItem>
+      </SelectMenuCheckboxGroup>
+    </SelectMenuBody>
   )
 }
 

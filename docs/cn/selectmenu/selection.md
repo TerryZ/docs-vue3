@@ -158,6 +158,15 @@ Checkbox group
 
 <MenuCheckboxGroupWithValue />
 
+#### 清除选中项
+
+```ts
+// clear radio group selection
+radioGroupActive.value = ''
+// clear checkbox group selection
+checkboxGroupActive.value = []
+```
+
 ### 选择后关闭菜单
 
 选项在选择后，立即关闭菜单
@@ -245,6 +254,32 @@ interface SelectionItemProps {
 ```
 
 ## 事件
+
+`SelectMenuRadioGroup`, `SelectMenuCheckboxGroup` 的响应事件
+
+### update:modelValue
+
+响应选择项变化
+
+```ts
+// radio group
+`update:modelValue`: (value: SelectionValue) => void
+
+// checkbox group
+`update:modelValue`: (value: SelectionValue[]) => void
+```
+
+### change
+
+响应选择项变化
+
+```ts
+// radio group
+change: (data: SelectionValue) => void
+
+// checkbox group
+change: (data: SelectionValue[]) => void
+```
 
 ## 插槽
 

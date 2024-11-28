@@ -139,14 +139,14 @@ interface GroupItemProps {
 
 ```ts
 change: (data: GroupItemData) => void
+```
 
+```ts
 interface GroupItemData {
   name: string
   title: string
 }
-```
-
-```ts
+// import type from package
 import type { GroupItemData } from 'v-selectmenu'
 ```
 

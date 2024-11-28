@@ -1,51 +1,42 @@
 import { ref } from 'vue'
 
 import {
-  SelectMenuDropdown,
-  SelectMenuTrigger,
   SelectMenuBody,
   SelectMenuHeader,
   SelectMenuGroup,
-  SelectMenuGroupItem,
-  SelectMenuItem
+  SelectMenuGroupItem
 } from 'v-selectmenu'
 
+import { createMenuItems, createDropdownWithTrigger } from './base'
+
 export function MenuGroup (props, { attrs }) {
-  return (
-    <SelectMenuDropdown>{{
-      trigger: () => <SelectMenuTrigger />,
-      default: () => (
-        <SelectMenuBody>
-          <SelectMenuHeader>Menu group</SelectMenuHeader>
-          <SelectMenuGroup
-            modelValue={props.modelValue}
-            onChange={props.onChange}
-          >
-            <SelectMenuGroupItem
-              name="group1"
-              title="Group1"
-            >
-              <SelectMenuItem>group item 1-1</SelectMenuItem>
-            </SelectMenuGroupItem>
-            <SelectMenuGroupItem
-              name="group2"
-              title="Group2"
-            >
-              <SelectMenuItem>group item 2-1</SelectMenuItem>
-              <SelectMenuItem>group item 2-2</SelectMenuItem>
-            </SelectMenuGroupItem>
-            <SelectMenuGroupItem
-              name="group3"
-              title="Group3"
-            >
-              <SelectMenuItem>group item 3-1</SelectMenuItem>
-              <SelectMenuItem>group item 3-2</SelectMenuItem>
-              <SelectMenuItem>group item 3-3</SelectMenuItem>
-            </SelectMenuGroupItem>
-          </SelectMenuGroup>
-        </SelectMenuBody>
-      )
-    }}</SelectMenuDropdown>
+  return createDropdownWithTrigger(
+    <SelectMenuBody>
+      <SelectMenuHeader>Menu group</SelectMenuHeader>
+      <SelectMenuGroup
+        modelValue={props.modelValue}
+        onChange={props.onChange}
+      >
+        <SelectMenuGroupItem
+          name="group1"
+          title="Group1"
+        >
+          {createMenuItems('group item 1-', 1)}
+        </SelectMenuGroupItem>
+        <SelectMenuGroupItem
+          name="group2"
+          title="Group2"
+        >
+          {createMenuItems('group item 2-', 2)}
+        </SelectMenuGroupItem>
+        <SelectMenuGroupItem
+          name="group3"
+          title="Group3"
+        >
+          {createMenuItems('group item 3-', 3)}
+        </SelectMenuGroupItem>
+      </SelectMenuGroup>
+    </SelectMenuBody>
   )
 }
 

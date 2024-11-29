@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       '@vitejs/plugin-vue-jsx':
-        specifier: ^4.1.0
+        specifier: ^4.1.1
         version: 4.1.1(vite@5.4.11(sass@1.81.0))(vue@3.5.13)
       bootstrap:
         specifier: ^5.3.3
@@ -30,8 +30,8 @@ importers:
         specifier: 3.3.0
         version: 3.3.0(vue@3.5.13)
       v-selectmenu:
-        specifier: 3.0.0
-        version: 3.0.0(vue@3.5.13)
+        specifier: 3.0.2
+        version: 3.0.2(vue@3.5.13)
       v-selectpage:
         specifier: 3.0.1
         version: 3.0.1(vue@3.5.13)
@@ -1123,8 +1123,8 @@ packages:
     peerDependencies:
       vue: ^3.2.0
 
-  v-selectmenu@3.0.0:
-    resolution: {integrity: sha512-hP7MXWyeDPtwDM3Z1Sim8L5Lm4/DU/mZofRiANAVQnYkQTaIQo/nQyOjaZEALPbpfV/6HWd3hGNcMJg83cX5WQ==}
+  v-selectmenu@3.0.2:
+    resolution: {integrity: sha512-hpN1zH6+NiUjwV3wYw8N594nzmV4mSPABlJbz0Bog9XevOEdvMlzN79F7RrR0buJtcriBVf+XwUZTOgGZOr/Ow==}
     peerDependencies:
       vue: ^3.4.0
 
@@ -2302,7 +2302,7 @@ snapshots:
       v-dropdown: 3.0.0(vue@3.5.13)
       vue: 3.5.13
 
-  v-selectmenu@3.0.0(vue@3.5.13):
+  v-selectmenu@3.0.2(vue@3.5.13):
     dependencies:
       v-dropdown: 3.0.0(vue@3.5.13)
       vue: 3.5.13

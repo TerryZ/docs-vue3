@@ -98,4 +98,8 @@ import {
 </SelectMenuDropdown>
 ```
 
+## 插槽
 
+`SelectMenuRow`, `SelectMenuColumn` 的插槽
+
+- `default` 默认插槽

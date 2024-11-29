@@ -20,7 +20,7 @@ export function MenuMultipleLevel () {
               trigger: () => <SelectMenuItem>Child item 2-3</SelectMenuItem>,
               default: () => (
                 <SelectMenuSection>
-                  {createMenuItems('Child item 3-', 3)}
+                  {createMenuItems('Grandson item 3-', 3)}
                 </SelectMenuSection>
               )
             }}</SelectMenuChildLevel>

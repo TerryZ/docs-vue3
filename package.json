@@ -13,14 +13,14 @@
   "author": "Terry",
   "license": "ISC",
   "dependencies": {
-    "@vitejs/plugin-vue-jsx": "^4.1.0",
+    "@vitejs/plugin-vue-jsx": "^4.1.1",
     "bootstrap": "^5.3.3",
     "v-dialogs": "3.0.3",
     "v-dropdown": "3.0.0",
     "v-layouts": "^1.0.2",
     "v-page": "3.2.1",
     "v-region": "3.3.0",
-    "v-selectmenu": "3.0.0",
+    "v-selectmenu": "3.0.2",
     "v-selectpage": "3.0.1"
   },
   "devDependencies": {

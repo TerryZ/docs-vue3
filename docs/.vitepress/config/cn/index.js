@@ -65,15 +65,15 @@ export default {
           },
           {
             text: "v-selectmenu",
-            link: "/cn/selectmenu/",
+            link: "/cn/select-menu/",
             collapsed: true,
             items: [
-              { text: "Group", link: "/cn/selectmenu/group" },
-              { text: "Selection", link: "/cn/selectmenu/selection" },
-              { text: "Layout", link: "/cn/selectmenu/layout" },
-              { text: "Multiple level", link: "/cn/selectmenu/multiple-level" },
-              { text: "Search", link: "/cn/selectmenu/search" },
-              { text: "组合", link: "/cn/selectmenu/combination" }
+              { text: "Group", link: "/cn/select-menu/group" },
+              { text: "Selection", link: "/cn/select-menu/selection" },
+              { text: "Layout", link: "/cn/select-menu/layout" },
+              { text: "Multiple level", link: "/cn/select-menu/multiple-level" },
+              { text: "Search", link: "/cn/select-menu/search" },
+              { text: "组合", link: "/cn/select-menu/combination" }
             ]
           }
         ]

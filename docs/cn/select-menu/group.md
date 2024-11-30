@@ -4,7 +4,7 @@
 
 <script setup>
 import LogDataPrinter from '@/views/components/LogDataPrinter.vue'
-import { menuGroupWithLogs, MenuGroupWithValue } from '@/script/selectmenu/group'
+import { menuGroupWithLogs, MenuGroupWithValue } from '@/script/select-menu/group'
 
 const { logs, NormalMenuGroup } = menuGroupWithLogs()
 </script>

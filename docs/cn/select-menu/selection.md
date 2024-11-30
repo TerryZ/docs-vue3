@@ -12,7 +12,7 @@ import {
   MenuCheckboxWithLogs,
   MenuCheckboxGroupWithValue,
   CloseAfterSelection
-} from '@/script/selectmenu/selection'
+} from '@/script/select-menu/selection'
 
 const { logs, MenuRadioGroupNormal } = MenuRadioWithLogs()
 const { logs: checkboxesLogs, MenuCheckboxGroupNormal } = MenuCheckboxWithLogs()

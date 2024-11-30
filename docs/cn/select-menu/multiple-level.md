@@ -5,7 +5,7 @@
 ## 实例
 
 <script setup>
-import { MenuMultipleLevel } from '@/script/selectmenu/multiple-level'
+import { MenuMultipleLevel } from '@/script/select-menu/multiple-level'
 </script>
 
 多级别菜单项目应用

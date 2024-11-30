@@ -9,7 +9,7 @@
 <script setup>
 import {
   MenuSearch
-} from '@/script/selectmenu/search'
+} from '@/script/select-menu/search'
 </script>
 
 ::: code-group

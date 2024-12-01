@@ -13,41 +13,46 @@ const { logs, NormalMenuGroup } = menuGroupWithLogs()
 
 ### 基础用法
 
+设置分组与项目
+
+<NormalMenuGroup />
+
+分组菜单切换事件响应数据
+
+<LogDataPrinter
+  title="事件响应数据日志"
+  :logs="logs"
+/>
+
 ::: code-group
 
 ```vue-html
-<SelectMenuDropdown>
-  <template #trigger>
-    <SelectMenuTrigger />
-  </template>
-
-  <SelectMenuBody>
-    <SelectMenuHeader>Menu group</SelectMenuHeader>
-    <SelectMenuGroup @change="handleGroupChange">
-      <SelectMenuGroupItem
-        name="group1"
-        title="Group1"
-      >
-        <SelectMenuItem>group item 1-1</SelectMenuItem>
-      </SelectMenuGroupItem>
-      <SelectMenuGroupItem
-        name="group2"
-        title="Group2"
-      >
-        <SelectMenuItem>group item 2-1</SelectMenuItem>
-        <SelectMenuItem>group item 2-2</SelectMenuItem>
-      </SelectMenuGroupItem>
-      <SelectMenuGroupItem
-        name="group3"
-        title="Group3"
-      >
-        <SelectMenuItem>group item 3-1</SelectMenuItem>
-        <SelectMenuItem>group item 3-2</SelectMenuItem>
-        <SelectMenuItem>group item 3-3</SelectMenuItem>
-      </SelectMenuGroupItem>
-    </SelectMenuGroup>
-  </SelectMenuBody>
-</SelectMenuDropdown>
+<SelectMenuBody>
+  <SelectMenuHeader>Menu group</SelectMenuHeader>
+  <SelectMenuGroup @change="handleGroupChange">
+    <SelectMenuGroupItem
+      name="group1"
+      title="Group1"
+    >
+      <SelectMenuItem>group item 1-1</SelectMenuItem>
+    </SelectMenuGroupItem>
+    <SelectMenuGroupItem
+      name="group2"
+      title="Group2"
+    >
+      <SelectMenuItem>group item 2-1</SelectMenuItem>
+      <SelectMenuItem>group item 2-2</SelectMenuItem>
+    </SelectMenuGroupItem>
+    <SelectMenuGroupItem
+      name="group3"
+      title="Group3"
+    >
+      <SelectMenuItem>group item 3-1</SelectMenuItem>
+      <SelectMenuItem>group item 3-2</SelectMenuItem>
+      <SelectMenuItem>group item 3-3</SelectMenuItem>
+    </SelectMenuGroupItem>
+  </SelectMenuGroup>
+</SelectMenuBody>
 ```
 
 ```ts
@@ -69,18 +74,11 @@ function handleGroupChange(data: GroupItemData) {
 
 :::
 
-<NormalMenuGroup />
-
-分组菜单切换事件响应数据
-
-<LogDataPrinter
-  title="事件响应数据日志"
-  :logs="logs"
-/>
-
 ### 初始分组
 
 通过 `v-model` 绑定分组名称，实现初始分组
+
+<MenuGroupWithValue />
 
 ::: code-group
 
@@ -97,8 +95,6 @@ const active = ref('group2')
 ```
 
 :::
-
-<MenuGroupWithValue />
 
 ## Props
 

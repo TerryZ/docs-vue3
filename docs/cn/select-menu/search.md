@@ -4,33 +4,29 @@
 
 ## 实例
 
-通过输入内容过滤菜单项
-
 <script setup>
 import {
   MenuSearch
 } from '@/script/select-menu/search'
 </script>
 
+通过输入内容过滤菜单项
+
+<MenuSearch />
+
 ::: code-group
 
 ```vue-html
-<SelectMenuDropdown>
-  <template #trigger>
-    <SelectMenuTrigger />
-  </template>
-
-  <SelectMenuBody>
-    <SelectMenuHeader>Menu search</SelectMenuHeader>
-    <SelectMenuSearch @search="search" />
-    <SelectMenuItem
-      v-for="item in items"
-      :key="item.key"
-    >
-      {{ item.name }}
-    </SelectMenuItem>
-  </SelectMenuBody>
-</SelectMenuDropdown>
+<SelectMenuBody>
+  <SelectMenuHeader>Menu search</SelectMenuHeader>
+  <SelectMenuSearch @search="search" />
+  <SelectMenuItem
+    v-for="item in items"
+    :key="item.key"
+  >
+    {{ item.name }}
+  </SelectMenuItem>
+</SelectMenuBody>
 ```
 
 ```ts
@@ -59,8 +55,6 @@ function search (value) {
 ```
 
 :::
-
-<MenuSearch />
 
 ## Props
 

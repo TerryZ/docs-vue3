@@ -27,26 +27,29 @@ const {
 
 单选按钮组允许用户从互斥的选项列表中选择一个选项
 
+<MenuRadioGroupNormal />
+
+选项切换事件响应数据
+
+<LogDataPrinter
+  title="事件响应数据日志"
+  :logs="logs"
+/>
+
 ::: code-group
 
 ```vue-html
-<SelectMenuDropdown>
-  <template #trigger>
-    <SelectMenuTrigger />
-  </template>
-
-  <SelectMenuBody>
-    <SelectMenuHeader>Radio group</SelectMenuHeader>
-    <SelectMenuRadioGroup>
-      <SelectMenuRadioItem
-        value="radio1"
-        disabled
-      >radio1</SelectMenuRadioItem>
-      <SelectMenuRadioItem value="radio2">radio2</SelectMenuRadioItem>
-      <SelectMenuRadioItem value="radio3">radio3</SelectMenuRadioItem>
-    </SelectMenuRadioGroup>
-  </SelectMenuBody>
-</SelectMenuDropdown>
+<SelectMenuBody>
+  <SelectMenuHeader>Radio group</SelectMenuHeader>
+  <SelectMenuRadioGroup>
+    <SelectMenuRadioItem
+      value="radio1"
+      disabled
+    >radio1</SelectMenuRadioItem>
+    <SelectMenuRadioItem value="radio2">radio2</SelectMenuRadioItem>
+    <SelectMenuRadioItem value="radio3">radio3</SelectMenuRadioItem>
+  </SelectMenuRadioGroup>
+</SelectMenuBody>
 ```
 
 ```ts
@@ -62,43 +65,37 @@ import {
 
 :::
 
-<MenuRadioGroupNormal />
+### Checkbox 多选模式
+
+CheckboxGroup 允许用户从选项列表中选择一个或多个项目
+
+<MenuCheckboxGroupNormal />
 
 选项切换事件响应数据
 
 <LogDataPrinter
   title="事件响应数据日志"
-  :logs="logs"
+  :logs="checkboxesLogs"
 />
-
-### Checkbox 多选模式
-
-CheckboxGroup 允许用户从选项列表中选择一个或多个项目
 
 ::: code-group
 
 ```vue-html
-<SelectMenuDropdown>
-  <template #trigger>
-    <SelectMenuTrigger />
-  </template>
-
-  <SelectMenuBody>
-    <SelectMenuHeader>Checkbox group</SelectMenuHeader>
-    <SelectMenuCheckboxGroup>
-      <SelectMenuCheckboxItem
-        value="checkbox1"
-      >checkbox1</SelectMenuCheckboxItem>
-      <SelectMenuCheckboxItem
-        value="checkbox2"
-        disabled
-      >checkbox2</SelectMenuCheckboxItem>
-      <SelectMenuCheckboxItem
-        value="checkbox3"
-      >checkbox3</SelectMenuCheckboxItem>
-    </SelectMenuCheckboxGroup>
-  </SelectMenuBody>
-</SelectMenuDropdown>
+<SelectMenuBody>
+  <SelectMenuHeader>Checkbox group</SelectMenuHeader>
+  <SelectMenuCheckboxGroup>
+    <SelectMenuCheckboxItem
+      value="checkbox1"
+    >checkbox1</SelectMenuCheckboxItem>
+    <SelectMenuCheckboxItem
+      value="checkbox2"
+      disabled
+    >checkbox2</SelectMenuCheckboxItem>
+    <SelectMenuCheckboxItem
+      value="checkbox3"
+    >checkbox3</SelectMenuCheckboxItem>
+  </SelectMenuCheckboxGroup>
+</SelectMenuBody>
 ```
 
 ```ts
@@ -113,15 +110,6 @@ import {
 ```
 
 :::
-
-<MenuCheckboxGroupNormal />
-
-选项切换事件响应数据
-
-<LogDataPrinter
-  title="事件响应数据日志"
-  :logs="checkboxesLogs"
-/>
 
 ### 设置默认选中项
 

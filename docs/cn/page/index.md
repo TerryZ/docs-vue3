@@ -10,7 +10,7 @@
 
 版本更新内容请访问 [Changelog](https://github.com/TerryZ/v-page/blob/dev/CHANGELOG-CN.md)
 
-如果您的项目正在使用 [vue 2.x](https://v2.vuejs.org/v2/guide/) 版本生态，请使用 [v-page 2.x](https://terryz.github.io/vue/#/page) 版本
+如果您的项目正在使用 [vue 2.x](https://v2.vuejs.org/v2/guide/) 版本生态，请使用 [v-page 2.x](https://terryz.github.io/docs-vue/#/page) 版本
 
 ## 安装
 

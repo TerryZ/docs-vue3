@@ -1,5 +1,37 @@
 # SelectMenu
 
+简洁、易用、高度可定制化的菜单解决方案
+
+[![GitHub Repo stars](https://img.shields.io/github/stars/terryz/v-selectmenu?style=social)](https://github.com/TerryZ/v-selectmenu) [![GitHub forks](https://img.shields.io/github/forks/terryz/v-selectmenu?style=social)](https://github.com/TerryZ/v-selectmenu)
+
+项目状态
+
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/TerryZ/v-selectmenu/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/TerryZ/v-selectmenu/tree/master) [![code coverage](https://codecov.io/gh/TerryZ/v-selectmenu/branch/master/graph/badge.svg)](https://codecov.io/gh/TerryZ/v-selectmenu) [![npm version](https://img.shields.io/npm/v/v-selectmenu.svg)](https://www.npmjs.com/package/v-selectmenu) [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://mit-license.org/) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
+版本更新内容请访问 [Changelog](https://github.com/TerryZ/v-selectmenu/blob/dev/CHANGELOG-CN.md)
+
+如果您的项目正在使用 [vue 2.x](https://v2.vuejs.org/v2/guide/) 版本生态，请使用 [v-selectmenu 2.x](https://terryz.github.io/docs-vue/#/selectmenu) 版本
+
+## 安装
+
+将 `v-selectmenu` 组件安装到项目中
+
+::: code-group
+
+```sh [npm]
+npm i v-selectmenu
+```
+
+```sh [yarn]
+yarn add v-selectmenu
+```
+
+```sh [pnpm]
+pnpm add v-selectmenu
+```
+
+:::
+
 ## 组件集
 
 - **SelectMenuDropdown** 菜单主容器
@@ -24,14 +56,18 @@
 ## 实例
 
 <script setup>
+import LogDataPrinter from '@/views/components/LogDataPrinter.vue'
 import {
   SelectMenuBase,
+  menuActionWithLogs,
+  MenuItemSlots,
+  MenuItemNoCloseDropdown,
+  MenuDropdownScopedSlot,
   MenuWithoutDropdown,
   MenuDivider
 } from '@/script/select-menu'
-import { useData } from 'vitepress'
 
-const { lang } = useData()
+const { logs, MenuItemEvent } = menuActionWithLogs()
 </script>
 
 ```vue-html
@@ -45,9 +81,54 @@ const { lang } = useData()
 </SelectMenuDropdown>
 ```
 
-### 仅菜单
+### 基础应用
 
-仅使用菜单，不使用下拉层
+设置一个菜单列表，并通过 `action` 事件统一接收菜单项发出的指令
+
+<MenuItemEvent />
+
+菜单项选择事件响应数据
+
+<LogDataPrinter
+  title="事件响应数据日志"
+  :logs="logs"
+/>
+
+::: code-group
+
+```vue-html
+<SelectMenuDropdown>
+  <template #trigger>
+    <SelectMenuTrigger />
+  </template>
+
+  <SelectMenuBody @action="handleAction">
+    <SelectMenuItem action="item1">Item 1</SelectMenuItem>
+    <SelectMenuItem action="item2">Item 2</SelectMenuItem>
+    <SelectMenuItem action="item3">Item 3</SelectMenuItem>
+  </SelectMenuBody>
+</SelectMenuDropdown>
+```
+
+```js
+import {
+  SelectMenuDropdown,
+  SelectMenuTrigger,
+  SelectMenuBody,
+  SelectMenuHeader,
+  SelectMenuItem
+} from 'v-selectmenu'
+
+function handleAction (action) {
+  console.log(action)
+}
+```
+
+:::
+
+### 不应用下拉层
+
+仅使用菜单，不通过下拉层展示
 
 <MenuWithoutDropdown />
 
@@ -60,20 +141,88 @@ const { lang } = useData()
 </SelectMenuBody>
 ```
 
+### 菜单项
+
+菜单项可通过 `prepend`、`default` 与 `append` 等插槽设置前置、后置与菜单项主体内容
+
+<MenuItemSlots />
+
+```vue-html
+<SelectMenuBody>
+  <SelectMenuHeader>Menu item slots</SelectMenuHeader>
+  <SelectMenuDivider />
+  <SelectMenuItem>
+    <template #prepend>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell b-svg-icon" viewBox="0 0 16 16">
+        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
+      </svg>
+    </template>
+    <template #append>
+      <span class="badge rounded-pill text-bg-danger">23</span>
+    </template>
+    Notifications
+  </SelectMenuItem>
+  <SelectMenuItem>Helps</SelectMenuItem>
+  <SelectMenuItem>Settings</SelectMenuItem>
+</SelectMenuBody>
+```
+
+该内容结构设置同样应用于以下组件
+
+- SelectMenuHeader
+- SelectMenuSubHeader
+- SelectMenuRadioItem
+- SelectMenuCheckboxItem
+
 ### 块容器
 
 `SelectMenuSection` 是块容器，用于包裹 `SelectMenu` 实例
 
-### dropdown
+### 关闭菜单的方式
 
-作用域插槽输出数据，或使用工具函数 `useSelectMenuDropdown` 获得 dropdown 的状态与函数
+在默认情况下，菜单项点击后，会自动关闭下拉菜单，如果需要保持菜单打开状态，则需要设置 `hideOnItemClick` 属性为 `false`
+
+<MenuItemNoCloseDropdown />
 
 ```vue-html
-<SelectMenuDropdown>
-  <template #trigger={}>
-  </template>
-</SelectMenuDropdown>
+<SelectMenuBody :hideOnItemClick="false">
+  <SelectMenuItem action="item1">Item 1</SelectMenuItem>
+  <SelectMenuItem action="item2">Item 2</SelectMenuItem>
+  <SelectMenuItem action="item3">Item 3</SelectMenuItem>
+</SelectMenuBody>
 ```
+
+### 分隔线
+
+分隔线组件，可以设置为横向或纵向
+
+<MenuDivider />
+
+```vue-html
+<SelectMenuBody>
+  <SelectMenuHeader>Menu divider</SelectMenuHeader>
+  <!-- horizontal divider -->
+  <SelectMenuDivider />
+  <SelectMenuRow>
+    <SelectMenuColumn>
+      <SelectMenuItem>Item 1</SelectMenuItem>
+      <SelectMenuItem>Item 2</SelectMenuItem>
+      <SelectMenuItem>Item 3</SelectMenuItem>
+    </SelectMenuColumn>
+    <!-- vertical divider -->
+    <SelectMenuDivider horizontal={false} />
+    <SelectMenuColumn>
+      <SelectMenuItem>Item 4</SelectMenuItem>
+      <SelectMenuItem>Item 5</SelectMenuItem>
+      <SelectMenuItem>Item 6</SelectMenuItem>
+    </SelectMenuColumn>
+  </SelectMenuRow>
+</SelectMenuBody>
+```
+
+### 下拉层
+
+下拉菜单的 `SelectMenuDropdown` 组件提供了状态与操作函数，可通过作用域插槽输出以及组件所提供的工具函数 `useSelectMenuDropdown` 获得
 
 ```ts
 interface SelectMenuDropdownUtilities {
@@ -96,14 +245,38 @@ interface SelectMenuDropdownUtilities {
 }
 ```
 
-除了使用 `SelectMenuDropdown` 的作用域插槽中输出的状态及函数外，也可以使用组件提供的 `useSelectMenuDropdown` 函数获得
+#### 作用域插槽
+
+`SelectMenuDropdown` 组件对 `trigger` 与 `default` 插槽均输出数据状态与操作函数，方便用户定制菜单内容与触发对象
+
+<MenuDropdownScopedSlot />
+
+```vue-html
+<SelectMenuDropdown>
+  <template #trigger={ visible, disabled, closeDropdown, adjustDropdown }>
+  ...
+  </template>
+  <template #default={ visible, disabled, closeDropdown, adjustDropdown }>
+    <div>
+      <div>Dropdown visible: {{ visible }}</div>
+      <div>Dropdown disabled: {{ disabled }}</div>
+      <button type="button" @click="closeDropdown">Close</button>
+      <button type="button" @click="adjustDropdown">Adjust</button>
+    </div>
+  </template>
+</SelectMenuDropdown>
+```
+
+#### 工具函数
+
+当菜单的内容是一个用户自定义组件时，可以通过 `useSelectMenuDropdown` 函数获得菜单的状态与操作函数
 
 ::: code-group
 
 ```vue-html
 <SelectMenuDropdown>
   <template #trigger>
-    <SelectMenuTrigger>{{ selected || 'Open' }}</SelectMenuTrigger>
+    <SelectMenuTrigger />
   </template>
 
   <CustomDropdownContent />
@@ -148,6 +321,12 @@ const {
 
 :::
 
+#### 内置触发按钮
+
+`v-selectmenu` 内置了 `SelectMenuTrigger` 组件，用于触发菜单的打开与关闭，如果该按钮不满足需求，可通过 `SelectMenuDropdown` 的 `trigger` 插槽自定义触发对象
+
+#### 下拉层属性与事件
+
 `v-selectmenu` 的下拉层基于 [v-dropdown](/cn/dropdown/) 实现，因此可以在 `SelectMenuDropdown` 组件上直接使用 `v-dropdown` 的属性与事件
 
 <SelectMenuBase trigger="hover" />
@@ -155,37 +334,12 @@ const {
 这里设置了 `trigger` 属性为 `hover`，下拉菜单的打开方式为鼠标悬停而不是默认的点击
 
 ```vue-html
-<SelectMenuDropdown trigger="hover">
-...
+<SelectMenuDropdown
+  trigger="hover"
+  @visible-change="visibleChange"
+>
+  ...
 </SelectMenuDropdown>
-```
-
-### 分隔线
-
-分隔线组件，可以设置为横向或纵向
-
-<MenuDivider />
-
-```vue-html
-<SelectMenuBody>
-  <SelectMenuHeader>Menu divider</SelectMenuHeader>
-  <!-- horizontal divider -->
-  <SelectMenuDivider />
-  <SelectMenuRow>
-    <SelectMenuColumn>
-      <SelectMenuItem>Item 1</SelectMenuItem>
-      <SelectMenuItem>Item 2</SelectMenuItem>
-      <SelectMenuItem>Item 3</SelectMenuItem>
-    </SelectMenuColumn>
-    <!-- vertical divider -->
-    <SelectMenuDivider horizontal={false} />
-    <SelectMenuColumn>
-      <SelectMenuItem>Item 4</SelectMenuItem>
-      <SelectMenuItem>Item 5</SelectMenuItem>
-      <SelectMenuItem>Item 6</SelectMenuItem>
-    </SelectMenuColumn>
-  </SelectMenuRow>
-</SelectMenuBody>
 ```
 
 ## Props
@@ -202,6 +356,21 @@ interface MenuBodyProps {
 }
 ```
 
+`SelectMenuItem` 的 Props
+
+```ts
+interface MenuItemProps {
+  /**
+   * 菜单项选择后触发的指令，在 `SelectMenuBody` 的 action 事件中统一接收
+   */
+  action?: string
+  /**
+   * @default false
+   */
+  disabled?: boolean
+}
+```
+
 `SelectMenuDivider` 的 Props
 
 ```ts
@@ -215,6 +384,13 @@ interface MenuDividerProps {
 ```
 
 ## 事件
+
+`SelectMenuBody` 的事件
+
+```ts
+// 响应菜单项选择后，获得该项的 action 值的事件
+action: (action: string) => void
+```
 
 ## 插槽
 

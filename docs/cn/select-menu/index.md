@@ -23,6 +23,43 @@
 
 ## 实例
 
+<script setup>
+import {
+  SelectMenuBase,
+  MenuWithoutDropdown,
+  MenuDivider
+} from '@/script/select-menu'
+import { useData } from 'vitepress'
+
+const { lang } = useData()
+</script>
+
+```vue-html
+<SelectMenuDropdown>
+  <template #trigger>
+    <SelectMenuTrigger />
+  </template>
+
+  <SelectMenuBody>
+  </SelectMenuBody>
+</SelectMenuDropdown>
+```
+
+### 仅菜单
+
+仅使用菜单，不使用下拉层
+
+<MenuWithoutDropdown />
+
+```vue-html
+<SelectMenuBody class="border rounded-4 shadow-sm">
+  <SelectMenuHeader>Menu without dropdown</SelectMenuHeader>
+  <SelectMenuItem>Item 1</SelectMenuItem>
+  <SelectMenuItem>Item 2</SelectMenuItem>
+  <SelectMenuItem>Item 3</SelectMenuItem>
+</SelectMenuBody>
+```
+
 ### 块容器
 
 `SelectMenuSection` 是块容器，用于包裹 `SelectMenu` 实例
@@ -111,9 +148,45 @@ const {
 
 :::
 
+`v-selectmenu` 的下拉层基于 [v-dropdown](/cn/dropdown/) 实现，因此可以在 `SelectMenuDropdown` 组件上直接使用 `v-dropdown` 的属性与事件
+
+<SelectMenuBase trigger="hover" />
+
+这里设置了 `trigger` 属性为 `hover`，下拉菜单的打开方式为鼠标悬停而不是默认的点击
+
+```vue-html
+<SelectMenuDropdown trigger="hover">
+...
+</SelectMenuDropdown>
+```
+
 ### 分隔线
 
-`SelectMenuDivider`
+分隔线组件，可以设置为横向或纵向
+
+<MenuDivider />
+
+```vue-html
+<SelectMenuBody>
+  <SelectMenuHeader>Menu divider</SelectMenuHeader>
+  <!-- horizontal divider -->
+  <SelectMenuDivider />
+  <SelectMenuRow>
+    <SelectMenuColumn>
+      <SelectMenuItem>Item 1</SelectMenuItem>
+      <SelectMenuItem>Item 2</SelectMenuItem>
+      <SelectMenuItem>Item 3</SelectMenuItem>
+    </SelectMenuColumn>
+    <!-- vertical divider -->
+    <SelectMenuDivider horizontal={false} />
+    <SelectMenuColumn>
+      <SelectMenuItem>Item 4</SelectMenuItem>
+      <SelectMenuItem>Item 5</SelectMenuItem>
+      <SelectMenuItem>Item 6</SelectMenuItem>
+    </SelectMenuColumn>
+  </SelectMenuRow>
+</SelectMenuBody>
+```
 
 ## Props
 

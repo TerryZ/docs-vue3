@@ -1,1 +1,0 @@
-import{p as s,h as r}from"./framework.7vN1-b-b.js";const n="/docs-vue3/layout/admin-classic.svg";function d(){const e=s(!1),t=s("70px"),o=r(()=>e.value?t.value:"200px"),i=s(!0),a=s(!0),c=s(!0),l=s(!0);return{collapse:e,collapsedWidth:t,asideWidthWidthCollapse:o,visibleHeader:i,visibleBreadcrumb:a,visibleAside:c,visibleFooter:l}}export{n as _,d as u};

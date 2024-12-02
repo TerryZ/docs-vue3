@@ -1,0 +1,1 @@
+import{Z as o,c as u,d as l}from"./v-selectmenu.BmzpQXtl.js";import{G as r}from"./framework.CVLWRb36.js";function i(e="Menu item ",a,n=1){return Array.from({length:a}).map((c,t)=>r(o,{key:t},{default:()=>[e,t+n]}))}function s(e){return r(l,null,{trigger:()=>r(u,null,null),default:()=>e})}export{i as a,s as c};

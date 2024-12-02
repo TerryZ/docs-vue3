@@ -34,6 +34,8 @@ pnpm add v-selectmenu
 
 ## 组件集
 
+`v-selectmenu` 提供的组件
+
 - **SelectMenuDropdown** 菜单主容器
 - **SelectMenuTrigger** 组件内置的打开菜单的触发按钮
 - **SelectMenuBody** 菜单内容的主容器
@@ -64,6 +66,7 @@ import {
   MenuItemNoCloseDropdown,
   MenuDropdownScopedSlot,
   MenuWithoutDropdown,
+  MenuSection,
   MenuDivider
 } from '@/script/select-menu'
 
@@ -177,6 +180,8 @@ function handleAction (action) {
 ### 块容器
 
 `SelectMenuSection` 是块容器，用于包裹 `SelectMenu` 实例
+
+<MenuSection />
 
 ### 关闭菜单的方式
 

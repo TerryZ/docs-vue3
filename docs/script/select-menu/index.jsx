@@ -5,6 +5,7 @@ import {
   SelectMenuTrigger,
   SelectMenuBody,
   SelectMenuHeader,
+  SelectMenuSubHeader,
   SelectMenuDivider,
   SelectMenuItem,
   SelectMenuRow,
@@ -17,7 +18,7 @@ import {
   SelectMenuSection
 } from 'v-selectmenu'
 
-import { createDropdownWithTrigger } from './base'
+import { createDropdownWithTrigger, createMenuItems } from './base'
 
 export function SelectMenuBase (props, { attrs }) {
   return (
@@ -102,9 +103,14 @@ export function MenuSection () {
   return createDropdownWithTrigger(
     <SelectMenuBody>
       <SelectMenuHeader>Menu section</SelectMenuHeader>
-      <SelectMenuSection>
-
+      <SelectMenuDivider />
+      <SelectMenuSubHeader>Section 1</SelectMenuSubHeader>
+      <SelectMenuSection style="max-height: 200px;">
+        {createMenuItems('Item ', 10)}
       </SelectMenuSection>
+      <SelectMenuDivider />
+      <SelectMenuSubHeader>Section 2</SelectMenuSubHeader>
+      {createMenuItems('Item ', 3)}
     </SelectMenuBody>
   )
 }

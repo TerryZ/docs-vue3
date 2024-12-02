@@ -102,10 +102,8 @@ export function MenuItemSlots () {
 export function MenuSection () {
   return createDropdownWithTrigger(
     <SelectMenuBody>
-      <SelectMenuHeader>Menu section</SelectMenuHeader>
-      <SelectMenuDivider />
       <SelectMenuSubHeader>Section 1</SelectMenuSubHeader>
-      <SelectMenuSection style="max-height: 200px;">
+      <SelectMenuSection style="max-height: 170px;">
         {createMenuItems('Item ', 10)}
       </SelectMenuSection>
       <SelectMenuDivider />

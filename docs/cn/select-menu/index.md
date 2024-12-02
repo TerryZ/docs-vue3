@@ -73,17 +73,6 @@ import {
 const { logs, MenuItemEvent } = menuActionWithLogs()
 </script>
 
-```vue-html
-<SelectMenuDropdown>
-  <template #trigger>
-    <SelectMenuTrigger />
-  </template>
-
-  <SelectMenuBody>
-  </SelectMenuBody>
-</SelectMenuDropdown>
-```
-
 ### 基础应用
 
 设置一个菜单列表，并通过 `action` 事件统一接收菜单项发出的指令
@@ -179,9 +168,29 @@ function handleAction (action) {
 
 ### 块容器
 
-`SelectMenuSection` 是块容器，用于包裹 `SelectMenu` 实例
+块容器 `SelectMenuSection` 用于包裹菜单项类型的组件，可通过自定义样式设置该区块的高度或其他样式
 
 <MenuSection />
+
+这里通过设置 `max-height` 样式管理块容器高度，使区块内容超出后出现滚动条
+
+```vue-html
+<SelectMenuBody>
+  <SelectMenuSubHeader>Section 1</SelectMenuSubHeader>
+  <SelectMenuSection style="max-height: 170px;">
+    <SelectMenuItem>Item 1</SelectMenuItem>
+    <SelectMenuItem>Item 2</SelectMenuItem>
+    <SelectMenuItem>Item 3</SelectMenuItem>
+    ...
+  </SelectMenuSection>
+  <SelectMenuSubHeader>Section 2</SelectMenuSubHeader>
+  <SelectMenuSection>
+    <SelectMenuItem>Item 1</SelectMenuItem>
+    <SelectMenuItem>Item 2</SelectMenuItem>
+    <SelectMenuItem>Item 3</SelectMenuItem>
+  </SelectMenuSection>
+</SelectMenuBody>
+```
 
 ### 关闭菜单的方式
 
@@ -354,7 +363,7 @@ const {
 ```ts
 interface MenuBodyProps {
   /**
-   * 指定当前菜单中所有 SelectMenuItem 点击后是否关闭菜单
+   * 指定当前菜单中所有 `SelectMenuItem` 点击后是否关闭菜单
    * @default true
    */
   hideOnItemClick?: boolean

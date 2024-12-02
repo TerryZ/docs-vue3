@@ -74,9 +74,9 @@ function handleGroupChange(data: GroupItemData) {
 
 :::
 
-### 初始分组
+### 指定默认分组
 
-通过 `v-model` 绑定分组名称，实现初始分组
+通过 `v-model` 绑定分组名称，实现指定默认分组
 
 <MenuGroupWithValue />
 

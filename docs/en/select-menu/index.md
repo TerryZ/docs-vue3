@@ -338,7 +338,7 @@ const {
 
 #### Dropdown props and events
 
-The dropdown layer of `v-selectmenu` is based on [v-dropdown](/cn/dropdown/), so the props and events of `v-dropdown` can be used directly on the `SelectMenuDropdown` component
+The dropdown layer of `v-selectmenu` is based on [v-dropdown](/dropdown/), so the props and events of `v-dropdown` can be used directly on the `SelectMenuDropdown` component
 
 <SelectMenuBase trigger="hover" />
 

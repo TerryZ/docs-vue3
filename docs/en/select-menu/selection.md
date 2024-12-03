@@ -140,7 +140,9 @@ Checkbox group
 
 <MenuCheckboxGroupWithValue />
 
-#### Clear selection
+### Clear selection
+
+Clear selected items
 
 ```ts
 // clear radio group selection

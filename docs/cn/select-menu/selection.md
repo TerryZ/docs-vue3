@@ -146,7 +146,9 @@ Checkbox group
 
 <MenuCheckboxGroupWithValue />
 
-#### 清除选中项
+### 清除选中项
+
+清除已选中的选项
 
 ```ts
 // clear radio group selection

@@ -72,7 +72,8 @@ export default {
               { text: "Selection", link: "/select-menu/selection" },
               { text: "Layout", link: "/select-menu/layout" },
               { text: "Multiple level", link: "/select-menu/multiple-level" },
-              { text: "Search", link: "/select-menu/search" },
+              { text: "Input", link: "/select-menu/input" },
+              { text: "Button", link: "/select-menu/button" },
               { text: "Combination", link: "/select-menu/combination" }
             ]
           }

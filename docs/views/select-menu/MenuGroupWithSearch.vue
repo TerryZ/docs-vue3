@@ -8,10 +8,10 @@
 
       <SelectMenuBody>
         <SelectMenuSubHeader>NBA teams</SelectMenuSubHeader>
-        <SelectMenuSearch @search="handleSearch" />
+        <SelectMenuInput v-model="search" />
         <SelectMenuDivider />
         <SelectMenuRadioGroup v-model="selected">
-          <SelectMenuGroup>
+          <SelectMenuGroup style="width: 300px;">
             <SelectMenuGroupItem
               name="east"
               title="East"
@@ -62,7 +62,7 @@ import {
   SelectMenuBody,
   SelectMenuSubHeader,
   SelectMenuDivider,
-  SelectMenuSearch,
+  SelectMenuInput,
   SelectMenuGroup,
   SelectMenuGroupItem,
   SelectMenuRadioGroup,
@@ -83,8 +83,4 @@ const filteredWestTeams = computed(() => {
   if (!search.value) return westTeams
   return westTeams.filter(val => val.name.includes(search.value))
 })
-
-function handleSearch (value) {
-  search.value = value
-}
 </script>

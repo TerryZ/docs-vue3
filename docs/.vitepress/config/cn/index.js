@@ -72,7 +72,8 @@ export default {
               { text: "Selection", link: "/cn/select-menu/selection" },
               { text: "Layout", link: "/cn/select-menu/layout" },
               { text: "Multiple level", link: "/cn/select-menu/multiple-level" },
-              { text: "Search", link: "/cn/select-menu/search" },
+              { text: "Input", link: "/cn/select-menu/input" },
+              { text: "Button", link: "/cn/select-menu/button" },
               { text: "组合", link: "/cn/select-menu/combination" }
             ]
           }

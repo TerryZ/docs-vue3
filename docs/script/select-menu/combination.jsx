@@ -6,7 +6,7 @@ import {
   SelectMenuBody,
   SelectMenuHeader,
   SelectMenuDivider,
-  SelectMenuSearch,
+  SelectMenuInput,
   SelectMenuGroup,
   SelectMenuGroupItem,
   SelectMenuRadioGroup,
@@ -65,7 +65,7 @@ export function MenuGroupWithSearch () {
       default: () => (
         <SelectMenuBody>
           <SelectMenuHeader>Select your NBA team</SelectMenuHeader>
-          <SelectMenuSearch onSearch={handleSearch} />
+          <SelectMenuInput onChange={handleSearch} />
           <SelectMenuDivider />
           <SelectMenuRadioGroup onChange={handleRadioGroupChange}>
             <SelectMenuGroup onChange={groupChange}>

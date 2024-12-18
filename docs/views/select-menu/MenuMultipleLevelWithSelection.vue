@@ -5,7 +5,7 @@
   </div>
   <SelectMenuDropdown>
     <template #trigger>
-      <SelectMenuTrigger>User Setting</SelectMenuTrigger>
+      <SelectMenuTrigger rounded="pill">User Setting</SelectMenuTrigger>
     </template>
 
     <SelectMenuBody>

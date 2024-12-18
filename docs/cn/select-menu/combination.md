@@ -23,10 +23,10 @@ import MenuMultipleLevelWithSelection from '@/views/select-menu/MenuMultipleLeve
 
   <SelectMenuBody>
     <SelectMenuSubHeader>NBA teams</SelectMenuSubHeader>
-    <SelectMenuSearch @search="handleSearch" />
+    <SelectMenuSearch v-model="search" />
     <SelectMenuDivider />
     <SelectMenuRadioGroup v-model="selected">
-      <SelectMenuGroup>
+      <SelectMenuGroup style="width: 300px;">
         <SelectMenuGroupItem
           name="east"
           title="East"
@@ -74,7 +74,7 @@ import {
   SelectMenuTrigger,
   SelectMenuBody,
   SelectMenuDivider,
-  SelectMenuSearch,
+  SelectMenuInput,
   SelectMenuGroup,
   SelectMenuGroupItem,
   SelectMenuRadioGroup,
@@ -95,10 +95,6 @@ const filteredWestTeams = computed(() => {
   if (!search.value) return westTeams
   return westTeams.filter(val => val.name.includes(search.value))
 })
-
-function handleSearch (value) {
-  search.value = value
-}
 ```
 
 ```js [data source]
@@ -130,7 +126,7 @@ export const westTeams = [
 ```vue-html
 <SelectMenuDropdown>
   <template #trigger>
-    <SelectMenuTrigger>User Setting</SelectMenuTrigger>
+    <SelectMenuTrigger rounded="pill">User Setting</SelectMenuTrigger>
   </template>
 
   <SelectMenuBody>

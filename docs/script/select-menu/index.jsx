@@ -10,7 +10,6 @@ import {
   SelectMenuItem,
   SelectMenuRow,
   SelectMenuColumn,
-  SelectMenuSearch,
   SelectMenuGroup,
   SelectMenuGroupItem,
   SelectMenuRadioGroup,

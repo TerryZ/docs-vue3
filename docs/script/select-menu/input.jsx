@@ -94,3 +94,60 @@ export function MenuInput () {
     <InputForm />
   )
 }
+export function MenuInputRounded () {
+  return (
+    <SelectMenuBody class="border rounded-4 shadow-sm">
+      <SelectMenuHeader>Input rounded</SelectMenuHeader>
+      <SelectMenuInput
+        placeholder="rounded small"
+        rounded="small"
+      />
+      <SelectMenuInput
+        placeholder="rounded medium"
+        rounded="medium"
+      />
+      <SelectMenuInput
+        placeholder="rounded large"
+        rounded="large"
+      />
+      <SelectMenuInput
+        placeholder="rounded pill"
+      />
+    </SelectMenuBody>
+  )
+}
+export function MenuInputBorder () {
+  return (
+    <SelectMenuBody class="border rounded-4 shadow-sm">
+      <SelectMenuHeader>Input rounded</SelectMenuHeader>
+      <SelectMenuInput
+        placeholder="border style"
+        border
+      />
+    </SelectMenuBody>
+  )
+}
+export function MenuInputLoading () {
+  const loading = ref(false)
+
+  function handleClick () {
+    loading.value = true
+    setTimeout(() => {
+      loading.value = false
+    }, 2000)
+  }
+
+  return (
+    <SelectMenuBody class="border rounded-4 shadow-sm">
+      <SelectMenuHeader>Register</SelectMenuHeader>
+      <SelectMenuInput
+        placeholder="Phone number"
+        border
+        loading={loading.value}
+      />
+      <SelectMenuBlock>
+        <SelectMenuButton onClick={handleClick}>Submit</SelectMenuButton>
+      </SelectMenuBlock>
+    </SelectMenuBody>
+  )
+}

@@ -1,13 +1,16 @@
-# Search
+# Input
 
-内容搜索、输入模块
+内容输入模块
 
 ## 实例
 
 <script setup>
 import {
   MenuSearch,
-  MenuInput
+  MenuInput,
+  MenuInputRounded,
+  MenuInputBorder,
+  MenuInputLoading
 } from '@/script/select-menu/input'
 </script>
 
@@ -149,6 +152,69 @@ function handleClick () {
 
 :::
 
+### 椭圆边角
+
+输入框的各种圆角尺寸展示
+
+<MenuInputRounded />
+
+```vue-html
+<SelectMenuBody>
+  <SelectMenuInput rounded="small" />
+  <SelectMenuInput rounded="medium" />
+  <SelectMenuInput rounded="large" />
+  <!-- The default is `pill` -->
+  <SelectMenuInput />
+</SelectMenuBody>
+```
+
+### 边框风格
+
+应用边框线条风格的输入框
+
+<MenuInputBorder />
+
+```vue-html
+<SelectMenuBody>
+  <SelectMenuInput border />
+</SelectMenuBody>
+```
+
+### loading 状态
+
+`SelectMenuInput` 内置了 loading 加载动画图标，但当 `prepend` 插槽存在内容时，则不显示
+
+<MenuInputLoading />
+
+::: code-group
+
+```vue-html
+<SelectMenuBody>
+  <SelectMenuHeader>Register</SelectMenuHeader>
+  <SelectMenuInput
+    placeholder="Phone number"
+    border
+    :loading="loading"
+  />
+  <SelectMenuBlock>
+    <SelectMenuButton @click="handleClick">Submit</SelectMenuButton>
+  </SelectMenuBlock>
+</SelectMenuBody>
+```
+
+```js
+const loading = ref(false)
+
+function handleClick () {
+  loading.value = true
+  setTimeout(() => {
+    loading.value = false
+  }, 2000)
+}
+```
+
+:::
+
 ## Props
 
 ```ts
@@ -175,7 +241,7 @@ interface InputProps {
    * 圆角风格
    * @default `pill`
    */
-  rounded?: BaseRounded
+  rounded?: 'small' | 'medium' | 'large' | 'pill'
   /**
    * 输入框的占位文本
    */

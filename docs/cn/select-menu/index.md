@@ -40,6 +40,7 @@ pnpm add v-selectmenu
 - **SelectMenuTrigger** 组件内置的打开菜单的触发按钮
 - **SelectMenuBody** 菜单内容的主容器
 - **SelectMenuSection** 菜单片断容器
+- **SelectMenuBlock** 菜单块容器
 - **SelectMenuRow** 使内容水平对齐的布局容器
 - **SelectMenuColumn** 使内容垂直对齐的布局容器
 - **SelectMenuHeader** 菜单主标题栏
@@ -48,7 +49,8 @@ pnpm add v-selectmenu
 - **SelectMenuGroup** 菜单分组容器
 - **SelectMenuGroupItem** 菜单分组项
 - **SelectMenuChildLevel** 子菜单主容器
-- **SelectMenuSearch** 内容输入模块
+- **SelectMenuInput** 文本输入框模块
+- **SelectMenuButton** 按钮模块
 - **SelectMenuItem** 菜单项
 - **SelectMenuCheckboxGroup** 多项选择容器
 - **SelectMenuCheckboxItem** 多项选择项目
@@ -69,6 +71,7 @@ import {
   MenuSection,
   MenuDivider
 } from '@/script/select-menu'
+import MenuTriggerRoundedSelect from '@/views/select-menu/MenuTriggerRoundedSelect.vue'
 
 const { logs, MenuItemEvent } = menuActionWithLogs()
 </script>
@@ -339,6 +342,12 @@ const {
 
 `v-selectmenu` 内置了 `SelectMenuTrigger` 组件，用于触发菜单的打开与关闭，如果该按钮不满足需求，可通过 `SelectMenuDropdown` 的 `trigger` 插槽自定义触发对象
 
+<MenuTriggerRoundedSelect />
+
+```vue-html
+<SelectMenuTrigger rounded="pill" />
+```
+
 #### 下拉层属性与事件
 
 `v-selectmenu` 的下拉层基于 [v-dropdown](/cn/dropdown/) 实现，因此可以在 `SelectMenuDropdown` 组件上直接使用 `v-dropdown` 的属性与事件
@@ -397,6 +406,18 @@ interface MenuDividerProps {
 }
 ```
 
+`SelectMenuTrigger` 的 Props
+
+```ts
+interface SelectMenuTriggerProps {
+  /**
+   * 圆角风格
+   * @default `small`
+   */
+  rounded?: 'small' | 'medium' | 'large' | 'pill'
+}
+```
+
 ## 事件
 
 `SelectMenuBody` 的事件
@@ -427,6 +448,7 @@ action: (action: string) => void
 
 适用的组件
 
+- SelectMenuBlock
 - SelectMenuItem
 - SelectMenuHeader
 - SelectMenuSubHeader

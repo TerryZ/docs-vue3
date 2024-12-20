@@ -12,179 +12,97 @@ import {
   MenuInputBorder,
   MenuInputLoading
 } from '@/script/select-menu/input'
+import {
+  MenuButtonSizes,
+  MenuButtonRounded,
+  MenuButtonLoading,
+  MenuButtonBlock
+} from '@/script/select-menu/button'
 </script>
 
-### 基础应用
+### 按钮尺寸
 
-通过输入内容过滤菜单项
+按钮的不同尺寸展示
 
-<MenuSearch />
-
-::: code-group
+<MenuButtonSizes />
 
 ```vue-html
 <SelectMenuBody>
-  <SelectMenuHeader>Menu search</SelectMenuHeader>
-  <SelectMenuInput
-    onSearch={search}
-    placeholder="Search"
-  />
-  <SelectMenuItem
-    v-for="item in items"
-    :key="item.key"
-  >
-    {{ item.name }}
-  </SelectMenuItem>
+  <SelectMenuHeader>Button size</SelectMenuHeader>
+  <SelectMenuBlock>
+    <SelectMenuButton size="medium">size medium</SelectMenuButton>
+  </SelectMenuBlock>
+  <SelectMenuBlock>
+    <SelectMenuButton size="small">size small</SelectMenuButton>
+  </SelectMenuBlock>
+  <SelectMenuBlock>
+    <SelectMenuButton size="mini">size mini</SelectMenuButton>
+  </SelectMenuBlock>
 </SelectMenuBody>
 ```
-
-```ts
-import { ref } from 'vue'
-import {
-  SelectMenuDropdown,
-  SelectMenuTrigger,
-  SelectMenuBody,
-  SelectMenuHeader,
-  SelectMenuItem,
-  SelectMenuInput
-} from 'v-selectmenu'
-
-const dataSource = [
-  { key: '1', name: '我是菜单项 1' },
-  { key: '2', name: '我是菜单项 2' },
-  { key: '3', name: 'This is the element item 3' },
-  { key: '4', name: 'This is the element item 4' },
-  { key: '5', name: '我是菜单标题项 5' }
-]
-const items = ref(dataSource)
-
-function search (value) {
-  items.value = dataSource.filter(item => item.name.includes(value))
-}
-```
-
-:::
-
-### 结合 Button 使用
-
-通过将按钮与输入框组合，实现一个快速输入的
-
-<MenuInput />
-
-::: code-group
-
-```vue-html
-<SelectMenuDropdown>
-  <template #trigger>
-    <SelectMenuTrigger />
-  </template>
-
-  <InputForm />
-</SelectMenuDropdown>
-```
-
-```ts
-import { SelectMenuDropdown, SelectMenuTrigger } from 'v-selectmenu'
-import InputForm from './InputForm.vue'
-```
-
-```vue [InputForm.vue]
-<template>
-  <SelectMenuBody>
-    <SelectMenuHeader>New user</SelectMenuHeader>
-    <SelectMenuBlock style="width: 250px;">
-      <SelectMenuInput
-        v-model="search"
-        placeholder="Your phone number"
-        :disabled="loading"
-      />
-      <template #append>
-        <SelectMenuButton
-          rounded="circle"
-          :loading="loading"
-          @click="handleClick"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-arrow-right-circle"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"
-            />
-          </svg>
-        </SelectMenuButton>
-      </template>
-    </SelectMenuBlock>
-  </SelectMenuBody>
-</template>
-
-<script setup>
-import { ref } from 'vue'
-import {
-  SelectMenuBody,
-  SelectMenuHeader,
-  SelectMenuInput,
-  SelectMenuButton,
-  SelectMenuBlock,
-  useSelectMenuDropdown
-} from 'v-selectmenu'
-
-const { closeDropdown } = useSelectMenuDropdown()
-const loading = ref(false)
-const search = ref('')
-
-function handleClick () {
-  loading.value = true
-
-  setTimeout(() => {
-    loading.value = false
-    closeDropdown()
-    search.value = ''
-  }, 2000)
-}
-</script>
-```
-
-:::
 
 ### 椭圆边角
 
 输入框的各种圆角尺寸展示
 
-<MenuInputRounded />
+<MenuButtonRounded />
 
 ```vue-html
 <SelectMenuBody>
-  <SelectMenuInput rounded="small" />
-  <SelectMenuInput rounded="medium" />
-  <SelectMenuInput rounded="large" />
-  <!-- The default is `pill` -->
-  <SelectMenuInput />
+  <SelectMenuHeader>Button rounded</SelectMenuHeader>
+  <SelectMenuBlock>
+    <SelectMenuButton rounded="small">rounded small</SelectMenuButton>
+  </SelectMenuBlock>
+  <SelectMenuBlock>
+    <SelectMenuButton rounded="medium">rounded medium</SelectMenuButton>
+  </SelectMenuBlock>
+  <SelectMenuBlock>
+    <SelectMenuButton rounded="large">rounded large</SelectMenuButton>
+  </SelectMenuBlock>
+  <SelectMenuBlock>
+    <SelectMenuButton>rounded pill</SelectMenuButton>
+  </SelectMenuBlock>
+  <SelectMenuBlock>
+    <SelectMenuButton rounded="circle" >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-arrow-right-circle"
+        viewBox="0 0 16 16"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"
+        />
+      </svg>
+    </SelectMenuButton>
+  </SelectMenuBlock>
 </SelectMenuBody>
 ```
 
-### 边框风格
+### 全宽度
 
-应用边框线条风格的输入框
+全宽按钮会自动填充父容器的宽度
 
-<MenuInputBorder />
+<MenuButtonBlock />
 
 ```vue-html
 <SelectMenuBody>
-  <SelectMenuInput border />
+  <SelectMenuHeader>Button block</SelectMenuHeader>
+  <SelectMenuButton block>Block button</SelectMenuButton>
+  <SelectMenuBlock>
+    <SelectMenuButton block>Block button in block</SelectMenuButton>
+  </SelectMenuBlock>
 </SelectMenuBody>
 ```
 
 ### loading 状态
 
-`SelectMenuInput` 内置了 loading 加载动画图标，但当 `prepend` 插槽存在内容时，则不显示
+`SelectMenuButton` 内置了 loading 加载动画图标，但当 `prepend` 插槽存在内容时，则不显示
 
-<MenuInputLoading />
+<MenuButtonLoading />
 
 ::: code-group
 
@@ -194,20 +112,26 @@ function handleClick () {
   <SelectMenuInput
     placeholder="Phone number"
     border
-    :loading="loading"
+    :disabled="loading"
+    v-model="content"
   />
   <SelectMenuBlock>
-    <SelectMenuButton @click="handleClick">Submit</SelectMenuButton>
+    <SelectMenuButton
+      :loading="loading"
+      @click="handleClick"
+    >Submit</SelectMenuButton>
   </SelectMenuBlock>
 </SelectMenuBody>
 ```
 
 ```js
+const content = ref('')
 const loading = ref(false)
 
 function handleClick () {
   loading.value = true
   setTimeout(() => {
+    content.value = ''
     loading.value = false
   }, 2000)
 }

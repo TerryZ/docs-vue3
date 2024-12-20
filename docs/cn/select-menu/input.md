@@ -267,10 +267,10 @@ interface InputProps {
 `update:modelValue`: (value: string) => void
 ```
 
-### search
+### change
 
 响应文本输入的变化
 
 ```ts
-search: (value: string) => void
+change: (value: string) => void
 ```

@@ -14,7 +14,8 @@ import {
   SelectMenuGroupItem,
   SelectMenuRadioGroup,
   SelectMenuRadioItem,
-  SelectMenuSection
+  SelectMenuSection,
+  SelectMenuButton
 } from 'v-selectmenu'
 
 import { createDropdownWithTrigger, createMenuItems } from './base'
@@ -89,7 +90,10 @@ export function MenuItemSlots () {
         ),
         default: () => 'Notifications',
         append: () => (
-          <span class="badge rounded-pill text-bg-danger">23</span>
+          <SelectMenuButton
+            size="mini"
+            class="bg-danger text-white"
+          >23</SelectMenuButton>
         )
       }}</SelectMenuItem>
       <SelectMenuItem>Helps</SelectMenuItem>

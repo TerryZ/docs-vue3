@@ -153,7 +153,10 @@ function handleAction (action) {
       </svg>
     </template>
     <template #append>
-      <span class="badge rounded-pill text-bg-danger">23</span>
+      <SelectMenuButton
+        size="mini"
+        class="bg-danger text-white"
+      >23</SelectMenuButton>
     </template>
     Notifications
   </SelectMenuItem>
@@ -164,10 +167,24 @@ function handleAction (action) {
 
 该内容结构设置同样应用于以下组件
 
+- SelectMenuBlock
 - SelectMenuHeader
 - SelectMenuSubHeader
 - SelectMenuRadioItem
 - SelectMenuCheckboxItem
+
+| 组件名 | hover | hideOnClick |
+| :--- | :--- | :--- |
+| SelectMenuItem | ✔ | ✔ |
+| SelectMenuBlock | ❌ | ❌ |
+| SelectMenuHeader | ❌ | ❌ |
+| SelectMenuSubHeader | ❌ | ❌ |
+| SelectMenuRadioItem | ✔ | ✔ |
+| SelectMenuCheckboxItem | ✔ | ❌ |
+
+::: tip 提示
+`SelectMenuBlock` 与 `SelectMenuItem` 同为菜单项块布局模块，它们的区别在于鼠标样式与行为的默认设置上。Block 组件更多是为了方便 Input 与 Button 等组件的组合排列使用，可以结合 [input 与 Button 组合使用](./input#input-with-button) 样例查看
+:::
 
 ### 块容器
 

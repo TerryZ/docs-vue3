@@ -26,8 +26,8 @@ import {
 <SelectMenuBody>
   <SelectMenuHeader>Menu search</SelectMenuHeader>
   <SelectMenuInput
-    onSearch={search}
     placeholder="Search"
+    @search="search"
   />
   <SelectMenuItem
     v-for="item in items"
@@ -65,7 +65,7 @@ function search (value) {
 
 :::
 
-### 结合 Button 使用
+### 与 Button 组合使用 {#input-with-button}
 
 通过将按钮与输入框组合，实现一个快速输入的
 
@@ -159,13 +159,11 @@ function handleClick () {
 <MenuInputRounded />
 
 ```vue-html
-<SelectMenuBody>
-  <SelectMenuInput rounded="small" />
-  <SelectMenuInput rounded="medium" />
-  <SelectMenuInput rounded="large" />
-  <!-- The default is `pill` -->
-  <SelectMenuInput />
-</SelectMenuBody>
+<SelectMenuInput rounded="small" />
+<SelectMenuInput rounded="medium" />
+<SelectMenuInput rounded="large" />
+<!-- The default is `pill` -->
+<SelectMenuInput />
 ```
 
 ### 边框风格
@@ -175,9 +173,7 @@ function handleClick () {
 <MenuInputBorder />
 
 ```vue-html
-<SelectMenuBody>
-  <SelectMenuInput border />
-</SelectMenuBody>
+<SelectMenuInput border />
 ```
 
 ### loading 状态

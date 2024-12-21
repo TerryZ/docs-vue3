@@ -1,12 +1,20 @@
 # 组合
 
 <script setup>
+import MenuSelection from '@/views/select-menu/MenuSelection.vue'
 import MenuGroupWithSearch from '@/views/select-menu/MenuGroupWithSearch.vue'
 import MenuMultipleLevelWithSelection from '@/views/select-menu/MenuMultipleLevelWithSelection.vue'
 import ChatInput from '@/views/select-menu/ChatInput.vue'
+import UserProfileForm from '@/views/select-menu/UserProfileForm.vue'
 </script>
 
 `SelectMenu` 提供的各种各样的组件组合应用场景实例
+
+## 多种类菜单项
+
+菜单项、单项选择与多项选择的组合应用
+
+<MenuSelection />
 
 ## 多分组搜索选择
 
@@ -337,3 +345,10 @@ function handleClick () {
 ```
 
 :::
+
+## 表单
+
+一个表单模块
+
+<UserProfileForm />
+

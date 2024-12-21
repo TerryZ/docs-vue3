@@ -67,7 +67,8 @@ import {
   SelectMenuGroupItem,
   SelectMenuRadioGroup,
   SelectMenuRadioItem,
-  SelectMenuSection
+  SelectMenuSection,
+  SelectMenuButton
 } from 'v-selectmenu'
 
 import { eastTeams, westTeams } from '@/script/data/nba-teams'

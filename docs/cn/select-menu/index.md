@@ -244,7 +244,7 @@ function handleAction (action) {
       <SelectMenuItem>Item 3</SelectMenuItem>
     </SelectMenuColumn>
     <!-- vertical divider -->
-    <SelectMenuDivider horizontal={false} />
+    <SelectMenuDivider :horizontal="false" />
     <SelectMenuColumn>
       <SelectMenuItem>Item 4</SelectMenuItem>
       <SelectMenuItem>Item 5</SelectMenuItem>

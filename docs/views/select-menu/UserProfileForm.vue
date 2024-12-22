@@ -1,46 +1,52 @@
 <template>
-  <SelectMenuDropdown>
-    <template #trigger>
-      <SelectMenuTrigger rounded="pill" >User profile</SelectMenuTrigger>
-    </template>
-    <SelectMenuBody>
-      <SelectMenuHeader>Profile</SelectMenuHeader>
-      <SelectMenuDivider />
-      <SelectMenuRow>
-        <SelectMenuColumn>
-          <SelectMenuSubHeader>Base</SelectMenuSubHeader>
-          <SelectMenuInput placeholder="User name" />
-          <SelectMenuInput placeholder="User age" />
-        </SelectMenuColumn>
-        <SelectMenuDivider :horizontal="false" />
-        <SelectMenuColumn>
-          <SelectMenuSubHeader>Extend</SelectMenuSubHeader>
-          <SelectMenuInput placeholder="Mail" />
-          <SelectMenuInput placeholder="Address" />
-        </SelectMenuColumn>
-      </SelectMenuRow>
+  <div>
+    <SelectMenuDropdown>
+      <template #trigger>
+        <SelectMenuTrigger rounded="pill" >User profile</SelectMenuTrigger>
+      </template>
+      <template #default="{ closeDropdown }">
+        <SelectMenuBody>
+          <SelectMenuHeader>Profile</SelectMenuHeader>
+          <SelectMenuDivider />
+          <SelectMenuRow>
+            <SelectMenuColumn>
+              <SelectMenuSubHeader>Base</SelectMenuSubHeader>
+              <SelectMenuInput placeholder="User name" v-model="profile.name" />
+              <SelectMenuInput placeholder="User age" v-model="profile.age" />
+            </SelectMenuColumn>
+            <SelectMenuDivider :horizontal="false" />
+            <SelectMenuColumn>
+              <SelectMenuSubHeader>Extend</SelectMenuSubHeader>
+              <SelectMenuInput placeholder="Mail" v-model="profile.mail" />
+              <SelectMenuInput placeholder="Address" v-model="profile.address" />
+            </SelectMenuColumn>
+          </SelectMenuRow>
+          <SelectMenuDivider />
 
-      <SelectMenuDivider />
-      <SelectMenuBlock>
-        <SelectMenuButton>
-          <template #prepend>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-floppy"
-              viewBox="0 0 16 16"
-            >
-              <path d="M11 2H9v3h2z" />
-              <path d="M1.5 0h11.586a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0M1 1.5v13a.5.5 0 0 0 .5.5H2v-4.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5V15h.5a.5.5 0 0 0 .5-.5V2.914a.5.5 0 0 0-.146-.353l-1.415-1.415A.5.5 0 0 0 13.086 1H13v4.5A1.5 1.5 0 0 1 11.5 7h-7A1.5 1.5 0 0 1 3 5.5V1H1.5a.5.5 0 0 0-.5.5m3 4a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V1H4zM3 15h10v-4.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5z" />
-            </svg>
-          </template>
-          Save
-        </SelectMenuButton>
-      </SelectMenuBlock>
-    </SelectMenuBody>
-  </SelectMenuDropdown>
+          <SelectMenuInput placeholder="Remark" v-model="profile.remark" />
+
+          <SelectMenuDivider />
+          <SelectMenuBlock>
+            <SelectMenuButton class="me-3" :loading="loading" @click="save(closeDropdown)">
+              Save
+            </SelectMenuButton>
+            <SelectMenuButton :disabled="loading" @click="clear">
+              Clear
+            </SelectMenuButton>
+          </SelectMenuBlock>
+        </SelectMenuBody>
+      </template>
+    </SelectMenuDropdown>
+
+    <div class="mt-3 border rounded-4 shadow-sm p-3" v-if="saved">
+      <h4 class="m-0 mb-3">User profile saved</h4>
+      <div>Name: {{ profile.name }}</div>
+      <div>Age: {{ profile.age }}</div>
+      <div>Mail: {{ profile.mail }}</div>
+      <div>Address: {{ profile.address }}</div>
+      <div>Remark: {{ profile.remark }}</div>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -59,4 +65,31 @@ import {
   SelectMenuButton
 } from 'v-selectmenu'
 
+const profile = ref({
+  name: '',
+  age: '',
+  mail: '',
+  address: '',
+  remark: ''
+})
+const saved = ref(false)
+const loading = ref(false)
+function save (close) {
+  loading.value = true
+  setTimeout(() => {
+    saved.value = true
+    loading.value = false
+    close()
+  }, 2000)
+}
+function clear () {
+  profile.value = {
+    name: '',
+    age: '',
+    mail: '',
+    address: '',
+    remark: ''
+  }
+  saved.value = false
+}
 </script>

@@ -16,6 +16,125 @@ import UserProfileForm from '@/views/select-menu/UserProfileForm.vue'
 
 <MenuSelection />
 
+::: code-group
+
+```vue-html
+<SelectMenuDropdown>
+  <template #trigger>
+    <SelectMenuTrigger rounded="pill">Ordering</SelectMenuTrigger>
+  </template>
+  <SelectMenuBody @action="handleAction">
+    <SelectMenuRow>
+      <SelectMenuColumn style="width: 180px;">
+        <SelectMenuHeader>Combo meals</SelectMenuHeader>
+        <SelectMenuItem action="Chicken fried rice">
+          Chicken fried rice
+        </SelectMenuItem>
+        <SelectMenuItem action="Big Mac burger">
+          Big Mac burger
+        </SelectMenuItem>
+        <SelectMenuItem action="Hot Dog sandwich">
+          Hot Dog sandwich
+        </SelectMenuItem>
+      </SelectMenuColumn>
+      <SelectMenuDivider :horizontal="false" />
+      <SelectMenuColumn style="width: 250px;">
+        <SelectMenuHeader>Optional meals</SelectMenuHeader>
+        <SelectMenuSubHeader>
+          Main courses
+          <template #append>
+            <SelectMenuButton
+              @click.stop="radio = ''"
+              size="mini"
+            >
+              Clear
+            </SelectMenuButton>
+          </template>
+        </SelectMenuSubHeader>
+        <SelectMenuRadioGroup
+          v-model="radio"
+          :hide-on-selection="false"
+          @change="handleSelection"
+        >
+          <SelectMenuRadioItem value="Fried Noodles">
+            Fried Noodles
+          </SelectMenuRadioItem>
+          <SelectMenuRadioItem value="Fried Rice">
+            Fried Rice
+          </SelectMenuRadioItem>
+          <SelectMenuRadioItem value="Hamburger">
+            Hamburger
+          </SelectMenuRadioItem>
+        </SelectMenuRadioGroup>
+        <SelectMenuSubHeader>
+          Side dishes
+          <template #append>
+            <SelectMenuButton
+              @click.stop="checkbox = []"
+              size="mini"
+            >
+            Clear
+            </SelectMenuButton>
+          </template>
+        </SelectMenuSubHeader>
+        <SelectMenuCheckboxGroup
+          v-model="checkbox"
+          @change="handleSelection"
+        >
+          <SelectMenuCheckboxItem value="Fruit Salad">
+            Fruit Salad
+          </SelectMenuCheckboxItem>
+          <SelectMenuCheckboxItem value="Fried Egg">
+            Fried Egg
+          </SelectMenuCheckboxItem>
+          <SelectMenuCheckboxItem value="Baked Potato">
+            Baked Potato
+          </SelectMenuCheckboxItem>
+        </SelectMenuCheckboxGroup>
+      </SelectMenuColumn>
+    </SelectMenuRow>
+  </SelectMenuBody>
+</SelectMenuDropdown>
+```
+
+```js
+import { ref } from 'vue'
+import {
+  SelectMenuDropdown,
+  SelectMenuTrigger,
+  SelectMenuBody,
+  SelectMenuHeader,
+  SelectMenuSubHeader,
+  SelectMenuDivider,
+  SelectMenuButton,
+  SelectMenuItem,
+  SelectMenuCheckboxGroup,
+  SelectMenuCheckboxItem,
+  SelectMenuRadioGroup,
+  SelectMenuRadioItem,
+  SelectMenuRow,
+  SelectMenuColumn
+} from 'v-selectmenu'
+
+const radio = ref('')
+const checkbox = ref([])
+const combo = ref('')
+
+function handleAction (action) {
+  checkbox.value = []
+  radio.value = ''
+  combo.value = action
+}
+function handleSelection () {
+  if (radio.value || checkbox.value.length) {
+    combo.value = ''
+  }
+}
+```
+
+:::
+
+
 ## 多分组搜索选择
 
 组合了文本搜索、多分组与单项选择等功能的应用场景
@@ -348,7 +467,95 @@ function handleClick () {
 
 ## 表单
 
-一个表单模块
+一个内容输入表单
 
 <UserProfileForm />
 
+::: code-group
+
+```vue-html
+<SelectMenuDropdown>
+  <template #trigger>
+    <SelectMenuTrigger rounded="pill" >User profile</SelectMenuTrigger>
+  </template>
+  <template #default="{ closeDropdown }">
+    <SelectMenuBody>
+      <SelectMenuHeader>Profile</SelectMenuHeader>
+      <SelectMenuDivider />
+      <SelectMenuRow>
+        <SelectMenuColumn>
+          <SelectMenuSubHeader>Base</SelectMenuSubHeader>
+          <SelectMenuInput placeholder="User name" v-model="profile.name" />
+          <SelectMenuInput placeholder="User age" v-model="profile.age" />
+        </SelectMenuColumn>
+        <SelectMenuDivider :horizontal="false" />
+        <SelectMenuColumn>
+          <SelectMenuSubHeader>Extend</SelectMenuSubHeader>
+          <SelectMenuInput placeholder="Mail" v-model="profile.mail" />
+          <SelectMenuInput placeholder="Address" v-model="profile.address" />
+        </SelectMenuColumn>
+      </SelectMenuRow>
+      <SelectMenuDivider />
+
+      <SelectMenuInput placeholder="Remark" v-model="profile.remark" />
+
+      <SelectMenuDivider />
+      <SelectMenuBlock>
+        <SelectMenuButton :loading="loading" @click="save(closeDropdown)">
+          Save
+        </SelectMenuButton>
+        <SelectMenuButton :disabled="loading" @click="clear">
+          Clear
+        </SelectMenuButton>
+      </SelectMenuBlock>
+    </SelectMenuBody>
+  </template>
+</SelectMenuDropdown>
+```
+
+```js
+import { ref } from 'vue'
+import {
+  SelectMenuDropdown,
+  SelectMenuTrigger,
+  SelectMenuBody,
+  SelectMenuHeader,
+  SelectMenuSubHeader,
+  SelectMenuRow,
+  SelectMenuColumn,
+  SelectMenuDivider,
+  SelectMenuBlock,
+  SelectMenuInput,
+  SelectMenuButton
+} from 'v-selectmenu'
+
+const profile = ref({
+  name: '',
+  age: '',
+  mail: '',
+  address: '',
+  remark: ''
+})
+const saved = ref(false)
+const loading = ref(false)
+function save (close) {
+  loading.value = true
+  setTimeout(() => {
+    saved.value = true
+    loading.value = false
+    close()
+  }, 2000)
+}
+function clear () {
+  profile.value = {
+    name: '',
+    age: '',
+    mail: '',
+    address: '',
+    remark: ''
+  }
+  saved.value = false
+}
+```
+
+:::

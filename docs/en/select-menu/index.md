@@ -40,6 +40,7 @@ pnpm add v-selectmenu
 - **SelectMenuTrigger** Component built-in trigger button for opening menu
 - **SelectMenuBody** Menu content main container
 - **SelectMenuSection** Menu fragment container
+- **SelectMenuBlock** Menu block container
 - **SelectMenuRow** Layout container for horizontal alignment of content
 - **SelectMenuColumn** Layout container for vertical alignment of content
 - **SelectMenuHeader** Menu main title bar
@@ -48,7 +49,8 @@ pnpm add v-selectmenu
 - **SelectMenuGroup** Menu group container
 - **SelectMenuGroupItem** Menu group item
 - **SelectMenuChildLevel** Submenu main container
-- **SelectMenuSearch** Content input module
+- **SelectMenuInput** Text input box module
+- **SelectMenuButton** Button module
 - **SelectMenuItem** Menu item
 - **SelectMenuCheckboxGroup** Multiple selection container
 - **SelectMenuCheckboxItem** Multiple selection item
@@ -69,6 +71,7 @@ import {
   MenuSection,
   MenuDivider
 } from '@/script/select-menu'
+import MenuTriggerRoundedSelect from '@/views/select-menu/MenuTriggerRoundedSelect.vue'
 
 const { logs, MenuItemEvent } = menuActionWithLogs()
 </script>
@@ -147,7 +150,10 @@ Menu items can set the front, back and main content of the menu item through slo
       </svg>
     </template>
     <template #append>
-      <span class="badge rounded-pill text-bg-danger">23</span>
+      <SelectMenuButton
+        size="mini"
+        class="bg-danger text-white"
+      >23</SelectMenuButton>
     </template>
     Notifications
   </SelectMenuItem>
@@ -158,10 +164,24 @@ Menu items can set the front, back and main content of the menu item through slo
 
 This content structure setting also applies to the following components
 
+- SelectMenuBlock
 - SelectMenuHeader
 - SelectMenuSubHeader
 - SelectMenuRadioItem
 - SelectMenuCheckboxItem
+
+| Component | hover | hideOnClick |
+| :--- | :--- | :--- |
+| SelectMenuItem | ✔ | ✔ |
+| SelectMenuBlock | ❌ | ❌ |
+| SelectMenuHeader | ❌ | ❌ |
+| SelectMenuSubHeader | ❌ | ❌ |
+| SelectMenuRadioItem | ✔ | ✔ |
+| SelectMenuCheckboxItem | ✔ | ❌ |
+
+::: tip
+`SelectMenuBlock` and `SelectMenuItem` are both menu item block layout modules. The difference between them lies in the default settings of mouse style and behavior. Block components are more convenient for the combination and use of components such as Input and Button. You can combine [input and Button](./input#input-with-button) to view the sample
+:::
 
 ### Block Container
 
@@ -221,7 +241,7 @@ Divider component, can be set to horizontal or vertical
       <SelectMenuItem>Item 3</SelectMenuItem>
     </SelectMenuColumn>
     <!-- vertical divider -->
-    <SelectMenuDivider horizontal={false} />
+    <SelectMenuDivider :horizontal="false" />
     <SelectMenuColumn>
       <SelectMenuItem>Item 4</SelectMenuItem>
       <SelectMenuItem>Item 5</SelectMenuItem>
@@ -336,6 +356,12 @@ const {
 
 `v-selectmenu` has a built-in `SelectMenuTrigger` component to trigger the opening and closing of the menu. If this button does not meet your needs, you can customize the trigger object through the `trigger` slot of `SelectMenuDropdown`
 
+<MenuTriggerRoundedSelect />
+
+```vue-html
+<SelectMenuTrigger rounded="pill" />
+```
+
 #### Dropdown props and events
 
 The dropdown layer of `v-selectmenu` is based on [v-dropdown](/dropdown/), so the props and events of `v-dropdown` can be used directly on the `SelectMenuDropdown` component
@@ -394,6 +420,18 @@ interface MenuDividerProps {
 }
 ```
 
+`SelectMenuTrigger` Props
+
+```ts
+interface SelectMenuTriggerProps {
+  /**
+   * Rounded size
+   * @default `small`
+   */
+  rounded?: 'small' | 'medium' | 'large' | 'pill'
+}
+```
+
 ## Events
 
 `SelectMenuBody` events
@@ -424,6 +462,7 @@ Applicable components
 
 Applicable components
 
+- SelectMenuBlock
 - SelectMenuItem
 - SelectMenuHeader
 - SelectMenuSubHeader

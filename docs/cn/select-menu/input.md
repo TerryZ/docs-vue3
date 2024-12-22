@@ -217,7 +217,7 @@ function handleClick () {
 interface InputProps {
   /**
    * 输入延迟（以毫秒为单位）
-   * @default 300
+   * @default 0
    **/
   debounce?: number
   /**

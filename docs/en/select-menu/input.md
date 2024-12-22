@@ -217,7 +217,7 @@ function handleClick () {
 interface InputProps {
   /**
    * Debounce delay when typing, in milliseconds
-   * @default 300
+   * @default 0
    **/
   debounce?: number
   /**

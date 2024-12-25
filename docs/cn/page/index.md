@@ -74,24 +74,43 @@ import { PaginationBar } from 'v-page'
 
 一个分页栏的典型用法
 
-```vue
-<template>
-  <div
-    v-for="item in list"
-    :key="item.key"
-    v-text="item.name"
-  />
-  <PaginationBar
-    language="cn"
-    v-model="pageNumber"
-    :total-row="totalRow"
-    @change="change"
-  />
-</template>
+::: code-group
 
-<script setup lang="ts">
+```vue-html
+<div
+  v-for="item in list"
+  :key="item.key"
+  v-text="item.name"
+/>
+<PaginationBar
+  language="cn"
+  v-model="pageNumber"
+  :total-row="totalRow"
+  @change="change"
+>
+  <PaginationPageSizeOptions />
+  <PaginationInfo />
+  <PaginationFirstPage />
+  <PaginationPreviousPage />
+  <PaginationPageNumbers />
+  <PaginationNextPage />
+  <PaginationLastPage />
+</PaginationBar>
+```
+
+```ts
 import { ref } from 'vue'
-import { PaginationBar } from 'v-page'
+import {
+  PaginationBar,
+  PaginationPageSizeOptions,
+  PaginationInfo,
+  PaginationPanel,
+  PaginationPageNumbers,
+  PaginationFirstPage,
+  PaginationPreviousPage,
+  PaginationNextPage,
+  PaginationLastPage
+} from 'v-page'
 import type { PageInfo } from 'v-page'
 
 const pageNumber = ref<number>(3)
@@ -113,35 +132,120 @@ function change (data: PageInfo): void {
     totalRow.value = resp.totalRow
   })
 }
-</script>
 ```
 
+:::
+
 ## 实例
+
+<script setup>
+import {
+  PaginationBar,
+  PaginationPageSizeOptions,
+  PaginationInfo,
+  PaginationPanel,
+  PaginationPageNumbers,
+  PaginationFirstPage,
+  PaginationPreviousPage,
+  PaginationNextPage,
+  PaginationLastPage
+} from 'v-page'
+
+import LogDataPrinter from '@/views/components/LogDataPrinter.vue'
+import PaginationOperation from '@/views/page/PaginationOperation.vue'
+import PaginationPageSize from '@/views/page/PaginationPageSize.vue'
+import PaginationAlign from '@/views/page/PaginationAlign.vue'
+import PaginationDisabled from '@/views/page/PaginationDisabled.vue'
+
+import {
+  usePagination,
+  paginationBase,
+  PaginationGallery,
+  PaginationDisplayAll,
+  PaginationStyle,
+  PaginationPanelOrder,
+  PaginationSlot
+} from '@/script/page'
+
+const { logs, PaginationBarBase } = paginationBase()
+
+// const {
+//   srcList,
+//   logs,
+//   listGallery,
+//   disabled,
+//   align,
+//   pageSize,
+//   pageNumberOperate,
+//   inputPageNumber,
+//   switchInfo,
+//   switchFirst,
+//   switchLast,
+//   switchPageSizeOptions,
+//   switchPageNumber,
+
+//   changeBasic,
+//   changeGallery,
+//   goToInputPage,
+//   setPageSize
+// } = usePagination()
+</script>
 
 ### 快速应用
 
 ```vue-html
 <PaginationBar
-  language="cn"
-  :total-row="21"
+  align="center"
+  total-row="21"
   @change="change"
-/>
+>
+  <PaginationPageSizeOptions />
+  <PaginationInfo />
+  <PaginationFirstPage />
+  <PaginationPreviousPage />
+  <PaginationPageNumbers />
+  <PaginationNextPage />
+  <PaginationLastPage />
+</PaginationBar>
 ```
 
-<div class="border rounded-3 shadow-sm p-2">
+<!-- <div class="border rounded-3 shadow-sm p-2">
   <PaginationBar
     align="center"
     language="cn"
     :total-row="21"
     @change="changeBasic"
   />
-</div>
+</div> -->
+<PaginationBarBase language="cn" />
 
 分页事件 [change](#change) 响应数据
 
 <LogDataPrinter :logs="logs" />
 
 ### 画廊数据展示模式实例
+
+画廊数据格展示方式示例
+
+<!-- <div class="border rounded-3 shadow-sm pt-2 ps-2 mb-2 d-flex flex-wrap">
+  <div
+    style="height: 100px;width: 126px;"
+    class="
+      rounded-2 bg-light me-2 mb-2 fs-1 text-body-secondary
+      d-flex align-items-center justify-content-center
+    "
+    v-for="item in listGallery"
+    :key="item"
+    v-text=item
+  />
+</div>
+<PaginationBar
+  align="center"
+  language="cn"
+  :total-row="88"
+  @change="changeGallery"
+/> -->
+<PaginationGallery language="cn" />
 
 ::: code-group
 
@@ -156,13 +260,14 @@ function change (data: PageInfo): void {
 <PaginationBar
   align="center"
   :total-row="88"
-  @change="changeGallery"
-/>
+  @change="change"
+>
+  ...
+</PaginationBar>
 ```
 
 ```js
 import { ref } from 'vue'
-import { PaginationBar } from 'v-page'
 
 const srcList = Array(88).fill(0).map((val, index) => index + 1)
 const listGallery = ref([])
@@ -180,28 +285,11 @@ function changeGallery ({ pageNumber, pageSize }) {
 
 :::
 
-<div class="border rounded-3 shadow-sm pt-2 ps-2 mb-2 d-flex flex-wrap">
-  <div
-    style="height: 100px;width: 126px;"
-    class="
-      rounded-2 bg-light me-2 mb-2 fs-1 text-body-secondary
-      d-flex align-items-center justify-content-center
-    "
-    v-for="item in listGallery"
-    :key="item"
-    v-text=item
-  />
-</div>
-<PaginationBar
-  align="center"
-  language="cn"
-  :total-row="88"
-  @change="changeGallery"
-/>
-
 ### 分页操作
 
 几个实例展示分页码的操作方式
+
+<PaginationOperation language="cn" />
 
 ::: code-group
 
@@ -215,7 +303,9 @@ function changeGallery ({ pageNumber, pageSize }) {
   >pageNumber + 1</button>
 </div>
 
-<PaginationBar v-model="pageNumber" />
+<PaginationBar v-model="pageNumber" >
+  ...
+</PaginationBar>
 ```
 
 ```js
@@ -239,58 +329,12 @@ function goToInputPage () {
 
 :::
 
-<div class="mb-3 d-flex">
-  <input
-    type="text"
-    class="form-control me-3"
-    v-model="inputPageNumber"
-    style="width: 100px"
-  />
-  <button
-    type="button"
-    class="btn btn-dark me-3"
-    @click="goToInputPage"
-  >
-    Go
-  </button>
-  <button
-    type="button"
-    class="btn btn-dark"
-    @click="pageNumberOperate++"
-  >
-    pageNumber + 1
-  </button>
-</div>
-
-<PaginationBar
-  align="left"
-  language="cn"
-  v-model="pageNumberOperate"
-  :total-row="58"
-/>
 
 ### 每页记录数
 
 `pageSize` 指定了每页记录数，`pageSizeMenu` 提供了可供用户快速选择的每页记录数列表
 
-::: code-group
-
-```vue-html
-<PaginationBar
-  v-model:page-size="pageSize"
-  :total-row="100"
-/>
-```
-
-```js
-import { ref } from 'vue'
-
-const pageSize = ref(25)
-```
-
-:::
-
-<PaginationBar
+<!-- <PaginationBar
   align="left"
   language="cn"
   v-model:page-size="pageSize"
@@ -305,21 +349,37 @@ const pageSize = ref(25)
   >
     set pageSize to 15
   </button>
-</div>
+</div> -->
+<PaginationPageSize language="cn" />
+
+::: code-group
+
+```vue-html
+<PaginationBar
+  v-model:page-size="pageSize"
+  :total-row="100"
+>
+  ...
+</PaginationBar>
+```
+
+```js
+import { ref } from 'vue'
+
+const pageSize = ref(25)
+```
+
+:::
 
 当 `pageSizeMenu` 所提供值列表没有与 `pageSize` 值匹配的项目时，则该值将自动添加进 `pageSizeMenu` 列表中，并选中该值
 
 ### 对齐方向
 
-```vue-html
-<PaginationBar align="left" />
-```
-
-<div class="mb-3 d-flex align-items-center">
+<!-- <div class="mb-3 d-flex align-items-center">
   指定对齐方向
   <select
     v-model="align"
-    style="-webkit-appearance: auto;width: 100px"
+    style="-webkit-appearance: auto;width: 100px;"
     class="form-control ms-3"
   >
     <option>left</option>
@@ -333,41 +393,42 @@ const pageSize = ref(25)
   :align="align"
   language="cn"
   border
-/>
-
-### 显示边框模式
+/> -->
+<PaginationAlign language="cn" />
 
 ```vue-html
-<PaginationBar border />
+<PaginationBar align="left" />
 ```
 
-<PaginationBar
+### 风格样式
+
+分页栏的风格样式
+
+<!-- <PaginationBar
   :total-row="28"
   align="left"
   language="cn"
   border
-/>
+/> -->
 
-### 圆形按钮风格
+<!-- ### 圆形按钮风格 -->
 
-```vue-html
-<PaginationBar circle />
-```
-
-<PaginationBar
+<!-- <PaginationBar
   :total-row="28"
   align="left"
   language="cn"
   circle
-/>
+/> -->
+<PaginationStyle language="cn" />
+
+```vue-html
+<PaginationBar border />
+<PaginationBar circle />
+```
 
 ### 启用与禁用
 
-```vue-html
-<PaginationBar :disabled="true" />
-```
-
-<div class="form-check form-switch d-inline-flex align-items-center border px-3 py-2 shadow-sm rounded-3">
+<!-- <div class="form-check form-switch d-inline-flex align-items-center border px-3 py-2 shadow-sm rounded-3">
   <label class="form-check-label" for="switchDisabled">启用</label>
   <input
     class="form-check-input mx-3"
@@ -394,101 +455,70 @@ const pageSize = ref(25)
   border
   align="left"
   language="cn"
-/>
+/> -->
+<PaginationDisabled language="cn" />
 
-### 功能模块的启用与关闭
+```vue-html
+<PaginationBar :disabled="true" />
+```
 
-设置分页栏模块的启用与关闭
+### 布局排列
 
-<div class="my-3 user-select-none border shadow-sm p-2 rounded-3">
-  <div>
-    <input
-      type="checkbox"
-      v-model="switchPageSizeOptions"
-      id="checkbox-page-size-menu"
-    />
-    <label for="checkbox-page-size-menu">每页数据量栏</label>
-  </div>
-  <div>
-    <input
-      type="checkbox"
-      :value="true"
-      v-model="switchInfo"
-      id="checkbox-info"
-    />
-    <label for="checkbox-info">分页信息栏</label>
-  </div>
-  <div>
-    <input
-      type="checkbox"
-      :value="true"
-      v-model="switchPageNumber"
-      id="checkbox-page-number"
-    />
-    <label for="checkbox-page-number">分页码栏</label>
-  </div>
-  <div>
-    <input
-      type="checkbox"
-      :value="true"
-      v-model="switchFirst"
-      id="checkbox-first"
-    />
-    <label for="checkbox-first">首页按钮</label>
-  </div>
-  <div>
-    <input
-      type="checkbox"
-      :value="true"
-      v-model="switchLast"
-      id="checkbox-last"
-    />
-    <label for="checkbox-last">尾页按钮</label>
-  </div>
-</div>
+`v-page` 可以视情况使用分页栏的组件模块，以及对排列顺序进行调整，以适应不同的布局需求
 
-<PaginationBar
-  align="left"
-  language="cn"
-  :total-row="28"
-  :info="switchInfo"
-  :page-size-options="switchPageSizeOptions"
-  :page-number="switchPageNumber"
-  :first="switchFirst"
-  :last="switchLast"
-/>
+<PaginationPanelOrder />
+
+```vue-html
+<PaginationBar>
+  <PaginationFirstPage />
+  <PaginationPreviousPage />
+  <PaginationPageNumbers />
+  <PaginationNextPage />
+  <PaginationLastPage />
+  <PaginationInfo />
+  <PaginationPageSizeOptions />
+</PaginationBar>
+<PaginationBar>
+  <PaginationPreviousPage />
+  <PaginationPageSizeOptions />
+  <PaginationInfo />
+  <PaginationNextPage />
+</PaginationBar>
+```
 
 ### 插槽
 
 `v-page` 提供了作用域插槽，输出分页栏核心状态数据，方便进行功能定制
+
+<PaginationSlot language="cn" />
 
 ```vue-html
 <PaginationBar
   border
   align="left"
   :total-row="28"
-  :page-size-options="false"
-  :info="false"
-  :first="false"
-  :last="false"
 >
   <template #default="{
     pageNumber, pageSize, totalPage,
     totalRow, isFirst, isLast
   }">
-    <div>
-      <div>page: <span v-text="pageNumber" /></div>
-      <div>pageSize: <span v-text="pageSize" /></div>
-      <div>totalPage: <span v-text="totalPage" /></div>
-      <div>totalRow: <span v-text="totalRow" /></div>
-      <div>isFirst: <span v-text="isFirst" /></div>
-      <div>isLast: <span v-text="isLast" /></div>
-    </div>
+    <PaginationPreviousPage />
+    <PaginationPanel>
+      <div>
+        <div>page: <span v-text="pageNumber" /></div>
+        <div>pageSize: <span v-text="pageSize" /></div>
+        <div>totalPage: <span v-text="totalPage" /></div>
+        <div>totalRow: <span v-text="totalRow" /></div>
+        <div>isFirst: <span v-text="isFirst" /></div>
+        <div>isLast: <span v-text="isLast" /></div>
+      </div>
+    </PaginationPanel>
+    <PaginationNextPage />
   </template>
 </PaginationBar>
 ```
 
-<PaginationBar
+<!-- <PaginationBar
   border
   align="left"
   language="cn"
@@ -509,7 +539,7 @@ const pageSize = ref(25)
       <div>isLast: <span v-text="isLast" /></div>
     </div>
   </template>
-</PaginationBar>
+</PaginationBar> -->
 
 ### 显示全部数据选项
 
@@ -523,40 +553,17 @@ const pageSize = ref(25)
 }
 ```
 
-<PaginationBar
+<!-- <PaginationBar
   :total-row="28"
   :display-all="true"
   align="left"
   language="cn"
-/>
+/> -->
+<PaginationDisplayAll language="cn" />
 
-<script setup>
-import { PaginationBar } from 'v-page'
-import LogDataPrinter from '@/views/components/LogDataPrinter.vue'
-
-import { usePagination } from '@/script/page'
-
-const {
-  srcList,
-  logs,
-  listGallery,
-  disabled,
-  align,
-  pageSize,
-  pageNumberOperate,
-  inputPageNumber,
-  switchInfo,
-  switchFirst,
-  switchLast,
-  switchPageSizeOptions,
-  switchPageNumber,
-
-  changeBasic,
-  changeGallery,
-  goToInputPage,
-  setPageSize
-} = usePagination()
-</script>
+```vue-html
+<PaginationBar :total-row="28" display-all>...</PaginationBar>
+```
 
 ## Props
 
@@ -615,31 +622,6 @@ interface PaginationProps {
    * @default false
    */
   circle?: boolean
-  /**
-   * 显示记录数列表面板
-   * @default true
-   */
-  pageSizeOptions?: boolean
-  /**
-   * 显示分页信息面板
-   * @default true
-   */
-  info?: boolean
-  /**
-   * 显示分页码模块
-   * @default true
-   */
-  pageNumber?: boolean
-  /**
-   * 显示首页按钮
-   * @default true
-   */
-  first?: boolean
-  /**
-   * 显示尾页按钮
-   * @default true
-   */
-  last?: boolean
   /**
    * 在每页记录数列表中增加显示所有数据记录项目
    * @default false

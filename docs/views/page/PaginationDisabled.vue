@@ -3,7 +3,7 @@
     form-check form-switch user-select-none
     d-inline-flex align-items-center border px-4 py-2 shadow-sm rounded-pill mt-3
   ">
-    <label class="form-check-label" for="switchDisabled">禁用</label>
+    <label class="form-check-label" for="switchDisabled">Disabled</label>
     <input
       class="form-check-input ms-3"
       type="checkbox"

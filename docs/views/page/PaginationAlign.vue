@@ -1,6 +1,6 @@
 <template>
   <div class="my-3 d-flex align-items-center">
-    指定对齐方向
+    Alignment direction
     <select
       v-model="align"
       style="-webkit-appearance: auto;width: 100px;"
@@ -15,8 +15,8 @@
   <PaginationBar
     :total-row="28"
     :align="align"
-    language="cn"
     border
+    v-bind="$attrs"
   >
     <PaginationPageSizeOptions />
     <PaginationInfo />

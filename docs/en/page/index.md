@@ -10,7 +10,7 @@ Repository status
 
 Detailed changes for each release are documented in [Changelog](https://github.com/TerryZ/v-page/blob/dev/CHANGELOG.md)
 
-If you are using [vue 2.x](https://v2.vuejs.org/v2/guide/) version, please use [v-page 2.x](https://terryz.github.io/vue/#/page) version instead
+If you are using [vue 2.x](https://v2.vuejs.org/v2/guide/) version, please use [v-page 2.x](https://terryz.github.io/docs-vue/#/page) version instead
 
 ## Installation
 
@@ -74,23 +74,43 @@ import { PaginationBar } from 'v-page'
 
 Typical usage of a pagination component
 
-```vue
-<template>
-  <div
-    v-for="item in list"
-    :key="item.key"
-    v-text="item.name"
-  />
-  <PaginationBar
-    v-model="pageNumber"
-    :total-row="totalRow"
-    @change="change"
-  />
-</template>
+::: code-group
 
-<script setup lang="ts">
+```vue-html
+<div
+  v-for="item in list"
+  :key="item.key"
+  v-text="item.name"
+/>
+<PaginationBar
+  language="cn"
+  v-model="pageNumber"
+  :total-row="totalRow"
+  @change="change"
+>
+  <PaginationPageSizeOptions />
+  <PaginationInfo />
+  <PaginationFirstPage />
+  <PaginationPreviousPage />
+  <PaginationPageNumbers />
+  <PaginationNextPage />
+  <PaginationLastPage />
+</PaginationBar>
+```
+
+```ts
 import { ref } from 'vue'
-import { PaginationBar } from 'v-page'
+import {
+  PaginationBar,
+  PaginationPageSizeOptions,
+  PaginationInfo,
+  PaginationPanel,
+  PaginationPageNumbers,
+  PaginationFirstPage,
+  PaginationPreviousPage,
+  PaginationNextPage,
+  PaginationLastPage
+} from 'v-page'
 import type { PageInfo } from 'v-page'
 
 const pageNumber = ref<number>(3)
@@ -112,33 +132,62 @@ function change (data: PageInfo): void {
     totalRow.value = resp.totalRow
   })
 }
-</script>
 ```
+
+:::
 
 ## Examples
 
+<script setup>
+import LogDataPrinter from '@/views/components/LogDataPrinter.vue'
+import PaginationOperation from '@/views/page/PaginationOperation.vue'
+import PaginationPageSize from '@/views/page/PaginationPageSize.vue'
+import PaginationAlign from '@/views/page/PaginationAlign.vue'
+import PaginationDisabled from '@/views/page/PaginationDisabled.vue'
+
+import {
+  paginationBase,
+  PaginationGallery,
+  PaginationDisplayAll,
+  PaginationStyle,
+  PaginationPanelOrder,
+  PaginationSlot
+} from '@/script/page'
+
+const { logs, PaginationBarBase } = paginationBase()
+</script>
+
 ### Quick demo
 
-```vue-html
-<PaginationBar
-  :total-row="21"
-  @change="change"
-/>
-```
+The most commonly used paging bar applications
 
-<div class="border rounded-3 shadow-sm p-2">
-  <PaginationBar
-    :total-row="21"
-    align="center"
-    @change="changeBasic"
-  />
-</div>
+<PaginationBarBase />
 
 Pagination [change](#change) event response data
 
 <LogDataPrinter :logs="logs" />
 
+```vue-html
+<PaginationBar
+  align="center"
+  :total-row="21"
+  @change="change"
+>
+  <PaginationPageSizeOptions />
+  <PaginationInfo />
+  <PaginationFirstPage />
+  <PaginationPreviousPage />
+  <PaginationPageNumbers />
+  <PaginationNextPage />
+  <PaginationLastPage />
+</PaginationBar>
+```
+
 ### Gallery data
+
+Gallery data grid display example
+
+<PaginationGallery />
 
 ::: code-group
 
@@ -151,15 +200,16 @@ Pagination [change](#change) event response data
   />
 </div>
 <PaginationBar
-  :total-row="88"
   align="center"
-  @change="changeGallery"
-/>
+  :total-row="88"
+  @change="change"
+>
+  ...
+</PaginationBar>
 ```
 
 ```js
 import { ref } from 'vue'
-import { PaginationBar } from 'v-page'
 
 const srcList = Array(88).fill(0).map((val, index) => index + 1)
 const listGallery = ref([])
@@ -169,7 +219,6 @@ function changeGallery ({ pageNumber, pageSize }) {
   const end = (start + pageSize) > srcList.length
     ? srcList.length
     : start + pageSize
-
   listGallery.value = srcList.filter((val, index) => {
     return index >= start && index < end
   })
@@ -178,27 +227,11 @@ function changeGallery ({ pageNumber, pageSize }) {
 
 :::
 
-<div class="border rounded-3 shadow-sm pt-2 ps-2 mb-2 d-flex flex-wrap">
-  <div
-    style="height: 100px;width: 126px;"
-    class="
-      rounded-2 bg-light me-2 mb-2 fs-1 text-body-secondary
-      d-flex align-items-center justify-content-center
-    "
-    v-for="item in listGallery"
-    :key="item"
-    v-text=item
-  />
-</div>
-<PaginationBar
-  :total-row="88"
-  align="center"
-  @change="changeGallery"
-/>
-
 ### Pagination operation
 
 Some cases showing how pagination operation works
+
+<PaginationOperation />
 
 ::: code-group
 
@@ -212,7 +245,9 @@ Some cases showing how pagination operation works
   >pageNumber + 1</button>
 </div>
 
-<PaginationBar v-model="pageNumber" />
+<PaginationBar v-model="pageNumber" >
+  ...
+</PaginationBar>
 ```
 
 ```js
@@ -236,38 +271,11 @@ function goToInputPage () {
 
 :::
 
-<div class="mb-3 d-flex">
-  <input
-    type="text"
-    class="form-control me-3"
-    v-model="inputPageNumber"
-    style="width: 100px"
-  />
-  <button
-    type="button"
-    class="btn btn-dark me-3"
-    @click="goToInputPage"
-  >
-    Go
-  </button>
-  <button
-    type="button"
-    class="btn btn-dark"
-    @click="pageNumberOperate++"
-  >
-    pageNumber + 1
-  </button>
-</div>
-
-<PaginationBar
-  align="left"
-  v-model="pageNumberOperate"
-  :total-row="58"
-/>
-
 ### Number of records per page
 
 `pageSize` specifies the number of records per page, and `pageSizeMenu` provides a list of the number of records per page for users to quickly select
+
+<PaginationPageSize />
 
 ::: code-group
 
@@ -275,7 +283,9 @@ function goToInputPage () {
 <PaginationBar
   v-model:page-size="pageSize"
   :total-row="100"
-/>
+>
+  ...
+</PaginationBar>
 ```
 
 ```js
@@ -286,218 +296,92 @@ const pageSize = ref(25)
 
 :::
 
-<PaginationBar
-  align="left"
-  v-model:page-size="pageSize"
-  :total-row="100"
-/>
-
-<div>
-  <button
-    type="button"
-    class="btn btn-dark mt-3"
-    @click="setPageSize(15)"
-  >
-    set pageSize to 15
-  </button>
-</div>
-
 When the value list provided by `pageSizeMenu` does not have an item matching the `pageSize` value, the value will be automatically added to the `pageSizeMenu` list and selected
 
 ### Alignment direction
+
+<PaginationAlign />
 
 ```vue-html
 <PaginationBar align="left" />
 ```
 
-<div class="mb-3 d-flex align-items-center">
-  Specify alignment direction
-  <select
-    v-model="align"
-    style="-webkit-appearance: auto;width: 100px"
-    class="form-control ms-3"
-  >
-    <option>left</option>
-    <option>center</option>
-    <option>right</option>
-  </select>
-</div>
+### Component styles
 
-<PaginationBar
-  :total-row="28"
-  :align="align"
-  border
-/>
+The style of the pagination bar
 
-### Display border mode
+<PaginationStyle />
 
 ```vue-html
 <PaginationBar border />
-```
-
-<PaginationBar
-  :total-row="28"
-  align="left"
-  border
-/>
-
-### Round style page number button
-
-```vue-html
 <PaginationBar circle />
 ```
 
-<PaginationBar
-  :total-row="28"
-  align="left"
-  circle
-/>
-
 ### Enabled and disabled
+
+<PaginationDisabled />
 
 ```vue-html
 <PaginationBar :disabled="true" />
 ```
 
-<div class="form-check form-switch d-inline-flex align-items-center border px-3 py-2 shadow-sm rounded-3">
-  <label class="form-check-label" for="switchDisabled">Enabled</label>
-  <input
-    class="form-check-input mx-3"
-    type="checkbox"
-    role="switch"
-    id="switchDisabled"
-    v-model="disabled"
-  >
-  <label class="form-check-label" for="switchDisabled">Disabled</label>
-</div>
+### Layout Arrangement
 
-<div class="my-3">
-  <PaginationBar
-    :total-row="28"
-    :disabled="disabled"
-    align="left"
-  />
-</div>
+`v-page` can use the component modules of the pagination bar as needed, and adjust the order of arrangement to meet different layout requirements
 
-<PaginationBar
-  :total-row="28"
-  :disabled="disabled"
-  border
-  align="left"
-/>
+<PaginationPanelOrder />
 
-### Modules on / off
-
-Setup pagination modules on or off
-
-<div class="my-3 user-select-none border shadow-sm p-2 rounded-3">
-  <div>
-    <input
-      type="checkbox"
-      v-model="switchPageSizeOptions"
-      id="checkbox-page-size-menu"
-    />
-    <label for="checkbox-page-size-menu">Page size list</label>
-  </div>
-  <div>
-    <input
-      type="checkbox"
-      :value="true"
-      v-model="switchInfo"
-      id="checkbox-info"
-    />
-    <label for="checkbox-info">Pagination status information</label>
-  </div>
-  <div>
-    <input
-      type="checkbox"
-      :value="true"
-      v-model="switchPageNumber"
-      id="checkbox-page-number"
-    />
-    <label for="checkbox-page-number">Page numbers</label>
-  </div>
-  <div>
-    <input
-      type="checkbox"
-      :value="true"
-      v-model="switchFirst"
-      id="checkbox-first"
-    />
-    <label for="checkbox-first">First page button</label>
-  </div>
-  <div>
-    <input
-      type="checkbox"
-      :value="true"
-      v-model="switchLast"
-      id="checkbox-last"
-    />
-    <label for="checkbox-last">Last page button</label>
-  </div>
-</div>
-
-<PaginationBar
-  align="left"
-  :total-row="28"
-  :info="switchInfo"
-  :page-size-options="switchPageSizeOptions"
-  :page-number="switchPageNumber"
-  :first="switchFirst"
-  :last="switchLast"
-/>
+```vue-html
+<PaginationBar>
+  <PaginationFirstPage />
+  <PaginationPreviousPage />
+  <PaginationPageNumbers />
+  <PaginationNextPage />
+  <PaginationLastPage />
+  <PaginationInfo />
+  <PaginationPageSizeOptions />
+</PaginationBar>
+<PaginationBar>
+  <PaginationPreviousPage />
+  <PaginationPageSizeOptions />
+  <PaginationInfo />
+  <PaginationNextPage />
+</PaginationBar>
+```
 
 ### Slot
 
 `v-page` provides scoped slots to output pagination state for more easily customization
+
+<PaginationSlot />
 
 ```vue-html
 <PaginationBar
   border
   align="left"
   :total-row="28"
-  :page-size-options="false"
-  :info="false"
-  :first="false"
-  :last="false"
 >
   <template #default="{
     pageNumber, pageSize, totalPage,
     totalRow, isFirst, isLast
   }">
-    <div>
-      <div>page: <span v-text="pageNumber" /></div>
-      <div>pageSize: <span v-text="pageSize" /></div>
-      <div>totalPage: <span v-text="totalPage" /></div>
-      <div>totalRow: <span v-text="totalRow" /></div>
-      <div>isFirst: <span v-text="isFirst" /></div>
-      <div>isLast: <span v-text="isLast" /></div>
-    </div>
+    <PaginationPreviousPage />
+    <PaginationPanel>
+      <div>
+        <div>page: <span v-text="pageNumber" /></div>
+        <div>pageSize: <span v-text="pageSize" /></div>
+        <div>totalPage: <span v-text="totalPage" /></div>
+        <div>totalRow: <span v-text="totalRow" /></div>
+        <div>isFirst: <span v-text="isFirst" /></div>
+        <div>isLast: <span v-text="isLast" /></div>
+      </div>
+    </PaginationPanel>
+    <PaginationNextPage />
   </template>
 </PaginationBar>
 ```
 
-<PaginationBar
-  border
-  align="left"
-  :total-row="28"
-  :page-size-options="false"
-  :page-number="false"
-  :info="false"
-  :first="false"
-  :last="false"
->
-  <template #default="{ pageNumber, pageSize, totalPage, totalRow, isFirst, isLast }">
-    <div class="d-flex">
-      <div class="me-1">page: <span v-text="pageNumber" /></div>
-      <div class="me-1">pageSize: <span v-text="pageSize" /></div>
-      <div class="me-1">totalPage: <span v-text="totalPage" /></div>
-      <div class="me-1">totalRow: <span v-text="totalRow" /></div>
-      <div class="me-1">isFirst: <span v-text="isFirst" /></div>
-      <div>isLast: <span v-text="isLast" /></div>
-    </div>
-  </template>
-</PaginationBar>
+Custom content is wrapped by the `PaginationPanel` component to ensure the style consistency of the pagination bar
 
 ### Display all data option
 
@@ -511,39 +395,11 @@ Add `All` item to page size list to display all data without paging. When this i
 }
 ```
 
-<PaginationBar
-  :total-row="28"
-  :display-all="true"
-  align="left"
-/>
+<PaginationDisplayAll />
 
-<script setup>
-import { PaginationBar } from 'v-page'
-import LogDataPrinter from '@/views/components/LogDataPrinter.vue'
-
-import { usePagination } from '@/script/page'
-
-const {
-  srcList,
-  logs,
-  listGallery,
-  disabled,
-  align,
-  pageSize,
-  pageNumberOperate,
-  inputPageNumber,
-  switchInfo,
-  switchFirst,
-  switchLast,
-  switchPageSizeOptions,
-  switchPageNumber,
-
-  changeBasic,
-  changeGallery,
-  goToInputPage,
-  setPageSize
-} = usePagination()
-</script>
+```vue-html
+<PaginationBar :total-row="28" display-all />
+```
 
 ## Props
 
@@ -602,31 +458,6 @@ interface PaginationProps {
    * @default false
    */
   circle?: boolean
-  /**
-   * Display page size list panel
-   * @default true
-   */
-  pageSizeOptions?: boolean
-  /**
-   * Display page information panel
-   * @default true
-   */
-  info?: boolean
-  /**
-   * Display page number buttons
-   * @default true
-   */
-  pageNumber?: boolean
-  /**
-   * Display first page button
-   * @default true
-   */
-  first?: boolean
-  /**
-   * Display last page button
-   * @default true
-   */
-  last?: boolean
   /**
    * Whether add `All` item in page length list
    * @default false

@@ -139,18 +139,6 @@ function change (data: PageInfo): void {
 ## 实例
 
 <script setup>
-import {
-  PaginationBar,
-  PaginationPageSizeOptions,
-  PaginationInfo,
-  PaginationPanel,
-  PaginationPageNumbers,
-  PaginationFirstPage,
-  PaginationPreviousPage,
-  PaginationNextPage,
-  PaginationLastPage
-} from 'v-page'
-
 import LogDataPrinter from '@/views/components/LogDataPrinter.vue'
 import PaginationOperation from '@/views/page/PaginationOperation.vue'
 import PaginationPageSize from '@/views/page/PaginationPageSize.vue'
@@ -158,7 +146,6 @@ import PaginationAlign from '@/views/page/PaginationAlign.vue'
 import PaginationDisabled from '@/views/page/PaginationDisabled.vue'
 
 import {
-  usePagination,
   paginationBase,
   PaginationGallery,
   PaginationDisplayAll,
@@ -168,35 +155,22 @@ import {
 } from '@/script/page'
 
 const { logs, PaginationBarBase } = paginationBase()
-
-// const {
-//   srcList,
-//   logs,
-//   listGallery,
-//   disabled,
-//   align,
-//   pageSize,
-//   pageNumberOperate,
-//   inputPageNumber,
-//   switchInfo,
-//   switchFirst,
-//   switchLast,
-//   switchPageSizeOptions,
-//   switchPageNumber,
-
-//   changeBasic,
-//   changeGallery,
-//   goToInputPage,
-//   setPageSize
-// } = usePagination()
 </script>
 
 ### 快速应用
 
+最常用的分页栏应用
+
+<PaginationBarBase language="cn" />
+
+分页事件 [change](#change) 响应数据
+
+<LogDataPrinter :logs="logs" />
+
 ```vue-html
 <PaginationBar
   align="center"
-  total-row="21"
+  :total-row="21"
   @change="change"
 >
   <PaginationPageSizeOptions />
@@ -209,42 +183,10 @@ const { logs, PaginationBarBase } = paginationBase()
 </PaginationBar>
 ```
 
-<!-- <div class="border rounded-3 shadow-sm p-2">
-  <PaginationBar
-    align="center"
-    language="cn"
-    :total-row="21"
-    @change="changeBasic"
-  />
-</div> -->
-<PaginationBarBase language="cn" />
-
-分页事件 [change](#change) 响应数据
-
-<LogDataPrinter :logs="logs" />
-
 ### 画廊数据展示模式实例
 
 画廊数据格展示方式示例
 
-<!-- <div class="border rounded-3 shadow-sm pt-2 ps-2 mb-2 d-flex flex-wrap">
-  <div
-    style="height: 100px;width: 126px;"
-    class="
-      rounded-2 bg-light me-2 mb-2 fs-1 text-body-secondary
-      d-flex align-items-center justify-content-center
-    "
-    v-for="item in listGallery"
-    :key="item"
-    v-text=item
-  />
-</div>
-<PaginationBar
-  align="center"
-  language="cn"
-  :total-row="88"
-  @change="changeGallery"
-/> -->
 <PaginationGallery language="cn" />
 
 ::: code-group
@@ -329,27 +271,10 @@ function goToInputPage () {
 
 :::
 
-
 ### 每页记录数
 
 `pageSize` 指定了每页记录数，`pageSizeMenu` 提供了可供用户快速选择的每页记录数列表
 
-<!-- <PaginationBar
-  align="left"
-  language="cn"
-  v-model:page-size="pageSize"
-  :total-row="100"
-/>
-
-<div>
-  <button
-    type="button"
-    class="btn btn-dark mt-3"
-    @click="setPageSize(15)"
-  >
-    set pageSize to 15
-  </button>
-</div> -->
 <PaginationPageSize language="cn" />
 
 ::: code-group
@@ -375,25 +300,6 @@ const pageSize = ref(25)
 
 ### 对齐方向
 
-<!-- <div class="mb-3 d-flex align-items-center">
-  指定对齐方向
-  <select
-    v-model="align"
-    style="-webkit-appearance: auto;width: 100px;"
-    class="form-control ms-3"
-  >
-    <option>left</option>
-    <option>center</option>
-    <option>right</option>
-  </select>
-</div>
-
-<PaginationBar
-  :total-row="28"
-  :align="align"
-  language="cn"
-  border
-/> -->
 <PaginationAlign language="cn" />
 
 ```vue-html
@@ -404,21 +310,6 @@ const pageSize = ref(25)
 
 分页栏的风格样式
 
-<!-- <PaginationBar
-  :total-row="28"
-  align="left"
-  language="cn"
-  border
-/> -->
-
-<!-- ### 圆形按钮风格 -->
-
-<!-- <PaginationBar
-  :total-row="28"
-  align="left"
-  language="cn"
-  circle
-/> -->
 <PaginationStyle language="cn" />
 
 ```vue-html
@@ -428,34 +319,6 @@ const pageSize = ref(25)
 
 ### 启用与禁用
 
-<!-- <div class="form-check form-switch d-inline-flex align-items-center border px-3 py-2 shadow-sm rounded-3">
-  <label class="form-check-label" for="switchDisabled">启用</label>
-  <input
-    class="form-check-input mx-3"
-    type="checkbox"
-    role="switch"
-    id="switchDisabled"
-    v-model="disabled"
-  >
-  <label class="form-check-label" for="switchDisabled">禁用</label>
-</div>
-
-<div class="my-3">
-  <PaginationBar
-    :total-row="28"
-    :disabled="disabled"
-    language="cn"
-    align="left"
-  />
-</div>
-
-<PaginationBar
-  :total-row="28"
-  :disabled="disabled"
-  border
-  align="left"
-  language="cn"
-/> -->
 <PaginationDisabled language="cn" />
 
 ```vue-html
@@ -466,7 +329,7 @@ const pageSize = ref(25)
 
 `v-page` 可以视情况使用分页栏的组件模块，以及对排列顺序进行调整，以适应不同的布局需求
 
-<PaginationPanelOrder />
+<PaginationPanelOrder language="cn" />
 
 ```vue-html
 <PaginationBar>
@@ -518,28 +381,7 @@ const pageSize = ref(25)
 </PaginationBar>
 ```
 
-<!-- <PaginationBar
-  border
-  align="left"
-  language="cn"
-  :total-row="28"
-  :page-size-options="false"
-  :page-number="false"
-  :info="false"
-  :first="false"
-  :last="false"
->
-  <template #default="{ pageNumber, pageSize, totalPage, totalRow, isFirst, isLast }">
-    <div class="d-flex">
-      <div class="me-1">page: <span v-text="pageNumber" /></div>
-      <div class="me-1">pageSize: <span v-text="pageSize" /></div>
-      <div class="me-1">totalPage: <span v-text="totalPage" /></div>
-      <div class="me-1">totalRow: <span v-text="totalRow" /></div>
-      <div class="me-1">isFirst: <span v-text="isFirst" /></div>
-      <div>isLast: <span v-text="isLast" /></div>
-    </div>
-  </template>
-</PaginationBar> -->
+自定义内容通过 `PaginationPanel` 组件包裹，以保证分页栏的样式一致性
 
 ### 显示全部数据选项
 
@@ -553,16 +395,10 @@ const pageSize = ref(25)
 }
 ```
 
-<!-- <PaginationBar
-  :total-row="28"
-  :display-all="true"
-  align="left"
-  language="cn"
-/> -->
 <PaginationDisplayAll language="cn" />
 
 ```vue-html
-<PaginationBar :total-row="28" display-all>...</PaginationBar>
+<PaginationBar :total-row="28" display-all />
 ```
 
 ## Props

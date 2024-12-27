@@ -23,7 +23,7 @@ import { createDropdownWithTrigger, createMenuItems } from './base'
 export function SelectMenuBase (props, { attrs }) {
   return (
     <SelectMenuDropdown {...attrs}>{{
-      trigger: () => <SelectMenuTrigger />,
+      trigger: () => <SelectMenuTrigger >{props?.triggerText || 'Open'}</SelectMenuTrigger>,
       default: () => (
         <SelectMenuBody>
           <SelectMenuHeader>SelectMenu</SelectMenuHeader>

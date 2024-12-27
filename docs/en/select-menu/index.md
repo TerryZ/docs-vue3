@@ -366,7 +366,7 @@ const {
 
 The dropdown layer of `v-selectmenu` is based on [v-dropdown](/dropdown/), so the props and events of `v-dropdown` can be used directly on the `SelectMenuDropdown` component
 
-<SelectMenuBase trigger="hover" />
+<SelectMenuBase trigger="hover" triggerText="Hover me" />
 
 Here the `trigger` property is set to `hover`, so the drop-down menu is opened by hovering the mouse instead of the default click
 

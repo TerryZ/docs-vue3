@@ -369,7 +369,7 @@ const {
 
 `v-selectmenu` 的下拉层基于 [v-dropdown](/cn/dropdown/) 实现，因此可以在 `SelectMenuDropdown` 组件上直接使用 `v-dropdown` 的属性与事件
 
-<SelectMenuBase trigger="hover" />
+<SelectMenuBase trigger="hover" triggerText="Hover me" />
 
 这里设置了 `trigger` 属性为 `hover`，下拉菜单的打开方式为鼠标悬停而不是默认的点击
 

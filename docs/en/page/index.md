@@ -214,7 +214,7 @@ import { ref } from 'vue'
 const srcList = Array(88).fill(0).map((val, index) => index + 1)
 const listGallery = ref([])
 
-function changeGallery ({ pageNumber, pageSize }) {
+function change ({ pageNumber, pageSize }) {
   const start = pageSize * (pageNumber - 1)
   const end = (start + pageSize) > srcList.length
     ? srcList.length

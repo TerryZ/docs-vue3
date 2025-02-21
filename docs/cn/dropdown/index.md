@@ -34,98 +34,114 @@ pnpm add v-dropdown
 
 ### 常规用例
 
-```vue
-<template>
-  <Dropdown @visible-change="change">
-    <!-- trigger element -->
-    <template #trigger>
-      <button type="button">Click me</button>
-    </template>
+::: code-group
 
-    <!-- contents display in dropdown -->
+```vue-html
+<Dropdown @visible-change="change">
+  <!-- trigger element -->
+  <template #trigger>
+    <!-- built-in trigger button -->
+    <DropdownTrigger />
+  </template>
+
+  <!-- contents display in dropdown -->
+  <DropdownContent>
     <div>
       some contents
     </div>
-  </Dropdown>
-</template>
+  </DropdownContent>
+</Dropdown>
+```
 
-<script setup>
-import Dropdown from 'v-dropdown'
-// or
-// import { Dropdown } from 'v-dropdown'
+```js
+import { Dropdown, DropdownContent, DropdownTrigger } from 'v-dropdown'
+
 function change (val) {
   console.log(val)
 }
-</script>
 ```
+
+:::
 
 ## 实例
 
+<script setup>
+import {
+  DropdownClick,
+  DropdownHover,
+  DropdownContextmenu,
+  DropdownNoToggle,
+  DropdownDisabled
+} from '@/script/dropdown'
+
+import { ref } from 'vue'
+import { Dropdown } from 'v-dropdown'
+
+const disabled = ref(false)
+
+const dropdownManual = ref(null)
+
+function changeDisabled (val) {
+  disabled.value = val
+}
+function inputChange (e) {
+  if (e.target.value === '3') {
+    dropdownManual.value.display()
+  } else {
+    if (dropdownManual.value.visible) {
+      dropdownManual.value.close()
+    }
+  }
+}
+</script>
+
 ### 快速应用
 
-```html
+```vue-html
 <Dropdown>
   <!-- trigger element -->
   <template #trigger>
-    <button type="button">Click me</button>
+    <DropdownTrigger>Click me</DropdownTrigger>
   </template>
   <!-- contents display in dropdown -->
-  <div>some contents</div>
+  <DropdownContent>
+    <div>some contents</div>
+  </DropdownContent>
 </Dropdown>
 ```
 
-<Dropdown>
-  <template #trigger>
-    <button
-      type="button"
-      class="border rounded-3 px-3 py-1 shadow-sm"
-    >Click me</button>
-  </template>
-
-  <div class="p-5">
-    <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
-</Dropdown>
+<DropdownClick />
 
 `Dropdown` 组件默认使用点击触发对象的方式以打开下拉栏
 
 ### 鼠标悬停激活
 
-```html
+```vue-html
 <Dropdown trigger="hover">
   <template #trigger>
-    <button type="button">Hover me</button>
+    <DropdownTrigger>Hover me</DropdownTrigger>
   </template>
   ...
 </Dropdown>
 ```
 
-<Dropdown trigger="hover">
-  <template #trigger>
-    <button
-      type="button"
-      class="border rounded-3 px-3 py-1 shadow-sm"
-    >Hover me</button>
-  </template>
-
-  <div class="p-5">
-    <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
-</Dropdown>
+<DropdownHover />
 
 ### 鼠标右键激活
 
 ```html
 <Dropdown
   trigger="contextmenu"
-  :full-width="true"
+  block
 >
   <template #trigger>
-    <div>Mouse right click me</div>
+    <div
+      style="height: 10rem;"
+      class="
+        d-flex align-items-center justify-content-center
+        bg-light rounded-3 px-3 py-1 fs-1 text-body-secondary w-100
+      "
+    >Mouse right click me</div>
   </template>
   ...
 </Dropdown>
@@ -133,28 +149,7 @@ function change (val) {
 
 鼠标右键点击触发对象区域以打开下拉栏
 
-<Dropdown
-  trigger="contextmenu"
-  :full-width="true"
->
-  <template #trigger>
-    <div
-      class="
-        d-flex align-items-center justify-content-center
-        bg-light rounded-3 px-3 py-1 fs-1 text-body-secondary w-100
-      "
-      style="height: 10rem;"
-    >
-      Mouse right click me
-    </div>
-  </template>
-
-  <div class="p-5">
-    <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
-</Dropdown>
+<DropdownContextmenu />
 
 ### 关闭循环切换
 
@@ -166,21 +161,7 @@ function change (val) {
 
 设置点击触发对象循环切换下拉栏的打开与关闭，效果同样作用于鼠标悬停与鼠标右键菜单的触发模式
 
-<Dropdown :toggle="false">
-  <template #trigger>
-    <input
-      type="text"
-      class="border rounded-3 px-3 py-2"
-      placeholder="focus on me"
-    />
-  </template>
-
-  <div class="p-5">
-    <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
-</Dropdown>
+<DropdownNoToggle />
 
 ### 禁用
 
@@ -202,7 +183,7 @@ function change (val) {
 </Dropdown>
 ```
 
-<div class="mb-3">
+<!-- <div class="mb-3">
   <button
     type="button"
     class="border rounded-3 px-3 py-1 shadow-sm me-3"
@@ -239,7 +220,8 @@ function change (val) {
     <div>some contents</div>
     <div>some contents</div>
   </div>
-</Dropdown>
+</Dropdown> -->
+<DropdownDisabled />
 
 ### 手动模式
 
@@ -400,27 +382,7 @@ function inputChange (e) {
   </div>
 </Dropdown>
 
-<script setup>
-import { ref } from 'vue'
-import Dropdown from 'v-dropdown'
 
-const disabled = ref(false)
-
-const dropdownManual = ref(null)
-
-function changeDisabled (val) {
-  disabled.value = val
-}
-function inputChange (e) {
-  if (e.target.value === '3') {
-    dropdownManual.value.display()
-  } else {
-    if (dropdownManual.value.visible) {
-      dropdownManual.value.close()
-    }
-  }
-}
-</script>
 
 ## 插槽
 
@@ -578,6 +540,30 @@ interface TriggerSlotData {
 `visible-change`: (visible: boolean) => void
 ```
 
+### open
+
+```ts
+open: () => void
+```
+
+### opened
+
+```ts
+opened: () => void
+```
+
+### close
+
+```ts
+close: () => void
+```
+
+### closed
+
+```ts
+closed: () => void
+```
+
 ## API
 
 使用插件的 API 前，需为组件声明 `ref` 属性，并使用 `ref()` 声明对应名称的响应式变量以调用 API 方法
@@ -619,12 +605,4 @@ close: () => void
 
 ```ts
 toggleVisible: () => void
-```
-
-### adjust
-
-检测并调整下拉栏位置，使下拉栏与触发对象位置对齐
-
-```ts
-adjust: () => void
 ```

@@ -16,7 +16,7 @@
     "@vitejs/plugin-vue-jsx": "^4.1.1",
     "bootstrap": "^5.3.3",
     "v-dialogs": "3.0.3",
-    "v-dropdown": "3.0.0",
+    "v-dropdown": "3.1.0",
     "v-layouts": "^1.0.2",
     "v-page": "3.3.0",
     "v-region": "3.3.0",
@@ -24,8 +24,8 @@
     "v-selectpage": "3.0.1"
   },
   "devDependencies": {
-    "sass": "^1.83.0",
-    "vitepress": "1.5.0",
+    "sass": "^1.85.0",
+    "vitepress": "1.6.3",
     "vue": "^3.5.13"
   }
 }

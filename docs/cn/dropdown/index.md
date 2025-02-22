@@ -66,16 +66,22 @@ function change (val) {
 ## 实例
 
 <script setup>
+import { ref } from 'vue'
+import { Dropdown } from 'v-dropdown'
+
 import {
   DropdownClick,
   DropdownHover,
   DropdownContextmenu,
-  DropdownNoToggle,
-  DropdownDisabled
+  DropdownManual,
+  DropdownCustomStyle,
+  DropdownSlotData
 } from '@/script/dropdown'
 
-import { ref } from 'vue'
-import { Dropdown } from 'v-dropdown'
+import DropdownToggle from '@/views/dropdown/DropdownToggle.vue'
+import DropdownDisabled from '@/views/dropdown/DropdownDisabled.vue'
+import DropdownAlign from '@/views/dropdown/DropdownAlign.vue'
+import DropdownStyles from '@/views/dropdown/DropdownStyles.vue'
 
 const disabled = ref(false)
 
@@ -97,6 +103,10 @@ function inputChange (e) {
 
 ### 快速应用
 
+`Dropdown` 组件默认使用点击触发对象的方式以打开下拉栏
+
+<DropdownClick />
+
 ```vue-html
 <Dropdown>
   <!-- trigger element -->
@@ -110,11 +120,11 @@ function inputChange (e) {
 </Dropdown>
 ```
 
-<DropdownClick />
-
-`Dropdown` 组件默认使用点击触发对象的方式以打开下拉栏
-
 ### 鼠标悬停激活
+
+鼠标悬停触发对象区域以打开下拉栏
+
+<DropdownHover />
 
 ```vue-html
 <Dropdown trigger="hover">
@@ -125,11 +135,13 @@ function inputChange (e) {
 </Dropdown>
 ```
 
-<DropdownHover />
-
 ### 鼠标右键激活
 
-```html
+鼠标右键点击触发对象区域以打开下拉栏
+
+<DropdownContextmenu />
+
+```vue-html
 <Dropdown
   trigger="contextmenu"
   block
@@ -147,163 +159,74 @@ function inputChange (e) {
 </Dropdown>
 ```
 
-鼠标右键点击触发对象区域以打开下拉栏
-
-<DropdownContextmenu />
-
 ### 关闭循环切换
 
-```html
+设置点击触发对象循环切换下拉栏的打开与关闭，效果同样作用于鼠标悬停与鼠标右键菜单的触发模式
+
+<DropdownToggle />
+
+```vue-html
 <Dropdown :toggle="false" >
   ...
 </Dropdown>
 ```
 
-设置点击触发对象循环切换下拉栏的打开与关闭，效果同样作用于鼠标悬停与鼠标右键菜单的触发模式
-
-<DropdownNoToggle />
-
 ### 禁用
 
-```html
-<Dropdown :disabled="true" >
-  <!-- named Scoped Slots -->
-  <template #trigger="{ visible, disabled }">
-    <button
-      type="button"
-      :class="{
-        'border-primary': visible.value,
-        'bg-primary': visible.value,
-        'bg-opacity-10': visible.value,
-      }"
-    >
-      Click me (visible: {{ visible }}, disabled: {{ disabled }})
-    </button>
-  </template>
-</Dropdown>
-```
-
-<!-- <div class="mb-3">
-  <button
-    type="button"
-    class="border rounded-3 px-3 py-1 shadow-sm me-3"
-    :class="{ 'bg-light': !disabled }"
-    :disabled="!disabled"
-    @click="changeDisabled(false)"
-  >Enabled</button>
-  <button
-    type="button"
-    class="border rounded-3 px-3 py-1 shadow-sm"
-    :class="{ 'bg-light': disabled }"
-    :disabled="disabled"
-    @click="changeDisabled(true)"
-  >Disabled</button>
-</div>
-
-<Dropdown :disabled="disabled">
-  <template #trigger="{ visible, disabled: stateDisabled }">
-    <button
-      type="button"
-      class="border rounded-3 px-3 py-1 shadow-sm transition-all"
-      :class="{
-        'border-primary': visible.value,
-        'bg-primary': visible.value,
-        'bg-opacity-10': visible.value,
-      }"
-    >
-      Click me (visible: {{ visible }}, disabled: {{ stateDisabled }})
-    </button>
-  </template>
-
-  <div class="p-5">
-    <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
-</Dropdown> -->
 <DropdownDisabled />
 
-### 手动模式
-
-```vue
-<template>
-  <Dropdown
-    :manual="true"
-    ref="dropdownManual"
-  >
-    <template #trigger>
-      <input
-        type="text"
-        @input="inputChange"
-      />
-    </template>
-    ...
-  </Dropdown>
-</template>
-
-<script setup>
-import { ref } from 'vue'
-const dropdownManual = ref(null)
-
-function inputChange (e) {
-  if (e.target.value === '3') {
-    dropdownManual.value.display()
-  } else {
-    // Dropdown expose `visible` state
-    if (dropdownManual.value.visible) {
-      dropdownManual.value.close()
-    }
-  }
-}
-</script>
-```
-
-在这个例子里，只有输入数字 `3` 时，才会打开下拉栏
-
-<Dropdown
-  :manual="true"
-  ref="dropdownManual"
->
-  <template #trigger>
-    <input
-      type="text"
-      class="border rounded-3 px-3 py-2"
-      placeholder="type enter 3"
-      @input="inputChange"
-    />
-  </template>
-
-  <div class="p-5">
-    <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
-</Dropdown>
-
-### 无边框模式
-
-```html
-<Dropdown :border="false" >
+```vue-html
+<Dropdown :disabled="true" >
   ...
 </Dropdown>
 ```
 
-<Dropdown :border="false">
-  <template #trigger>
-    <button
-      type="button"
-      class="border rounded-3 px-3 py-1 shadow-sm"
-    >Click me</button>
-  </template>
+### 手动模式
 
-  <div class="p-5">
-    <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
+在这个例子里，只有输入数字 `3` 时，才会打开下拉栏
+
+<DropdownManual />
+
+::: code-group
+
+```vue-html
+<Dropdown
+  :manual="true"
+  ref="dropdown"
+>
+  <template #trigger>
+    <input
+      type="text"
+      @input="inputChange"
+    />
+  </template>
+  ...
 </Dropdown>
+```
+
+```js
+import { ref } from 'vue'
+const dropdown = ref(null)
+
+function inputChange (e) {
+  if (e.target.value === '3') {
+    dropdown.value.display()
+  } else {
+    // Dropdown expose `visible` state
+    if (dropdown.value.visible) {
+      dropdown.value.close()
+    }
+  }
+}
+```
+
+:::
 
 ### 对齐方向
+
+下拉栏对齐于触发器的方向
+
+<DropdownAlign />
 
 ```html
 <Dropdown align="center" >
@@ -311,78 +234,99 @@ function inputChange (e) {
 </Dropdown>
 ```
 
-<Dropdown class="me-5">
+### 样式定制
+
+<DropdownStyles />
+
+```vue-html
+<Dropdown>
   <template #trigger>
-    <button
-      type="button"
-      class="border rounded-3 px-3 py-1 shadow-sm"
-    >Align left</button>
+    <DropdownTrigger rounded="pill" />
   </template>
-
-  <div class="p-5">
+  <DropdownContent
+    :border="false"
+    rounded="medium"
+  >
     <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
-</Dropdown>
-
-<Dropdown
-  align="center"
-  class="me-5"
->
-  <template #trigger>
-    <button
-      type="button"
-      class="border rounded-3 px-3 py-1 shadow-sm"
-    >Align center</button>
-  </template>
-
-  <div class="p-5">
-    <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
-</Dropdown>
-
-<Dropdown align="right">
-  <template #trigger>
-    <button
-      type="button"
-      class="border rounded-3 px-3 py-1 shadow-sm"
-    >Align center</button>
-  </template>
-
-  <div class="p-5">
-    <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
-</Dropdown>
-
-### 设置下拉栏宽度
-
-```html
-<Dropdown :width="500" >
-  ...
+  </DropdownContent>
 </Dropdown>
 ```
 
-<Dropdown :width="500">
+更具体的样式定制可直接通过 `style` 或 `class` 来设置
+
+<DropdownCustomStyle />
+
+```vue-html
+<Dropdown>
   <template #trigger>
-    <button
-      type="button"
-      class="border rounded-3 px-3 py-1 shadow-sm"
-    >Click me</button>
+    <DropdownTrigger class="border rounded-4 bg-primary-subtle p-2" />
   </template>
-
-  <div class="p-5">
+  <DropdownContent
+    style="width: 500px;background-color:rgb(255, 174, 0);"
+  >
     <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
+  </DropdownContent>
 </Dropdown>
+```
 
+### 状态与函数
 
+`Dropdown` 的 trigger 与默认插槽均提供了插件的状态与部分功能函数
+
+```vue-html
+<Dropdown>
+  <template #trigger="{ visible, disabled, close }">
+    <DropdownTrigger />
+  </template>
+  <template #default="{ visible, disabled, close }">
+    <DropdownContent>
+      <div>visible: {{ visible }}</div>
+      <div>disabled: {{ disabled }}</div>
+      <button
+        class="btn btn-secondary"
+        @click="close"
+      >Close</button>
+    </DropdownContent>
+  </template>
+</Dropdown>
+```
+
+<DropdownSlotData />
+
+另外，`Dropdown` 还提供了 `useDropdown` 组合式函数，用于在组件内获取下拉栏的状态与函数
+
+::: code-group
+
+```vue-html
+<Dropdown>
+  <template #trigger>
+    <DropdownTrigger />
+  </template>
+  <DropdownContent>
+    <CustomContent />
+  </DropdownContent>
+</Dropdown>
+```
+
+```vue [CustomContent.vue]
+<template>
+  <div>
+    <div>visible: {{ visible }}</div>
+    <div>disabled: {{ disabled }}</div>
+    <button
+      class="btn btn-secondary"
+      @click="close"
+    >Close</button>
+  </div>
+</template>
+<script setup>
+import { useDropdown } from 'v-dropdown'
+
+const { visible, disabled, close } = useDropdown()
+</script>
+```
+
+:::
 
 ## 插槽
 

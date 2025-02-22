@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import { Dropdown, DropdownContent, DropdownTrigger, useDropdown } from 'v-dropdown'
 
-function ContentText () {
+export function ContentText () {
   return (
     <div style="width: 400px;" class="p-3">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -69,36 +69,72 @@ export function DropdownNoToggle () {
   }
   return <Dropdown toggle={false} v-slots={slots} />
 }
-export function DropdownDisabled () {
-  const disabled = ref(false)
+export function DropdownManual () {
+  const dropdown = ref(null)
+
+  function inputChange (e) {
+    if (e.target.value === '3') {
+      dropdown.value.display()
+    } else {
+      // Dropdown expose `visible` state
+      if (dropdown.value.visible) {
+        dropdown.value.close()
+      }
+    }
+  }
   const slots = {
-    trigger: () => <DropdownTrigger />,
+    trigger: () => (
+      <input
+        type="text"
+        class="border rounded-3 px-3 py-2"
+        placeholder="try enter 3"
+        onInput={inputChange}
+      />
+    ),
     default: () => (
       <DropdownContent>
         <ContentText />
       </DropdownContent>
     )
   }
-  const change = e => {
-    console.log(e.target.checked)
-    disabled.value = e.target.checked
+  return <Dropdown ref={dropdown} manual v-slots={slots} />
+}
+export function DropdownCustomStyle () {
+  const slots = {
+    trigger: () => <DropdownTrigger class="border rounded-4 bg-primary-subtle p-2" />,
+    default: () => (
+      <DropdownContent
+        style="width: 500px;background-color:rgb(255, 174, 0);"
+      >
+        <ContentText />
+      </DropdownContent>
+    )
   }
-  return (
-    <div>
-      <div class="d-flex mb-3">
-        <div class="form-check form-switch mb-0 d-flex align-items-center">
-          <input
-            class="form-check-input me-2"
-            type="checkbox"
-            role="switch"
-            id="switch-disabled"
-            onChange={change}
-          />
-          <label class="form-check-label" for="switch-disabled">Disabled</label>
+  return <Dropdown v-slots={slots} />
+}
+export function DropdownSlotData () {
+  const slots = {
+    trigger: ({ visible }) => (
+      <DropdownTrigger>visible: {String(visible.value)}</DropdownTrigger>
+    ),
+    default: ({ visible, disabled, close }) => (
+      <DropdownContent>
+        <div class="d-flex flex-column p-3">
+          <div class="mb-3">
+            visible: { String(visible.value) }
+          </div>
+          <div class="mb-3">
+            disabled: { String(disabled.value) }
+          </div>
+          <button
+            class="btn btn-secondary"
+            onClick={close}
+          >
+            Close
+          </button>
         </div>
-      </div>
-      <div>{String(disabled.value)}</div>
-      <Dropdown disabled={disabled.value} v-slots={slots} />
-    </div>
-  )
+      </DropdownContent>
+    )
+  }
+  return <Dropdown v-slots={slots} />
 }

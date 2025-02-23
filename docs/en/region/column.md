@@ -20,7 +20,6 @@ import {
 <script setup>
 import { ref } from 'vue'
 import {
-  RegionColumnsCore,
   RegionFullColumnsCore,
   RegionColumns,
   RegionFullColumns

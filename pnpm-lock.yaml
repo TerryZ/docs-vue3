@@ -18,8 +18,8 @@ importers:
         specifier: 3.0.3
         version: 3.0.3(vue@3.5.13)
       v-dropdown:
-        specifier: 3.1.0
-        version: 3.1.0(vue@3.5.13)
+        specifier: 3.1.3
+        version: 3.1.3(vue@3.5.13)
       v-layouts:
         specifier: ^1.0.2
         version: 1.0.2(vue@3.5.13)
@@ -1120,8 +1120,8 @@ packages:
     peerDependencies:
       vue: ^3.2.0
 
-  v-dropdown@3.1.0:
-    resolution: {integrity: sha512-781/Pvcv8kyUUcDm21Qc+Tux7DkW4scH6mPhvSq/r6esD6Kdf7LzdbAusi2RJI9qKRMx1OewofalF18nQh4N1w==}
+  v-dropdown@3.1.3:
+    resolution: {integrity: sha512-7vK3jjhqC/trM8bdnEDfcX34LGtl8UIZlEYXJZDfYaz6r53mScGUP/bbLET824hiqzqivqE7O8lskfTtOKXQNQ==}
     peerDependencies:
       vue: ^3.3.0
 
@@ -2307,7 +2307,7 @@ snapshots:
     dependencies:
       vue: 3.5.13
 
-  v-dropdown@3.1.0(vue@3.5.13):
+  v-dropdown@3.1.3(vue@3.5.13):
     dependencies:
       vue: 3.5.13
 
@@ -2321,7 +2321,7 @@ snapshots:
 
   v-region@3.3.0(vue@3.5.13):
     dependencies:
-      v-dropdown: 3.1.0(vue@3.5.13)
+      v-dropdown: 3.1.3(vue@3.5.13)
       vue: 3.5.13
 
   v-selectmenu@3.1.1(vue@3.5.13):

@@ -1,10 +1,10 @@
 # Dropdown
 
-Dropdown component
+Dropdown menu component
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/terryz/v-dropdown?style=social)](https://github.com/TerryZ/v-dropdown) [![GitHub forks](https://img.shields.io/github/forks/terryz/v-dropdown?style=social)](https://github.com/TerryZ/v-dropdown)
 
-Repository status
+## Project Status
 
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/TerryZ/v-dropdown/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/TerryZ/v-dropdown/tree/master) [![codecov](https://codecov.io/gh/TerryZ/v-dropdown/branch/master/graph/badge.svg?token=veg52RGaZg)](https://codecov.io/gh/TerryZ/v-dropdown) [![npm version](https://img.shields.io/npm/v/v-dropdown.svg)](https://www.npmjs.com/package/v-dropdown) [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://mit-license.org/) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -14,7 +14,7 @@ If you are using [vue 2.x](https://v2.vuejs.org/v2/guide/) version, please use [
 
 ## Installation
 
-Install `v-dropdown` component in to your project
+Install the `v-dropdown` component into your project:
 
 ::: code-group
 
@@ -32,386 +32,65 @@ pnpm add v-dropdown
 
 :::
 
-### Usage
+### Basic Usage
 
-```vue
-<template>
-  <Dropdown @visible-change="change">
-    <!-- trigger element -->
-    <template #trigger>
-      <button type="button">Click me</button>
-    </template>
+::: code-group
 
-    <!-- contents display in dropdown -->
+```vue-html
+<Dropdown @visible-change="change">
+  <!-- trigger element -->
+  <template #trigger>
+    <!-- built-in trigger button -->
+    <DropdownTrigger />
+  </template>
+
+  <!-- contents display in dropdown -->
+  <DropdownContent>
     <div>
       some contents
     </div>
-  </Dropdown>
-</template>
+  </DropdownContent>
+</Dropdown>
+```
 
-<script setup>
-import Dropdown from 'v-dropdown'
-// or
-// import { Dropdown } from 'v-dropdown'
-function change (val) {
+```js
+import { Dropdown, DropdownContent, DropdownTrigger } from 'v-dropdown'
+
+function change(val) {
   console.log(val)
 }
-</script>
 ```
+
+:::
 
 ## Examples
 
-### Quick demo
-
-```html
-<Dropdown>
-  <!-- trigger element -->
-  <template #trigger>
-    <button type="button">Click me</button>
-  </template>
-  <!-- contents display in dropdown -->
-  <div>some contents</div>
-</Dropdown>
-```
-
-<Dropdown>
-  <template #trigger>
-    <button
-      type="button"
-      class="border rounded-3 px-3 py-1 shadow-sm"
-    >Click me</button>
-  </template>
-
-  <div class="p-5">
-    <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
-</Dropdown>
-
-`Dropdown` component uses click-triggered objects by default to open the dropdown conatiner
-
-### trigger by hover
-
-```html
-<Dropdown trigger="hover">
-  <template #trigger>
-    <button type="button">Hover me</button>
-  </template>
-  ...
-</Dropdown>
-```
-
-<Dropdown trigger="hover">
-  <template #trigger>
-    <button
-      type="button"
-      class="border rounded-3 px-3 py-1 shadow-sm"
-    >Hover me</button>
-  </template>
-
-  <div class="p-5">
-    <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
-</Dropdown>
-
-### trigger by contextmenu
-
-```html
-<Dropdown
-  trigger="contextmenu"
-  :full-width="true"
->
-  <template #trigger>
-    <div>Mouse right click me</div>
-  </template>
-  ...
-</Dropdown>
-```
-
-Mouse right click trigger container area to open dropdown container
-
-<Dropdown
-  trigger="contextmenu"
-  :full-width="true"
->
-  <template #trigger>
-    <div
-      class="
-        d-flex align-items-center justify-content-center
-        bg-light rounded-3 px-3 py-1 fs-1 text-body-secondary
-      "
-      style="height: 10rem;"
-    >
-      Mouse right click me
-    </div>
-  </template>
-
-  <div class="p-5">
-    <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
-</Dropdown>
-
-### close toggle
-
-```html
-<Dropdown :toggle="false" >
-  ...
-</Dropdown>
-```
-
-Set the click to trigger the object cycle to switch the dropdown container open and closed, the effect also works on the mouse hover and the right mouse button menu trigger mode
-
-<Dropdown :toggle="false">
-  <template #trigger>
-    <input
-      type="text"
-      class="border rounded-3 px-3 py-2"
-      placeholder="focus on me"
-    />
-  </template>
-
-  <div class="p-5">
-    <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
-</Dropdown>
-
-### Disabled
-
-```html
-<Dropdown :disabled="true" >
-  <!-- named scoped slots -->
-  <template #trigger="{ visible, disabled }">
-    <button
-      type="button"
-      :class="{
-        'border-primary': visible.value,
-        'bg-primary': visible.value,
-        'bg-opacity-10': visible.value,
-      }"
-    >
-      Click me (visible: {{ visible }}, disabled: {{ disabled }})
-    </button>
-  </template>
-</Dropdown>
-```
-
-<div class="mb-3">
-  <button
-    type="button"
-    class="border rounded-3 px-3 py-1 shadow-sm me-3"
-    :class="{ 'bg-light': !disabled }"
-    :disabled="!disabled"
-    @click="changeDisabled(false)"
-  >Enabled</button>
-  <button
-    type="button"
-    class="border rounded-3 px-3 py-1 shadow-sm"
-    :class="{ 'bg-light': disabled }"
-    :disabled="disabled"
-    @click="changeDisabled(true)"
-  >Disabled</button>
-</div>
-
-<Dropdown :disabled="disabled">
-  <template #trigger="{ visible, disabled: stateDisabled }">
-    <button
-      type="button"
-      class="border rounded-3 px-3 py-1 shadow-sm transition-all"
-      :class="{
-        'border-primary': visible.value,
-        'bg-primary': visible.value,
-        'bg-opacity-10': visible.value,
-      }"
-    >
-      Click me (visible: {{ visible }}, disabled: {{ stateDisabled }})
-    </button>
-  </template>
-
-  <div class="p-5">
-    <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
-</Dropdown>
-
-### Manual
-
-```vue
-<template>
-  <Dropdown
-    :manual="true"
-    ref="dropdownManual"
-  >
-    <template #trigger>
-      <input
-        type="text"
-        @input="inputChange"
-      />
-    </template>
-    ...
-  </Dropdown>
-</template>
-
 <script setup>
 import { ref } from 'vue'
-const dropdownManual = ref(null)
+import { Dropdown } from 'v-dropdown'
 
-function inputChange (e) {
-  if (e.target.value === '3') {
-    dropdownManual.value.display()
-  } else {
-    // Dropdown expose `visible` state
-    if (dropdownManual.value.visible) {
-      dropdownManual.value.close()
-    }
-  }
-}
-</script>
-```
+import {
+  DropdownClick,
+  DropdownHover,
+  DropdownContextmenu,
+  DropdownManual,
+  DropdownCustomStyle,
+  DropdownSlotData
+} from '@/script/dropdown'
 
-In this example, the dropdown container will only open when the number `3` is entered
-
-<Dropdown
-  :manual="true"
-  ref="dropdownManual"
->
-  <template #trigger>
-    <input
-      type="text"
-      class="border rounded-3 px-3 py-2"
-      placeholder="type enter 3"
-      @input="inputChange"
-    />
-  </template>
-
-  <div class="p-5">
-    <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
-</Dropdown>
-
-### No border
-
-```html
-<Dropdown :border="false" >
-  ...
-</Dropdown>
-```
-
-<Dropdown :border="false">
-  <template #trigger>
-    <button
-      type="button"
-      class="border rounded-3 px-3 py-1 shadow-sm"
-    >Click me</button>
-  </template>
-
-  <div class="p-5">
-    <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
-</Dropdown>
-
-### Alignment direction
-
-```html
-<Dropdown align="center" >
-  ...
-</Dropdown>
-```
-
-<Dropdown class="me-5">
-  <template #trigger>
-    <button
-      type="button"
-      class="border rounded-3 px-3 py-1 shadow-sm"
-    >Align left</button>
-  </template>
-
-  <div class="p-5">
-    <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
-</Dropdown>
-
-<Dropdown
-  align="center"
-  class="me-5"
->
-  <template #trigger>
-    <button
-      type="button"
-      class="border rounded-3 px-3 py-1 shadow-sm"
-    >Align center</button>
-  </template>
-
-  <div class="p-5">
-    <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
-</Dropdown>
-
-<Dropdown align="right">
-  <template #trigger>
-    <button
-      type="button"
-      class="border rounded-3 px-3 py-1 shadow-sm"
-    >Align center</button>
-  </template>
-
-  <div class="p-5">
-    <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
-</Dropdown>
-
-### Specify container width
-
-```html
-<Dropdown :width="500" >
-  ...
-</Dropdown>
-```
-
-<Dropdown :width="500">
-  <template #trigger>
-    <button
-      type="button"
-      class="border rounded-3 px-3 py-1 shadow-sm"
-    >Click me</button>
-  </template>
-
-  <div class="p-5">
-    <div>some contents</div>
-    <div>some contents</div>
-    <div>some contents</div>
-  </div>
-</Dropdown>
-
-<script setup>
-import { ref } from 'vue'
-import Dropdown from 'v-dropdown'
+import DropdownToggle from '@/views/dropdown/DropdownToggle.vue'
+import DropdownDisabled from '@/views/dropdown/DropdownDisabled.vue'
+import DropdownAlign from '@/views/dropdown/DropdownAlign.vue'
+import DropdownStyles from '@/views/dropdown/DropdownStyles.vue'
 
 const disabled = ref(false)
 
 const dropdownManual = ref(null)
 
-function changeDisabled (val) {
+function changeDisabled(val) {
   disabled.value = val
 }
-function inputChange (e) {
+function inputChange(e) {
   if (e.target.value === '3') {
     dropdownManual.value.display()
   } else {
@@ -422,165 +101,415 @@ function inputChange (e) {
 }
 </script>
 
-## Slots
+### Quick Usage
 
-In the `Dropdown` component, the trigger object and content are distributed using slots
+The `Dropdown` component uses click trigger by default
 
-### trigger <Badge type="info" text="named scoped slots" />
+<DropdownClick />
 
-Named scoped slots for placing trigger objects, which outputs the following component state
+```vue-html
+<Dropdown>
+  <!-- trigger element -->
+  <template #trigger>
+    <DropdownTrigger>Click me</DropdownTrigger>
+  </template>
+  <!-- contents display in dropdown -->
+  <DropdownContent>
+    <div>some contents</div>
+  </DropdownContent>
+</Dropdown>
+```
 
-```ts
-interface TriggerSlotData {
-  visible: boolean  // the dropdown container visible status
-  disabled: boolean // disabled status
+### Hover Activation
+
+Open dropdown by hovering over trigger area
+
+<DropdownHover />
+
+```vue-html
+<Dropdown trigger="hover">
+  <template #trigger>
+    <DropdownTrigger>Hover me</DropdownTrigger>
+  </template>
+  ...
+</Dropdown>
+```
+
+### Context Menu Activation
+
+Right-click trigger area to open dropdown
+
+<DropdownContextmenu />
+
+```vue-html
+<Dropdown
+  trigger="contextmenu"
+  block
+>
+  <template #trigger>
+    <div
+      style="height: 10rem;"
+      class="
+        d-flex align-items-center justify-content-center
+        bg-light rounded-3 px-3 py-1 fs-1 text-body-secondary w-100
+      "
+    >Mouse right click me</div>
+  </template>
+  ...
+</Dropdown>
+```
+
+### Toggle Cycle
+
+Disable toggle cycle when clicking trigger
+
+<DropdownToggle />
+
+```vue-html
+<Dropdown :toggle="false">
+  ...
+</Dropdown>
+```
+
+### Disabled State
+
+<DropdownDisabled />
+
+```vue-html
+<Dropdown :disabled="true">
+  ...
+</Dropdown>
+```
+
+### Manual Mode
+
+Only opens dropdown when input value is "3"
+
+<DropdownManual />
+
+::: code-group
+
+```vue-html
+<Dropdown
+  :manual="true"
+  ref="dropdown"
+>
+  <template #trigger>
+    <input
+      type="text"
+      @input="inputChange"
+    />
+  </template>
+  ...
+</Dropdown>
+```
+
+```js
+import { ref } from 'vue'
+const dropdown = ref(null)
+
+function inputChange(e) {
+  if (e.target.value === '3') {
+    dropdown.value.display()
+  } else {
+    if (dropdown.value.visible) {
+      dropdown.value.close()
+    }
+  }
 }
 ```
 
-```vue
-<template>
-  <Dropdown>
-    <template #trigger> // [!code focus]
-      <button type="button">Click me</button>
-    </template>
-  </Dropdown>
-</template>
+:::
+
+### Alignment Direction
+
+Dropdown alignment relative to trigger
+
+<DropdownAlign />
+
+```html
+<Dropdown align="center">
+  ...
+</Dropdown>
 ```
 
-Apply scoped slots status data
+### Style Customization
 
-```vue
-<template>
-  <Dropdown>
-    <template #trigger="{ visible }">
+<DropdownStyles />
+
+```vue-html
+<Dropdown>
+  <template #trigger>
+    <DropdownTrigger rounded="pill" />
+  </template>
+  <DropdownContent
+    :border="false"
+    rounded="medium"
+  >
+    <div>some contents</div>
+  </DropdownContent>
+</Dropdown>
+```
+
+Advanced styling via `style` or `class`
+
+<DropdownCustomStyle />
+
+```vue-html
+<Dropdown>
+  <template #trigger>
+    <DropdownTrigger class="border rounded-4 bg-primary-subtle p-2" />
+  </template>
+  <DropdownContent
+    style="width: 500px;background-color:rgb(255, 174, 0);"
+  >
+    <div>some contents</div>
+  </DropdownContent>
+</Dropdown>
+```
+
+### State & Utilities
+
+`Dropdown` provides component state and utility functions to slots
+
+```vue-html
+<Dropdown>
+  <template #trigger="{ visible, disabled, close }">
+    <DropdownTrigger />
+  </template>
+  <template #default="{ visible, disabled, close }">
+    <DropdownContent>
+      <div>visible: {{ visible }}</div>
+      <div>disabled: {{ disabled }}</div>
       <button
-        type="button"
-        :class="{ active: visible }"
-      >Click me</button>
-    </template>
-  </Dropdown>
-</template>
+        class="btn btn-secondary"
+        @click="close"
+      >Close</button>
+    </DropdownContent>
+  </template>
+</Dropdown>
 ```
 
-### default
+<DropdownSlotData />
 
-The default slot is used to place the content area in the dropdown container
+The `useDropdown` composable provides state and utilities:
+
+::: code-group
+
+```vue-html
+<Dropdown>
+  <template #trigger>
+    <DropdownTrigger />
+  </template>
+  <DropdownContent>
+    <CustomContent />
+  </DropdownContent>
+</Dropdown>
+```
+
+```vue [CustomContent.vue]
+<template>
+  <div>
+    <div>visible: {{ visible }}</div>
+    <div>disabled: {{ disabled }}</div>
+    <button
+      class="btn btn-secondary"
+      @click="close"
+    >Close</button>
+  </div>
+</template>
+<script setup>
+import { useDropdown } from 'v-dropdown'
+
+const { visible, disabled, close } = useDropdown()
+</script>
+```
+
+:::
+
+## Slots
+
+### Dropdown {#dropdown-component}
+
+- `trigger` Trigger element
+- `default` Dropdown content
+
+Slot scope utilities:
+
+```ts
+interface DropdownUtilities {
+  visible: ComputedRef<boolean>
+  disabled: ComputedRef<boolean>
+  /** Close the dropdown */
+  close: () => void
+}
+```
+
+Usage example:
 
 ```vue
 <template>
   <Dropdown>
-    <template #trigger>
+    <template #trigger="data: DropdownUtilities">
       <button type="button">Click me</button>
     </template>
 
-    <!-- contents display in dropdown default slot -->
-    <div>                     // [!code focus]
-      some contents           // [!code focus]
-    </div>                    // [!code focus]
+    <template #default="{ visible, disabled, close }: DropdownUtilities">
+      <div>visible: {{ visible }}</div>
+      <div>disabled: {{ disabled }}</div>
+      <button
+        class="btn btn-secondary"
+        @click="close"
+      >Close</button>
+    </template>
   </Dropdown>
 </template>
+<script setup>
+import type { DropdownUtilities } from 'v-dropdown'
+</script>
 ```
+
+### DropdownTrigger
+
+Built-in button-style trigger component
+
+- `default` Trigger content (default: "Open")
+- `append` Opened state icon
+
+### DropdownContent
+
+- `default` Dropdown content
 
 ## Props
 
-### align
+`Dropdown` component props
 
-- type `'left' | 'center' | 'right'`
-- default `'left'`
+```ts
+interface DropdownProps {
+  /**
+   * Dropdown alignment
+   * @default `left`
+   */
+  align?: 'left' | 'center' | 'right'
+  /**
+   * Toggle visibility on repeated trigger clicks
+   * @default true
+   */
+  toggle?: boolean
+  /**
+   * Manual control mode
+   * @default false
+   */
+  manual?: boolean
+  /**
+   * Disabled state
+   * @default false
+   */
+  disabled?: boolean
+  /**
+   * Trigger displays in full-width mode
+   * @default false
+   */
+  block?: boolean
+  /**
+   * Trigger method
+   * @default `click`
+   */
+  trigger?: 'click' | 'hover' | 'contextmenu'
+  /**
+   * Spacing between trigger and dropdown
+   * @default 5
+   */
+  gap?: number
+}
+```
 
-The dropdown container align to trigger container direction
+`DropdownContent` component props
 
-::: tip
-`Dropdown` automatically determines the vertical orientation of the dropdown container (up or down) depending on the position of the screen
-:::
+```ts
+interface ContentProps {
+  /**
+   * Show border
+   * @default true
+   */
+  border?: boolean
+  /**
+   * Enable animations
+   * @default true
+   */
+  animated?: boolean
+  /**
+   * Custom animation class name
+   * @default ``
+   */
+  animationName?: string
+  /**
+   * Border radius
+   * @default `small`
+   */
+  rounded?: 'small' | 'medium' | 'large'
+  /**
+   * z-index value
+   * @default 3000
+   */
+  zIndex?: number
+}
+```
 
-### border
+`DropdownTrigger` component props
 
-- type `boolean`
-- default `true`
-
-The dropdown container display border
-
-### toggle
-
-- type `boolean`
-- default `true`
-
-Cyclically toggle the display/closing of the dropdown container
-
-### manual
-
-- type `boolean`
-- default `false`
-
-Manual operation mode; when this mode is enabled, the trigger specified by `trigger` will no longer be able to open/close the drop-down bar, but can only be controlled by function calls, this mode is suitable for scenarios requiring precise control
-
-### disabled
-
-- type `boolean`
-- default `false`
-
-Enabled / disabled `Dropdown` component
-
-### animated
-
-- type `boolean | string`
-- default `true`
-
-To turn on/off the dropdown animation, in addition to setting on and off, you can also specify a string as the class name of the custom animation, the content of which needs to be defined externally
-
-### width
-
-- type `number`
-
-Specify the width of the dropdown container, or adapt to the content width if not specified
-
-### fullWidth
-
-- type `boolean`
-- default `false`
-
-Trigger container display mode
-
-- `true` block element box `display: block`
-- `false` inline element boxes `display: inline-block`
-
-### trigger
-
-- type `'click' | 'hover' | 'contextmenu'`
-- default `'click'`
-
-Open the dropdown container trigger method
-
-### customTriggerClass
-
-- type `string`
-- default `''`
-
-Add custom class to trigger container
-
-### customContainerClass
-
-- type `string`
-- default `''`
-
-Add custom class to dropdown container
+```ts
+interface TriggerProps {
+  /** Button border radius */
+  rounded?: 'small' | 'medium' | 'large' | 'pill' | 'circle'
+}
+```
 
 ## Events
 
-Component operation response events
-
 ### visible-change
 
-Respond to the state change of the dropdown container opening / closing
+Triggered on visibility change
 
 ```ts
 `visible-change`: (visible: boolean) => void
 ```
 
+### open
+
+Triggered when dropdown opens
+
+```ts
+open: () => void
+```
+
+### opened
+
+Triggered after opening animation completes
+
+```ts
+opened: () => void
+```
+
+### close
+
+Triggered when dropdown closes
+
+```ts
+close: () => void
+```
+
+### closed
+
+Triggered after closing animation completes
+
+```ts
+closed: () => void
+```
+
 ## API
 
-Before using component's API, need to declare a `ref` attribute for the component, declare a `ref` variable by `ref()` to hold the element reference(the name must match template ref value) and use it to call API methods
+Before using the plugin's API, declare a `ref` attribute for the component:
 
 ```vue
 <template>
@@ -588,26 +517,27 @@ Before using component's API, need to declare a `ref` attribute for the componen
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Dropdown } from 'v-dropdown'
 
 const dropdown = ref(null)
-// call api
-dropdown.value.display()
+onMounted(() => {
+  dropdown.value.display()
+})
 </script>
 ```
 
 ### display
 
-Display dropdown container
+Open dropdown
 
 ```ts
 display: () => void
 ```
 
-### close
+### close {#api-close}
 
-Close dropdown container
+Close dropdown
 
 ```ts
 close: () => void
@@ -615,16 +545,8 @@ close: () => void
 
 ### toggleVisible
 
-Toggle dropdown visible state
+Toggle dropdown state
 
 ```ts
 toggleVisible: () => void
-```
-
-### adjust
-
-Detect and adjust dropdown container position, make the dropdown container align to the trigger container
-
-```ts
-adjust: () => void
 ```

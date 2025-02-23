@@ -330,27 +330,20 @@ const { visible, disabled, close } = useDropdown()
 
 ## 插槽
 
-在 `Dropdown` 组件中，触发对象与内容均使用插槽的方式进行分发
+### Dropdown {#dropdown-component}
 
-### trigger <Badge type="info" text="named scoped slots" />
+- `trigger` 触发器
+- `default` 下拉栏内容
 
-用于放置触发对象的具名作用域插槽，它输出了以下组件状态
+`Dropdown` 组件为 `trigger` 与 `default` 插槽均提供了插件的状态与部分功能函数
 
 ```ts
-interface TriggerSlotData {
-  visible: boolean  // 显示状态
-  disabled: boolean // 禁用状态
+interface DropdownUtilities {
+  visible: ComputedRef<boolean>
+  disabled: ComputedRef<boolean>
+  /** Close the dropdown */
+  close: () => void
 }
-```
-
-```vue
-<template>
-  <Dropdown>
-    <template #trigger> // [!code focus]
-      <button type="button">Click me</button>
-    </template>
-  </Dropdown>
-</template>
 ```
 
 应用作用域数据状态
@@ -358,119 +351,120 @@ interface TriggerSlotData {
 ```vue
 <template>
   <Dropdown>
-    <template #trigger="{ visible }">
-      <button
-        type="button"
-        :class="{ active: visible }"
-      >Click me</button>
-    </template>
-  </Dropdown>
-</template>
-```
-
-### default
-
-默认插槽用于放置于下拉栏的内容区域
-
-```vue
-<template>
-  <Dropdown>
-    <template #trigger>
+    <template #trigger="data: DropdownUtilities">
       <button type="button">Click me</button>
     </template>
 
-    <!-- contents display in dropdown default slot -->
-    <div>                     // [!code focus]
-      some contents           // [!code focus]
-    </div>                    // [!code focus]
+    <template #default="{ visible, disabled, close }: DropdownUtilities">
+      <div>visible: {{ visible }}</div>
+      <div>disabled: {{ disabled }}</div>
+      <button
+        class="btn btn-secondary"
+        @click="close"
+      >Close</button>
+    </template>
   </Dropdown>
 </template>
+<script setup>
+import type { DropdownUtilities } from 'v-dropdown'
+</script>
 ```
+
+### DropdownTrigger
+
+`DropdownTrigger` 是 `Dropdown` 组件内置的按钮形态的触发器对象组件
+
+- `default` 触发器内容，默认显示 `Open` 文本
+- `append` **Dropdown** 下拉栏打开状态图标
+
+### DropdownContent
+
+- `default` 下拉栏内容
 
 ## Props
 
-### align
+`Dropdown` 组件的 props
 
-- 类型 `'left' | 'center' | 'right'`
-- 默认 `'left'`
+```ts
+interface DropdownProps {
+  /**
+   * 下拉栏的对齐方向
+   * @default `left`
+   */
+  align?: 'left' | 'center' | 'right'
+  /**
+   * 连续点击触发器时是否循环切换打开与关闭
+   * @default true
+   */
+  toggle?: boolean
+  /**
+   * 手动控制下拉栏的显示与隐藏
+   * @default false
+   */
+  manual?: boolean
+  /**
+   * 禁用状态
+   * @default false
+   */
+  disabled?: boolean
+  /**
+   * 触发器显示全宽模式
+   * @default false
+   */
+  block?: boolean
+  /**
+   * 下拉栏的触发方式
+   * @default `click`
+   */
+  trigger?: 'click' | 'hover' | 'contextmenu'
+  /**
+   * 触发器与下拉栏之间的间距
+   * @default 5
+   */
+  gap?: number
+}
+```
 
-下拉栏相对于触发对象的对齐位置
+`DropdownContent` 组件的 props
 
-::: tip 提示
-`Dropdown` 会自动根据屏幕的位置来决定下拉栏的垂直显示方向（向上或向下）
-:::
+```ts
+interface ContentProps {
+  /**
+   * 下拉栏的边框
+   * @default true
+   */
+  border?: boolean
+  /**
+   * 下拉栏的打开与关闭是否使用动画
+   * @default true
+   */
+  animated?: boolean
+  /**
+   * 自定义下拉栏打开与关闭时所使用的动画样式名
+   * @default ``
+   */
+  animationName?: string
+  /**
+   * 下拉栏的圆角弧度
+   * @default `small`
+   */
+  rounded?: 'small' | 'medium' | 'large'
+  /**
+   * 下拉栏的 Z 轴顺序值
+   * @default 3000
+   */
+  zIndex?: number
+}
+```
 
-### border
+`DropdownTrigger` 组件的 props
 
-- 类型 `boolean`
-- 默认 `true`
-
-下拉栏显示边框
-
-### toggle
-
-- 类型 `boolean`
-- 默认 `true`
-
-循环切换下拉栏的显示/关闭
-
-### manual
-
-- 类型 `boolean`
-- 默认 `false`
-
-手动操作模式，启用该模式后，`trigger` 所指定的触发方式将不再能打开/关闭下拉栏，仅能通过功能函数的调用来控制，该模式适用于需要精准控制的场景
-
-### disabled
-
-- 类型 `boolean`
-- 默认 `false`
-
-启用/禁用 `Dropdown` 组件
-
-### animated
-
-- 类型 `boolean | string`
-- 默认 `true`
-
-打开 / 关闭下拉栏动画，除设置开与关之外，也可以指定一个字符串，作为自定义动画的样式名称，该样式内容需要在外部进行定义
-
-### width
-
-- 类型 `number`
-
-指定下拉栏宽度，不指定则自适应内容宽度
-
-### fullWidth
-
-- 类型 `boolean`
-- 默认 `false`
-
-触发对象的布局显示模式
-
-- `true` 块级元素布局占用一行 `display: block`
-- `false` 内联元素布局 `display: inline-block`
-
-### trigger
-
-- 类型 `'click' | 'hover' | 'contextmenu'`
-- 默认 `'click'`
-
-下拉栏打开的触发方式
-
-### customTriggerClass
-
-- 类型 `string`
-- 默认 `''`
-
-添加自定义样式类名至触发对象容器
-
-### customContainerClass
-
-- 类型 `string`
-- 默认 `''`
-
-添加自定义样式类名至下拉容器中
+```ts
+interface TriggerProps {
+  /** 触发器按钮的圆角弧度 */
+  rounded?: 'small' | 'medium' | 'large' | 'pill' | 'circle'
+}
+```
 
 ## 事件
 
@@ -486,11 +480,15 @@ interface TriggerSlotData {
 
 ### open
 
+下拉栏打开时响应
+
 ```ts
 open: () => void
 ```
 
 ### opened
+
+下拉栏打开动画完成时响应
 
 ```ts
 opened: () => void
@@ -498,11 +496,15 @@ opened: () => void
 
 ### close
 
+下拉栏关闭时响应
+
 ```ts
 close: () => void
 ```
 
 ### closed
+
+下拉栏关闭动画完成时响应
 
 ```ts
 closed: () => void
@@ -518,12 +520,13 @@ closed: () => void
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Dropdown } from 'v-dropdown'
 
 const dropdown = ref(null)
-// call api
-dropdown.value.display()
+onMounted(() => {
+  dropdown.value.display()
+})
 </script>
 ```
 
@@ -535,7 +538,7 @@ dropdown.value.display()
 display: () => void
 ```
 
-### close
+### close {#api-close}
 
 关闭下拉栏
 

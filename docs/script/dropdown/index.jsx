@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { Dropdown, DropdownContent, DropdownTrigger, useDropdown } from 'v-dropdown'
+import { Dropdown, DropdownContent, DropdownTrigger } from 'v-dropdown'
 
 export function ContentText () {
   return (

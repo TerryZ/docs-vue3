@@ -109,11 +109,9 @@ function inputChange (e) {
 
 ```vue-html
 <Dropdown>
-  <!-- trigger element -->
   <template #trigger>
     <DropdownTrigger>Click me</DropdownTrigger>
   </template>
-  <!-- contents display in dropdown -->
   <DropdownContent>
     <div>some contents</div>
   </DropdownContent>
@@ -352,7 +350,7 @@ interface DropdownUtilities {
 <template>
   <Dropdown>
     <template #trigger="data: DropdownUtilities">
-      <button type="button">Click me</button>
+      <button type="button">visible: {{ data.visible }}</button>
     </template>
 
     <template #default="{ visible, disabled, close }: DropdownUtilities">

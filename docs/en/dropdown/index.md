@@ -109,11 +109,9 @@ The `Dropdown` component uses click trigger by default
 
 ```vue-html
 <Dropdown>
-  <!-- trigger element -->
   <template #trigger>
     <DropdownTrigger>Click me</DropdownTrigger>
   </template>
-  <!-- contents display in dropdown -->
   <DropdownContent>
     <div>some contents</div>
   </DropdownContent>
@@ -351,7 +349,7 @@ Usage example:
 <template>
   <Dropdown>
     <template #trigger="data: DropdownUtilities">
-      <button type="button">Click me</button>
+      <button type="button">visible: {{ data.visible }}</button>
     </template>
 
     <template #default="{ visible, disabled, close }: DropdownUtilities">

@@ -1,1 +1,0 @@
-import{x as o,M as u,m}from"./v-selectmenu.BRc44lu9.js";import{G as e}from"./framework.EgVEMnwr.js";function s(r="Menu item ",n,a=1){return Array.from({length:n}).map((l,t)=>e(m,{key:t},{default:()=>[r,t+a]}))}function c(r){return e(o,null,{trigger:()=>e(u,null,null),default:()=>r})}export{s as a,c};

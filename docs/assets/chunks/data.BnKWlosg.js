@@ -1,0 +1,1 @@
+import{p as t}from"./framework.DvaPEpzT.js";const r=a=>JSON.stringify(a,null,2);function c(a){const o=t(a),n=t({});function e(s){n.value=s}return{dataValue:o,dataModel:n,change:e,jsonFormat:r}}export{r as j,c as u};

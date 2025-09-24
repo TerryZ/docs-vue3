@@ -1,0 +1,1 @@
+import{N as p}from"./v-dialogs.BBG_HKvP.js";import{p as e}from"./framework.BNrXfYtY.js";function m(){const o=e("top"),s=e("info");function n(t){p("Hello World",t)}return{placement:o,messageType:s,openMessage:n}}export{m as u};

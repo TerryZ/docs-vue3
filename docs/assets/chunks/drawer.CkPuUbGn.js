@@ -1,0 +1,1 @@
+import{f as n}from"./v-dialogs.DDHc4obv.js";import{_ as t}from"./CardPanel.dIIaDpKl.js";import{p as a}from"./framework.DjA1FEqA.js";function s(){const r=a("right");function o(e){n(t,e)}return{placement:r,openDrawer:o}}export{s as u};

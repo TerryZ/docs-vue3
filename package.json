@@ -12,6 +12,7 @@
   "keywords": [],
   "author": "Terry",
   "license": "ISC",
+  "packageManager": "pnpm@10.15.0",
   "dependencies": {
     "@vitejs/plugin-vue-jsx": "^5.1.2",
     "bootstrap": "^5.3.8",

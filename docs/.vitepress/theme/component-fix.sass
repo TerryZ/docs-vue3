@@ -1,0 +1,28 @@
+/* 主要用于解决 vite press 文档平台的样式污染影响组件的问题 */
+
+.v-pagination
+  ul
+    li
+      select
+        -webkit-appearance: auto
+      &+li
+        margin-top: unset
+
+.rg-group .rg-level-tabs ul li + li
+  margin-top: unset
+.rg-column li
+  margin: 0 !important
+
+// v-selectpage
+.vp-doc
+  .sp-table
+    table
+      margin: 0 !important
+      tr
+        border-top: none
+        background-color: transparent
+        th
+          background-color: transparent
+  // .v-pagination
+  //   a:hover
+  //     color: inherit

@@ -1,0 +1,34 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36" version="24.7.7">
+  <diagram id="2GOauJT7Yn-luxj3bmyB" name="第 1 页">
+    <mxGraphModel dx="794" dy="493" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="aq9JJDKxaiViuSofXtG_-2" value="" style="rounded=1;whiteSpace=wrap;html=1;glass=0;sketch=0;shadow=1;arcSize=3;fontFamily=Verdana;fontSize=20;fontStyle=1;fontColor=#808080;strokeColor=#CCCCCC;" parent="1" vertex="1">
+          <mxGeometry x="40" y="40" width="240" height="460" as="geometry" />
+        </mxCell>
+        <mxCell id="bg6waQgNnvFO33RHhs3d-1" value="" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;glass=0;sketch=0;fontFamily=Verdana;fontSize=15;fontColor=#808080;fillColor=default;arcSize=4;strokeColor=#CCCCCC;" parent="1" vertex="1">
+          <mxGeometry x="50" y="50" width="220" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="bg6waQgNnvFO33RHhs3d-2" value="Panel header" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;glass=0;sketch=0;fontFamily=Verdana;fontSize=20;fillColor=#dae8fc;strokeColor=none;fontStyle=1;fontColor=#999999;" parent="1" vertex="1">
+          <mxGeometry x="60" y="60" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="bg6waQgNnvFO33RHhs3d-5" value="Panel content" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;glass=0;sketch=0;fontFamily=Verdana;fontSize=20;fontColor=#999999;fillColor=#f5f5f5;arcSize=5;strokeColor=none;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="60" y="121" width="200" height="109" as="geometry" />
+        </mxCell>
+        <mxCell id="bg6waQgNnvFO33RHhs3d-6" value="" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;glass=0;sketch=0;fontFamily=Verdana;fontSize=15;fontColor=#808080;fillColor=default;arcSize=4;strokeColor=#CCCCCC;" parent="1" vertex="1">
+          <mxGeometry x="50" y="250" width="220" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="bg6waQgNnvFO33RHhs3d-7" value="Panel header" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;glass=0;sketch=0;fontFamily=Verdana;fontSize=20;fillColor=#dae8fc;strokeColor=none;fontStyle=1;fontColor=#999999;" parent="1" vertex="1">
+          <mxGeometry x="60" y="260" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="bg6waQgNnvFO33RHhs3d-8" value="Panel content" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;glass=0;sketch=0;fontFamily=Verdana;fontSize=20;fontColor=#999999;fillColor=#f5f5f5;arcSize=5;strokeColor=none;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="60" y="321" width="200" height="109" as="geometry" />
+        </mxCell>
+        <mxCell id="bg6waQgNnvFO33RHhs3d-9" value="......" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;shadow=0;glass=0;sketch=0;fontFamily=Verdana;fontSize=15;fontColor=#808080;" parent="1" vertex="1">
+          <mxGeometry x="50" y="450" width="220" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

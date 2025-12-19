@@ -1,0 +1,37 @@
+
+/* 浅色主题代码模块颜色定义 */
+// html:not(.dark)
+//   --vp-c-text-dark-3: #ccc
+//   --vp-code-block-bg: rgba(238, 238, 238, 0.5)
+//   --vp-code-line-highlight-color: rgba(238, 238, 238, 1)
+//   --vp-code-block-divider-color: #ccc
+//   --vp-code-line-number-color: #666
+//   --vp-code-copy-code-bg: rgba(238, 238, 238, .5)
+//   --vp-code-copy-code-hover-bg: rgba(238, 238, 238, .7)
+
+:root
+  // 主题色
+  --vp-c-brand-1: #1FB982
+  --vp-button-brand-bg: #1FB982
+  --vp-c-brand-2: #14966A
+  // --vp-code-color: var(--vp-c-brand-1)
+
+img
+  display: inherit
+
+.b-svg-icon
+  width: 1em
+  height: 1em
+  font-size: 1rem
+
+.VPNavBar.has-sidebar
+  .content
+    -webkit-backdrop-filter: saturate(50%) blur(8px)
+    backdrop-filter: saturate(50%) blur(8px)
+    background: rgb(255,255,255,.6)
+    .content-body
+      background-color: transparent
+.VPNav
+  z-index: 4000 !important
+.transition-all
+  transition: all .3s ease-out

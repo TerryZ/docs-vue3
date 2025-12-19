@@ -1,23 +1,31 @@
 {
-  "name": "docs-vue3",
-  "description": "A dropdown layer container component for vue3",
-  "version": "0.0.1",
-  "author": "TerryZ <terry5@foxmail.com>",
-  "type": "module",
-  "license": "MIT",
+  "name": "vue3-plugin-site-vite-press",
+  "version": "1.0.0",
+  "description": "vue3 plugin documentation write by vite press",
+  "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview --port 4173",
-    "test:unit": "vitest",
-    "coverage": "vitest run --coverage",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "dev": "vitepress dev docs --port 5188",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
   },
-  "peerDependencies": {
-  },
+  "type": "module",
+  "keywords": [],
+  "author": "Terry",
+  "license": "ISC",
   "dependencies": {
+    "@vitejs/plugin-vue-jsx": "^5.1.2",
+    "bootstrap": "^5.3.8",
+    "v-dialogs": "3.1.1",
+    "v-dropdown": "3.5.1",
+    "v-layouts": "^1.0.2",
+    "v-page": "3.4.0",
+    "v-region": "3.5.0",
+    "v-selectmenu": "3.1.2",
+    "v-selectpage": "3.0.1"
   },
   "devDependencies": {
-
+    "sass": "^1.97.0",
+    "vitepress": "1.6.4",
+    "vue": "^3.5.22"
   }
 }

@@ -541,7 +541,7 @@ const dropdownRef = useTemplateRef<DropdownUtilities>('dropdown')
 // const dropdownRef = ref<DropdownUtilities>()
 
 onMounted(() => {
-  dropdownRef.value?.display()
+  dropdownRef.value?.open()
 })
 </script>
 ```

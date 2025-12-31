@@ -100,7 +100,7 @@ function changeDisabled(val) {
 }
 function inputChange(e) {
   if (e.target.value === '3') {
-    dropdownManual.value.display()
+    dropdownManual.value.open()
   } else {
     if (dropdownManual.value.visible) {
       dropdownManual.value.close()
@@ -213,7 +213,7 @@ const dropdown = ref(null)
 
 function inputChange(e) {
   if (e.target.value === '3') {
-    dropdown.value.display()
+    dropdown.value.open()
   } else {
     if (dropdown.value.visible) {
       dropdown.value.close()

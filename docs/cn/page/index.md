@@ -22,41 +22,48 @@
 npm i v-page
 ```
 
-```sh [yarn]
-yarn add v-page
-```
-
 ```sh [pnpm]
 pnpm add v-page
+```
+
+```sh [yarn]
+yarn add v-page
 ```
 
 :::
 
 全局安装插件
 
-```js
+```ts
 import { createApp } from 'vue'
 import App from './app.vue'
-import { PaginationBar } from 'v-page'
+import PaginationPlugin from 'v-page'
 
 const app = createApp(App)
 // globally install component
-app.use(PaginationBar, {
-  // globally config options
+app.use(PaginationPlugin, {
+  language: 'cn',
+  register: true
 })
 app.mount('#app')
 ```
 
 可在全局安装组件时设置的属性
 
-- info
-- pageSizeMenu
-- language
-- align
-- border
-- pageNumber
-- first
-- last
+```ts
+export interface PaginationGlobalOptions {
+  /**
+   * 组件语言
+   */
+  language?: LanguageKey
+  /**
+   * 在安装插件时，是否同时全局注册 `PaginationBar` 组件
+   * 适用于全局安装时，仅希望全局设置组件语言
+   * @default false
+   */
+  register?: boolean
+}
+```
 
 当然，您也可以仅在需要使用的地方引用组件，这也是更加推荐的使用方式。这更有利于代码拆分打包，起到更好的按需引用效果
 
@@ -98,7 +105,7 @@ const pageNumber = ref<number>(3)
 const totalRow = ref<number>(100)
 const list = ref<unknown[]>([])
 // respond for pagination change
-function change (data: PageInfo): void {
+function change (data: PageInfo) {
   console.log(data) // { pageNumber: 1, pageSize: 10, totalPage: 10 }
 
   const params = {
@@ -406,6 +413,8 @@ import {
 `v-page` 的设置参数
 
 ```ts
+type LanguageKey = 'cn' | 'en' | 'de' | 'jp' | 'pt'
+
 interface PaginationProps {
   /**
    * 默认页/当前页
@@ -432,7 +441,7 @@ interface PaginationProps {
    * `pt` Portuguese
    * `jp` Japanese
    */
-  language?: 'cn' | 'en' | 'de' | 'jp' | 'pt'
+  language?: LanguageKey
   /**
    * 每页数据记录数列表，仅在 `pageSizeOptions` 为 `true` 时生效
    * @default [10, 20, 50, 100]

@@ -22,41 +22,49 @@ Install `v-page` component in to your project
 npm i v-page
 ```
 
-```sh [yarn]
-yarn add v-page
-```
-
 ```sh [pnpm]
 pnpm add v-page
+```
+
+```sh [yarn]
+yarn add v-page
 ```
 
 :::
 
 Globally install component
 
-```js
+```ts
 import { createApp } from 'vue'
 import App from './app.vue'
-import { PaginationBar } from 'v-page'
+import PaginationPlugin from 'v-page'
 
 const app = createApp(App)
 // globally install component
-app.use(PaginationBar, {
-  // globally config options
+app.use(PaginationPlugin, {
+  language: 'cn',
+  register: true
 })
 app.mount('#app')
 ```
 
 Can global config options in plugin install
 
-- info
-- pageSizeMenu
-- language
-- align
-- border
-- pageNumber
-- first
-- last
+```ts
+export interface PaginationGlobalOptions {
+  /**
+   * Component language
+   */
+  language?: LanguageKey
+  /**
+   * When installing the plugin, whether the `PaginationBar` component be
+   * registered globally at the same time
+   * When applying to a global installation, you only want to set the
+   * component language globally
+   * @default false
+   */
+  register?: boolean
+}
 
 You can also use components only where you need them, which is the more recommended way to use them. This is more conducive to code splitting and packaging
 
@@ -97,7 +105,7 @@ const pageNumber = ref<number>(3)
 const totalRow = ref<number>(100)
 const list = ref<unknown[]>([])
 // respond for pagination change
-function change (data: PageInfo): void {
+function change (data: PageInfo) {
   console.log(data) // { pageNumber: 1, pageSize: 10, totalPage: 10 }
 
   const params = {
@@ -405,6 +413,8 @@ Add `All` item to page size list to display all data without paging. When this i
 `v-page` component props arguments
 
 ```ts
+type LanguageKey = 'cn' | 'en' | 'de' | 'jp' | 'pt'
+
 interface PaginationProps {
   /**
    * The number of current page
@@ -430,7 +440,7 @@ interface PaginationProps {
    * `pt` Portuguese
    * `jp` Japanese
    */
-  language?: 'cn' | 'en' | 'de' | 'jp' | 'pt'
+  language?: LanguageKey
   /**
    * List of the number of records per page, only
    * valid when `pageSizeOptions` is `true`

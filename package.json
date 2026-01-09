@@ -22,7 +22,8 @@
     "v-page": "3.5.0",
     "v-region": "3.5.0",
     "v-selectmenu": "3.1.2",
-    "v-selectpage": "3.0.1"
+    "v-selectpage": "3.0.1",
+    "vitepress-plugin-group-icons": "^1.6.5"
   },
   "devDependencies": {
     "sass": "^1.97.2",

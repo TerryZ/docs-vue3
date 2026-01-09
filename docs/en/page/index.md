@@ -34,7 +34,7 @@ yarn add v-page
 
 Globally install component
 
-```ts
+```ts [main.ts]
 import { createApp } from 'vue'
 import App from './app.vue'
 import PaginationPlugin from 'v-page'

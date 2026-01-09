@@ -1,5 +1,7 @@
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vitepress'
+import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
+
 import cnConfig from './cn'
 import enConfig from './en'
 
@@ -38,7 +40,10 @@ export default defineConfig({
       dark: 'github-dark',
       light: 'github-light',
     },
-    lineNumbers: false
+    lineNumbers: false,
+    config(md) {
+      md.use(groupIconMdPlugin)
+    }
   },
   vite: {
     resolve: {
@@ -46,6 +51,9 @@ export default defineConfig({
         '@': fileURLToPath(new URL('../../../docs', import.meta.url)),
         '@demo': fileURLToPath(new URL('../demos', import.meta.url))
       }
-    }
+    },
+    plugins: [
+      groupIconVitePlugin()
+    ]
   }
 })

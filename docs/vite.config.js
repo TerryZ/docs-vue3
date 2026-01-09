@@ -9,19 +9,17 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./', import.meta.url))
     }
   },
-  plugins: [
-    vueJsx()
-  ],
+  plugins: [vueJsx()],
   css: {
-     preprocessorOptions: {
-        scss: {
-          silenceDeprecations: [
-            'import',
-            'mixed-decls',
-            'color-functions',
-            'global-builtin',
-          ],
-        },
-     },
+    preprocessorOptions: {
+      scss: {
+        silenceDeprecations: [
+          'import',
+          'mixed-decls',
+          'color-functions',
+          'global-builtin'
+        ]
+      }
+    }
   }
 })

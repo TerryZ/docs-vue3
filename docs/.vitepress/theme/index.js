@@ -1,5 +1,6 @@
 import DefaultTheme from "vitepress/theme"
 import Layout from './Layout.vue'
+import 'virtual:group-icons.css'
 
 // 引用 bootstrap 工具类样式
 // import 'bootstrap/dist/css/bootstrap.min.css'

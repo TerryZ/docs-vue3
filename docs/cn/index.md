@@ -3,7 +3,8 @@ layout: home
 
 hero:
   name: Vue 3 components
-  text: 基于 Vue 3 的组件集文档与实例
+  text: 基于 Vue 3 的轻量级组件集合
+  tagline: 专注于实用性与可维护性，提供清晰的 API 设计、完整的类型支持与完善的文档说明
   image:
     src: /logo.svg
     alt: Vue3Components
@@ -16,6 +17,15 @@ hero:
       link: https://github.com/TerryZ
 
 features:
+  - icon: 📦
+    title: 开箱即用
+    details: 轻量组件，开箱即用，按需引入
+  - icon: 🧩
+    title: 设计
+    details: 清晰的组件职责与 API 设计
+  - icon: 🛠
+    title: TypeScript
+    details: 完整的 TypeScript 类型支持
   - icon: 🔩
     title: 独立使用
     details: 所有组件均独立开发，可独立应用于项目中

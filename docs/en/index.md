@@ -3,7 +3,8 @@ layout: home
 
 hero:
   name: Vue 3 components
-  text: The documentation and examples
+  text: A collection of lightweight components based on Vue 3
+  tagline: Focus on practicality and maintainability, providing clear API design, complete type support and complete documentation
   image:
     src: /logo.svg
     alt: Vue3Components
@@ -16,6 +17,15 @@ hero:
       link: https://github.com/TerryZ
 
 features:
+  - icon: 📦
+    title: Ready out of the box
+    details: Lightweight components, ready to use out of the box, introduced on demand
+  - icon: 🧩
+    title: Design
+    details: Clear component responsibilities and API design
+  - icon: 🛠
+    title: TypeScript
+    details: Full TypeScript type support
   - icon: 🔩
     title: Stand-alone
     details: All components are developed independently and can be used independently in projects
